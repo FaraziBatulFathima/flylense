@@ -42,7 +42,6 @@
             --nav-height-mobile: 64px;
             --max-width: 1280px;
         }
-
         *,
         *::before,
         *::after {
