@@ -1721,17 +1721,17 @@
                     if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                         currentSection = section.getAttribute('id');
                     }
-                });
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === currentSection) link.classList.add('active');
-                });
-                const mobileLinks = mobileMenu.querySelectorAll('a[data-section]');
-                mobileLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === currentSection) link.classList.add('active');
-                });
-            }
+            //     });
+            //     navLinks.forEach(link => {
+            //         link.classList.remove('active');
+            //         if (link.getAttribute('data-section') === currentSection) link.classList.add('active');
+            //     });
+            //     const mobileLinks = mobileMenu.querySelectorAll('a[data-section]');
+            //     mobileLinks.forEach(link => {
+            //         link.classList.remove('active');
+            //         if (link.getAttribute('data-section') === currentSection) link.classList.add('active');
+            //     });
+            // }
 
             function updateNavbar() {
                 const scrollY = window.scrollY;
