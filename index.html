@@ -86,79 +86,6 @@
             color: #fff;
         }
 
-        /* ============ PRELOADER ============ */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .preloader-content {
-            text-align: center;
-        }
-        .preloader-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: var(--gradient-blue);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1.2rem;
-            animation: preloaderPulse 1.6s ease-in-out infinite;
-        }
-        .preloader-bar {
-            width: 120px;
-            height: 3px;
-            background: var(--border);
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .preloader-bar-inner {
-            height: 100%;
-            width: 0%;
-            background: var(--gradient-blue);
-            border-radius: 3px;
-            animation: preloaderBar 1.8s ease-in-out infinite;
-        }
-        @keyframes preloaderPulse {
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-        @keyframes preloaderBar {
-            0% {
-                width: 0%;
-                margin-left: 0;
-            }
-            50% {
-                width: 100%;
-                margin-left: 0;
-            }
-            100% {
-                width: 0%;
-                margin-left: 100%;
-            }
-        }
-
         /* ============ NAVIGATION ============ */
         .navbar {
             position: fixed;
@@ -330,101 +257,90 @@
             font-size: 1.1rem !important;
         }
 
-        /* ============ HERO SLIDER SECTION ============ */
+        /* ============ FADE SLIDER ============ */
         .hero-slider-wrapper {
             position: relative;
             width: 100%;
             padding-top: var(--nav-height);
             background: var(--bg-primary);
+            padding-bottom: 2rem;
         }
-        .slider {
-            display: flex;
+        .fade-slider {
+            position: relative;
+            width: 100%;
             height: 80vh;
             min-height: 500px;
             overflow: hidden;
-            flex-wrap: nowrap;
-            width: 100%;
         }
-        .slider .panel {
-            flex: 1;
+        .fade-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: flex-end;
-            padding: 30px;
-            min-width: 0;
-            border-right: 2px solid rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 0;
         }
-        .slider .panel:last-child {
-            border-right: none;
+        .fade-slide.active {
+            opacity: 1;
+            z-index: 1;
         }
-        .slider .panel::before {
-            content: '';
+        .fade-slide .slide-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(10, 10, 15, 0.1) 0%, rgba(10, 10, 15, 0.5) 60%, rgba(10, 10, 15, 0.9) 100%);
-            z-index: 1;
-            transition: all 0.5s ease;
+            background: linear-gradient(180deg, rgba(10, 10, 15, 0.2) 0%, rgba(10, 10, 15, 0.6) 60%, rgba(10, 10, 15, 0.9) 100%);
         }
-        .slider .panel:hover::before {
-            background: linear-gradient(180deg, rgba(10, 10, 15, 0.05) 0%, rgba(10, 10, 15, 0.3) 50%, rgba(10, 10, 15, 0.75) 100%);
-        }
-        .slider .panel:hover {
-            flex: 5;
-        }
-        .slider .panel .label {
-            position: relative;
+        .fade-slide .slide-caption {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
             z-index: 2;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 16px 24px;
+            padding: 16px 28px;
             border-radius: 12px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.35s ease 0.1s;
             color: white;
             font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.04em;
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            border-left: 3px solid var(--blue);
-            white-space: nowrap;
+            border-left: 4px solid var(--blue);
+            transition: all 0.3s ease;
         }
-        .slider .panel:hover .label {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .slider .panel .panel-indicator {
+        /* Transparent animated FlyLense watermark */
+        .hero-brand-watermark {
             position: absolute;
-            top: 30px;
-            left: 30px;
-            z-index: 2;
-            width: 10px;
-            height: 10px;
-            background: var(--blue);
-            border-radius: 50%;
-            box-shadow: 0 0 12px rgba(0, 116, 246, 0.7);
-            animation: pulse-dot 2s ease-in-out infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            pointer-events: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.18) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: brandPulse 3s ease-in-out infinite;
+            text-shadow: 0 0 80px rgba(0, 116, 246, 0.15);
         }
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 116, 246, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 0 14px rgba(0, 116, 246, 0);
-            }
+        @keyframes brandPulse {
+            0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.65; transform: translate(-50%, -50%) scale(1.04); }
         }
 
         /* ============ STATS RIBBON ============ */
         .stats-ribbon {
             position: relative;
             z-index: 3;
-            margin-top: -3rem;
+            margin-top: 2rem;
             padding: 0 2rem;
         }
         .stats-ribbon-inner {
@@ -634,6 +550,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 2rem 1.6rem;
+            text-align: center;
             transition: all var(--transition-smooth);
             cursor: pointer;
             position: relative;
@@ -665,22 +582,29 @@
             height: 200px;
         }
         .service-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(0, 116, 246, 0.1);
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.2rem auto;
             border-radius: var(--radius-md);
+            background: rgba(0, 116, 246, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            color: var(--blue-light);
-            margin-bottom: 1.2rem;
             transition: all var(--transition-smooth);
         }
         .service-card:hover .service-icon {
             background: var(--gradient-blue);
-            color: #fff;
             box-shadow: var(--shadow-blue);
+        }
+        .service-icon img {
+            max-width: 60%;
+            max-height: 60%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .service-icon img {
+            transform: scale(1.1);
         }
         .service-card h3 {
             font-family: 'Space Grotesk', sans-serif;
@@ -1176,18 +1100,17 @@
             transform: translateY(-4px);
         }
 
-        /* ============ RESPONSIVE - TABLET ============ */
+        /* ============ RESPONSIVE ============ */
         @media (max-width: 1024px) {
-            .slider {
+            .fade-slider {
                 height: 60vh;
                 min-height: 400px;
             }
-            .slider .panel:hover {
-                flex: 3;
-            }
-            .slider .panel .label {
-                font-size: 0.8rem;
-                padding: 12px 18px;
+            .fade-slide .slide-caption {
+                font-size: 1rem;
+                padding: 14px 22px;
+                bottom: 40px;
+                left: 40px;
             }
             .stats-ribbon-inner {
                 grid-template-columns: repeat(2, 1fr);
@@ -1226,7 +1149,6 @@
             }
         }
 
-        /* ============ RESPONSIVE - MOBILE ============ */
         @media (max-width: 768px) {
             :root {
                 --nav-height: var(--nav-height-mobile);
@@ -1249,36 +1171,21 @@
             .nav-logo img.logo-title {
                 height: 22px;
             }
-            .slider {
-                flex-direction: column;
-                height: auto;
-                min-height: auto;
+            .fade-slider {
+                height: 55vh;
+                min-height: 320px;
             }
-            .slider .panel {
-                height: 180px;
-                flex: none;
-                width: 100%;
-                border-right: none;
-                border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-            }
-            .slider .panel:last-child {
-                border-bottom: none;
-            }
-            .slider .panel:hover {
-                flex: none;
-                height: 240px;
-            }
-            .slider .panel .label {
-                opacity: 0.85;
-                transform: translateY(0);
-                font-size: 0.75rem;
+            .fade-slide .slide-caption {
+                bottom: 25px;
+                left: 20px;
+                font-size: 0.8rem;
                 padding: 10px 16px;
             }
-            .slider .panel:hover .label {
-                opacity: 1;
+            .hero-brand-watermark {
+                font-size: clamp(3rem, 10vw, 5rem);
             }
             .stats-ribbon {
-                margin-top: -2rem;
+                margin-top: 1.5rem;
                 padding: 0 1rem;
             }
             .stats-ribbon-inner {
@@ -1371,15 +1278,15 @@
         }
 
         @media (max-width: 400px) {
-            .slider .panel {
-                height: 150px;
+            .fade-slider {
+                height: 45vh;
+                min-height: 250px;
             }
-            .slider .panel:hover {
-                height: 200px;
-            }
-            .slider .panel .label {
+            .fade-slide .slide-caption {
                 font-size: 0.7rem;
                 padding: 8px 12px;
+                bottom: 20px;
+                left: 15px;
             }
             .btn {
                 padding: 0.7rem 1.4rem;
@@ -1405,26 +1312,13 @@
     </style>
 </head>
 <body>
-
-    <!-- ==================== PRELOADER ==================== -->
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">FlyLense</div>
-            <div class="preloader-bar">
-                <div class="preloader-bar-inner"></div>
-            </div>
-        </div>
-    </div>
-
+    
     <!-- ==================== NAVIGATION ==================== -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <a href="#" class="nav-logo" aria-label="FlyLense Home">
-                <!-- Logo Icon - Replace src with your logo image -->
                 <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                <!-- Title Image - Replace src with your title image -->
                 <img class="logo-title" src="img/title.png" alt="FlyLense" onerror="this.style.display='none';">
-                <!-- Fallback if images not loaded -->
                 <span style="display:none;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);">FlyLense</span>
             </a>
             <ul class="nav-links" id="navLinks">
@@ -1452,33 +1346,32 @@
         <a href="#contact" data-section="contact">Contact</a>
         <a href="#contact" class="mobile-cta">Get a Quote</a>
     </div>
-    <!-- ==================== HERO SLIDER SECTION ==================== -->
+
+    <!-- ==================== FADE SLIDER ==================== -->
     <section class="hero-slider-wrapper" id="home">
-        <div class="slider">
-            <!-- Panel 1 - Commercial Films -->
-            <div class="panel" style="background-image: url('img/slider/1.png');" onclick="window.location.href='#services'">
-                <div class="panel-indicator"></div>
-                <div class="label">COMMERCIAL FILMS</div>
+        <div class="fade-slider" id="fadeSlider">
+            <!-- Transparent animated FlyLense watermark -->
+            <div class="hero-brand-watermark">FlyLense</div>
+
+            <div class="fade-slide active" style="background-image: url('img/slider/1.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-caption">COMMERCIAL FILMS</div>
             </div>
-            <!-- Panel 2 - Brand Storytelling -->
-            <div class="panel" style="background-image: url('img/slider/2.png');" onclick="window.location.href='#services'">
-                <div class="panel-indicator"></div>
-                <div class="label">BRAND STORYTELLING</div>
+            <div class="fade-slide" style="background-image: url('img/slider/2.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-caption">BRAND STORYTELLING</div>
             </div>
-            <!-- Panel 3 - Aerial Drone Footage -->
-            <div class="panel" style="background-image: url('img/slider/3.png');" onclick="window.location.href='#services'">
-                <div class="panel-indicator"></div>
-                <div class="label">AERIAL DRONE FOOTAGE</div>
+            <div class="fade-slide" style="background-image: url('img/slider/3.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-caption">AERIAL DRONE FOOTAGE</div>
             </div>
-            <!-- Panel 4 - Corporate Videos -->
-            <div class="panel" style="background-image: url('img/slider/4.png');" onclick="window.location.href='#services'">
-                <div class="panel-indicator"></div>
-                <div class="label">CORPORATE VIDEOS</div>
+            <div class="fade-slide" style="background-image: url('img/slider/4.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-caption">CORPORATE VIDEOS</div>
             </div>
-            <!-- Panel 5 - Social Media Content -->
-            <div class="panel" style="background-image: url('img/slider/5.png');" onclick="window.location.href='#services'">
-                <div class="panel-indicator"></div>
-                <div class="label">SOCIAL MEDIA CONTENT</div>
+            <div class="fade-slide" style="background-image: url('img/slider/5.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-caption">SOCIAL MEDIA CONTENT</div>
             </div>
         </div>
     </section>
@@ -1566,38 +1459,56 @@
                 <p class="section-subtitle">Comprehensive media production services tailored to elevate your brand's visual identity.</p>
             </div>
             <div class="services-grid">
+                <!-- Service 1 -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-film"></i></div>
+                    <div class="service-icon">
+                        <img src="img/icons/service1.png" alt="Commercial Films" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-film\' style=\'font-size:2rem; color:var(--blue-light);\'></i>';">
+                    </div>
                     <h3>Commercial Films</h3>
                     <p>High-impact commercial films that capture attention and drive results. From concept development to final delivery, we produce commercials that stand out.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <!-- Service 2 -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-feather"></i></div>
+                    <div class="service-icon">
+                        <img src="img/icons/service2.png" alt="Brand Storytelling" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-feather\' style=\'font-size:2rem; color:var(--blue-light);\'></i>';">
+                    </div>
                     <h3>Brand Storytelling</h3>
                     <p>Compelling narratives that connect emotionally with your audience. We uncover the heart of your brand and craft stories that leave a lasting impression.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <!-- Service 3 -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-drone"></i></div>
+                    <div class="service-icon">
+                        <img src="img/icons/service3.png" alt="Aerial Drone Footage" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-drone\' style=\'font-size:2rem; color:var(--blue-light);\'></i>';">
+                    </div>
                     <h3>Aerial Drone Footage</h3>
                     <p>Breathtaking aerial cinematography with FAA-certified pilots. Capture stunning perspectives with our fleet of advanced drones equipped with 8K cameras.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <!-- Service 4 -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-building"></i></div>
+                    <div class="service-icon">
+                        <img src="img/icons/service4.png" alt="Corporate Videos" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-building\' style=\'font-size:2rem; color:var(--blue-light);\'></i>';">
+                    </div>
                     <h3>Corporate Videos</h3>
                     <p>Professional corporate video production that communicates your message with clarity and impact. Training videos, executive interviews, and company profiles.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <!-- Service 5 -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-hashtag"></i></div>
+                    <div class="service-icon">
+                        <img src="img/icons/service5.png" alt="Social Media Content" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-hashtag\' style=\'font-size:2rem; color:var(--blue-light);\'></i>';">
+                    </div>
                     <h3>Social Media Content</h3>
                     <p>Engaging, platform-optimized content designed to stop the scroll. Short-form videos, reels, and stories that boost engagement across all social channels.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <!-- Service 6 -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-scissors"></i></div>
+                    <div class="service-icon">
+                        <img src="img/icons/service6.png" alt="Post-Production" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-scissors\' style=\'font-size:2rem; color:var(--blue-light);\'></i>';">
+                    </div>
                     <h3>Post-Production</h3>
                     <p>Expert editing, color grading, sound design, and visual effects. Our post-production team polishes every frame to cinematic perfection.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
@@ -1676,7 +1587,6 @@
         <h2 class="brand-title">Our Trusted Brands</h2>
         <div class="brand-slider">
             <div class="brand-track">
-                <!-- Placeholder brand logos - replace src with actual brand images -->
                 <img src="images/brands/brand-1.png" alt="Brand 1" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
                 <img src="images/brands/brand-2.png" alt="Brand 2" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
                 <img src="images/brands/brand-3.png" alt="Brand 3" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
@@ -1784,16 +1694,23 @@
     <!-- ==================== SCRIPTS ==================== -->
     <script>
         (function() {
-            const preloader = document.getElementById('preloader');
-            window.addEventListener('load', () => { setTimeout(() => { preloader.classList.add('hidden'); }, 600); });
-            if (document.readyState === 'complete') { setTimeout(() => { preloader.classList.add('hidden'); }, 400); }
-
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const backToTop = document.getElementById('backToTop');
             const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
             const allSectionLinks = document.querySelectorAll('a[href^="#"]');
+
+            // Fade Slider
+            const slides = document.querySelectorAll('.fade-slide');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % totalSlides;
+                slides[currentSlide].classList.add('active');
+            }
+            setInterval(nextSlide, 4000);
 
             function updateActiveNavLink() {
                 const sections = document.querySelectorAll('section[id]');
@@ -1918,12 +1835,6 @@
             };
 
             updateNavbar();
-            setTimeout(() => {
-                if (!preloader.classList.contains('hidden') && document.readyState === 'complete') {
-                    preloader.classList.add('hidden');
-                }
-            }, 2000);
-
             console.log('%c FlyLense %c Media Production ',
                 'background:#0074f6;color:#fff;padding:6px 10px;border-radius:4px 0 0 4px;font-weight:bold;',
                 'background:#151523;color:#f0ece4;padding:6px 10px;border-radius:0 4px 4px 0;');
