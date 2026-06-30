@@ -1,800 +1,954 @@
-<?php
-// about.php - Professional About Page with Single Half-Slider for Flylense
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="FlyLensee Media Production">
-    <meta name="description" content="Flylense is a leading media production company in Hyderabad, specializing in creative video production, photography, branding, and digital storytelling.">
-    <meta name="keywords" content="Flylense, Media Production, Video Production Hyderabad, Photography, Branding, Creative Studio">
-    <title>About Us | Flylense - Media Production Company</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | FlyLense Media Production</title>
+    <meta name="description" content="Learn more about FlyLense — a cinematic media production company driven by creativity and precision.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* ===== GLOBAL RESET & TYPOGRAPHY ===== */
-        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-            font-family: "Poppins", sans-serif;
-            color: white;
+        /* ============ SAME ROOT VARIABLES & GLOBAL STYLES AS index.php ============ */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #0d0d14;
+            --bg-tertiary: #12121c;
+            --bg-card: #151523;
+            --bg-card-hover: #1a1a2e;
+            --blue: #0074f6;
+            --blue-light: #3391ff;
+            --blue-dark: #0056c4;
+            --accent: #4da3ff;
+            --text-primary: #f0ece4;
+            --text-secondary: #b8b5ad;
+            --text-muted: #7a7872;
+            --border: #1e1e30;
+            --border-light: #282840;
+            --gradient-blue: linear-gradient(135deg, #0074f6 0%, #3391ff 30%, #0056c4 70%, #0074f6 100%);
+            --gradient-dark: linear-gradient(180deg, rgba(10, 10, 15, 0) 0%, rgba(10, 10, 15, 0.8) 50%, rgba(10, 10, 15, 1) 100%);
+            --gradient-radial: radial-gradient(ellipse at center, rgba(0, 116, 246, 0.08) 0%, transparent 70%);
+            --shadow-blue: 0 0 40px rgba(0, 116, 246, 0.15), 0 0 80px rgba(0, 116, 246, 0.05);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 50%;
+            --nav-height: 80px;
+            --nav-height-mobile: 64px;
+            --max-width: 1280px;
+        }
+
+        *,
+        *::before,
+        *::after {
             margin: 0;
-            letter-spacing: 0.5px;
+            padding: 0;
+            box-sizing: border-box;
         }
-        body { background: #000; }
 
-        /* ===== HEADER ===== */
-        #header .header-inner, #header #header-wrap {
-            height: 80px;
-            background-color: black;
-            left: 0;
-            right: 0;
-            transition: all .4s ease-in-out;
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        #mainMenu nav > ul > li > a {
-            position: relative;
-            font-family: "Poppins", sans-serif;
-            padding: 10px 12px;
-            text-transform: uppercase;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            color: #fff;
-            border-radius: 0;
-            transition: all .3s ease;
-            line-height: normal;
-        }
-        #mainMenu nav > ul > li > a:hover { color: #56c473; }
 
-        /* ===== HALF SLIDER - SINGLE SLIDE WITH BACKGROUND IMAGE ===== */
-        .half-slider-wrapper {
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--blue-dark); }
+        ::selection { background: rgba(0, 116, 246, 0.35); color: #fff; }
+
+        /* ============ EXACT HEADER STYLES FROM index.php ============ */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%; z-index: 1000;
+            height: var(--nav-height);
+            transition: all var(--transition-smooth);
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+        }
+        .navbar-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 0.5rem; text-decoration: none; z-index: 1001; flex-shrink: 0;
+        }
+        .nav-logo img { height: 42px; width: auto; object-fit: contain; transition: transform var(--transition-bounce); }
+        .nav-logo img.logo-icon { height: 42px; }
+        .nav-logo img.logo-title { padding-left: 20px; height: 50px; }
+        .nav-logo:hover img.logo-icon { transform: scale(1.05); }
+        .nav-logo:hover img.logo-title { transform: scale(1.05); }
+        .nav-links {
+            display: flex; align-items: center; gap: 0.3rem; list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;
+            letter-spacing: 0.01em; padding: 0.55rem 1.1rem; border-radius: 50px;
+            transition: all var(--transition-fast); position: relative; white-space: nowrap;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: #fff; background: rgba(255, 255, 255, 0.04); }
+        .nav-links a.active { color: var(--blue-light); background: rgba(0, 116, 246, 0.1); }
+        .nav-cta {
+            background: var(--gradient-blue) !important; color: #fff !important; font-weight: 600 !important;
+            padding: 0.55rem 1.5rem !important; border-radius: 50px !important;
+            transition: all var(--transition-bounce) !important; box-shadow: 0 4px 20px rgba(0, 116, 246, 0.3);
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 116, 246, 0.5) !important;
+            background: var(--gradient-blue) !important; color: #fff !important;
+        }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001;
+            padding: 8px; background: none; border: none;
+        }
+        .hamburger span {
+            display: block; width: 26px; height: 2.5px; background: var(--text-primary);
+            border-radius: 2px; transition: all var(--transition-fast);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(10, 10, 15, 0.97); backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px); z-index: 999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.4s ease; pointer-events: none;
+        }
+        .mobile-menu.active { opacity: 1; visibility: visible; pointer-events: auto; }
+        .mobile-menu a {
+            text-decoration: none; color: var(--text-secondary); font-size: 1.4rem; font-weight: 500;
+            letter-spacing: 0.02em; transition: color var(--transition-fast); padding: 0.6rem 1.5rem;
+        }
+        .mobile-menu a:hover { color: var(--blue-light); }
+        .mobile-menu .mobile-cta {
+            background: var(--gradient-blue); color: #fff !important; font-weight: 600;
+            border-radius: 50px; padding: 0.8rem 2rem !important; margin-top: 0.5rem; font-size: 1.1rem !important;
+        }
+
+        /* ============ ABOUT PAGE SPECIFIC STYLES ============ */
+        /* Half‑Page Hero Slider */
+        .hero-slider {
             position: relative;
             width: 100%;
-            height: 50vh;
-            min-height: 320px;
-            max-height: 500px;
+            height: 60vh;               /* Half the viewport */
+            min-height: 450px;
+            margin-top: var(--nav-height);
             overflow: hidden;
-            background: #000;
-            padding: 10px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
         }
-        .half-slider {
+        .hero-slider .slides {
             display: flex;
             height: 100%;
-            width: 100%;
-            gap: 0;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
-        .half-slide {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
+        .hero-slider .slide {
+            min-width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+        .hero-slider .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(10,10,15,0.85) 0%, rgba(10,10,15,0.2) 60%);
+            z-index: 1;
+        }
+        .hero-slider .caption {
+            position: relative;
+            z-index: 2;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-left: 4px solid var(--blue);
+            max-width: 90%;
+        }
+
+        /* Slider controls */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(6px);
+            font-size: 1rem;
         }
-        .half-slide::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
-            z-index: 1;
+        .slider-arrow:hover {
+            background: var(--blue);
+            border-color: var(--blue);
         }
-        .half-slide .slide-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: #fff;
-            padding: 40px;
-            max-width: 800px;
-        }
-        .half-slide .slide-content .tag {
-            display: inline-block;
-            background: rgba(86, 196, 115, 0.15);
-            color: #006ded;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            padding: 6px 20px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-            border: 1px solid #006ded;
-        }
-        .half-slide .slide-content h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 4px 40px rgba(0,0,0,0.8);
-            margin-bottom: 15px;
-            letter-spacing: 4px;
-        }
-        .half-slide .slide-content .line {
-            width: 80px;
-            height: 3px;
-            background: #0066d9;
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-        .half-slide .slide-content .subtitle {
-            font-size: 1.2rem;
-            color: #ddd;
-            font-weight: 300;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-        }
+        .slider-arrow.prev { left: 1.5rem; }
+        .slider-arrow.next { right: 1.5rem; }
 
-        /* ===== MOBILE SLIDER ===== */
-        .half-slider-mobile {
-            display: none;
-            position: relative;
-            width: 100%;
-            height: 45vh;
-            min-height: 280px;
-            overflow: hidden;
-            background: #000;
-            padding: 8px;
-        }
-        .half-slider-mobile .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 30px 25px;
-            border-radius: 16px;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-        .half-slider-mobile .slide.active {
-            opacity: 1;
-        }
-        .half-slider-mobile .slide::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
-            z-index: 1;
-            border-radius: 16px;
-        }
-        .half-slider-mobile .slide .slide-content {
-            position: relative;
-            z-index: 2;
-            color: #fff;
-        }
-        .half-slider-mobile .slide .slide-content .tag {
-            display: inline-block;
-            background: rgba(86, 196, 115, 0.15);
-            color: #56c473;
-            font-size: 0.6rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            padding: 4px 16px;
-            border-radius: 30px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(86, 196, 115, 0.2);
-        }
-        .half-slider-mobile .slide .slide-content h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 4px 40px rgba(0,0,0,0.8);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
-        }
-        .half-slider-mobile .slide .slide-content .line {
-            width: 60px;
-            height: 3px;
-            background: #56c473;
-            margin: 12px auto;
-            border-radius: 2px;
-        }
-        .half-slider-mobile .slide .slide-content .subtitle {
-            font-size: 0.85rem;
-            color: #ddd;
-            font-weight: 300;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
         .slider-dots {
             position: absolute;
-            bottom: 20px;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 3;
             display: flex;
-            gap: 10px;
-            z-index: 5;
+            gap: 0.6rem;
         }
         .slider-dots .dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.35);
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            padding: 0;
+            transition: all var(--transition-smooth);
+            border: 2px solid transparent;
         }
         .slider-dots .dot.active {
-            background: #56c473;
-            width: 30px;
-            border-radius: 4px;
+            background: var(--blue);
+            border-color: #fff;
+            box-shadow: 0 0 14px rgba(0,116,246,0.6);
+            width: 12px;
+            height: 12px;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .half-slide .slide-content h1 { font-size: 3rem; }
-            .half-slide .slide-content .subtitle { font-size: 1rem; letter-spacing: 5px; }
+        /* Common section styles */
+        .section {
+            padding: 5rem 2rem;
+            position: relative;
         }
-        @media (max-width: 768px) {
-            .half-slider-wrapper { display: none; }
-            .half-slider-mobile { display: block; }
-        }
-
-        /* ===== ABOUT CONTENT ===== */
-        .background-black { background-color: #000; color: #fff; }
-        .text-white { color: white; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        .text-center { text-align: center; }
-        .p-t-60 { padding-top: 60px; }
-        .p-b-60 { padding-bottom: 60px; }
-        .p-t-80 { padding-top: 80px; }
-        .p-b-80 { padding-bottom: 80px; }
-        .services-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 50px;
-            color: #fff;
-        }
-        .about-card {
-            background: #111;
-            border-radius: 1.25rem;
-            padding: 40px 30px;
-            transition: 0.3s ease-in-out;
-            height: 100%;
-            border: 1px solid #222;
-        }
-        .about-card:hover { transform: translateY(-8px); border-color: #56c473; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-        .about-icon { font-size: 2.5rem; color: #56c473; margin-bottom: 20px; }
-        .about-title { font-weight: 600; font-size: 1.3rem; margin-bottom: 10px; color: #fff; }
-        .about-text { font-size: 0.98rem; line-height: 1.8; color: #aaa; }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .team-member {
-            background: #111;
-            border-radius: 16px;
-            padding: 30px 20px;
-            text-align: center;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-        .team-member:hover { border-color: #006ef4; transform: scale(1.02); }
-        .team-member img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 3px solid #006ef4;
-        }
-        .team-member h4 { color: #fff; font-size: 1.2rem; margin-bottom: 5px; }
-        .team-member .role { color:#006ef4; font-size: 0.9rem; font-weight: 500; }
-        .team-member p { color: #aaa; font-size: 0.9rem; margin-top: 10px; }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .value-item {
-            background: #111;
-            padding: 30px 20px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-        .value-item:hover { border-color: #006ef4; }
-        .value-item .num { font-size: 2.5rem; font-weight: 700; color: #006ef4; }
-        .value-item h5 { color: #fff; margin-top: 10px; font-size: 1.1rem; }
-        .value-item p { color: #aaa; font-size: 0.9rem; }
-
-        .about-story {
-            background: #0a0a0a;
-            border-radius: 20px;
-            padding: 50px;
-            border-left: 5px solid #0066d9;
-            margin: 40px 0;
-        }
-        .about-story p { font-size: 1.1rem; line-height: 1.9; color: #ccc; }
-
-        .btn-about {
-            background: #006ef4;
-            color: #fff;
-            border: none;
-            padding: 14px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-about:hover { background: #fff; color: #000; transform: scale(1.05); }
-
-        /* ===== FAQS SECTION ===== */
-        .faq-section {
-            background: #0a0a0a;
-            padding: 80px 0;
-        }
-        .faq-container {
-            max-width: 900px;
+        .section-container {
+            max-width: var(--max-width);
             margin: 0 auto;
         }
-        .faq-item {
-            background: #111;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #1a1a1a;
-            overflow: hidden;
-            transition: all 0.3s ease;
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
         }
-        .faq-item:hover {
-            border-color: #006ef4;
-        }
-        .faq-question {
-            padding: 20px 30px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-        .faq-question h3 {
-            font-size: 1.1rem;
+        .section-tag {
+            display: inline-block;
+            font-size: 0.78rem;
             font-weight: 600;
-            color: #fff;
-            margin: 0;
-            transition: color 0.3s ease;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 0.8rem;
         }
-        .faq-item.active .faq-question h3 {
-            color: #006ef4;
-        }
-        .faq-question .faq-icon {
-            font-size: 1.5rem;
-            color: #006ef4;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-            margin-left: 15px;
-            font-weight: 300;
-        }
-        .faq-item.active .faq-question .faq-icon {
-            transform: rotate(45deg);
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-        .faq-answer .faq-answer-inner {
-            padding: 0 30px 25px 30px;
-            color: #aaa;
-            line-height: 1.8;
-            font-size: 0.98rem;
-        }
-        .faq-answer .faq-answer-inner p {
-            margin: 0;
-        }
-        .faq-answer .faq-answer-inner ul {
-            margin: 10px 0 0 20px;
-            color: #aaa;
-        }
-        .faq-answer .faq-answer-inner ul li {
-            margin-bottom: 5px;
-        }
-        .faq-answer .faq-answer-inner strong {
-            color: #ddd;
-        }
-
-        /* ===== FOOTER & SOCIAL ===== */
-        .social-icons .icon { width: 60px; object-fit: contain; }
-        .inter, .inters { position: fixed; bottom: 50px; z-index: 1000; }
-        .inter { right: 20px; }
-        .inters { left: 20px; }
-        @media (max-width: 768px) {
-            .social-icons .icon { width: 40px; }
-            .inter, .inters { bottom: 60px; }
-            .about-story { padding: 30px; }
-            .team-grid { gap: 20px; }
-            .faq-question { padding: 15px 20px; }
-            .faq-question h3 { font-size: 0.95rem; }
-            .faq-answer .faq-answer-inner { padding: 0 20px 20px 20px; font-size: 0.9rem; }
-        }
-        footer { background-color: #000; padding: 50px 0; color: #fff; }
-        footer a { color: #ccc; margin: 0 10px; text-decoration: none; }
-        footer a:hover { color: #006ef4; }
-
-        /* Page title under slider */
-        .page-title-section {
-            background: #000;
-            padding: 30px 0 20px;
-            border-bottom: 1px solid #1a1a1a;
-        }
-        .page-title-section h1 {
-            font-size: 2.6rem;
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
             font-weight: 700;
-            color: #fff;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
         }
-        .page-title-section p {
-            color: #aaa;
-            font-size: 1.15rem;
-            max-width: 650px;
-            margin: 8px auto 0;
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .section-divider {
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-blue);
+            border-radius: 3px;
+            margin: 1rem auto;
+        }
+
+        /* Mission & Vision Grid */
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .mission-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+        }
+        .mission-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--blue-dark);
+            box-shadow: var(--shadow-elevated);
+        }
+        .mission-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+        .mission-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-light);
+            border-radius: 1px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            left: -25px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            background: var(--blue);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 16px rgba(0, 116, 246, 0.5);
+            z-index: 2;
+        }
+        .timeline-year {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--blue-light);
+            letter-spacing: 0.06em;
+            margin-bottom: 0.3rem;
+        }
+        .timeline-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Team grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1.4rem;
+            text-align: center;
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--blue-dark);
+            box-shadow: var(--shadow-elevated);
+        }
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--blue-light);
+            border: 2px solid var(--border-light);
+            overflow: hidden;
+        }
+        .team-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+        .team-role {
+            font-size: 0.78rem;
+            color: var(--blue-light);
+            letter-spacing: 0.03em;
+            margin-bottom: 0.6rem;
+        }
+        .team-bio {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* CTA Banner */
+        .cta-banner-section {
+            padding: 20px 2rem;
+            background: var(--bg-primary);
+            position: relative;
+            z-index: 2;
+        }
+        .cta-banner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0074f6, #0040c1);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .cta-banner-text h2 {
+            font-weight: 700;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .cta-banner-text h4 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.85);
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-bounce);
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+        .btn-cta-white {
+            background: #fff;
+            color: #0074f6;
+            border: none;
+            padding: 18px 32px;
+            font-weight: 700;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        .btn-cta-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: #f0f4ff;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-light);
+        }
+        .btn-outline:hover {
+            border-color: var(--blue);
+            color: var(--blue-light);
+            background: rgba(0, 116, 246, 0.05);
+            transform: translateY(-3px);
+        }
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: #fff;
+            box-shadow: 0 6px 25px rgba(0, 116, 246, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 116, 246, 0.5);
+        }
+
+        /* Footer (same as index) */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+        }
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a {
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            transition: color var(--transition-fast);
+        }
+        .footer-links a:hover { color: var(--blue-light); }
+        .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
+        .footer-social { display: flex; gap: 0.8rem; }
+        .footer-social a {
+            width: 38px; height: 38px; border-radius: 50%;
+            border: 1px solid var(--border-light);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); text-decoration: none;
+            transition: all var(--transition-fast); font-size: 0.9rem;
+        }
+        .footer-social a:hover {
+            border-color: var(--blue); color: var(--blue-light);
+            background: rgba(0, 116, 246, 0.08);
+        }
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
+            background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-primary); cursor: pointer; z-index: 900;
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all var(--transition-smooth); box-shadow: var(--shadow-card);
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--blue); color: #fff; border-color: var(--blue); transform: translateY(-4px); }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .hero-slider { height: 55vh; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .mission-vision-grid { grid-template-columns: 1fr; }
+            .cta-banner { flex-direction: column; text-align: center; }
+            .cta-banner-text h2 { font-size: 1.5rem; }
+            .cta-banner-text h4 { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --nav-height: var(--nav-height-mobile); }
+            html { scroll-padding-top: var(--nav-height-mobile); }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .navbar-container { padding: 0 1.2rem; }
+            .nav-logo img.logo-icon { height: 34px; }
+            .nav-logo img.logo-title { height: 22px; }
+            .hero-slider { height: 50vh; min-height: 350px; }
+            .hero-slider .caption { font-size: 0.8rem; padding: 0.6rem 1.4rem; }
+            .slider-arrow { width: 36px; height: 36px; font-size: 0.8rem; }
+            .slider-arrow.prev { left: 1rem; }
+            .slider-arrow.next { right: 1rem; }
+            .section { padding: 3rem 1.2rem; }
+            .section-header { margin-bottom: 2rem; }
+            .section-title { font-size: 1.6rem; }
+            .team-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .timeline { padding-left: 20px; }
+            .timeline::before { left: 5px; }
+            .timeline-dot { left: -22px; width: 10px; height: 10px; }
+            .timeline-item { padding-left: 1.2rem; margin-bottom: 1.8rem; }
+            .footer-container { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 38px; height: 38px; }
+            .cta-banner { padding: 1.5rem; border-radius: 16px; }
+            .cta-banner .btn-cta-white { padding: 14px 24px; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 400px) {
+            .hero-slider { height: 40vh; min-height: 280px; }
+            .hero-slider .caption { font-size: 0.7rem; padding: 0.5rem 1rem; }
+            .team-grid { grid-template-columns: 1fr; }
+            .btn { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
-    <div class="body-inner">
-        <!-- ===== HEADER ===== -->
-        <?php include "header.php"; ?> 
 
-        <!-- ===== HALF SLIDER - SINGLE SLIDE WITH BACKGROUND IMAGE (Desktop) ===== -->
-        <div class="half-slider-wrapper">
-            <div class="half-slider">
-                <div class="half-slide" style="background-image: url('img/slider/4.png');">
-                    <div class="slide-content">
-                        <span class="tag">Welcome to Flylense</span>
-                        <h1>About Us</h1>
-                        <div class="line"></div>
-                        <span class="subtitle">Crafting Stories That Inspire &amp; Elevate Brands</span>
-                    </div>
-                </div>
-            </div>
+    <!-- ==================== IDENTICAL HEADER (NAVBAR) FROM index.php ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="index.php" class="nav-logo" aria-label="FlyLense Home">
+                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <img class="logo-title" src="img/title.png" alt="FlyLense" onerror="this.style.display='none';">
+                <span style="display:none;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);">FlyLense</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.php" class="active">About</a></li>
+                <li><a href="index.php#services">Services</a></li>
+                <li><a href="index.php#portfolio">Portfolio</a></li>
+                <li><a href="index.php#gallery">Gallery</a></li>
+                <li><a href="index.php#contact">Contact</a></li>
+                <li><a href="index.php#contact" class="nav-cta">Get a Quote</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
+    </nav>
 
-        <!-- ===== MOBILE SLIDER ===== -->
-        <div class="half-slider-mobile" id="mobileSlider">
-            <div class="slide active" style="background-image: url('img/slider/4.png');">
-                <div class="slide-content">
-                    <span class="tag">Welcome to Flylense</span>
-                    <h1>About Us</h1>
-                    <div class="line"></div>
-                    <span class="subtitle">Crafting Stories That Inspire &amp; Elevate Brands</span>
-                </div>
-            </div>
-            <div class="slider-dots" id="sliderDots">
-                <button class="dot active" data-index="0"></button>
-            </div>
-        </div>
-
-        <!-- ===== PAGE TITLE ===== -->
-        <!-- <div class="page-title-section">
-            <div class="container text-center">
-                <h1>About Flylense</h1>
-                <p>Crafting stories that inspire, engage, and elevate brands.</p>
-            </div>
-        </div> -->
-
-        <!-- ===== OUR STORY ===== -->
-        <section class="background-black p-t-60 p-b-60">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <img src="img/1.png" alt="About Flylense" class="img-fluid rounded" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
-                    </div>
-                    <div class="col-lg-6">
-                        <h2 style="color: #fff; font-size: 2.2rem; margin-bottom: 20px;">Who We Are</h2>
-                        <div class="about-story" style="border-left-color: #0066d9; background: transparent; padding: 0 0 0 30px; margin: 0;">
-                            <p style="color: #ddd; font-size: 1.05rem;">
-                                <strong>Flylense</strong> is a premier media production company based in Hyderabad, India. 
-                                We are a collective of visionary filmmakers, photographers, designers, and digital strategists 
-                                who are passionate about visual storytelling. Our mission is to transform ideas into compelling 
-                                cinematic experiences that resonate with audiences and drive real impact for brands.
-                            </p>
-                            <p style="color: #ccc; margin-top: 15px;">
-                                From concept to completion, we handle every aspect of production — scripting, direction, 
-                                cinematography, editing, and digital distribution. Whether it's a commercial ad film, 
-                                a corporate documentary, or a social media campaign, we bring the same level of dedication 
-                                and creativity to every project.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== CORE VALUES ===== -->
-        <section style="background: #0a0a0a; padding: 80px 0;">
-            <div class="container">
-                <h2 class="services-title">Our Core Values</h2>
-                <div class="values-grid">
-                    <div class="value-item">
-                        <div class="num">01</div>
-                        <h5>Creativity</h5>
-                        <p>We push boundaries to deliver fresh, innovative ideas that stand out.</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="num">02</div>
-                        <h5>Excellence</h5>
-                        <p>We are committed to the highest quality in every frame and every project.</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="num">03</div>
-                        <h5>Integrity</h5>
-                        <p>We build trust through transparency, honesty, and reliability.</p>
-                    </div>
-                    <div class="value-item">
-                        <div class="num">04</div>
-                        <h5>Collaboration</h5>
-                        <p>We work closely with clients to bring their unique vision to life.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== OUR TEAM ===== -->
-        <section class="background-black p-t-60 p-b-60">
-            <div class="container">
-                <h2 class="services-title">Meet the Team</h2>
-                <p style="text-align: center; color: #aaa; max-width: 700px; margin: -20px auto 40px;">The creative minds behind Flylense — each one bringing unique expertise and passion to the table.</p>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="img/3.png" alt="Founder">
-                        <h4>Rajesh Kumar</h4>
-                        <div class="role">Founder & Creative Director</div>
-                        <p>With over 15 years of experience in film and advertising, Rajesh leads the creative vision at Flylense.</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="img/2.png" alt="Co-Founder">
-                        <h4>Priya Sharma</h4>
-                        <div class="role">Co-Founder & Head of Production</div>
-                        <p>Priya is a dynamic producer with a keen eye for detail, overseeing all production workflows.</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="img/3.png" alt="Cinematographer">
-                        <h4>Vikram Reddy</h4>
-                        <div class="role">Director of Photography</div>
-                        <p>Vikram's cinematography brings depth and emotion to every frame with expert lighting and composition.</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="img/2.png" alt="Editor">
-                        <h4>Ananya Desai</h4>
-                        <div class="role">Lead Editor & Post-Production</div>
-                        <p>Ananya crafts the final narrative with precision, turning raw footage into impactful stories.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== FOUNDERS / VISION ===== -->
-        <section style="background: #0a0a0a; padding: 80px 0 40px 0;">
-            <div class="container">
-                <h2 class="services-title">The Vision Behind Flylense</h2>
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-                        <img src="img/4.png" alt="Founders" class="img-fluid rounded shadow" style="max-width: 450px; border-radius: 20px;">
-                    </div>
-                    <div class="col-lg-6">
-                        <p style="color: #ccc; font-size: 1.1rem; line-height: 1.9;">
-                            At Flylense Media Production, everything starts with a bold vision. The founders came together with a shared passion for visual storytelling, a drive for innovation, and a deep understanding of the media landscape. Their combined leadership and dedication have shaped Flylense into a creative powerhouse known for delivering high-quality production across film, digital, and advertising.
-                            <br><br>
-                            With a clear mission to elevate content through cinematic excellence, the founders continue to lead the company with creativity, integrity, and a commitment to client success.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== FAQS SECTION ===== -->
-        <section class="faq-section">
-            <div class="container">
-                <h2 class="services-title">Frequently Asked Questions</h2>
-                <p style="text-align: center; color: #aaa; max-width: 700px; margin: -20px auto 50px;">Find answers to the most common questions about our services and process.</p>
-                
-                <div class="faq-container">
-                    <!-- FAQ 1 -->
-                    <div class="faq-item active">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>What types of video production services do you offer?</h3>
-                            <span class="faq-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                <p>We offer a comprehensive range of video production services including:</p>
-                                <ul>
-                                    <li><strong>Commercial Ad Films</strong> – High-impact ads for TV, web, and social media</li>
-                                    <li><strong>Corporate Videos</strong> – Brand stories, company culture, and promotional content</li>
-                                    <li><strong>Documentaries &amp; Short Films</strong> – Cinematic storytelling with depth and emotion</li>
-                                    <li><strong>Social Media Content</strong> – Reels, shorts, and engaging content for digital platforms</li>
-                                    <li><strong>Aerial Drone Footage</strong> – Stunning cinematic shots from unique perspectives</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 2 -->
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>How long does a typical project take from start to finish?</h3>
-                            <span class="faq-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                <p>Project timelines vary based on the scope and complexity. A typical corporate video or commercial ad film takes <strong>2-4 weeks</strong> from pre-production to final delivery. Social media content and smaller projects can be completed in <strong>5-10 days</strong>. We always provide a detailed timeline during the planning phase and keep you updated throughout the process.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 3 -->
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>Do you provide scriptwriting and creative direction?</h3>
-                            <span class="faq-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                <p>Absolutely! We offer <strong>end-to-end creative services</strong> including scriptwriting, storyboarding, creative direction, and concept development. Our team works closely with you to understand your brand, message, and goals, then crafts a compelling narrative that resonates with your target audience. We handle everything from the initial idea to the final cut.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 4 -->
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>What is the cost of producing a video with Flylense?</h3>
-                            <span class="faq-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                <p>Video production costs vary based on several factors including:</p>
-                                <ul>
-                                    <li><strong>Video length and format</strong> – Short-form vs. long-form content</li>
-                                    <li><strong>Production complexity</strong> – Location shoots, animation, special effects</li>
-                                    <li><strong>Equipment and crew</strong> – Number of cameras, drones, lighting, and team members</li>
-                                    <li><strong>Post-production</strong> – Editing, color grading, sound design, and motion graphics</li>
-                                </ul>
-                                <p style="margin-top: 10px;">We provide <strong>customized quotes</strong> based on your specific requirements. Contact us for a free consultation and we'll work within your budget to deliver exceptional results.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 5 -->
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>Can you help with digital marketing and content distribution?</h3>
-                            <span class="faq-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                <p>Yes! We offer <strong>integrated digital marketing services</strong> to help you maximize the reach and impact of your content. Our services include:</p>
-                                <ul>
-                                    <li><strong>Social Media Strategy</strong> – Content planning, scheduling, and engagement</li>
-                                    <li><strong>Paid Advertising</strong> – Campaign management on Google, Facebook, Instagram, and YouTube</li>
-                                    <li><strong>SEO &amp; Content Optimization</strong> – Ensuring your videos rank well and reach the right audience</li>
-                                    <li><strong>Analytics &amp; Reporting</strong> – Tracking performance and optimizing for better results</li>
-                                </ul>
-                                <p style="margin-top: 10px;">We help you get the most out of your investment by ensuring your content reaches the right people at the right time.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== CTA ===== -->
-        <section style="padding: 60px 0; background: #000;">
-            <div class="container">
-                <div style="background: linear-gradient(135deg, #006ff6, #0040c1); border-radius: 20px; box-shadow: 0 8px 20px rgba(0,111,246,0.4); padding: 50px 30px; text-align: center;">
-                    <h2 style="color: #fff; font-size: 2.2rem; font-weight: 600;">Ready to Create Something Amazing?</h2>
-                    <p style="color: #e0e0ff; font-size: 1.2rem; margin-bottom: 30px;">Let's collaborate and bring your vision to life.</p>
-                    <a href="index.php#section-5" class="btn-about" style="background: #fff; color: #000;">Start Your Project</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== FOOTER ===== -->
-        <?php include "footer.php"; ?>
-
-        <!-- ===== FLOATING SOCIAL ICONS ===== -->
-        <div class="social-icons">
-            <div class="inter">
-                <a href="https://www.instagram.com/flylensemediapartner/" target="_blank">
-                    <img class="icon" src="img/7.png" alt="Instagram">
-                </a>
-            </div>
-            <div class="inters">
-                <a onclick="window.open('https://api.whatsapp.com/send?phone=+919989571223&text=Hi,%20I%20got%20your%20number%20from%20your%20website')" target="_blank">
-                    <img class="icon" src="img/8.png" alt="WhatsApp">
-                </a>
-            </div>
-        </div>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mobile Menu (identical to index) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.php">Home</a>
+        <a href="about.php">About</a>
+        <a href="index.php#services">Services</a>
+        <a href="index.php#portfolio">Portfolio</a>
+        <a href="index.php#gallery">Gallery</a>
+        <a href="index.php#contact">Contact</a>
+        <a href="index.php#contact" class="mobile-cta">Get a Quote</a>
     </div>
 
-    <!-- ===== SCROLL TOP ===== -->
-    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!-- ==================== HALF‑PAGE HERO SLIDER ==================== -->
+    <section class="hero-slider" id="heroSlider">
+        <div class="slides" id="heroSlides">
+            <div class="slide" style="background-image: url('img/slider/1.png');">
+                <div class="caption">Commercial Films</div>
+            </div>
+            <div class="slide" style="background-image: url('img/slider/2.png');">
+                <div class="caption">Brand Storytelling</div>
+            </div>
+            <div class="slide" style="background-image: url('img/slider/3.png');">
+                <div class="caption">Aerial Drone Footage</div>
+            </div>
+            <div class="slide" style="background-image: url('img/slider/4.png');">
+                <div class="caption">Corporate Videos</div>
+            </div>
+        </div>
+        <button class="slider-arrow prev" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slider-arrow next" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="slider-dots" id="sliderDots"></div>
+    </section>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/functions.js"></script>
-    <link href="https://fonts.cdnfonts.com/css/aileron" rel="stylesheet">
+    <!-- ==================== ABOUT CONTENT ==================== -->
+    <section class="section" style="background: var(--bg-primary);">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Who We Are</span>
+                <h2 class="section-title">About FlyLense</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">A dynamic media production company where creativity meets precision — crafting stories that captivate and inspire.</p>
+            </div>
+            <div class="mission-vision-grid">
+                <div class="mission-card">
+                    <h3><i class="fa-solid fa-bullseye" style="color: var(--blue-light); margin-right: 0.5rem;"></i> Our Mission</h3>
+                    <p>To empower brands through visually stunning storytelling. We push creative boundaries, leverage cutting‑edge technology, and maintain an obsessive focus on quality.</p>
+                </div>
+                <div class="mission-card">
+                    <h3><i class="fa-solid fa-eye" style="color: var(--blue-light); margin-right: 0.5rem;"></i> Our Vision</h3>
+                    <p>To become the most trusted creative partner for brands worldwide — making every ambitious idea shine on screen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- ===== FAQ TOGGLE SCRIPT ===== -->
+    <section class="section" style="background: var(--bg-secondary);">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Our Journey</span>
+                <h2 class="section-title">The FlyLense Timeline</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2018</div>
+                    <h4>Founded in Los Angeles</h4>
+                    <p>Started as a two‑person crew with a single camera and a drone.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2020</div>
+                    <h4>Expanded to Full‑Service</h4>
+                    <p>Built an in‑house post‑production team, landed first major brand campaign.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2022</div>
+                    <h4>Award‑Winning Work</h4>
+                    <p>Multiple industry awards for creative storytelling.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2024</div>
+                    <h4>8K & National Reach</h4>
+                    <p>Invested in 8K systems, expanded nationwide.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2026</div>
+                    <h4>Trusted by 150+ Brands</h4>
+                    <p>A team of 20+ creatives, still passionate as day one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--bg-primary);">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">The People</span>
+                <h2 class="section-title">Meet Our Core Team</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                    <h4>Marcus Chen</h4>
+                    <div class="team-role">Founder & Creative Director</div>
+                    <p class="team-bio">15+ years behind the lens. Shapes every project’s creative vision.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+                    <h4>Elena Vasquez</h4>
+                    <div class="team-role">Head of Production</div>
+                    <p class="team-bio">Logistics expert, ensures flawless execution.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fa-solid fa-user-ninja"></i></div>
+                    <h4>David Okafor</h4>
+                    <div class="team-role">Lead Cinematographer</div>
+                    <p class="team-bio">Master of light and composition.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fa-solid fa-user-gear"></i></div>
+                    <h4>Sophie Laurent</h4>
+                    <div class="team-role">Post‑Production Supervisor</div>
+                    <p class="team-bio">Turns raw footage into compelling stories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner-section">
+        <div class="cta-banner">
+            <div class="cta-banner-text">
+                <h2>Ready to create something remarkable?</h2>
+                <h4>Let’s bring your vision to the screen</h4>
+            </div>
+            <a href="index.php#contact" class="btn-cta-white">
+                <i class="fa-solid fa-paper-plane"></i> Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== IDENTICAL FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">FlyLense</div>
+            <div class="footer-links">
+                <a href="index.php">Home</a>
+                <a href="about.php">About</a>
+                <a href="index.php#services">Services</a>
+                <a href="index.php#portfolio">Portfolio</a>
+                <a href="index.php#gallery">Gallery</a>
+                <a href="index.php#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <div class="footer-copy">&copy; 2026 FlyLense. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
-        function toggleFaq(element) {
-            const faqItem = element.closest('.faq-item');
-            const isActive = faqItem.classList.contains('active');
-            
-            // Close all other FAQs
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
+        (function() {
+            const navbar = document.getElementById('navbar');
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const backToTop = document.getElementById('backToTop');
+            const allSectionLinks = document.querySelectorAll('a[href^="#"]');
+
+            function updateNavbar() {
+                const scrollY = window.scrollY;
+                if (scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+                if (scrollY > 600) backToTop.classList.add('visible');
+                else backToTop.classList.remove('visible');
+            }
+
+            function toggleMobileMenu() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+            function closeMobileMenu() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            hamburger.addEventListener('click', toggleMobileMenu);
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
             });
-            
-            // Toggle the clicked one
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
-        }
-    </script>
 
-    <!-- ===== MOBILE SLIDER AUTO-PLAY ===== -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('#mobileSlider .slide');
-            const dots = document.querySelectorAll('#sliderDots .dot');
-            let current = 0;
-            let interval;
-
-            function goTo(index) {
-                slides.forEach((s, i) => s.classList.toggle('active', i === index));
-                dots.forEach((d, i) => d.classList.toggle('active', i === index));
-                current = index;
-            }
-
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    clearInterval(interval);
-                    goTo(parseInt(this.dataset.index));
-                    startAutoPlay();
+            allSectionLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#') && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const offset = navbar.offsetHeight + 10;
+                            const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+                            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                        }
+                    }
                 });
             });
 
-            function startAutoPlay() {
-                interval = setInterval(() => {
-                    goTo((current + 1) % slides.length);
-                }, 5000);
+            backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+            let scrollTicking = false;
+            window.addEventListener('scroll', () => {
+                if (!scrollTicking) {
+                    requestAnimationFrame(() => { updateNavbar(); scrollTicking = false; });
+                    scrollTicking = true;
+                }
+            });
+
+            // ----- Half‑Page Slider Functionality -----
+            const slidesContainer = document.getElementById('heroSlides');
+            const slides = slidesContainer.querySelectorAll('.slide');
+            const dotsContainer = document.getElementById('sliderDots');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            let currentIndex = 0;
+            let autoplay;
+
+            // Create dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            function goToSlide(index) {
+                if (index < 0) index = slides.length - 1;
+                if (index >= slides.length) index = 0;
+                currentIndex = index;
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+                resetAutoplay();
             }
 
-            if (slides.length > 1) {
-                startAutoPlay();
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1); }
+
+            function resetAutoplay() {
+                clearInterval(autoplay);
+                autoplay = setInterval(nextSlide, 4500);
             }
-        });
+
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            const sliderEl = document.getElementById('heroSlider');
+            sliderEl.addEventListener('mouseenter', () => clearInterval(autoplay));
+            sliderEl.addEventListener('mouseleave', resetAutoplay);
+
+            let touchStartX = 0;
+            sliderEl.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            sliderEl.addEventListener('touchend', (e) => {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (diff > 50) nextSlide();
+                if (diff < -50) prevSlide();
+            }, { passive: true });
+
+            autoplay = setInterval(nextSlide, 4500);
+
+            updateNavbar();
+        })();
     </script>
 </body>
 </html>
