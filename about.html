@@ -163,7 +163,7 @@
         .hero-slider {
             position: relative;
             width: 100%;
-            height: 60vh;               /* Half the viewport */
+            height: 60vh;
             min-height: 450px;
             margin-top: var(--nav-height);
             overflow: hidden;
@@ -209,7 +209,6 @@
             max-width: 90%;
         }
 
-        /* Slider controls */
         .slider-arrow {
             position: absolute;
             top: 50%;
@@ -340,60 +339,96 @@
             line-height: 1.7;
         }
 
-        /* Timeline */
-        .timeline {
+        /* ============ REDESIGNED "OUR JOURNEY" SECTION ============ */
+        .journey-section {
+            background: var(--bg-secondary);
             position: relative;
-            max-width: 800px;
-            margin: 2rem auto 0;
-            padding-left: 30px;
+            overflow: hidden;
         }
-        .timeline::before {
+        .journey-section::before {
             content: '';
             position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border-light);
-            border-radius: 1px;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0, 116, 246, 0.05) 0%, transparent 60%);
+            pointer-events: none;
         }
-        .timeline-item {
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
             position: relative;
-            margin-bottom: 2.5rem;
-            padding-left: 2rem;
+            z-index: 2;
         }
-        .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-dot {
+        /* Dashed connecting line (visible on larger screens) */
+        .journey-grid::before {
+            content: '';
             position: absolute;
-            left: -25px;
-            top: 4px;
+            top: 30px;
+            left: 5%;
+            width: 90%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 50%, var(--blue) 100%);
+            opacity: 0.25;
+            z-index: -1;
+        }
+        .milestone-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.2rem 1.5rem;
+            text-align: center;
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            z-index: 1;
+        }
+        .milestone-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--blue-dark);
+            box-shadow: var(--shadow-elevated), 0 0 30px rgba(0,116,246,0.2);
+            background: var(--bg-card-hover);
+        }
+        .milestone-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
             width: 14px;
             height: 14px;
             background: var(--blue);
             border-radius: 50%;
-            border: 3px solid var(--bg-primary);
-            box-shadow: 0 0 16px rgba(0, 116, 246, 0.5);
-            z-index: 2;
+            border: 3px solid var(--bg-secondary);
+            box-shadow: 0 0 16px rgba(0,116,246,0.5);
+            transition: all var(--transition-smooth);
         }
-        .timeline-year {
+        .milestone-card:hover::after {
+            background: var(--blue-light);
+            box-shadow: 0 0 20px rgba(0,116,246,0.8);
+        }
+        .milestone-year {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--blue-light);
-            letter-spacing: 0.06em;
-            margin-bottom: 0.3rem;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            margin-top: 0.8rem;
+            line-height: 1;
         }
-        .timeline-item h4 {
+        .milestone-card h4 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
         }
-        .timeline-item p {
+        .milestone-card p {
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Team grid */
@@ -597,6 +632,11 @@
         /* ============ RESPONSIVE ============ */
         @media (max-width: 1024px) {
             .hero-slider { height: 55vh; }
+            .journey-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            .journey-grid::before { display: none; }
             .team-grid { grid-template-columns: repeat(2, 1fr); }
             .mission-vision-grid { grid-template-columns: 1fr; }
             .cta-banner { flex-direction: column; text-align: center; }
@@ -620,11 +660,12 @@
             .section { padding: 3rem 1.2rem; }
             .section-header { margin-bottom: 2rem; }
             .section-title { font-size: 1.6rem; }
+            .journey-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .milestone-card::after { display: none; }
             .team-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-            .timeline { padding-left: 20px; }
-            .timeline::before { left: 5px; }
-            .timeline-dot { left: -22px; width: 10px; height: 10px; }
-            .timeline-item { padding-left: 1.2rem; margin-bottom: 1.8rem; }
             .footer-container { flex-direction: column; text-align: center; }
             .footer-links { justify-content: center; }
             .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 38px; height: 38px; }
@@ -651,8 +692,8 @@
                 <span style="display:none;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);">FlyLense</span>
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.php" class="active">About</a></li>
                 <li><a href="index.php#services">Services</a></li>
                 <li><a href="index.php#portfolio">Portfolio</a></li>
                 <li><a href="index.php#gallery">Gallery</a></li>
@@ -719,48 +760,46 @@
         </div>
     </section>
 
-    <section class="section" style="background: var(--bg-secondary);">
+    <!-- ==================== REDESIGNED OUR JOURNEY SECTION ==================== -->
+    <section class="section journey-section">
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Our Journey</span>
-                <h2 class="section-title">The FlyLense Timeline</h2>
+                <h2 class="section-title">Milestones That Define Us</h2>
                 <div class="section-divider"></div>
+                <p class="section-subtitle">From a small creative studio to a trusted production partner for over 150 brands — every step shaped who we are.</p>
             </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-year">2018</div>
-                    <h4>Founded in Los Angeles</h4>
-                    <p>Started as a two‑person crew with a single camera and a drone.</p>
+            <div class="journey-grid">
+                <div class="milestone-card">
+                    <div class="milestone-year">2018</div>
+                    <h4>Founded in LA</h4>
+                    <p>Started as a two‑person crew with a single camera and a drone, fueled by passion for visual storytelling.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-year">2020</div>
-                    <h4>Expanded to Full‑Service</h4>
-                    <p>Built an in‑house post‑production team, landed first major brand campaign.</p>
+                <div class="milestone-card">
+                    <div class="milestone-year">2020</div>
+                    <h4>Full‑Service Expansion</h4>
+                    <p>Built an in‑house post‑production team and landed our first major brand campaign.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-year">2022</div>
+                <div class="milestone-card">
+                    <div class="milestone-year">2022</div>
                     <h4>Award‑Winning Work</h4>
-                    <p>Multiple industry awards for creative storytelling.</p>
+                    <p>Recognized with multiple industry awards for creative excellence. Over 200 projects delivered.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-year">2024</div>
+                <div class="milestone-card">
+                    <div class="milestone-year">2024</div>
                     <h4>8K & National Reach</h4>
-                    <p>Invested in 8K systems, expanded nationwide.</p>
+                    <p>Invested in cutting‑edge 8K camera systems and expanded operations nationwide.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-year">2026</div>
-                    <h4>Trusted by 150+ Brands</h4>
-                    <p>A team of 20+ creatives, still passionate as day one.</p>
+                <div class="milestone-card">
+                    <div class="milestone-year">2026</div>
+                    <h4>150+ Happy Clients</h4>
+                    <p>A tight‑knit team of 20+ creatives, still delivering world‑class content with the same passion as day one.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ==================== MEET THE TEAM ==================== -->
     <section class="section" style="background: var(--bg-primary);">
         <div class="section-container">
             <div class="section-header">
@@ -903,7 +942,6 @@
             let currentIndex = 0;
             let autoplay;
 
-            // Create dots
             slides.forEach((_, i) => {
                 const dot = document.createElement('span');
                 dot.classList.add('dot');
