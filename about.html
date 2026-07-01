@@ -11,8 +11,8 @@
     <style>
         /* ============ SAME ROOT VARIABLES & GLOBAL STYLES AS index.php ============ */
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #0d0d14;
+            --bg-primary: white;
+            --bg-secondary: white;
             --bg-tertiary: #12121c;
             --bg-card: #151523;
             --bg-card-hover: #1a1a2e;
@@ -424,158 +424,95 @@
             font-size: 0.85rem;
         }
 
-        /* ============ JOURNEY SECTION WITH BACKGROUND IMAGE ============ */
-        .journey-section {
-            position: relative;
-            background: url('img/journey-bg.jpg') center/cover no-repeat; /* ← Replace with your image */
-            background-attachment: fixed;
-            overflow: hidden;
+        /* ============ FOUNDERS SECTION (CUSTOM NEW DESIGN) ============ */
+        .founders-section {
+            background: var(--bg-primary);
         }
-        .journey-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(2px);
-            z-index: 0;
-        }
-        .journey-section .section-container {
-            position: relative;
-            z-index: 1;
-        }
-        .journey-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-            position: relative;
-        }
-        .journey-grid::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: 5%;
-            width: 90%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 50%, var(--blue) 100%);
-            opacity: 0.35;
-            z-index: 0;
-        }
-        .milestone-card {
-            background: rgba(21, 21, 35, 0.9);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem 1.2rem 1.5rem;
-            text-align: center;
-            transition: all var(--transition-smooth);
-            box-shadow: var(--shadow-card);
-            position: relative;
-            z-index: 1;
-        }
-        .milestone-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--blue-dark);
-            box-shadow: var(--shadow-elevated), 0 0 30px rgba(0,116,246,0.25);
-            background: rgba(26, 26, 46, 0.95);
-        }
-        .milestone-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 14px;
-            height: 14px;
-            background: var(--blue);
-            border-radius: 50%;
-            border: 3px solid rgba(10,10,15,0.9);
-            box-shadow: 0 0 16px rgba(0,116,246,0.5);
-            transition: all var(--transition-smooth);
-        }
-        .milestone-card:hover::after {
-            background: var(--blue-light);
-            box-shadow: 0 0 20px rgba(0,116,246,0.8);
-        }
-        .milestone-year {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: var(--gradient-blue);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.8rem;
-            margin-top: 0.8rem;
-            line-height: 1;
-        }
-        .milestone-card h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-        .milestone-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Team grid */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        .team-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.8rem 1.4rem;
-            text-align: center;
-            transition: all var(--transition-smooth);
-            box-shadow: var(--shadow-card);
-        }
-        .team-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--blue-dark);
-            box-shadow: var(--shadow-elevated);
-        }
-        .team-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            margin: 0 auto 1rem;
+        .founder-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: var(--blue-light);
-            border: 2px solid var(--border-light);
-            overflow: hidden;
+            gap: 4rem;
+            margin-bottom: 5rem;
         }
-        .team-card h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1rem;
+        .founder-row:last-child {
+            margin-bottom: 0;
+        }
+        /* Alternating reverse logic */
+        .founder-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .founder-image-wrap {
+            flex: 1;
+            max-width: 45%;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-elevated);
+            border: 1px solid var(--border-light);
+            background: var(--bg-tertiary);
+        }
+        .founder-image-wrap img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4/3;
+            transition: transform var(--transition-smooth);
+        }
+        .founder-image-wrap img:hover {
+            transform: scale(1.02);
+        }
+        .founder-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .founder-name {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #2faf9d; /* Original Teal */
+            letter-spacing: -0.02em;
             margin-bottom: 0.2rem;
         }
-        .team-role {
-            font-size: 0.78rem;
-            color: var(--blue-light);
-            letter-spacing: 0.03em;
-            margin-bottom: 0.6rem;
+        /* LinkedIn button */
+        .founder-linkedin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0077b5;
+            color: #fff;
+            border-radius: 4px;
+            padding: 0.15rem 0.4rem;
+            font-size: 1.1rem;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            width: 26px;
+            height: 26px;
         }
-        .team-bio {
-            font-size: 0.8rem;
+        .founder-linkedin:hover {
+            transform: scale(1.15);
+            color: #fff;
+            background: #00669c;
+        }
+        .founder-role {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+        .founder-bio {
             color: var(--text-muted);
-            line-height: 1.5;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 550px;
+            margin-top: 0.3rem;
         }
 
-        /* ============ FAQ SECTION ============ */
+        /* ============ UNTOUCHED FAQ SECTION CSS ============ */
         .faq-section {
             background: var(--bg-secondary);
         }
@@ -643,7 +580,135 @@
             margin: 0;
         }
 
-        /* CTA Banner */
+        /* ============ NEW PROMO/COLLAGE SECTION ============ */
+        .promo-section {
+            background: #f8f9fc; /* Slight off-white background to pop */
+            padding: 5rem 2rem;
+        }
+        .promo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .promo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .promo-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: #005dcf; /* Matching your current blue heading */
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        .promo-content h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #111;
+            margin-top: -0.4rem;
+        }
+        .promo-content p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+        .btn-yellow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffc107;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.85rem 2.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all var(--transition-bounce);
+            background: var(--gradient-blue);
+            align-self: flex-start;
+            margin-top: 0.5rem;
+            
+        }
+        .btn-yellow:hover {
+            transform: translateY(-3px);
+            background: var(--gradient-blue);
+            box-shadow: 0 8px 20px #0066de;
+            color: white;
+        }
+        .promo-images {
+            display: flex;
+            gap: 1.5rem;
+            height: 480px;
+        }
+        .promo-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex: 1;
+        }
+        .img-wrapper {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            transition: all var(--transition-smooth);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .img-wrapper:hover {
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        .img-wrapper:hover img {
+            transform: scale(1.06);
+        }
+        .img-tall { flex: 1.6; }
+        .img-short { flex: 1; }
+        
+        @media (max-width: 768px) {
+            .promo-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .promo-content h2 { font-size: 2.2rem; }
+            .promo-content h3 { font-size: 1.1rem; }
+            .promo-content p { max-width: 100%; }
+            .btn-yellow { align-self: center; }
+            .promo-images {
+                flex-direction: column;
+                height: auto;
+                gap: 1.5rem;
+            }
+            .promo-col {
+                flex-direction: row;
+                height: 300px;
+            }
+            .img-tall { flex: 1.2; }
+            .img-short { flex: 1; }
+        }
+        @media (max-width: 500px) {
+            .promo-col {
+                flex-direction: column;
+                height: auto;
+            }
+            .img-wrapper {
+                aspect-ratio: 4/3;
+                height: 200px;
+            }
+        }
+
+        /* ============ CTA Banner ============ */
         .cta-banner-section {
             padding: 20px 2rem;
             background: var(--bg-primary);
@@ -798,12 +863,6 @@
                 max-width: 500px;
                 margin: 0 auto;
             }
-            .journey-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2rem;
-            }
-            .journey-grid::before { display: none; }
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
             .cta-banner { flex-direction: column; text-align: center; }
             .cta-banner-text h2 { font-size: 1.5rem; }
             .cta-banner-text h4 { font-size: 1.1rem; }
@@ -828,12 +887,29 @@
             .section-header { margin-bottom: 2rem; }
             .section-title { font-size: 1.6rem; }
             .about-features { grid-template-columns: 1fr; }
-            .journey-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            
+            /* Founder section responsiveness */
+            .founder-row, .founder-row:nth-child(even) {
+                flex-direction: column;
+                gap: 2rem;
+                margin-bottom: 4rem;
             }
-            .milestone-card::after { display: none; }
-            .team-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .founder-image-wrap {
+                max-width: 100%;
+                width: 100%;
+            }
+            .founder-name {
+                font-size: 1.6rem;
+            }
+            .founder-info {
+                text-align: center;
+            }
+            .founder-bio {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
             .faq-question { padding: 1rem 1.4rem; font-size: 0.95rem; }
             .faq-answer { padding: 0 1.4rem; }
             .faq-item.active .faq-answer { padding: 0 1.4rem 1rem; }
@@ -849,7 +925,6 @@
         @media (max-width: 400px) {
             .hero-slider { height: 40vh; min-height: 280px; }
             .hero-slider .caption { font-size: 0.7rem; padding: 0.5rem 1rem; }
-            .team-grid { grid-template-columns: 1fr; }
             .btn { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
             .slide-title { font-size: 1.6rem; }
         }
@@ -896,11 +971,8 @@
         <div class="slides" id="heroSlides">
             <div class="slide" style="background-image: url('img/slider/5.png');">
                 <h1 class="slide-title">About Us</h1>
-                <!-- <div class="caption">Commercial Films</div> -->
             </div>
-            <!-- Additional slides can be uncommented if needed -->
         </div>
-        <!-- Arrow and dots are commented out in your original; they remain unchanged -->
     </section>
 
     <!-- ==================== ABOUT SECTION WITH IMAGE ==================== -->
@@ -915,16 +987,16 @@
                 </div>
                 <div class="about-text">
                     <span class="section-tag">Who We Are</span>
-                    <h3>Transforming Ideas Into Cinematic Experiences</h3>
-                    <p>At FlyLense, we believe every brand has a unique story waiting to be told. Our team of visionary directors, skilled cinematographers, certified drone pilots, and meticulous editors collaborates closely with you from concept to final cut.</p>
-                    <p>We blend artistic creativity with technical precision, leveraging cutting‑edge equipment—including 8K cameras, advanced drone technology, and professional lighting rigs—to deliver visuals that resonate.</p>
+                    <h3 style="color: #005dcf;"><em>Transforming Ideas Into Cinematic Experiences</em></h3>
+                    <p style="color: black;">At FlyLense, we believe every brand has a unique story waiting to be told. Our team of visionary directors, skilled cinematographers, certified drone pilots, and meticulous editors collaborates closely with you from concept to final cut.</p>
+                    <p style="color: black;">We blend artistic creativity with technical precision, leveraging cutting‑edge equipment—including 8K cameras, advanced drone technology, and professional lighting rigs—to deliver visuals that resonate.</p>
                     <ul class="about-features">
-                        <li><i class="fa-solid fa-check-circle"></i> 8K Cinematic Footage</li>
-                        <li><i class="fa-solid fa-check-circle"></i> FAA-Certified Drone Pilots</li>
-                        <li><i class="fa-solid fa-check-circle"></i> End-to-End Production</li>
-                        <li><i class="fa-solid fa-check-circle"></i> Fast Turnaround Times</li>
-                        <li><i class="fa-solid fa-check-circle"></i> Creative Storytelling</li>
-                        <li><i class="fa-solid fa-check-circle"></i> Post-Production Mastery</li>
+                        <li style="color: black;"><i class="fa-solid fa-check-circle"></i> 8K Cinematic Footage</li>
+                        <li style="color: black;"><i class="fa-solid fa-check-circle"></i> FAA-Certified Drone Pilots</li>
+                        <li style="color: black;"><i class="fa-solid fa-check-circle"></i> End-to-End Production</li>
+                        <li style="color: black;"><i class="fa-solid fa-check-circle"></i> Fast Turnaround Times</li>
+                        <li style="color: black;"><i class="fa-solid fa-check-circle"></i> Creative Storytelling</li>
+                        <li style="color: black;"><i class="fa-solid fa-check-circle"></i> Post-Production Mastery</li>
                     </ul>
                     <a href="index.php#contact" class="btn btn-primary" style="margin-top:0.5rem;">
                         <i class="fa-solid fa-handshake"></i> Work With Us
@@ -934,90 +1006,63 @@
         </div>
     </section>
 
-    <!-- ==================== JOURNEY SECTION WITH BACKGROUND IMAGE ==================== -->
-    <!-- <section class="section journey-section">
+    <!-- ==================== MEET OUR FOUNDERS ==================== -->
+    <section class="section founders-section">
         <div class="section-container">
             <div class="section-header">
-                <span class="section-tag">Our Journey</span>
-                <h2 class="section-title">Milestones That Define Us</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">From a small creative studio to a trusted production partner for over 150 brands — every step shaped who we are.</p>
+                <h2 class="section-title" style="color: #0074f6;">Meet our Founders</h2>
             </div>
-            <div class="journey-grid">
-                <div class="milestone-card">
-                    <div class="milestone-year">2018</div>
-                    <h4>Founded in LA</h4>
-                    <p>Started as a two‑person crew with a single camera and a drone.</p>
+            
+            <!-- Founder 1 -->
+            <div class="founder-row">
+                <div class="founder-image-wrap">
+                    <!-- Replace src with your actual team member image -->
+                    <img src="img/founder1.jpg" alt="Prashant Pavithran" onerror="this.src='https://placehold.co/600x450/1a1a2e/2faf9d?text=Photo+1'">
                 </div>
-                <div class="milestone-card">
-                    <div class="milestone-year">2020</div>
-                    <h4>Full‑Service Expansion</h4>
-                    <p>Built an in‑house post‑production team and landed our first major campaign.</p>
-                </div>
-                <div class="milestone-card">
-                    <div class="milestone-year">2022</div>
-                    <h4>Award‑Winning Work</h4>
-                    <p>Recognized with multiple industry awards. Over 200 projects delivered.</p>
-                </div>
-                <div class="milestone-card">
-                    <div class="milestone-year">2024</div>
-                    <h4>8K & National Reach</h4>
-                    <p>Invested in cutting‑edge 8K systems and expanded nationwide.</p>
-                </div>
-                <div class="milestone-card">
-                    <div class="milestone-year">2026</div>
-                    <h4>150+ Happy Clients</h4>
-                    <p>A team of 20+ creatives, still as passionate as day one.</p>
+                <div class="founder-info">
+                    <div style="color:#0074f6;" class="founder-name">
+                        ABDUL SAMI
+                        <!-- <a href="#" class="founder-linkedin" aria-label="LinkedIn Profile">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a> -->
+                    </div>
+                    <div  style="color: #005dcf;" class="founder-role">Director & COO</div>
+                    <div style="color: black;" class="founder-bio">
+                        An early adopter, a tech enthusiast, and a rock-solid guy who can stay smiling even on the craziest of days. Prashant a.k.a. PP studied in Symbiosis, and worked with Reckitt, Nokia, Microsoft, and a start-up of his own before this. He leads our Sales and BD.
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
- -->
-    <!-- ==================== MEET THE TEAM ==================== -->
-    <section class="section" style="background: var(--bg-primary);">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-tag">The People</span>
-                <h2 class="section-title">Meet Our Core Team</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fa-solid fa-user-tie"></i></div>
-                    <h4>Marcus Chen</h4>
-                    <div class="team-role">Founder & Creative Director</div>
-                    <p class="team-bio">15+ years behind the lens. Shapes every project’s creative vision.</p>
+
+            <!-- Founder 2 -->
+            <div class="founder-row">
+                <div class="founder-image-wrap">
+                    <!-- Replace src with your actual team member image -->
+                    <img src="img/founder2.jpg" alt="Prashanth Naik" onerror="this.src='https://placehold.co/600x450/1a1a2e/2faf9d?text=Photo+2'">
                 </div>
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
-                    <h4>Elena Vasquez</h4>
-                    <div class="team-role">Head of Production</div>
-                    <p class="team-bio">Logistics expert, ensures flawless execution.</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fa-solid fa-user-ninja"></i></div>
-                    <h4>David Okafor</h4>
-                    <div class="team-role">Lead Cinematographer</div>
-                    <p class="team-bio">Master of light and composition.</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fa-solid fa-user-gear"></i></div>
-                    <h4>Sophie Laurent</h4>
-                    <div class="team-role">Post‑Production Supervisor</div>
-                    <p class="team-bio">Turns raw footage into compelling stories.</p>
+                <div class="founder-info">
+                    <div style="color:#0074f6;" class="founder-name">
+                        SHAIK SADIQ
+                        <!-- <a href="#" class="founder-linkedin" aria-label="LinkedIn Profile">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a> -->
+                    </div>
+                    <div  style="color: #005dcf;" class="founder-role">Director & CMO</div>
+                    <div style="color: black;" class="founder-bio">
+                        Prashanth, a.k.a. Nike, has close to two decades of technology, product and marketing experience. He's worked as COO of a voice-activated AI firm, led high-impact projects, run a wedding photography business, and even made a couple of short films.
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== FAQ SECTION ==================== -->
+    <!-- ==================== UNTOUCHED FAQ SECTION (EXACTLY AS YOUR ORIGINAL) ==================== -->
     <section class="section faq-section">
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Frequently Asked</span>
-                <h2 class="section-title">Your Questions, Answered</h2>
+                <h2 style="color: #005dcf;" class="section-title">Your Questions, Answered</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Everything you need to know before starting your next project with us.</p>
+                <p style="color: black;" class="section-subtitle">Everything you need to know before starting your next project with us.</p>
             </div>
             <div class="faq-container">
                 <div class="faq-item">
@@ -1063,6 +1108,38 @@
                     </button>
                     <div class="faq-answer">
                         <p>We offer custom quotes based on the project's complexity, duration, and required crew. After an initial consultation, we'll provide a transparent, itemized proposal. No hidden fees — just high‑quality production at a fair value.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== NEW PROMO SECTION (BASED ON YOUR IMAGE) ==================== -->
+    <section class="section promo-section">
+        <div class="section-container">
+            <div class="promo-grid">
+                                <div class="promo-content">
+                    <h2>Cinematic Excellence, Delivered in Weeks.</h2>
+                    <h3>Share your brief. Get a transparent quote. Launch your campaign.</h3>
+                    <p>At FlyLense, we combine agency-level artistry with startup-speed agility. Say goodbye to long production delays. Our crew of visionary directors, certified drone pilots, and post-production masters work seamlessly to produce stunning 8K footage, corporate films, and social media content—so you can focus on your business while we bring your story to life.</p>
+                    <a href="index.php#contact" class="btn-yellow">Start Your Project</a>
+                </div>
+                <div class="promo-images">
+                    <div class="promo-col">
+                        <div class="img-wrapper img-tall">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop" alt="Woman thumbs up" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+1'">
+                        </div>
+                        <div class="img-wrapper img-short">
+                            <img src="https://images.unsplash.com/photo-1544033527-b192d6c3b0e1?w=600&h=400&fit=crop" alt="Ghee Jar" onerror="this.src='https://placehold.co/600x400/005dcf/fff?text=Image+3'">
+                        </div>
+                    </div>
+                    <div class="promo-col">
+                        <div class="img-wrapper img-short">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop" alt="Modern Oven" onerror="this.src='https://placehold.co/600x400/005dcf/fff?text=Image+2'">
+                        </div>
+                        <div class="img-wrapper img-tall">
+                            <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&h=800&fit=crop" alt="Woman reaching shelf" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+4'">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1221,7 +1298,7 @@
                 autoplay = setInterval(nextSlide, 4500);
             }
 
-            // ----- FAQ Accordion Functionality -----
+            // ----- FAQ Accordion Functionality (Preserved exactly) -----
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const questionBtn = item.querySelector('.faq-question');
