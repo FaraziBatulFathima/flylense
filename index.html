@@ -8,51 +8,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-       :root {
-    /* White Theme */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f7f9fc;
-    --bg-tertiary: #eef3fa;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f5f9ff;
-    /* Brand Blue */
-    --blue: #0074f6;
-    --blue-light: #3391ff;
-    --blue-dark: #0056c4;
-    --accent: #4da3ff;
-    /* Text */
-    --text-primary: #111827;
-    --text-secondary: #374151;
-    --text-muted: #6b7280;
-    /* Borders */
-    --border: #e5e7eb;
-    --border-light: #d1d5db;
-    /* Gradients */
-    --gradient-blue: linear-gradient(135deg,#0074f6,#3391ff,#0056c4);
-    --gradient-dark: linear-gradient(
-        180deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,.55) 55%,
-        rgba(255,255,255,.95) 100%
-    );
-    --gradient-radial: radial-gradient(
-        ellipse at center,
-        rgba(0,116,246,.08) 0%,
-        transparent 70%
-    );
-    --shadow-blue:0 10px 30px rgba(0,116,246,.15);
-    --shadow-card:0 10px 25px rgba(0,0,0,.08);
-    --shadow-elevated:0 20px 45px rgba(0,0,0,.12);
-    --radius-sm:8px;
-    --radius-md:14px;
-    --radius-lg:20px;
-    --radius-xl:28px;
-    --radius-full:50%;
-    --nav-height:80px;
-    --nav-height-mobile:64px;
-    --max-width:1280px;
-    --watermark-opacity:.08;
-}
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f9fc;
+            --bg-tertiary: #eef3fa;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f5f9ff;
+            --blue: #0074f6;
+            --blue-light: #3391ff;
+            --blue-dark: #0056c4;
+            --accent: #4da3ff;
+            --text-primary: #111827;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --border-light: #d1d5db;
+            --gradient-blue: linear-gradient(135deg, #0074f6, #3391ff, #0056c4);
+            --shadow-blue: 0 10px 30px rgba(0, 116, 246, .15);
+            --shadow-card: 0 10px 25px rgba(0, 0, 0, .06);
+            --shadow-elevated: 0 20px 45px rgba(0, 0, 0, .10);
+            --shadow-nav: 0 4px 30px rgba(0, 0, 0, .12);
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 50%;
+            --nav-height: 80px;
+            --nav-height-mobile: 64px;
+            --max-width: 1280px;
+        }
+
+        /* Navbar intro animation */
+        .navbar {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: opacity 0.7s ease, transform 0.7s ease, top 0.45s cubic-bezier(0.4,0,0.2,1), background 0.45s cubic-bezier(0.4,0,0.2,1);
+        }
+        .navbar.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         *,
         *::before,
         *::after {
@@ -79,338 +78,369 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--blue-dark); }
-        ::selection { background: rgba(0, 116, 246, 0.35); color: #fff; }
-
-        /* ============ NAVIGATION ============ */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height: var(--nav-height);
-            transition: all var(--transition-smooth); background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-        .navbar.scrolled { background: rgba(10, 10, 15, 0.95); box-shadow: 0 2px 30px rgba(0, 0, 0, 0.6); }
-        .navbar-container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; z-index: 1001; flex-shrink: 0; }
-        .nav-logo img { height: 42px; width: auto; object-fit: contain; transition: transform var(--transition-bounce); }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--blue-dark);
+        }
+        ::selection {
+            background: rgba(0, 116, 246, 0.35);
+            color: #fff;
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.revealed {
+            opacity: 1;
+        }
+        .reveal-up { transform: translateY(50px); }
+        .reveal-up.revealed { transform: translateY(0); }
+        .reveal-left { transform: translateX(-50px); }
+        .reveal-left.revealed { transform: translateX(0); }
+        .reveal-right { transform: translateX(50px); }
+        .reveal-right.revealed { transform: translateX(0); }
+        .reveal-scale { transform: scale(0.88); }
+        .reveal-scale.revealed { transform: scale(1); }
+        .delay-1 { transition-delay: 0.05s; }
+        .delay-2 { transition-delay: 0.12s; }
+        .delay-3 { transition-delay: 0.19s; }
+        .delay-4 { transition-delay: 0.26s; }
+        .delay-5 { transition-delay: 0.33s; }
+        .delay-6 { transition-delay: 0.40s; }
+        .delay-7 { transition-delay: 0.47s; }
+        .delay-8 { transition-delay: 0.54s; }
+
+        /* NAVIGATION */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: 1px solid transparent;
+            box-shadow: none;
+            will-change: background, backdrop-filter, box-shadow, border-color;
+        }
+        .navbar.scrolled {
+            top: 0px;
+            background: rgba(12, 18, 30, .96);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
+        }
+        .navbar-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            z-index: 1001;
+            flex-shrink: 0;
+            transition: transform var(--transition-bounce);
+        }
+        .nav-logo:hover { transform: scale(1.03); }
+        .nav-logo img { height: 42px; width: auto; object-fit: contain; }
         .nav-logo img.logo-icon { height: 42px; }
         .nav-logo img.logo-title { padding-left: 20px; height: 50px; }
-        .nav-logo:hover img.logo-icon { transform: scale(1.05); }
-        .nav-logo:hover img.logo-title { transform: scale(1.05); }
+        .navbar.scrolled .nav-logo img { filter: brightness(1) invert(0); }
         .nav-links { display: flex; align-items: center; gap: 0.3rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em; padding: 0.55rem 1.1rem; border-radius: 50px; transition: all var(--transition-fast); position: relative; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255, 255, 255, 0.04); }
-        .nav-links a.active { color: var(--blue-light); background: rgba(0, 116, 246, 0.1); }
-        .nav-cta { background: var(--gradient-blue) !important; color: #fff !important; font-weight: 600 !important; padding: 0.55rem 1.5rem !important; border-radius: 50px !important; box-shadow: 0 4px 20px rgba(0, 116, 246, 0.3); }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 116, 246, 0.5) !important; }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            transition: all 0.35s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+        .navbar.scrolled .nav-links a { color: rgba(255,255,255,.88); }
+        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
+        .navbar.scrolled .nav-links a:hover { background: rgba(255,255,255,.08); }
+        .nav-links a.active { color: #fff; background: rgba(255,255,255,0.15); font-weight: 600; }
+        .navbar.scrolled .nav-links a.active {
+            background: rgba(0,116,246,.25);
+            border: 1px solid rgba(0,116,246,.35);
+        }
+        .nav-cta {
+            background: var(--gradient-blue);
+            color: #fff !important;
+            font-weight: 600 !important;
+            padding: 0.55rem 1.5rem !important;
+            border-radius: 50px !important;
+            box-shadow: 0 4px 20px rgba(0,116,246,0.4);
+            transition: all var(--transition-bounce) !important;
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,116,246,0.6) !important; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; padding: 8px; background: none; border: none; }
-        .hamburger span { display: block; width: 26px; height: 2.5px; background: var(--text-primary); border-radius: 2px; transition: all var(--transition-fast); }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-        .mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.97); backdrop-filter: blur(30px); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.4s ease; pointer-events: none; }
+        .hamburger span { display: block; width: 26px; height: 2.5px; background: #fff; border-radius: 2px; transition: all 0.35s ease; }
+        .navbar.scrolled .hamburger span { box-shadow: none; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+        .mobile-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(10,10,20,0.96); backdrop-filter: blur(30px);
+            z-index: 999; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 1.2rem; opacity: 0; visibility: hidden;
+            transition: all 0.4s ease; pointer-events: none;
+        }
         .mobile-menu.active { opacity: 1; visibility: visible; pointer-events: auto; }
-        .mobile-menu a { text-decoration: none; color: var(--text-secondary); font-size: 1.4rem; font-weight: 500; padding: 0.6rem 1.5rem; }
-        .mobile-menu a:hover { color: var(--blue-light); }
-        .mobile-menu .mobile-cta { background: var(--gradient-blue); color: #fff !important; font-weight: 600; border-radius: 50px; padding: 0.8rem 2rem !important; margin-top: 0.5rem; font-size: 1.1rem !important; }
+        .mobile-menu.scrolled-bg { background: rgba(255,255,255,0.97); }
+        .mobile-menu a { text-decoration: none; color: rgba(255,255,255,0.9); font-size: 1.4rem; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 50px; }
+        .mobile-menu.scrolled-bg a { color: var(--text-secondary); }
+        .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .mobile-menu.scrolled-bg a:hover { color: var(--blue); background: rgba(0,116,246,0.06); }
+        .mobile-cta { background: var(--gradient-blue); color: #fff !important; font-weight: 600; border-radius: 50px; padding: 0.8rem 2rem !important; margin-top: 0.5rem; font-size: 1.1rem !important; box-shadow: 0 6px 25px rgba(0,116,246,0.4); }
 
-        /* ============ FADE SLIDER ============ */
-        .hero-slider-wrapper { position: relative; width: 100%; padding-top: var(--nav-height); background: var(--bg-primary); padding-bottom: 2rem; }
-        .fade-slider { position: relative; width: 100%; height: 80vh; min-height: 500px; overflow: hidden; }
-        .fade-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; z-index: 0; }
+        /* SLIDER WITH CLOSER CONTENT */
+        .hero-slider-wrapper { position: relative; width: 100%; background: var(--bg-primary); padding-bottom: 2rem; }
+        .fade-slider { position: relative; width: 100%; height: 100vh; min-height: 600px; overflow: hidden; box-shadow: var(--shadow-elevated); }
+        .fade-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; transition: opacity 1s ease-in-out; z-index: 0;
+        }
         .fade-slide.active { opacity: 1; z-index: 1; }
-        .fade-slide .slide-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 10, 15, 0.2) 0%, rgba(10, 10, 15, 0.6) 60%, rgba(10, 10, 15, 0.9) 100%); }
-        .fade-slide .slide-caption { position: absolute; bottom: 60px; left: 60px; z-index: 2; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 16px 28px; border-radius: 12px; color: white; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.05em; text-transform: uppercase; border-left: 4px solid var(--blue); }
-        .hero-brand-watermark {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none;
-            opacity: var(--watermark-opacity);
-            filter: drop-shadow(0 0 30px rgba(0, 116, 246, 0.3));
-            animation: subtleFloat 4s ease-in-out infinite;
-        }
-        .hero-brand-watermark img {
-            width: clamp(180px, 30vw, 400px);
-            height: auto;
-            display: block;
-        }
-        @keyframes subtleFloat {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-            50% { transform: translate(-50%, -50%) translateY(-8px); }
+        .fade-slide .slide-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.50) 50%, rgba(0,0,0,0.80) 100%);
         }
 
-        /* ============ STATS RIBBON ============ */
+        /* Left and right content closer to center */
+        .slide-content-left {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(calc(-100% - 30px), -50%) translateX(-40px);
+            z-index: 4;
+            max-width: 460px;
+            opacity: 0;
+            transition: opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s;
+            pointer-events: none;
+            text-align: right;
+        }
+        .fade-slide.active .slide-content-left {
+            opacity: 1;
+            transform: translate(calc(-100% - 30px), -50%) translateX(0);
+            pointer-events: auto;
+        }
+        .slide-content-right {
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            transform: translate(calc(100% + 30px), -50%) translateX(40px);
+            z-index: 4;
+            max-width: 460px;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s;
+            pointer-events: none;
+        }
+        .fade-slide.active .slide-content-right {
+            opacity: 1;
+            transform: translate(calc(100% + 30px), -50%) translateX(0);
+            pointer-events: auto;
+        }
+        .slide-tag {
+            display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--blue-light);
+            background: rgba(0,116,246,0.18); padding: 6px 16px; border-radius: 50px;
+            margin-bottom: 12px; border: 1px solid rgba(0,116,246,0.3);
+        }
+        .slide-heading {
+            font-family: 'Poppins', sans-serif; font-size: clamp(2.2rem, 4vw, 3.6rem);
+            font-weight: 700; color: #fff; line-height: 1.15;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5); margin-bottom: 8px;
+        }
+        .slide-desc {
+            font-size: 1.05rem; color: rgba(255,255,255,0.85); line-height: 1.6;
+            margin-bottom: 18px; text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+        .slide-cta {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--gradient-blue); color: #fff; padding: 0.75rem 1.8rem;
+            border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none;
+            box-shadow: 0 6px 25px rgba(0,116,246,0.45); transition: all var(--transition-bounce);
+            letter-spacing: 0.02em;
+        }
+        .slide-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,116,246,0.65); gap: 0.65rem; }
+        .slide-stat-row { display: flex; gap: 1.5rem; margin-top: 10px; }
+        .slide-stat { text-align: center; }
+        .slide-stat .s-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1; }
+        .slide-stat .s-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); }
+
+        /* STATS RIBBON */
         .stats-ribbon { position: relative; z-index: 3; margin-top: 2rem; padding: 0 2rem; }
-        .stats-ribbon-inner { max-width: var(--max-width); margin: 0 auto; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); display: grid; grid-template-columns: repeat(4, 1fr); box-shadow: var(--shadow-elevated); overflow: hidden; }
-        .stat-item { padding: 1.8rem 1.5rem; text-align: center; border-right: 1px solid var(--border); transition: background var(--transition-smooth); }
+        .stats-ribbon-inner { max-width: var(--max-width); margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); display: grid; grid-template-columns: repeat(4, 1fr); box-shadow: var(--shadow-elevated); overflow: hidden; }
+        .stat-item { padding: 1.8rem 1.5rem; text-align: center; border-right: 1px solid var(--border); transition: all var(--transition-smooth); cursor: default; }
         .stat-item:last-child { border-right: none; }
-        .stat-item:hover { background: var(--bg-tertiary); }
-        .stat-number { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; background: var(--gradient-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+        .stat-item:hover { background: var(--bg-card-hover); transform: translateY(-3px); box-shadow: var(--shadow-blue); border-radius: var(--radius-md); z-index: 2; }
+        .stat-number { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; background: var(--gradient-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; transition: transform var(--transition-bounce); }
+        .stat-item:hover .stat-number { transform: scale(1.1); }
         .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem; }
 
-        /* ============ SECTION COMMONS ============ */
+        /* SECTION COMMONS */
         .section { padding: 5rem 2rem; position: relative; }
         .section-container { max-width: var(--max-width); margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 3.5rem; }
-        .section-tag { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.8rem; }
-        .section-title { font-family: 'Playfair Display', 'Georgia', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-primary); margin-bottom: 0.8rem; }
+        .section-tag { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.8rem; }
+        .section-title { font-family: 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-primary); margin-bottom: 0.8rem; }
         .section-subtitle { color: var(--text-muted); font-size: 1rem; max-width: 550px; margin: 0 auto; line-height: 1.7; }
-        .section-divider { width: 50px; height: 3px; background: var(--gradient-blue); border-radius: 3px; margin: 1rem auto; }
+        .section-divider { width: 50px; height: 3px; background: var(--gradient-blue); border-radius: 3px; margin: 1rem auto; transition: width var(--transition-bounce); }
+        .section-header:hover .section-divider { width: 80px; }
 
-        /* ============ REDESIGNED ABOUT SECTION ============ */
-        #about {
-            background: var(--bg-primary);
-            position: relative;
-            overflow: hidden;
-        }
-        #about::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -30%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 116, 246, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-        .about-image-block {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .about-image-main {
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-elevated);
-            position: relative;
-        }
-        .about-image-main img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .about-image-main .image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-card) 100%);
-            font-size: 4rem;
-            color: rgba(0, 116, 246, 0.3);
-        }
-        .about-experience-badge {
-            position: absolute;
-            top: 20px;
-            left: -15px;
-            background: var(--gradient-blue);
-            color: #fff;
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius-md);
-            box-shadow: 0 8px 25px rgba(0, 116, 246, 0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-weight: 700;
-            z-index: 3;
-        }
-        .about-experience-badge .years {
-            font-size: 2rem;
-            line-height: 1;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .about-experience-badge .text {
-            font-size: 0.7rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-        .about-text {
-            padding-left: 1rem;
-        }
-        .about-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            color: var(--text-primary);
-            position: relative;
-        }
-        .about-text h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gradient-blue);
-            border-radius: 3px;
-        }
-        .about-text .lead {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-        .about-stats-row {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        .about-stat {
-            text-align: center;
-            padding: 1rem 1.2rem;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border);
-            min-width: 80px;
-        }
-        .about-stat .num {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--blue-light);
-        }
-        .about-stat .lbl {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-        }
-        .about-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--gradient-blue);
-            color: #fff;
-            padding: 0.85rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition-bounce);
-            box-shadow: 0 6px 20px rgba(0, 116, 246, 0.3);
-        }
-        .about-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 116, 246, 0.5);
-        }
+        /* ABOUT */
+        #about { background: var(--bg-primary); position: relative; overflow: hidden; }
+        #about::before { content: ''; position: absolute; top: -50%; right: -30%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,116,246,0.06) 0%, transparent 70%); border-radius: 50%; pointer-events: none; animation: aboutGlow 8s ease-in-out infinite; }
+        @keyframes aboutGlow { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-30px,20px) scale(1.08); } }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+        .about-image-block { position: relative; display: flex; flex-direction: column; gap: 1.5rem; }
+        .about-image-main { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 16/10; background: var(--bg-tertiary); border: 1px solid var(--border); box-shadow: var(--shadow-elevated); transition: all var(--transition-smooth); }
+        .about-image-main:hover { transform: translateY(-4px); box-shadow: var(--shadow-elevated), var(--shadow-blue); border-color: var(--blue-light); }
+        .about-image-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .about-experience-badge { position: absolute; top: 20px; left: -15px; background: var(--gradient-blue); color: #fff; padding: 1rem 1.5rem; border-radius: var(--radius-md); box-shadow: 0 8px 25px rgba(0,116,246,0.4); display: flex; flex-direction: column; align-items: center; font-weight: 700; z-index: 3; transition: all var(--transition-bounce); animation: badgePulse 3s ease-in-out infinite; }
+        .about-experience-badge:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 14px 40px rgba(0,116,246,0.55); }
+        .about-experience-badge .years { font-size: 2rem; line-height: 1; font-family: 'Space Grotesk', sans-serif; }
+        .about-experience-badge .text { font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; }
+        .about-text { padding-left: 1rem; }
+        .about-text h3 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--text-primary); position: relative; transition: color var(--transition-smooth); }
+        .about-text h3::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: var(--gradient-blue); border-radius: 3px; transition: width var(--transition-bounce); }
+        .about-text:hover h3::after { width: 100px; }
+        .about-text .lead { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8; }
+        .about-stats-row { display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap; }
+        .about-stat { text-align: center; padding: 1rem 1.2rem; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border); min-width: 80px; transition: all var(--transition-smooth); cursor: default; }
+        .about-stat:hover { transform: translateY(-4px); border-color: var(--blue-light); box-shadow: var(--shadow-blue); background: var(--bg-card-hover); }
+        .about-stat .num { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--blue); transition: transform var(--transition-bounce); }
+        .about-stat:hover .num { transform: scale(1.15); }
+        .about-stat .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+        .about-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--gradient-blue); color: #fff; padding: 0.85rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all var(--transition-bounce); box-shadow: 0 6px 20px rgba(0,116,246,0.3); }
+        .about-cta:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,116,246,0.5); gap: 0.7rem; }
 
-        /* ============ SERVICES SECTION ============ */
+        /* SERVICES */
         #services { background: var(--bg-secondary); position: relative; }
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem 1.6rem; text-align: center; transition: all var(--transition-smooth); cursor: pointer; position: relative; overflow: hidden; box-shadow: var(--shadow-card); }
-        .service-card:hover { transform: translateY(-6px); border-color: var(--blue-dark); box-shadow: var(--shadow-elevated), var(--shadow-blue); background: var(--bg-card-hover); }
-        .service-card::after { content: ''; position: absolute; top: -50%; right: -50%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(0, 116, 246, 0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transition: all var(--transition-smooth); }
-        .service-card:hover::after { top: -20%; right: -20%; width: 200px; height: 200px; }
-        .service-icon { width: 80px; height: 80px; margin: 0 auto 1.2rem auto; border-radius: var(--radius-md); background: rgba(0, 116, 246, 0.1); display: flex; align-items: center; justify-content: center; transition: all var(--transition-smooth); }
-        .service-card:hover .service-icon { background: var(--gradient-blue); box-shadow: var(--shadow-blue); }
-        .service-icon img { max-width: 60%; max-height: 60%; object-fit: contain; display: block; transition: transform 0.3s ease; }
-        .service-card:hover .service-icon img { transform: scale(1.1); }
-        .service-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.6rem; color: var(--text-primary); }
-        .service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-        .service-card .service-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem; color: var(--blue-light); font-weight: 500; font-size: 0.85rem; text-decoration: none; transition: gap var(--transition-fast); }
-        .service-card:hover .service-link { gap: 0.7rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+        .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-smooth); cursor: pointer; box-shadow: var(--shadow-card); display: flex; flex-direction: column; }
+        .service-card:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: var(--shadow-elevated), var(--shadow-blue); }
+        .service-card-image { width: 100%; aspect-ratio: 4/3; overflow: hidden; position: relative; background: var(--bg-tertiary); }
+        .service-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .service-card:hover .service-card-image img { transform: scale(1.06); }
+        .service-card-body { padding: 1.5rem 1.4rem; text-align: left; flex: 1; display: flex; flex-direction: column; }
+        .service-card-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .service-card-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+        .service-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem; color: var(--blue); font-weight: 500; font-size: 0.85rem; text-decoration: none; transition: all var(--transition-fast); }
+        .service-card:hover .service-link { gap: 0.7rem; color: var(--blue-dark); }
 
-        /* ============ PORTFOLIO SECTION ============ */
-        #portfolio { background: var(--bg-primary); position: relative; }
+        /* PORTFOLIO */
+        #portfolio { background: var(--bg-primary); }
         .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         .portfolio-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 16/10; background: var(--bg-tertiary); border: 1px solid var(--border); cursor: pointer; box-shadow: var(--shadow-card); transition: all var(--transition-smooth); }
-        .portfolio-item:hover { transform: translateY(-5px); border-color: var(--blue-dark); box-shadow: var(--shadow-elevated); }
-        .portfolio-item-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--bg-card); position: relative; }
-        .portfolio-item-inner i { font-size: 3.5rem; color: rgba(0, 116, 246, 0.2); transition: all var(--transition-smooth); }
-        .portfolio-item:hover .portfolio-item-inner i { color: rgba(0, 116, 246, 0.5); transform: scale(1.1); }
-        .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(10, 10, 15, 0.9) 100%); display: flex; align-items: flex-end; padding: 1.3rem; opacity: 0; transition: opacity var(--transition-smooth); }
+        .portfolio-item:hover { transform: translateY(-5px); border-color: var(--blue); box-shadow: var(--shadow-elevated), var(--shadow-blue); }
+        .portfolio-item-image { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .portfolio-item:hover .portfolio-item-image { transform: scale(1.06); }
+        .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,0.85) 100%); display: flex; align-items: flex-end; padding: 1.3rem; opacity: 0; transition: opacity var(--transition-smooth); }
         .portfolio-item:hover .portfolio-overlay { opacity: 1; }
         .portfolio-overlay-info h4 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem; }
         .portfolio-overlay-info span { font-size: 0.78rem; color: var(--blue-light); letter-spacing: 0.03em; }
-        .portfolio-cta { text-align: center; margin-top: 2.5rem; }
+        .video-badge { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 3; backdrop-filter: blur(6px); border: 2px solid rgba(255,255,255,0.4); }
 
-        /* ============ GALLERY SECTION ============ */
-        #gallery { background: var(--bg-secondary); position: relative; }
+        /* GALLERY */
+        #gallery { background: var(--bg-secondary); }
         .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-        .gallery-item { aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; background: var(--bg-tertiary); border: 1px solid var(--border); cursor: pointer; transition: all var(--transition-smooth); display: flex; align-items: center; justify-content: center; position: relative; }
-        .gallery-item:hover { transform: scale(1.03); border-color: var(--blue-dark); box-shadow: var(--shadow-elevated); z-index: 2; }
-        .gallery-item i { font-size: 2.5rem; color: rgba(0, 116, 246, 0.2); transition: all var(--transition-smooth); }
-        .gallery-item:hover i { color: rgba(0, 116, 246, 0.55); transform: scale(1.15); }
+        .gallery-item { aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); cursor: pointer; transition: all var(--transition-smooth); position: relative; box-shadow: var(--shadow-card); }
+        .gallery-item:hover { transform: scale(1.04); border-color: var(--blue); box-shadow: var(--shadow-elevated), var(--shadow-blue); z-index: 2; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
         .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
         .gallery-item.tall { grid-row: span 2; aspect-ratio: 1/2; }
+        .gallery-video-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; z-index: 3; backdrop-filter: blur(6px); border: 2px solid rgba(255,255,255,0.4); }
+        .gallery-item:hover .gallery-video-badge { background: var(--blue); border-color: #fff; }
 
-        /* ============ CTA BANNER ============ */
-        .cta-banner-section { padding: 20px 2rem; background: var(--bg-primary); position: relative; z-index: 2; }
-        .cta-banner { max-width: var(--max-width); margin: 0 auto; background: linear-gradient(135deg, #0074f6, #0040c1); border-radius: 20px; box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35); display: flex; align-items: center; justify-content: space-between; padding: 2rem 2.5rem; flex-wrap: wrap; gap: 1.5rem; }
-        .cta-banner-text h2 { font-weight: 700; font-size: 2rem; color: #fff; margin-bottom: 0.3rem; font-family: 'Poppins', sans-serif; }
-        .cta-banner-text h4 { font-weight: 400; font-size: 1.3rem; color: rgba(255, 255, 255, 0.85); font-family: 'Poppins', sans-serif; }
-        .cta-banner .btn-cta-white { background: #fff; color: #0074f6; border: none; padding: 18px 32px; font-weight: 700; border-radius: 50px; font-size: 1rem; cursor: pointer; transition: all var(--transition-bounce); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; letter-spacing: 0.02em; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); }
-        .cta-banner .btn-cta-white:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); background: #f0f4ff; }
+        /* CTA BANNER */
+        .cta-banner-section { padding: 20px 2rem; background: var(--bg-primary); }
+        .cta-banner { max-width: var(--max-width); margin: 0 auto; background: var(--gradient-blue); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; padding: 2rem 2.5rem; flex-wrap: wrap; gap: 1.5rem; box-shadow: 0 8px 30px rgba(0,116,246,0.35); transition: all var(--transition-smooth); }
+        .cta-banner:hover { box-shadow: 0 14px 45px rgba(0,116,246,0.5); transform: translateY(-2px); }
+        .cta-banner-text h2 { font-weight: 700; font-size: 2rem; color: #fff; font-family: 'Poppins', sans-serif; }
+        .cta-banner-text h4 { font-weight: 400; font-size: 1.3rem; color: rgba(255,255,255,0.85); }
+        .btn-cta-white { background: #fff; color: #0074f6; padding: 18px 32px; font-weight: 700; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: all var(--transition-bounce); }
+        .btn-cta-white:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.35); background: #f0f4ff; }
 
-        /* ============ BRAND CAROUSEL ============ */
-        .brand-carousel { overflow: hidden; background: var(--bg-primary); padding: 50px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-        .brand-title { text-align: center; color: var(--text-primary); font-size: 1.6rem; margin-bottom: 30px; font-family: 'Poppins', sans-serif; font-weight: 600; }
-        .brand-slider { overflow: hidden; white-space: nowrap; }
-        .brand-track { display: flex; animation: scroll 35s linear infinite; gap: 0; }
-        .brand-slider:hover .brand-track { animation-play-state: paused; }
-        .brand-track img { height: 65px; margin: 0 20px; object-fit: contain; transition: transform 0.3s ease; border-radius: 12px; flex-shrink: 0; background: rgba(255, 255, 255, 0.03); padding: 8px 14px; }
-        .brand-track img:hover { transform: scale(1.15); background: rgba(0, 116, 246, 0.08); }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        /* BRAND GRID */
+        .brand-carousel { background: #fff; padding: 90px 0; }
+        .brand-grid { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(6,1fr); gap: 55px 45px; align-items: center; }
+        .brand-item { display: flex; justify-content: center; align-items: center; opacity: 0; transform: translateY(40px); }
+        .brand-item img { max-width: 120px; max-height: 80px; object-fit: contain; transition: .35s; }
+        .brand-item:hover img { transform: scale(1.08); }
+        .brand-item.show { animation: brandReveal .8s ease forwards; }
+        @keyframes brandReveal { from { opacity:0; transform: translateY(35px); } to { opacity:1; transform: translateY(0); } }
 
-        /* ============ CONTACT SECTION ============ */
-        #contact { background: var(--bg-secondary); position: relative; }
+        /* CONTACT */
+        #contact { background: var(--bg-secondary); }
         .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
-        .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); }
-        .contact-info p { color: var(--text-secondary); margin-bottom: 1.8rem; line-height: 1.7; }
-        .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
-        .contact-detail-icon { width: 44px; height: 44px; background: rgba(0, 116, 246, 0.1); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: var(--blue-light); font-size: 1rem; flex-shrink: 0; }
-        .contact-detail-text span { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.03em; text-transform: uppercase; }
-        .contact-detail-text p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; }
+        .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; transition: all var(--transition-fast); }
+        .contact-detail:hover { transform: translateX(4px); }
+        .contact-detail-icon { width: 44px; height: 44px; background: rgba(0,116,246,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--blue); transition: all var(--transition-smooth); }
+        .contact-detail:hover .contact-detail-icon { background: var(--gradient-blue); color: #fff; box-shadow: var(--shadow-blue); }
         .contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-card); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
         .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.4rem; letter-spacing: 0.02em; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: all var(--transition-fast); outline: none; resize: vertical; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--blue-dark); box-shadow: 0 0 0 3px rgba(0, 116, 246, 0.1); }
-        .form-group textarea { min-height: 120px; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.8rem; border-radius: 50px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; border: none; transition: all var(--transition-bounce); letter-spacing: 0.01em; white-space: nowrap; }
-        .btn-primary { background: var(--gradient-blue); color: #fff; box-shadow: 0 6px 25px rgba(0, 116, 246, 0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0, 116, 246, 0.5); }
+        .form-group label { font-size: 0.82rem; font-weight: 500; color: var(--text-secondary); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; outline: none; transition: all var(--transition-fast); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,116,246,0.1); }
+        .btn-primary { background: var(--gradient-blue); color: #fff; padding: 0.85rem 1.8rem; border-radius: 50px; font-weight: 600; border: none; cursor: pointer; transition: all var(--transition-bounce); box-shadow: 0 6px 25px rgba(0,116,246,0.3); }
+        .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,116,246,0.5); }
         .btn-outline { background: transparent; color: var(--text-primary); border: 1.5px solid var(--border-light); }
-        .btn-outline:hover { border-color: var(--blue); color: var(--blue-light); background: rgba(0, 116, 246, 0.05); transform: translateY(-3px); }
-        .form-submit { width: 100%; justify-content: center; padding: 0.9rem; font-size: 0.95rem; cursor: pointer; }
+        .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,116,246,0.05); }
 
-        /* ============ FOOTER ============ */
+        /* FOOTER */
         .footer { background: var(--bg-primary); border-top: 1px solid var(--border); padding: 2.5rem 2rem; }
         .footer-container { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
-        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color var(--transition-fast); }
-        .footer-links a:hover { color: var(--blue-light); }
-        .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
-        .footer-social { display: flex; gap: 0.8rem; }
-        .footer-social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: all var(--transition-fast); font-size: 0.9rem; }
-        .footer-social a:hover { border-color: var(--blue); color: var(--blue-light); background: rgba(0, 116, 246, 0.08); }
-
-        /* ============ BACK TO TOP ============ */
-        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary); cursor: pointer; z-index: 900; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-smooth); box-shadow: var(--shadow-card); }
+        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; }
+        .footer-links a:hover { color: var(--blue); }
+        .footer-social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: all var(--transition-smooth); }
+        .footer-social a:hover { border-color: var(--blue); color: #fff; background: var(--gradient-blue); }
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary); cursor: pointer; z-index: 900; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-smooth); }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .back-to-top:hover { background: var(--blue); color: #fff; border-color: var(--blue); transform: translateY(-4px); }
+        .back-to-top:hover { background: var(--gradient-blue); color: #fff; border-color: var(--blue); }
 
-        /* ============ RESPONSIVE ============ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .fade-slider { height: 60vh; min-height: 400px; }
-            .fade-slide .slide-caption { font-size: 1rem; padding: 14px 22px; bottom: 40px; left: 40px; }
+            .fade-slider { height: 70vh; min-height: 450px; }
+            .slide-content-left { max-width: 340px; left: 20px; transform: translate(0, -50%) translateX(-30px); text-align: left; }
+            .fade-slide.active .slide-content-left { transform: translate(0, -50%) translateX(0); }
+            .slide-content-right { max-width: 340px; right: 20px; transform: translate(0, -50%) translateX(30px); text-align: right; }
+            .fade-slide.active .slide-content-right { transform: translate(0, -50%) translateX(0); }
+            .slide-heading { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+            .slide-desc { font-size: 0.9rem; }
+            .slide-stat-row { gap: 1rem; }
+            .slide-stat .s-num { font-size: 1.3rem; }
             .stats-ribbon-inner { grid-template-columns: repeat(2, 1fr); }
             .stat-item:nth-child(2) { border-right: none; }
             .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -421,32 +451,21 @@
             .gallery-grid { grid-template-columns: repeat(3, 1fr); }
             .contact-grid { grid-template-columns: 1fr; }
             .cta-banner { flex-direction: column; text-align: center; }
-            .cta-banner-text h2 { font-size: 1.5rem; }
-            .cta-banner-text h4 { font-size: 1.1rem; }
         }
         @media (max-width: 768px) {
-            :root { --nav-height: var(--nav-height-mobile); }
-            html { scroll-padding-top: var(--nav-height-mobile); }
+            :root { --nav-height: 64px; }
             .nav-links { display: none; }
             .hamburger { display: flex; }
             .navbar-container { padding: 0 1.2rem; }
-            .nav-logo img.logo-icon { height: 34px; }
-            .nav-logo img.logo-title { height: 22px; }
-            .fade-slider { height: 55vh; min-height: 320px; }
-            .fade-slide .slide-caption { bottom: 25px; left: 20px; font-size: 0.8rem; padding: 10px 16px; }
-            .hero-brand-watermark img { width: clamp(120px, 25vw, 200px); }
-            .stats-ribbon { margin-top: 1.5rem; padding: 0 1rem; }
-            .stats-ribbon-inner { grid-template-columns: repeat(2, 1fr); }
-            .stat-number { font-size: 1.8rem; }
-            .stat-label { font-size: 0.7rem; }
-            .stat-item { padding: 1.2rem 1rem; }
+            .fade-slider { height: 60vh; min-height: 380px; }
+            .slide-content-left { left: 14px; max-width: 200px; }
+            .slide-content-right { right: 14px; max-width: 200px; }
+            .slide-heading { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+            .slide-desc { font-size: 0.75rem; }
+            .slide-cta { padding: 0.55rem 1.2rem; font-size: 0.75rem; }
+            .slide-stat .s-num { font-size: 1rem; }
             .section { padding: 3rem 1.2rem; }
-            .section-header { margin-bottom: 2rem; }
             .section-title { font-size: 1.6rem; }
-            .about-text h3 { font-size: 1.6rem; }
-            .about-stats-row { gap: 1rem; }
-            .about-stat { min-width: 70px; padding: 0.8rem; }
-            .about-stat .num { font-size: 1.5rem; }
             .services-grid { grid-template-columns: 1fr; }
             .portfolio-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
@@ -454,106 +473,177 @@
             .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
             .form-row { grid-template-columns: 1fr; }
             .footer-container { flex-direction: column; text-align: center; }
-            .footer-links { justify-content: center; }
-            .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 38px; height: 38px; }
-            .contact-form { padding: 1.3rem; }
-            .portfolio-overlay { opacity: 1; background: linear-gradient(180deg, transparent 20%, rgba(10, 10, 15, 0.85) 100%); }
-            .cta-banner { padding: 1.5rem; border-radius: 16px; }
+            .portfolio-overlay { opacity: 1; background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.8) 100%); }
+            .cta-banner { padding: 1.5rem; }
             .cta-banner-text h2 { font-size: 1.3rem; }
             .cta-banner-text h4 { font-size: 1rem; }
-            .cta-banner .btn-cta-white { padding: 14px 24px; font-size: 0.9rem; }
-            .brand-track img { height: 45px; margin: 0 12px; padding: 6px 10px; }
+            .btn-cta-white { padding: 14px 24px; font-size: 0.9rem; }
             .brand-carousel { padding: 35px 0; }
         }
-        @media (max-width: 400px) {
-            .fade-slider { height: 45vh; min-height: 250px; }
-            .fade-slide .slide-caption { font-size: 0.7rem; padding: 8px 12px; bottom: 20px; left: 15px; }
-            .btn { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
-            .stats-ribbon-inner { grid-template-columns: 1fr 1fr; }
-            .stat-number { font-size: 1.5rem; }
-            .cta-banner-text h2 { font-size: 1.1rem; }
-            .cta-banner-text h4 { font-size: 0.85rem; }
+        @media (max-width: 480px) {
+            .fade-slider { height: 55vh; min-height: 300px; }
+            .slide-content-left { max-width: 150px; }
+            .slide-content-right { max-width: 150px; }
+            .slide-heading { font-size: 1rem; }
+            .slide-desc { font-size: 0.68rem; }
+            .slide-cta { padding: 0.45rem 1rem; font-size: 0.7rem; }
+            .brand-grid { grid-template-columns: repeat(2, 1fr); gap: 35px; }
+            .brand-item img { max-width: 90px; }
         }
     </style>
 </head>
 <body>
-    <!-- ==================== NAVIGATION ==================== -->
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
-            <a href="#" class="nav-logo" aria-label="FlyLense Home">
-                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                <img class="logo-title" src="img/title.png" alt="FlyLense" onerror="this.style.display='none';">
-                <span style="display:none;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);">FlyLense</span>
+            <a href="#" class="nav-logo">
+                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo">
+                <img class="logo-title" src="img/title.png" alt="FlyLense">
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="active" data-section="home">Home</a></li>
-                <li><a href="about.html" data-section="about">About</a></li>
-                <li><a href="#services" data-section="services">Services</a></li>
-                <li><a href="#portfolio" data-section="portfolio">Portfolio</a></li>
-                <li><a href="#gallery" data-section="gallery">Gallery</a></li>
-                <li><a href="#contact" data-section="contact">Contact</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
         </div>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" data-section="home">Home</a>
-        <a href="#about" data-section="about">About</a>
-        <a href="#services" data-section="services">Services</a>
-        <a href="#portfolio" data-section="portfolio">Portfolio</a>
-        <a href="#gallery" data-section="gallery">Gallery</a>
-        <a href="#contact" data-section="contact">Contact</a>
+        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
         <a href="#contact" class="mobile-cta">Get a Quote</a>
     </div>
-    <!-- ==================== FADE SLIDER ==================== -->
+
+    <!-- Slider with closer content -->
     <section class="hero-slider-wrapper" id="home">
         <div class="fade-slider" id="fadeSlider">
-            <div class="hero-brand-watermark">
-                <img src="img/logo-watermark.png" alt="FlyLense transparent logo" onerror="this.style.display='none';">
-            </div>
-            <div class="fade-slide active" style="background-image: url('img/slider/1.png');"><div class="slide-overlay"></div><div class="slide-caption">COMMERCIAL FILMS</div></div>
-            <div class="fade-slide" style="background-image: url('img/slider/2.png');"><div class="slide-overlay"></div><div class="slide-caption">BRAND STORYTELLING</div></div>
-            <div class="fade-slide" style="background-image: url('img/slider/3.png');"><div class="slide-overlay"></div><div class="slide-caption">AERIAL DRONE FOOTAGE</div></div>
-            <div class="fade-slide" style="background-image: url('img/slider/4.png');"><div class="slide-overlay"></div><div class="slide-caption">CORPORATE VIDEOS</div></div>
-            <div class="fade-slide" style="background-image: url('img/slider/5.png');"><div class="slide-overlay"></div><div class="slide-caption">SOCIAL MEDIA CONTENT</div></div>
-        </div>
-    </section>
-
-    <!-- ==================== STATS RIBBON ==================== -->
-    <div class="stats-ribbon">
-        <div class="stats-ribbon-inner">
-            <div class="stat-item"><div class="stat-number" data-count="500">0</div><div class="stat-label">Projects Delivered</div></div>
-            <div class="stat-item"><div class="stat-number" data-count="150">0</div><div class="stat-label">Happy Clients</div></div>
-            <div class="stat-item"><div class="stat-number" data-count="12">0</div><div class="stat-label">Industry Awards</div></div>
-            <div class="stat-item"><div class="stat-number" data-count="8">0</div><div class="stat-label">Years of Excellence</div></div>
-        </div>
-    </div>
-    <!-- ==================== CTA BANNER ==================== -->
-    <section class="cta-banner-section">
-        <div class="cta-banner">
-            <div class="cta-banner-text"><h2>Ready to Bring Your Vision to Life?</h2><h4>Let's Create Something Incredible Together</h4></div>
-            <a href="#contact" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Let's Get Started</a>
-        </div>
-    </section>
-
-    <!-- ==================== REDESIGNED ABOUT SECTION ==================== -->
-    <section class="section" id="about">
-        <div class="section-container">
-             <div class="section-header"> <span class="section-tag">Who We Are</span> <h2 class="section-title">About FlyLense</h2> <div class="section-divider"></div> <p class="section-subtitle">A dynamic media production company where creativity meets precision—crafting stories that captivate and inspire.</p> </div>
-            <div class="about-grid">
-                <div class="about-image-block">
-                    <div class="about-image-main">
-                        <div class="image-placeholder"><i class="fa-solid fa-clapperboard"></i></div>
+            <div class="fade-slide" style="background-image: url('img/slider/1.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content-left">
+                    <span class="slide-tag">Cinematic Excellence</span>
+                    <h2 class="slide-heading">Every Frame<br>Tells a Story</h2>
+                </div>
+                <div class="slide-content-right">
+                    <p class="slide-desc">Precision-crafted visuals that captivate audiences and elevate your brand.</p>
+                    <div class="slide-stat-row">
+                        <div class="slide-stat"><div class="s-num">500+</div><div class="s-lbl">Projects</div></div>
+                        <div class="slide-stat"><div class="s-num">8</div><div class="s-lbl">Years</div></div>
                     </div>
                 </div>
-                <div class="about-text">
+            </div>
+            <div class="fade-slide" style="background-image: url('img/slider/2.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content-left">
+                    <span class="slide-tag">Aerial Mastery</span>
+                    <h2 class="slide-heading">Perspectives<br>From Above</h2>
+                </div>
+                <div class="slide-content-right">
+                    <p class="slide-desc">Breathtaking drone cinematography with FAA‑certified pilots.</p>
+                    <a href="#contact" class="slide-cta">Explore Aerial <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="fade-slide" style="background-image: url('img/slider/3.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content-left">
+                    <span class="slide-tag">Brand Storytelling</span>
+                    <h2 class="slide-heading">Narratives<br>That Resonate</h2>
+                </div>
+                <div class="slide-content-right">
+                    <p class="slide-desc">Weaving emotional connections that inspire action and build loyalty.</p>
+                    <div class="slide-stat-row">
+                        <div class="slide-stat"><div class="s-num">150+</div><div class="s-lbl">Happy Clients</div></div>
+                        <div class="slide-stat"><div class="s-num">12</div><div class="s-lbl">Awards</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-slide active" style="background-image: url('img/slider/4.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content-left">
+                    <span class="slide-tag">Creative Vision</span>
+                    <h2 class="slide-heading">From Concept<br>To Screen</h2>
+                </div>
+                <div class="slide-content-right">
+                    <p class="slide-desc">Crafting visual masterpieces with passion, precision, and purpose.</p>
+                    <a href="#contact" class="slide-cta">Start Your Project <i class="fa-solid fa-paper-plane"></i></a>
+                </div>
+            </div>
+            <div class="fade-slide" style="background-image: url('img/slider/5.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content-left">
+                    <span class="slide-tag">Visual Impact</span>
+                    <h2 class="slide-heading">Content That<br>Converts</h2>
+                </div>
+                <div class="slide-content-right">
+                    <p class="slide-desc">Scroll‑stopping content designed to captivate and drive real results.</p>
+                    <a href="#contact" class="slide-cta">Let's Create <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Ribbon -->
+    <div class="stats-ribbon">
+        <div class="stats-ribbon-inner reveal reveal-up">
+            <div class="stat-item delay-1"><div class="stat-number" data-count="500">0</div><div class="stat-label">Projects Delivered</div></div>
+            <div class="stat-item delay-2"><div class="stat-number" data-count="150">0</div><div class="stat-label">Happy Clients</div></div>
+            <div class="stat-item delay-3"><div class="stat-number" data-count="12">0</div><div class="stat-label">Industry Awards</div></div>
+            <div class="stat-item delay-4"><div class="stat-number" data-count="8">0</div><div class="stat-label">Years of Excellence</div></div>
+        </div>
+    </div>
+
+    <!-- Brand Section -->
+    <section class="brand-carousel" id="brands">
+        <div class="section-header reveal reveal-up">
+            <span class="section-tag">Trusted by</span>
+            <h2 class="section-title">Brands We've Worked With</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="brand-grid">
+            <div class="brand-item"><img src="img/clients/1.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/2.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/3.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/4.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/5.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/6.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/7.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/8.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/9.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/10.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/11.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/12.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/13.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/14.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/15.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/16.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/17.png" alt=""></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-container">
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Who We Are</span>
+                <h2 class="section-title">About FlyLense</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">A dynamic media production company where creativity meets precision.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-image-block reveal reveal-left">
+                    <div class="about-image-main">
+                        <img src="img/3.png" alt="FlyLense team">
+                    </div>
+                </div>
+                <div class="about-text reveal reveal-right">
                     <h3>Where Vision Meets Cinematic Precision</h3>
                     <p class="lead">At FlyLense, we are a dynamic media production company where creativity meets precision. From script to screen, our passionate team of directors, cinematographers, drone pilots, and editors works closely with you to bring your brand's vision to life.</p>
                     <div class="about-stats-row">
                         <div class="about-stat"><div class="num">500+</div><div class="lbl">Projects</div></div>
-                        <div class="about-stat"><div class="num">150+</div><div class="lbl">Happy Clients</div></div>
+                        <div class="about-stat"><div class="num">150+</div><div class="lbl">Clients</div></div>
                         <div class="about-stat"><div class="num">12</div><div class="lbl">Awards</div></div>
                     </div>
                     <a href="#contact" class="about-cta"><i class="fa-solid fa-handshake"></i> Start Your Project</a>
@@ -562,171 +652,377 @@
         </div>
     </section>
 
-    <!-- ==================== SERVICES SECTION ==================== -->
+    <!-- Services with web images -->
     <section class="section" id="services">
         <div class="section-container">
-            <div class="section-header"><span class="section-tag">What We Offer</span><h2 class="section-title">Our Services</h2><div class="section-divider"></div><p class="section-subtitle">Comprehensive media production services tailored to elevate your brand's visual identity.</p></div>
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">What We Offer</span>
+                <h2 class="section-title">Our Services</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Comprehensive media production services tailored to elevate your brand's visual identity.</p>
+            </div>
             <div class="services-grid">
-                <div class="service-card"><div class="service-icon"><img src="img/icons/1.png" alt="Commercial Films" onerror="this.innerHTML='<i class=\'fa-solid fa-film\'></i>';"></div><h3>Commercial Films</h3><p>High-impact commercial films that capture attention and drive results.</p><a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
-                <div class="service-card"><div class="service-icon"><img src="img/icons/2.png" alt="Brand Storytelling" onerror="this.innerHTML='<i class=\'fa-solid fa-feather\'></i>';"></div><h3>Brand Storytelling</h3><p>Compelling narratives that connect emotionally with your audience.</p><a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
-                <div class="service-card"><div class="service-icon"><img src="img/icons/3.png" alt="Aerial Drone Footage" onerror="this.innerHTML='<i class=\'fa-solid fa-drone\'></i>';"></div><h3>Aerial Drone Footage</h3><p>Breathtaking aerial cinematography with FAA-certified pilots.</p><a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
-                <div class="service-card"><div class="service-icon"><img src="img/icons/4.png" alt="Corporate Videos" onerror="this.innerHTML='<i class=\'fa-solid fa-building\'></i>';"></div><h3>Corporate Videos</h3><p>Professional corporate video production that communicates your message with impact.</p><a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
-                <div class="service-card"><div class="service-icon"><img src="img/icons/5.png" alt="Social Media Content" onerror="this.innerHTML='<i class=\'fa-solid fa-hashtag\'></i>';"></div><h3>Social Media Content</h3><p>Engaging, platform-optimized content designed to stop the scroll.</p><a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
-                <div class="service-card"><div class="service-icon"><img src="img/icons/6.png" alt="Post-Production" onerror="this.innerHTML='<i class=\'fa-solid fa-scissors\'></i>';"></div><h3>Post-Production</h3><p>Expert editing, color grading, sound design, and visual effects for cinematic perfection.</p><a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
+                <div class="service-card reveal reveal-scale delay-1">
+                    <div class="service-card-image">
+                        <img src="https://picsum.photos/seed/commercial/640/480" alt="Commercial Films">
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Commercial Films</h3>
+                        <p>High‑impact commercial films that capture attention and drive results.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-scale delay-2">
+                    <div class="service-card-image">
+                        <img src="https://picsum.photos/seed/brandstory/640/480" alt="Brand Storytelling">
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Brand Storytelling</h3>
+                        <p>Compelling narratives that connect emotionally with your audience.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-scale delay-3">
+                    <div class="service-card-image">
+                        <img src="https://picsum.photos/seed/drone/640/480" alt="Aerial Drone">
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Aerial Drone Footage</h3>
+                        <p>Breathtaking aerial cinematography with FAA‑certified pilots.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-scale delay-4">
+                    <div class="service-card-image">
+                        <img src="https://picsum.photos/seed/corporate/640/480" alt="Corporate Videos">
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Corporate Videos</h3>
+                        <p>Professional corporate video production that communicates your message with impact.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-scale delay-5">
+                    <div class="service-card-image">
+                        <img src="https://picsum.photos/seed/socialmedia/640/480" alt="Social Media">
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Social Media Content</h3>
+                        <p>Engaging, platform‑optimized content designed to stop the scroll.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-scale delay-6">
+                    <div class="service-card-image">
+                        <img src="https://picsum.photos/seed/postproduction/640/480" alt="Post‑Production">
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Post‑Production</h3>
+                        <p>Expert editing, color grading, sound design, and visual effects.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== PORTFOLIO SECTION ==================== -->
+    <!-- Portfolio with web images & video badge -->
     <section class="section" id="portfolio">
         <div class="section-container">
-            <div class="section-header"><span class="section-tag">Our Work</span><h2 class="section-title">Portfolio</h2><div class="section-divider"></div><p class="section-subtitle">A curated selection of projects that showcase our passion for visual storytelling.</p></div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item"><div class="portfolio-item-inner"><i class="fa-solid fa-mountain-sun"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Summit Adventures</h4><span>Commercial • 2025</span></div></div></div>
-                <div class="portfolio-item"><div class="portfolio-item-inner"><i class="fa-solid fa-city"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Urban Horizons</h4><span>Brand Film • 2025</span></div></div></div>
-                <div class="portfolio-item"><div class="portfolio-item-inner"><i class="fa-solid fa-ship"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Ocean's Edge</h4><span>Aerial • 2024</span></div></div></div>
-                <div class="portfolio-item"><div class="portfolio-item-inner"><i class="fa-solid fa-industry"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>TechNova Corp</h4><span>Corporate • 2024</span></div></div></div>
-                <div class="portfolio-item"><div class="portfolio-item-inner"><i class="fa-solid fa-champagne-glasses"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Luxe Launch</h4><span>Social Media • 2025</span></div></div></div>
-                <div class="portfolio-item"><div class="portfolio-item-inner"><i class="fa-solid fa-leaf"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Green Future</h4><span>Documentary • 2024</span></div></div></div>
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Our Work</span>
+                <h2 class="section-title">Portfolio</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">A curated selection of projects that showcase our passion for visual storytelling.</p>
             </div>
-            <div class="portfolio-cta"><a href="#contact" class="btn btn-outline"><i class="fa-solid fa-folder-open"></i> View Full Portfolio</a></div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal reveal-scale delay-1">
+                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
+                    <img class="portfolio-item-image" src="https://picsum.photos/seed/summit/800/500" alt="Summit Adventures">
+                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Summit Adventures</h4><span>Commercial • 2025</span></div></div>
+                </div>
+                <div class="portfolio-item reveal reveal-scale delay-2">
+                    <img class="portfolio-item-image" src="https://picsum.photos/seed/urban/800/500" alt="Urban Horizons">
+                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Urban Horizons</h4><span>Brand Film • 2025</span></div></div>
+                </div>
+                <div class="portfolio-item reveal reveal-scale delay-3">
+                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
+                    <img class="portfolio-item-image" src="https://picsum.photos/seed/ocean/800/500" alt="Ocean's Edge">
+                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Ocean's Edge</h4><span>Aerial • 2024</span></div></div>
+                </div>
+                <div class="portfolio-item reveal reveal-scale delay-4">
+                    <img class="portfolio-item-image" src="https://picsum.photos/seed/technova/800/500" alt="TechNova Corp">
+                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>TechNova Corp</h4><span>Corporate • 2024</span></div></div>
+                </div>
+                <div class="portfolio-item reveal reveal-scale delay-5">
+                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
+                    <img class="portfolio-item-image" src="https://picsum.photos/seed/luxe/800/500" alt="Luxe Launch">
+                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Luxe Launch</h4><span>Social Media • 2025</span></div></div>
+                </div>
+                <div class="portfolio-item reveal reveal-scale delay-6">
+                    <img class="portfolio-item-image" src="https://picsum.photos/seed/greenfuture/800/500" alt="Green Future">
+                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Green Future</h4><span>Documentary • 2024</span></div></div>
+                </div>
+            </div>
+            <div class="portfolio-cta reveal reveal-up delay-3"><a href="#contact" class="btn btn-outline"><i class="fa-solid fa-folder-open"></i> View Full Portfolio</a></div>
         </div>
     </section>
 
-    <!-- ==================== GALLERY SECTION ==================== -->
+    <!-- Gallery with images & video badges -->
     <section class="section" id="gallery">
         <div class="section-container">
-            <div class="section-header"><span class="section-tag">Visual Showcase</span><h2 class="section-title">Gallery</h2><div class="section-divider"></div><p class="section-subtitle">A glimpse behind the lens—moments captured in motion and light.</p></div>
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Visual Showcase</span>
+                <h2 class="section-title">Gallery</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">A glimpse behind the lens—moments captured in motion and light.</p>
+            </div>
             <div class="gallery-grid">
-                <div class="gallery-item wide"><i class="fa-solid fa-camera-retro"></i></div>
-                <div class="gallery-item"><i class="fa-solid fa-image"></i></div>
-                <div class="gallery-item tall"><i class="fa-solid fa-video"></i></div>
-                <div class="gallery-item"><i class="fa-solid fa-panorama"></i></div>
-                <div class="gallery-item"><i class="fa-solid fa-aperture"></i></div>
-                <div class="gallery-item wide"><i class="fa-solid fa-film"></i></div>
-                <div class="gallery-item"><i class="fa-solid fa-circle"></i></div>
-                <div class="gallery-item"><i class="fa-solid fa-star"></i></div>
+                <div class="gallery-item wide reveal reveal-scale delay-1">
+                    <img src="https://picsum.photos/seed/gal1/800/400" alt="Gallery wide">
+                </div>
+                <div class="gallery-item reveal reveal-scale delay-2">
+                    <div class="gallery-video-badge"><i class="fa-solid fa-play"></i></div>
+                    <img src="https://picsum.photos/seed/gal2/400/400" alt="Video thumbnail">
+                </div>
+                <div class="gallery-item tall reveal reveal-scale delay-3">
+                    <img src="https://picsum.photos/seed/gal3/400/800" alt="Tall image">
+                </div>
+                <div class="gallery-item reveal reveal-scale delay-4">
+                    <div class="gallery-video-badge"><i class="fa-solid fa-play"></i></div>
+                    <img src="https://picsum.photos/seed/gal4/400/400" alt="Video">
+                </div>
+                <div class="gallery-item reveal reveal-scale delay-5">
+                    <img src="https://picsum.photos/seed/gal5/400/400" alt="">
+                </div>
+                <div class="gallery-item wide reveal reveal-scale delay-6">
+                    <div class="gallery-video-badge"><i class="fa-solid fa-play"></i></div>
+                    <img src="https://picsum.photos/seed/gal6/800/400" alt="Wide video">
+                </div>
+                <div class="gallery-item reveal reveal-scale delay-7">
+                    <img src="https://picsum.photos/seed/gal7/400/400" alt="">
+                </div>
+                <div class="gallery-item reveal reveal-scale delay-8">
+                    <img src="https://picsum.photos/seed/gal8/400/400" alt="">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== BRAND CAROUSEL ==================== -->
-    <section class="brand-carousel">
-        <h2 class="brand-title">Our Trusted Brands</h2>
-        <div class="brand-slider">
-            <div class="brand-track">
-                <img src="img/clients/1.png" alt="Brand 1" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/2.png" alt="Brand 2" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/3.png" alt="Brand 3" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/4.png" alt="Brand 4" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/5.png" alt="Brand 5" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/6.png" alt="Brand 6" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/7.png" alt="Brand 7" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/8.png" alt="Brand 8" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/9.png" alt="Brand 1" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/10.png" alt="Brand 2" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/11.png" alt="Brand 3" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/12.png" alt="Brand 4" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/13.png" alt="Brand 5" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/14.png" alt="Brand 6" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/15.png" alt="Brand 7" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/16.png" alt="Brand 8" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
-                <img src="img/clients/17.png" alt="Brand 8" onerror="this.style.background='rgba(255,255,255,0.05)';this.style.minWidth='100px';">
+    <!-- CTA Banner -->
+    <section class="cta-banner-section">
+        <div class="cta-banner reveal reveal-up">
+            <div class="cta-banner-text">
+                <h2>Ready to Bring Your Vision to Life?</h2>
+                <h4>Let's Create Something Incredible Together</h4>
             </div>
+            <a href="#contact" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Let's Get Started</a>
         </div>
     </section>
 
-    <!-- ==================== CONTACT SECTION ==================== -->
+    <!-- Contact -->
     <section class="section" id="contact">
         <div class="section-container">
-            <div class="section-header"><span class="section-tag">Get In Touch</span><h2 class="section-title">Contact Us</h2><div class="section-divider"></div><p class="section-subtitle">Ready to bring your vision to life? Let's create something extraordinary together.</p></div>
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Ready to bring your vision to life? Let's create something extraordinary together.</p>
+            </div>
             <div class="contact-grid">
-                <div class="contact-info">
+                <div class="contact-info reveal reveal-left">
                     <h3>Let's Talk</h3>
                     <p>Every great project starts with a conversation. Reach out to our team and let's discuss how we can bring your brand's story to the screen.</p>
-                    <div class="contact-detail"><div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div><div class="contact-detail-text"><span>Studio Location</span><p>Los Angeles, CA 90028</p></div></div>
-                    <div class="contact-detail"><div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div><div class="contact-detail-text"><span>Email</span><p>hello@flylense.com</p></div></div>
-                    <div class="contact-detail"><div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div><div class="contact-detail-text"><span>Phone</span><p>+1 (323) 555-0192</p></div></div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-detail-text"><span>Studio Location</span><p>Los Angeles, CA 90028</p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-detail-text"><span>Email</span><p>hello@flylense.com</p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-detail-text"><span>Phone</span><p>+1 (323) 555-0192</p></div>
+                    </div>
                 </div>
-                <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+                <form class="contact-form reveal reveal-right" id="contactForm" onsubmit="handleFormSubmit(event)">
                     <div class="form-row">
-                        <div class="form-group"><label for="firstName">First Name *</label><input type="text" id="firstName" placeholder="John" required></div>
-                        <div class="form-group"><label for="lastName">Last Name *</label><input type="text" id="lastName" placeholder="Doe" required></div>
+                        <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="John" required></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="lastName" placeholder="Doe" required></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" placeholder="john@example.com" required></div>
-                        <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000"></div>
+                        <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="john@example.com" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000"></div>
                     </div>
                     <div class="form-group">
-                        <label for="service">Service Interested In *</label>
+                        <label>Service Interested In *</label>
                         <select id="service" required>
                             <option value="">Select a service...</option>
-                            <option value="commercial">Commercial Films</option>
-                            <option value="brand">Brand Storytelling</option>
-                            <option value="drone">Aerial Drone Footage</option>
-                            <option value="corporate">Corporate Videos</option>
-                            <option value="social">Social Media Content</option>
-                            <option value="post">Post-Production</option>
-                            <option value="other">Other / Multiple</option>
+                            <option>Commercial Films</option>
+                            <option>Brand Storytelling</option>
+                            <option>Aerial Drone Footage</option>
+                            <option>Corporate Videos</option>
+                            <option>Social Media Content</option>
+                            <option>Post‑Production</option>
                         </select>
                     </div>
-                    <div class="form-group"><label for="message">Tell Us About Your Project *</label><textarea id="message" placeholder="Describe your vision, goals, timeline, and any specific requirements..." required></textarea></div>
+                    <div class="form-group"><label>Your Project *</label><textarea id="message" placeholder="Describe your vision..." required></textarea></div>
                     <button type="submit" class="btn btn-primary form-submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
-            <div class="footer-links"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#portfolio">Portfolio</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a></div>
+            <div class="footer-links">
+                <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+            </div>
             <div class="footer-social">
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <div class="footer-copy">&copy; 2026 FlyLense. All rights reserved.</div>
         </div>
     </footer>
-    <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script>
         (function() {
+            // Navbar intro animation
+            setTimeout(() => {
+                document.getElementById('navbar').classList.add('loaded');
+            }, 100);
+
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const backToTop = document.getElementById('backToTop');
-            const allSectionLinks = document.querySelectorAll('a[href^="#"]');
             const slides = document.querySelectorAll('.fade-slide');
             let currentSlide = 0;
-            function nextSlide() { slides[currentSlide].classList.remove('active'); currentSlide = (currentSlide + 1) % slides.length; slides[currentSlide].classList.add('active'); }
-            setInterval(nextSlide, 4000);
+            const slideInterval = 2000;
+            let slideTimer;
 
-            function updateNavbar() { const scrollY = window.scrollY; if (scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); if (scrollY > 600) backToTop.classList.add('visible'); else backToTop.classList.remove('visible'); }
-            function toggleMobileMenu() { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; }
-            function closeMobileMenu() { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
+            slides.forEach((slide, index) => { if (slide.classList.contains('active')) currentSlide = index; });
 
-            hamburger.addEventListener('click', toggleMobileMenu);
-            mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
-            allSectionLinks.forEach(link => { link.addEventListener('click', function(e) { const href = this.getAttribute('href'); if (href && href.startsWith('#') && href.length > 1) { e.preventDefault(); const target = document.querySelector(href); if (target) { const offset = navbar.offsetHeight + 10; const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({ top: targetPosition, behavior: 'smooth' }); } } }); });
-            backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            function startTimer() { slideTimer = setInterval(nextSlide, slideInterval); }
+            if (slides.length > 1) startTimer();
+            const slider = document.getElementById('fadeSlider');
+            if (slider) {
+                slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
+                slider.addEventListener('mouseleave', startTimer);
+                slider.addEventListener('touchstart', () => clearInterval(slideTimer), { passive: true });
+                slider.addEventListener('touchend', startTimer);
+            }
 
-            let scrollTicking = false;
-            window.addEventListener('scroll', () => { if (!scrollTicking) { requestAnimationFrame(() => { updateNavbar(); scrollTicking = false; }); scrollTicking = true; } });
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                navbar.classList.toggle('scrolled', scrollY > 60);
+                mobileMenu.classList.toggle('scrolled-bg', scrollY > 60);
+                backToTop.classList.toggle('visible', scrollY > 600);
 
-            const statNumbers = document.querySelectorAll('.stat-number[data-count]');
-            let countersAnimated = false;
-            function animateCounters() { if (countersAnimated) return; const statsRibbon = document.querySelector('.stats-ribbon'); if (!statsRibbon) return; const rect = statsRibbon.getBoundingClientRect(); if (rect.top < window.innerHeight && rect.bottom > 0) { countersAnimated = true; statNumbers.forEach(el => { const target = parseInt(el.getAttribute('data-count'), 10); const duration = 2000; const startTime = performance.now(); function updateCounter(timestamp) { const elapsed = timestamp - startTime; const progress = Math.min(elapsed / duration, 1); const eased = 1 - Math.pow(1 - progress, 3); const current = Math.round(target * eased); el.textContent = current + (target >= 100 ? '+' : ''); if (progress < 1) requestAnimationFrame(updateCounter); else el.textContent = target + (target >= 100 ? '+' : ''); } requestAnimationFrame(updateCounter); }); } }
-            window.addEventListener('scroll', () => { animateCounters(); });
-            setTimeout(animateCounters, 300);
+                // Active nav link
+                const sections = document.querySelectorAll('section[id], .hero-slider-wrapper[id]');
+                let current = 'home';
+                sections.forEach(sec => {
+                    const top = sec.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 100;
+                    if (scrollY >= top && scrollY < top + sec.offsetHeight) {
+                        const id = sec.getAttribute('id');
+                        if (id) current = id;
+                    }
+                });
+                document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+                });
 
-            window.handleFormSubmit = function(event) { event.preventDefault(); const submitBtn = event.target.querySelector('button[type="submit"]'); const originalHTML = submitBtn.innerHTML; submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...'; submitBtn.disabled = true; setTimeout(() => { submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Message Sent!'; submitBtn.style.background = '#27c93f'; submitBtn.style.color = '#fff'; event.target.reset(); setTimeout(() => { submitBtn.innerHTML = originalHTML; submitBtn.style.background = ''; submitBtn.style.color = ''; submitBtn.disabled = false; }, 2500); }, 1200); };
+                // Counter animation
+                const stats = document.querySelector('.stats-ribbon');
+                if (stats && stats.getBoundingClientRect().top < window.innerHeight && !stats.dataset.animated) {
+                    stats.dataset.animated = 'true';
+                    document.querySelectorAll('.stat-number[data-count]').forEach(el => {
+                        const target = parseInt(el.getAttribute('data-count'));
+                        let start = null;
+                        function step(timestamp) {
+                            if (!start) start = timestamp;
+                            const progress = Math.min((timestamp - start) / 2000, 1);
+                            el.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))) + (target >= 100 ? '+' : '');
+                            if (progress < 1) requestAnimationFrame(step);
+                            else el.textContent = target + (target >= 100 ? '+' : '');
+                        }
+                        requestAnimationFrame(step);
+                    });
+                }
+            });
 
-            updateNavbar();
-            console.log('%c FlyLense %c Media Production ', 'background:#0074f6;color:#fff;padding:6px 10px;border-radius:4px 0 0 4px;font-weight:bold;', 'background:#151523;color:#f0ece4;padding:6px 10px;border-radius:0 4px 4px 0;');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }));
+
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 10, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // Reveal animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Brand grid
+            const brandGrid = document.querySelector('.brand-grid');
+            if (brandGrid) {
+                const brandObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        document.querySelectorAll('.brand-item').forEach((item, i) => setTimeout(() => item.classList.add('show'), i * 80));
+                        brandObserver.unobserve(brandGrid);
+                    }
+                }, { threshold: 0.25 });
+                brandObserver.observe(brandGrid);
+            }
+
+            // Form
+            window.handleFormSubmit = function(e) {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Sent!';
+                    btn.style.background = '#27c93f';
+                    btn.style.color = '#fff';
+                    e.target.reset();
+                    setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 2500);
+                }, 1200);
+            };
         })();
     </script>
 </body>
