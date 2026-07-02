@@ -6,32 +6,33 @@
     <title>Services | FlyLense Media Production</title>
     <meta name="description" content="Explore FlyLense's comprehensive media production and digital branding services including cinematography, drone shoots, social media management, and end-to-end brand solutions.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ============ ROOT VARIABLES & GLOBAL STYLES ============ */
+        /* ============ ROOT VARIABLES (matching portfolio) ============ */
         :root {
-            --bg-primary: white;
-            --bg-secondary: white;
-            --bg-tertiary: #12121c;
-            --bg-card: #151523;
-            --bg-card-hover: #1a1a2e;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f9fc;
+            --bg-tertiary: #eef3fa;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f5f9ff;
             --blue: #0074f6;
             --blue-light: #3391ff;
             --blue-dark: #0056c4;
             --accent: #4da3ff;
-            --text-primary: #f0ece4;
-            --text-secondary: #b8b5ad;
-            --text-muted: #7a7872;
-            --border: #1e1e30;
-            --border-light: #282840;
-            --gradient-blue: linear-gradient(135deg, #0074f6 0%, #3391ff 30%, #0056c4 70%, #0074f6 100%);
-            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
-            --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.12);
-            --shadow-blue: 0 0 40px rgba(0, 116, 246, 0.15), 0 0 80px rgba(0, 116, 246, 0.05);
+            --text-primary: #111827;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --border-light: #d1d5db;
+            --gradient-blue: linear-gradient(135deg, #0074f6, #3391ff, #0056c4);
+            --shadow-blue: 0 10px 30px rgba(0, 116, 246, .15);
+            --shadow-card: 0 10px 25px rgba(0, 0, 0, .06);
+            --shadow-elevated: 0 20px 45px rgba(0, 0, 0, .10);
+            --shadow-nav: 0 4px 30px rgba(0, 0, 0, .12);
             --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             --radius-sm: 8px;
             --radius-md: 14px;
             --radius-lg: 20px;
@@ -42,129 +43,235 @@
             --max-width: 1280px;
         }
 
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Navbar intro animation */
+        .navbar {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: opacity 0.7s ease, transform 0.7s ease, top 0.45s cubic-bezier(0.4,0,0.2,1), background 0.45s cubic-bezier(0.4,0,0.2,1);
         }
+        .navbar.loaded { opacity: 1; transform: translateY(0); }
+
+        *,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
             scroll-padding-top: var(--nav-height);
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-primary);
-            color: #111;
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            -webkit-tap-highlight-color: transparent;
         }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--blue-dark); }
         ::selection { background: rgba(0, 116, 246, 0.35); color: #fff; }
 
-        /* ============ NAVIGATION ============ */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height: var(--nav-height);
-            transition: all var(--transition-smooth); background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transition: opacity 0.75s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        .navbar.scrolled { background: rgba(10, 10, 15, 0.95); box-shadow: 0 2px 30px rgba(0, 0, 0, 0.6); }
-        .navbar-container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; z-index: 1001; flex-shrink: 0; }
-        .nav-logo img { height: 42px; width: auto; object-fit: contain; transition: transform var(--transition-bounce); }
+        .reveal.revealed { opacity: 1; }
+        .reveal-up { transform: translateY(50px); }
+        .reveal-up.revealed { transform: translateY(0); }
+        .reveal-left { transform: translateX(-50px); }
+        .reveal-left.revealed { transform: translateX(0); }
+        .reveal-right { transform: translateX(50px); }
+        .reveal-right.revealed { transform: translateX(0); }
+        .reveal-scale { transform: scale(0.88); }
+        .reveal-scale.revealed { transform: scale(1); }
+        .delay-1 { transition-delay: 0.05s; }
+        .delay-2 { transition-delay: 0.12s; }
+        .delay-3 { transition-delay: 0.19s; }
+        .delay-4 { transition-delay: 0.26s; }
+        .delay-5 { transition-delay: 0.33s; }
+
+        /* ============ NAVIGATION (matching portfolio) ============ */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: 1px solid transparent;
+            box-shadow: none;
+            will-change: background, backdrop-filter, box-shadow, border-color;
+        }
+        .navbar.scrolled {
+            top: 0px;
+            background: rgba(12, 18, 30, .96);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
+        }
+        .navbar-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            z-index: 1001;
+            flex-shrink: 0;
+            transition: transform var(--transition-bounce);
+        }
+        .nav-logo:hover { transform: scale(1.03); }
+        .nav-logo img { height: 42px; width: auto; object-fit: contain; }
         .nav-logo img.logo-icon { height: 42px; }
         .nav-logo img.logo-title { padding-left: 20px; height: 50px; }
-        .nav-logo:hover img.logo-icon { transform: scale(1.05); }
-        .nav-logo:hover img.logo-title { transform: scale(1.05); }
+        .navbar.scrolled .nav-logo img { filter: brightness(1) invert(0); }
         .nav-links { display: flex; align-items: center; gap: 0.3rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em; padding: 0.55rem 1.1rem; border-radius: 50px; transition: all var(--transition-fast); position: relative; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255, 255, 255, 0.04); }
-        .nav-links a.active { color: var(--blue-light); background: rgba(0, 116, 246, 0.1); }
-        .nav-cta { background: var(--gradient-blue) !important; color: #fff !important; font-weight: 600 !important; padding: 0.55rem 1.5rem !important; border-radius: 50px !important; box-shadow: 0 4px 20px rgba(0, 116, 246, 0.3); }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 116, 246, 0.5) !important; }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; padding: 8px; background: none; border: none; }
-        .hamburger span { display: block; width: 26px; height: 2.5px; background: var(--text-primary); border-radius: 2px; transition: all var(--transition-fast); }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-        .mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.97); backdrop-filter: blur(30px); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.4s ease; pointer-events: none; }
-        .mobile-menu.active { opacity: 1; visibility: visible; pointer-events: auto; }
-        .mobile-menu a { text-decoration: none; color: var(--text-secondary); font-size: 1.4rem; font-weight: 500; padding: 0.6rem 1.5rem; }
-        .mobile-menu a:hover { color: var(--blue-light); }
-        .mobile-menu .mobile-cta { background: var(--gradient-blue); color: #fff !important; font-weight: 600; border-radius: 50px; padding: 0.8rem 2rem !important; margin-top: 0.5rem; font-size: 1.1rem !important; }
-
-        /* ============ HERO SLIDER (Matches About Page) ============ */
-        .hero-slider {
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            transition: all 0.35s ease;
             position: relative;
+            white-space: nowrap;
+        }
+        .navbar.scrolled .nav-links a { color: rgba(255,255,255,.88); }
+        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
+        .nav-links a.active { color: #fff; background: rgba(255,255,255,0.15); font-weight: 600; }
+        .navbar.scrolled .nav-links a.active {
+            background: rgba(0,116,246,.25);
+            border: 1px solid rgba(0,116,246,.35);
+        }
+        .nav-cta {
+            background: var(--gradient-blue) !important;
+            color: #fff !important;
+            font-weight: 600 !important;
+            padding: 0.55rem 1.5rem !important;
+            border-radius: 50px !important;
+            box-shadow: 0 4px 20px rgba(0,116,246,0.4);
+            transition: all var(--transition-bounce) !important;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,116,246,0.6) !important;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.35s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 60vh;
-            min-height: 450px;
-            margin-top: var(--nav-height);
-            overflow: hidden;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-        }
-        .hero-slider .slides {
+            height: 100vh;
+            background: rgba(10,10,20,0.96);
+            backdrop-filter: blur(30px);
+            z-index: 999;
             display: flex;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            pointer-events: none;
         }
-        .hero-slider .slide {
-            min-width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
+        .mobile-menu.active { opacity: 1; visibility: visible; pointer-events: auto; }
+        .mobile-menu a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.4rem;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+        }
+        .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .mobile-cta {
+            background: var(--gradient-blue);
+            color: #fff !important;
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 0.8rem 2rem !important;
+            margin-top: 0.5rem;
+            font-size: 1.1rem !important;
+            box-shadow: 0 6px 25px rgba(0,116,246,0.4);
+        }
+
+        /* ============ HERO (matching portfolio) ============ */
+        .services-hero {
             position: relative;
+            height: 500px;
+            background: url('img/slider/5.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            overflow: hidden;
         }
-        .hero-slider .slide::after {
+        .services-hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(0deg, rgba(10,10,15,0.85) 0%, rgba(10,10,15,0.2) 60%);
+            background: rgba(0, 0, 0, 0.65);
             z-index: 1;
         }
-        .slide-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .services-hero > * {
+            position: relative;
             z-index: 2;
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+        }
+        .services-hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
             font-weight: 700;
-            color: #fff;
+            margin-bottom: 0.8rem;
+            margin-top: 60px;
+        }
+        .services-hero p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            font-size: 1.1rem;
             text-align: center;
-            letter-spacing: -0.02em;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            margin: 0;
-            line-height: 1.1;
-            white-space: nowrap;
         }
-        .slide-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--gradient-blue);
-            margin: 0.8rem auto 0;
-            border-radius: 2px;
-        }
-        /* ============ NEW PROMO/COLLAGE SECTION ============ */
+
+        /* ============ PROMO SECTION ============ */
         .promo-section {
-            background: #f8f9fc; /* Slight off-white background to pop */
+            background: #f8f9fc;
             padding: 5rem 2rem;
         }
         .promo-grid {
@@ -182,7 +289,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 2.6rem;
             font-weight: 600;
-            color: #005dcf; /* Matching your current blue heading */
+            color: #005dcf;
             line-height: 1.2;
             letter-spacing: -0.02em;
         }
@@ -204,25 +311,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: #ffc107;
+            background: var(--gradient-blue);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             padding: 0.85rem 2.2rem;
             font-weight: 600;
             font-size: 1rem;
             text-decoration: none;
             transition: all var(--transition-bounce);
-            background: var(--gradient-blue);
             align-self: flex-start;
             margin-top: 0.5rem;
-            
+            box-shadow: 0 6px 20px rgba(0, 116, 246, 0.3);
         }
         .btn-yellow:hover {
             transform: translateY(-3px);
-            background: var(--gradient-blue);
             box-shadow: 0 8px 20px #0066de;
-            color: white;
         }
         .promo-images {
             display: flex;
@@ -252,56 +356,18 @@
         .img-wrapper:hover {
             box-shadow: 0 12px 30px rgba(0,0,0,0.1);
         }
-        .img-wrapper:hover img {
-            transform: scale(1.06);
-        }
+        .img-wrapper:hover img { transform: scale(1.06); }
         .img-tall { flex: 1.6; }
         .img-short { flex: 1; }
-        
-        @media (max-width: 768px) {
-            .promo-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-            .promo-content h2 { font-size: 2.2rem; }
-            .promo-content h3 { font-size: 1.1rem; }
-            .promo-content p { max-width: 100%; }
-            .btn-yellow { align-self: center; }
-            .promo-images {
-                flex-direction: column;
-                height: auto;
-                gap: 1.5rem;
-            }
-            .promo-col {
-                flex-direction: row;
-                height: 300px;
-            }
-            .img-tall { flex: 1.2; }
-            .img-short { flex: 1; }
-        }
-        @media (max-width: 500px) {
-            .promo-col {
-                flex-direction: column;
-                height: auto;
-            }
-            .img-wrapper {
-                aspect-ratio: 4/3;
-                height: 200px;
-            }
-        }
 
-        /* ============ SECTIONS & SCROLL REVEALS ============ */
+        /* ============ SECTIONS ============ */
         .section { padding: 5rem 2rem; position: relative; background: var(--bg-primary); }
         .section-container { max-width: var(--max-width); margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 3.5rem; }
-        .section-tag { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.8rem; }
-        .section-title { font-family: 'Playfair Display', 'Georgia', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #111; margin-bottom: 0.8rem; }
+        .section-tag { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.8rem; }
+        .section-title { font-family: 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #111; margin-bottom: 0.8rem; }
         .section-subtitle { color: #666; font-size: 1rem; max-width: 550px; margin: 0 auto; line-height: 1.7; }
         .section-divider { width: 50px; height: 3px; background: var(--gradient-blue); border-radius: 3px; margin: 1rem auto; }
-
-        /* Reveal animations */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(0.2, 0.9, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* ============ SERVICE CATEGORIES GRID ============ */
         .service-categories-grid {
@@ -356,19 +422,16 @@
             border-color: #005dcf;
             transform: translateX(4px);
         }
-        .service-tag i {
-            font-size: 0.7rem;
-            color: #005dcf;
-        }
+        .service-tag i { font-size: 0.7rem; color: #005dcf; }
 
-        /* ============ TRUSTED BRANDS SECTION (NEW) ============ */
+        /* ============ TRUSTED BRANDS ============ */
         .trusted-brands-section { background: var(--bg-primary); padding: 2rem 2rem 4rem 2rem; }
         .trusted-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 2.2rem;
             font-weight: 600;
             text-align: center;
-            color: #1b786a; /* Exact teal from your reference image */
+            color: #005dcf;
             margin-bottom: 3.5rem;
             letter-spacing: -0.01em;
         }
@@ -388,14 +451,12 @@
             width: 100%;
             height: 70px;
             transition: all var(--transition-fast);
-            /*filter: grayscale(100%) opacity(0.7);*/
             padding: 0.5rem;
             background: #fcfcfc;
             border-radius: var(--radius-sm);
         }
         .client-logo-box:hover {
             transform: scale(1.08);
-            filter: grayscale(0%) opacity(1);
             box-shadow: var(--shadow-card);
         }
         .client-logo-box img {
@@ -405,7 +466,7 @@
             display: block;
         }
 
-        /* ============ WHY CHOOSE SECTION ============ */
+        /* ============ WHY CHOOSE ============ */
         .why-section { background: #f8f9fc; padding: 5rem 2rem; }
         .why-grid {
             display: grid;
@@ -420,23 +481,9 @@
             border: 1px solid #f0f0f0;
             transition: all var(--transition-smooth);
         }
-        .why-card:hover {
-            transform: scale(1.03);
-            box-shadow: var(--shadow-elevated);
-            border-color: #005dcf;
-        }
-        .why-card i {
-            color: #005dcf;
-            font-size: 1.8rem;
-            margin-bottom: 0.6rem;
-            display: block;
-        }
-        .why-card h4 {
-            font-size: 0.95rem;
-            color: #111;
-            font-weight: 600;
-            line-height: 1.3;
-        }
+        .why-card:hover { transform: scale(1.03); box-shadow: var(--shadow-elevated); border-color: #005dcf; }
+        .why-card i { color: #005dcf; font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+        .why-card h4 { font-size: 0.95rem; color: #111; font-weight: 600; line-height: 1.3; }
 
         /* ============ VIDEO SHOWCASE ============ */
         .showcase-intro { padding-bottom: 0; }
@@ -450,44 +497,126 @@
             border: 1px solid #eaeaea;
             background: #f8f9fc;
             aspect-ratio: 16/9;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: var(--shadow-elevated);
         }
         .video-wrapper i { font-size: 5rem; color: rgba(0, 116, 246, 0.2); transition: all var(--transition-smooth); }
         .video-wrapper:hover i { color: var(--blue-light); transform: scale(1.1); }
         .video-wrapper .play-btn {
-            position: absolute; width: 80px; height: 80px;
-            background: rgba(10, 10, 15, 0.7); backdrop-filter: blur(12px);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 2rem; transition: all var(--transition-bounce);
-            cursor: pointer; border: 1px solid rgba(255,255,255,0.15);
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2rem;
+            transition: all var(--transition-bounce);
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.15);
         }
         .video-wrapper .play-btn:hover { background: var(--blue); transform: scale(1.1); box-shadow: 0 0 40px rgba(0, 116, 246, 0.5); }
 
         /* ============ CTA & FOOTER ============ */
         .cta-banner-section { padding: 20px 2rem; background: var(--bg-primary); position: relative; z-index: 2; }
-        .cta-banner { max-width: var(--max-width); margin: 0 auto; background: linear-gradient(135deg, #0074f6, #0040c1); border-radius: 20px; box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35); display: flex; align-items: center; justify-content: space-between; padding: 2rem 2.5rem; flex-wrap: wrap; gap: 1.5rem; }
+        .cta-banner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0074f6, #0040c1);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
         .cta-banner-text h2 { font-weight: 700; font-size: 2rem; color: #fff; margin-bottom: 0.3rem; font-family: 'Poppins', sans-serif; }
         .cta-banner-text h4 { font-weight: 400; font-size: 1.3rem; color: rgba(255, 255, 255, 0.85); font-family: 'Poppins', sans-serif; }
-        .cta-banner .btn-cta-white { background: #fff; color: #0074f6; border: none; padding: 18px 32px; font-weight: 700; border-radius: 50px; font-size: 1rem; cursor: pointer; transition: all var(--transition-bounce); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); }
+        .cta-banner .btn-cta-white {
+            background: #fff;
+            color: #0074f6;
+            border: none;
+            padding: 18px 32px;
+            font-weight: 700;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
         .cta-banner .btn-cta-white:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); background: #f0f4ff; }
-        .footer { background: #0a0a0f; border-top: 1px solid #1e1e30; padding: 2.5rem 2rem; }
-        .footer-container { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+        .footer {
+            background: #0a1628;
+            color: #e5e7eb;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem 2rem;
+        }
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: #ffffff; }
         .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .footer-links a { color: #7a7872; text-decoration: none; font-size: 0.85rem; transition: color var(--transition-fast); }
-        .footer-links a:hover { color: var(--blue-light); }
-        .footer-copy { color: #7a7872; font-size: 0.8rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #ffffff; }
         .footer-social { display: flex; gap: 0.8rem; }
-        .footer-social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #282840; display: flex; align-items: center; justify-content: center; color: #7a7872; text-decoration: none; transition: all var(--transition-fast); font-size: 0.9rem; }
-        .footer-social a:hover { border-color: var(--blue); color: var(--blue-light); background: rgba(0, 116, 246, 0.08); }
-        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: #151523; border: 1px solid #282840; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 900; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-smooth); box-shadow: var(--shadow-card); }
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+        }
+        .footer-social a:hover { border-color: var(--blue); color: #fff; background: var(--gradient-blue); }
+        .footer-copy { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            cursor: pointer;
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+        }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .back-to-top:hover { background: var(--blue); color: #fff; border-color: var(--blue); transform: translateY(-4px); }
+        .back-to-top:hover { background: var(--gradient-blue); color: #fff; border-color: var(--blue); }
 
         /* ============ RESPONSIVE ============ */
         @media (max-width: 1024px) {
-            .hero-slider { height: 55vh; }
+            .services-hero { height: 400px; }
             .service-categories-grid { grid-template-columns: 1fr; gap: 2rem; }
             .service-tags { grid-template-columns: repeat(2, 1fr); }
             .why-grid { grid-template-columns: repeat(2, 1fr); }
@@ -496,17 +625,14 @@
             .trusted-title { font-size: 2rem; }
         }
         @media (max-width: 768px) {
-            :root { --nav-height: var(--nav-height-mobile); }
-            html { scroll-padding-top: var(--nav-height-mobile); }
+            :root { --nav-height: 64px; }
             .nav-links { display: none; }
             .hamburger { display: flex; }
             .navbar-container { padding: 0 1.2rem; }
-            .nav-logo img.logo-icon { height: 34px; }
-            .nav-logo img.logo-title { height: 22px; }
-            .hero-slider { height: 50vh; min-height: 350px; }
+            .services-hero { height: 350px; }
+            .services-hero h1 { margin-top: 40px; }
             .section { padding: 3rem 1.2rem; }
             .section-title { font-size: 1.6rem; }
-            .slide-title { font-size: clamp(1.8rem, 8vw, 2.8rem); white-space: normal; }
             .intro-content { grid-template-columns: 1fr; }
             .why-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .service-cat-card { padding: 1.5rem; }
@@ -516,71 +642,72 @@
             .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 38px; height: 38px; }
             .cta-banner { padding: 1.5rem; border-radius: 16px; }
             .cta-banner .btn-cta-white { padding: 14px 24px; font-size: 0.9rem; }
-            
-            /* Clients Grid Mobile Adjustments */
             .clients-grid { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
             .trusted-title { font-size: 1.6rem; }
             .client-logo-box { height: 55px; }
+            .promo-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .promo-content h2 { font-size: 2.2rem; }
+            .promo-content h3 { font-size: 1.1rem; }
+            .promo-content p { max-width: 100%; }
+            .btn-yellow { align-self: center; }
+            .promo-images { flex-direction: column; height: auto; gap: 1.5rem; }
+            .promo-col { flex-direction: row; height: 300px; }
+            .img-tall { flex: 1.2; }
+            .img-short { flex: 1; }
         }
         @media (max-width: 480px) {
-            .hero-slider { height: 40vh; min-height: 280px; }
-            .slide-title { font-size: 1.6rem; }
+            .services-hero { height: 300px; }
             .why-grid { grid-template-columns: 1fr; }
             .clients-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .client-logo-box { height: 45px; padding: 0.25rem; }
+            .promo-col { flex-direction: column; height: auto; }
+            .img-wrapper { aspect-ratio: 4/3; height: 200px; }
         }
     </style>
 </head>
 <body>
-    <!-- ==================== NAVIGATION ==================== -->
+    <!-- ==================== NAVBAR (matching portfolio) ==================== -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
-            <a href="index.php" class="nav-logo" aria-label="FlyLense Home">
-                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                <img class="logo-title" src="img/title.png" alt="FlyLense" onerror="this.style.display='none';">
-                <span style="display:none;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;">FlyLense</span>
+            <a href="#" class="nav-logo">
+                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo">
+                <img class="logo-title" src="img/title.png" alt="FlyLense">
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" >Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="service.html" class="active">Services</a></li>
-                <li><a href="index.php#portfolio">Portfolio</a></li>
-                <li><a href="industry.html">Industry</a></li>
-                <li><a href="index.php#contact">Contact</a></li>
-                <li><a href="index.php#contact" class="nav-cta">Get a Quote</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="industry.html">Industries</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <!-- <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+            </ul> -->
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
         </div>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="service.html">Services</a>
-        <a href="index.php#portfolio">Portfolio</a>
-        <a href="industry.html">Industry</a>
-        <a href="index.php#contact">Contact</a>
-        <a href="index.php#contact" class="mobile-cta">Get a Quote</a>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="service.html">Services</a>
+        <a href="portfolio.html">Portfolio</a><a href="industry.html">Industries</a><a href="contact.html">Contact</a>
+        <!-- <a href="#contact" class="mobile-cta">Get a Quote</a> -->
     </div>
 
-    <!-- ==================== HALF-PAGE HERO SLIDER ==================== -->
-    <section class="hero-slider" id="heroSlider">
-        <div class="slides" id="heroSlides">
-            <div class="slide" style="background-image: url('img/slider/5.png');">
-                <h1 class="slide-title">Our Services</h1>
-            </div>
-        </div>
+    <!-- ==================== HERO (matching portfolio) ==================== -->
+    <section class="services-hero">
+        <h1 class="reveal reveal-up">Our Services</h1>
+        <p class="reveal reveal-up delay-1">Comprehensive media production and digital branding solutions tailored to your brand's success.</p>
     </section>
-    <!-- ==================== NEW PROMO SECTION (BASED ON YOUR IMAGE) ==================== -->
-    <section class="section promo-section">
+
+    <!-- ==================== PROMO SECTION ==================== -->
+    <section class="promo-section">
         <div class="section-container">
             <div class="promo-grid">
-                                <div class="promo-content">
+                <div class="promo-content reveal reveal-left">
                     <h2>Services We Deliver</h2>
                     <h3>Share your brief. Get a transparent quote. Launch your campaign.</h3>
                     <p>At FlyLense, we combine agency-level artistry with startup-speed agility. Say goodbye to long production delays. Our crew of visionary directors, certified drone pilots, and post-production masters work seamlessly to produce stunning 8K footage, corporate films, and social media content—so you can focus on your business while we bring your story to life.</p>
-                    <a href="index.php#contact" class="btn-yellow">Start Your Project</a>
+                    <a href="contact.html" class="btn-yellow">Start Your Project</a>
                 </div>
-                <div class="promo-images">
+                <div class="promo-images reveal reveal-right">
                     <div class="promo-col">
                         <div class="img-wrapper img-tall">
                             <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop" alt="Woman thumbs up" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+1'">
@@ -605,19 +732,19 @@
     <!-- ==================== INTRO & VIDEO SHOWCASE ==================== -->
     <section class="section showcase-intro">
         <div class="section-container">
-            <div class="section-header reveal">
+            <div class="section-header reveal reveal-up">
                 <span class="section-tag">Why FlyLense</span>
                 <h2 style="color:#005dcf" class="section-title">Your Creative Powerhouse</h2>
                 <div class="section-divider"></div>
                 <p class="section-subtitle">Whether you need a single high-end shoot or a full-scale end-to-end brand management solution, our in-house experts deliver cinematic quality with unmatched agility.</p>
             </div>
             <div class="intro-content">
-                <div class="intro-text reveal-left">
+                <div class="intro-text reveal reveal-left">
                     <h3 style="color:#005dcf">Need only a shoot?</h3>
                     <p>Our Production Services provide you with top-tier professional photography, cinematography, drone flights, and gimbal shoots. Get raw footage or fully edited masterpieces tailored for your brand.</p>
                     <p>Need someone to manage everything? Our Digital Branding & Marketing Services handle your entire visual identity—from social media strategies and daily posts to Meta ads and monthly performance analytics.</p>
                 </div>
-                <div class="video-wrapper reveal-right">
+                <div class="video-wrapper reveal reveal-right">
                     <div class="play-btn"><i class="fa-solid fa-play"></i></div>
                     <i class="fa-solid fa-clapperboard"></i>
                 </div>
@@ -628,15 +755,13 @@
     <!-- ==================== SERVICE CATEGORIES ==================== -->
     <section class="section">
         <div class="section-container">
-            <div class="section-header reveal">
+            <div class="section-header reveal reveal-up">
                 <span class="section-tag">What We Offer</span>
                 <h2 style="color:#005dcf" class="section-title">Complete Solutions for Every Need</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="service-categories-grid">
-                
-                <!-- Category 1: Production Services -->
-                <div class="service-cat-card reveal">
+                <div class="service-cat-card reveal reveal-scale">
                     <h3>Production Services</h3>
                     <span style="color:#4299ff" class="tagline">Need only a shoot? → Production Services</span>
                     <div class="service-tags">
@@ -656,9 +781,7 @@
                         <span class="service-tag"><i class="fa-solid fa-circle-check"></i> Raw Footage Delivery</span>
                     </div>
                 </div>
-
-                <!-- Category 2: Digital Branding -->
-                <div class="service-cat-card reveal">
+                <div class="service-cat-card reveal reveal-scale">
                     <h3>Digital Branding & Marketing</h3>
                     <span style="color:#4299ff" class="tagline">Need someone to manage everything? → Digital Branding & Marketing Services</span>
                     <div class="service-tags">
@@ -675,34 +798,32 @@
                         <span class="service-tag"><i class="fa-solid fa-circle-check"></i> Online Reputation Management</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ==================== TRUSTED BRANDS SECTION (REPLACED INDUSTRIES) ==================== -->
+    <!-- ==================== TRUSTED BRANDS ==================== -->
     <section class="section trusted-brands-section">
         <div class="section-container">
-            <h2 style="color:#005dcf" class="trusted-title reveal">Video Production that's Trusted - Across India.</h2>
+            <h2 style="color:#005dcf" class="trusted-title reveal reveal-up">Video Production that's Trusted - Across India.</h2>
             <div class="clients-grid">
-                <!-- 17 Logos pulled from your Index page's client slider -->
-                <div class="client-logo-box reveal"><img src="img/clients/1.png" alt="Client 1" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+1'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/2.png" alt="Client 2" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+2'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/3.png" alt="Client 3" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+3'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/4.png" alt="Client 4" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+4'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/5.png" alt="Client 5" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+5'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/6.png" alt="Client 6" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+6'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/7.png" alt="Client 7" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+7'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/8.png" alt="Client 8" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+8'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/9.png" alt="Client 9" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+9'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/10.png" alt="Client 10" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+10'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/11.png" alt="Client 11" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+11'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/12.png" alt="Client 12" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+12'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/13.png" alt="Client 13" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+13'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/14.png" alt="Client 14" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+14'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/15.png" alt="Client 15" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+15'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/16.png" alt="Client 16" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+16'"></div>
-                <div class="client-logo-box reveal"><img src="img/clients/17.png" alt="Client 17" onerror="this.src='https://placehold.co/150x70/transparent/1b786a?text=Client+17'"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/1.png" alt="Client 1"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/2.png" alt="Client 2"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/3.png" alt="Client 3"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/4.png" alt="Client 4"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/5.png" alt="Client 5"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/6.png" alt="Client 6"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/7.png" alt="Client 7"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/8.png" alt="Client 8"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/9.png" alt="Client 9"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/10.png" alt="Client 10"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/11.png" alt="Client 11"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/12.png" alt="Client 12"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/13.png" alt="Client 13"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/14.png" alt="Client 14"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/15.png" alt="Client 15"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/16.png" alt="Client 16"></div>
+                <div class="client-logo-box reveal reveal-scale"><img src="img/clients/17.png" alt="Client 17"></div>
             </div>
         </div>
     </section>
@@ -710,31 +831,34 @@
     <!-- ==================== WHY CHOOSE FLYLENSE ==================== -->
     <section class="why-section">
         <div class="section-container">
-            <div class="section-header reveal">
+            <div class="section-header reveal reveal-up">
                 <span class="section-tag">Why Us</span>
                 <h2 style="color:#005dcf" class="section-title">Why Choose FlyLense?</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="why-grid">
-                <div class="why-card reveal"><i class="fa-solid fa-people-group"></i><h4>In-House Production Team</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-camera-retro"></i><h4>Professional Cinematographers</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-pen-nib"></i><h4>Creative Graphic Designers</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-scissors"></i><h4>Experienced Video Editors</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-bullhorn"></i><h4>Social Media Experts</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-memory"></i><h4>High-End Camera Equipment</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-drone"></i><h4>Drone & Gimbal Shoots</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-user-check"></i><h4>Dedicated Account Manager</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-chart-pie"></i><h4>Monthly Analytics Reports</h4></div>
-                <div class="why-card reveal"><i class="fa-solid fa-layer-group"></i><h4>End-to-End Brand Management</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-people-group"></i><h4>In-House Production Team</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-camera-retro"></i><h4>Professional Cinematographers</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-pen-nib"></i><h4>Creative Graphic Designers</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-scissors"></i><h4>Experienced Video Editors</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-bullhorn"></i><h4>Social Media Experts</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-memory"></i><h4>High-End Camera Equipment</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-drone"></i><h4>Drone & Gimbal Shoots</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-user-check"></i><h4>Dedicated Account Manager</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-chart-pie"></i><h4>Monthly Analytics Reports</h4></div>
+                <div class="why-card reveal reveal-scale"><i class="fa-solid fa-layer-group"></i><h4>End-to-End Brand Management</h4></div>
             </div>
         </div>
     </section>
 
     <!-- ==================== CTA BANNER ==================== -->
     <section class="cta-banner-section">
-        <div class="cta-banner">
-            <div class="cta-banner-text"><h2>Ready to Bring Your Vision to Life?</h2><h4>Let's Create Something Incredible Together</h4></div>
-            <a href="index.php#contact" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Let's Get Started</a>
+        <div class="cta-banner reveal reveal-up">
+            <div class="cta-banner-text">
+                <h2>Ready to Bring Your Vision to Life?</h2>
+                <h4>Let's Create Something Incredible Together</h4>
+            </div>
+            <a href="contact.html" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Let's Get Started</a>
         </div>
     </section>
 
@@ -742,7 +866,14 @@
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
-            <div class="footer-links"><a href="index.php">Home</a><a href="about.html">About</a><a href="service.html">Services</a><a href="index.php#portfolio">Portfolio</a><a href="index.php#gallery">Gallery</a><a href="index.php#contact">Contact</a></div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="service.html">Services</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
             <div class="footer-social">
                 <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -756,27 +887,52 @@
 
     <script>
         (function() {
+            // Navbar intro animation
+            setTimeout(() => document.getElementById('navbar').classList.add('loaded'), 100);
+
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const backToTop = document.getElementById('backToTop');
-            const allSectionLinks = document.querySelectorAll('a[href^="#"]');
 
-            function updateNavbar() { const scrollY = window.scrollY; if (scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); if (scrollY > 600) backToTop.classList.add('visible'); else backToTop.classList.remove('visible'); }
-            function toggleMobileMenu() { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; }
-            function closeMobileMenu() { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
+            // Scroll handler
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                navbar.classList.toggle('scrolled', scrollY > 60);
+                backToTop.classList.toggle('visible', scrollY > 600);
+            });
 
-            hamburger.addEventListener('click', toggleMobileMenu);
-            mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
-            
-            allSectionLinks.forEach(link => { link.addEventListener('click', function(e) { const href = this.getAttribute('href'); if (href && href.startsWith('#') && href.length > 1) { e.preventDefault(); const target = document.querySelector(href); if (target) { const offset = navbar.offsetHeight + 10; const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({ top: targetPosition, behavior: 'smooth' }); } } }); });
-            
-            backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            // Hamburger toggle
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }));
 
-            let scrollTicking = false;
-            window.addEventListener('scroll', () => { if (!scrollTicking) { requestAnimationFrame(() => { updateNavbar(); scrollTicking = false; }); scrollTicking = true; } });
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const offset = navbar.offsetHeight + 10;
+                            const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+                            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
 
-            // Video Play Button Placeholder Interaction
+            backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // Video Play Button
             const playBtns = document.querySelectorAll('.play-btn');
             playBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -784,19 +940,17 @@
                 });
             });
 
-            // ==================== DYNAMIC STAGGERED SCROLL REVEALS ====================
+            // Reveal animations
             const revealElements = document.querySelectorAll('.reveal');
             const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
+                entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => { entry.target.classList.add('active'); }, index * 80);
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-            
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
             revealElements.forEach(el => revealObserver.observe(el));
-
-            updateNavbar();
         })();
     </script>
 </body>
