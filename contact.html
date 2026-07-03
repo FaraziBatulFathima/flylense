@@ -56,7 +56,7 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--blue-dark); }
         ::selection { background: rgba(0, 116, 246, 0.35); color: #fff; }
 
-        /* ---------- NAVIGATION (identical to homepage) ---------- */
+        /* ---------- NAVIGATION ---------- */
         .navbar {
             position: fixed; top: 20px; left: 0; width: 100%; z-index: 1000;
             height: var(--nav-height); background: transparent;
@@ -101,7 +101,7 @@
         .mobile-menu a { text-decoration: none; color: rgba(255,255,255,0.9); font-size: 1.4rem; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 50px; }
         .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
-        /* ---------- HERO WITH INTRO ANIMATION ---------- */
+        /* ---------- HERO SLIDER ---------- */
         .contact-hero {
             position: relative;
             height: 70vh;
@@ -121,8 +121,8 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         .contact-hero h1 {
-            font-family: 'Poppins', sans-serif; font-size: clamp(2.8rem, 6vw, 4.2rem);
-            font-weight: 700; line-height: 1.2; margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif; font-size: clamp(3rem, 7vw, 4.5rem);
+            font-weight: 700; line-height: 1.2; 
         }
         .contact-hero p {
             font-size: 1.2rem; color: rgba(255,255,255,0.85);
@@ -135,94 +135,109 @@
             transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .reveal.revealed { opacity: 1; transform: translateY(0); }
-        .reveal-left { transform: translateX(-40px); }
-        .reveal-left.revealed { transform: translateX(0); }
-        .reveal-right { transform: translateX(40px); }
-        .reveal-right.revealed { transform: translateX(0); }
 
-        /* ---------- CONTACT SECTION ---------- */
-        .contact-section {
-            padding: 6rem 2rem 7rem;
+        /* ---------- PROFESSIONAL SPLIT FORM SECTION ---------- */
+        .contact-form-section {
+            padding: 6rem 2rem 4rem 2rem;
             background: var(--bg-secondary);
+            position: relative;
+        }
+        .contact-wrapper-single {
+            max-width: 960px; margin: 0 auto;
+            display: flex; flex-direction: column;
+            position: relative; z-index: 2;
+        }
+
+        /* Premium Split Card */
+        .form-card-single {
+            background: #fff; border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-elevated);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            border: 1px solid rgba(0,116,246,0.05);
+        }
+        
+        /* Left side: Info + Branding */
+        .form-info-panel {
+            background: var(--gradient-blue);
+            padding: 3rem 2.5rem;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
             overflow: hidden;
         }
-        .contact-section::after {
+        .form-info-panel::after {
             content: '';
-            position: absolute; bottom: -120px; right: -120px;
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, rgba(0,116,246,0.05) 0%, transparent 70%);
+            position: absolute;
+            top: -40%; right: -30%;
+            width: 300px; height: 300px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             pointer-events: none;
         }
-        .contact-wrapper {
-            max-width: var(--max-width); margin: 0 auto;
-            display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem;
-            align-items: center; position: relative; z-index: 2;
+        .form-info-panel .brand-icon {
+            font-size: 2.2rem; margin-bottom: 1rem; display: block;
         }
-
-        /* Info Card */
-        .info-card {
-            background: #fff; border-radius: var(--radius-lg);
-            padding: 2.8rem; box-shadow: var(--shadow-elevated);
-            position: relative; overflow: hidden;
-        }
-        .info-card::before {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 4px; height: 60px;
-            background: var(--gradient-blue); border-radius: 0 4px 4px 0;
-        }
-        .info-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem; margin-bottom: 1.8rem; color: var(--text-primary);
-        }
-        .info-item {
-            display: flex; gap: 1rem; margin-bottom: 1.8rem;
-            transition: transform var(--transition-fast);
-        }
-        .info-item:hover { transform: translateX(6px); }
-        .info-icon {
-            width: 48px; height: 48px; background: var(--gradient-blue);
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.2rem; flex-shrink: 0;
-        }
-        .info-text strong { display: block; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.15rem; }
-        .info-text p { font-size: 0.9rem; color: var(--text-secondary); }
-        .social-icons {
-            display: flex; gap: 0.8rem; margin-top: 2.5rem;
-        }
-        .social-icons a {
-            width: 42px; height: 42px; border-radius: 12px;
-            background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center;
-            color: var(--text-muted); text-decoration: none; transition: all var(--transition-smooth);
-        }
-        .social-icons a:hover { background: var(--gradient-blue); color: #fff; transform: translateY(-3px); }
-
-        /* Form Card */
-        .form-card {
-            background: #fff; border-radius: var(--radius-lg);
-            padding: 2.8rem; box-shadow: var(--shadow-elevated);
-            border: 1px solid rgba(0,116,246,0.08);
-        }
-        .form-card h2 {
+        .form-info-panel h3 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem; margin-bottom: 0.3rem; color: var(--text-primary);
+            font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
         }
-        .form-subtitle {
-            color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;
-            border-left: 4px solid var(--blue); padding-left: 1rem;
+        .form-info-panel .tagline {
+            font-size: 0.95rem; line-height: 1.5; margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
         }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
-        .form-group { margin-bottom: 1.2rem; }
+        .form-info-panel .info-details {
+            display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; position: relative; z-index: 2;
+        }
+        .form-info-panel .info-detail-item {
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .form-info-panel .info-detail-item i {
+            width: 24px; text-align: center; font-size: 1.1rem;
+        }
+        .form-info-panel .info-detail-item p {
+            font-size: 0.9rem; color: rgba(255, 255, 255, 0.95);
+        }
+        .form-info-panel .social-links {
+            display: flex; gap: 0.8rem; position: relative; z-index: 2;
+        }
+        .form-info-panel .social-links a {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        .form-info-panel .social-links a:hover {
+            background: #fff; color: var(--blue); transform: translateY(-3px);
+        }
+
+        /* Right side: Form Fields */
+        .form-fields-panel {
+            padding: 3rem 3rem 3rem 2.5rem;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .form-fields-panel h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem;
+            color: var(--text-primary); margin-bottom: 0.2rem;
+        }
+        .form-fields-panel .form-subtitle {
+            color: var(--text-muted); font-size: 0.9rem;
+            margin-bottom: 1.8rem;
+        }
+        .form-group { margin-bottom: 1.3rem; }
         .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 0.4rem; }
         .form-group input,
         .form-group textarea,
         .form-group select {
-            width: 100%; padding: 0.85rem 1rem;
+            width: 100%; padding: 0.85rem 1.2rem;
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif; font-size: 0.95rem;
             outline: none; transition: all var(--transition-fast);
         }
         .form-group input:focus,
@@ -231,15 +246,34 @@
             border-color: var(--blue);
             box-shadow: 0 0 0 3px rgba(0,116,246,0.1);
         }
+        .form-row-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
         .btn-submit {
+            width: 100%; justify-content: center;
             background: var(--gradient-blue); color: #fff;
-            padding: 0.9rem 2.8rem; border-radius: 50px;
+            padding: 1rem 2.8rem; border-radius: 50px;
             font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
             transition: all var(--transition-bounce);
             box-shadow: 0 8px 25px rgba(0,116,246,0.3);
-            display: inline-flex; align-items: center; gap: 0.5rem;
+            display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;
         }
         .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,116,246,0.5); }
+
+        /* ---------- MAP SECTION ---------- */
+        .map-section {
+            padding: 0 2rem 5rem 2rem;
+            background: var(--bg-secondary);
+        }
+        .map-container {
+            max-width: var(--max-width); margin: 0 auto;
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-elevated);
+            border: 1px solid var(--border);
+            transition: all var(--transition-smooth);
+        }
+        .map-container:hover { box-shadow: var(--shadow-blue); transform: scale(1.005); }
+        .map-container iframe {
+            width: 100%; height: 450px; display: block; border: none;
+        }
 
         /* ---------- FOOTER ---------- */
         .footer {
@@ -267,8 +301,11 @@
         .footer-social a:hover { border-color: var(--blue); color: #fff; background: var(--gradient-blue); }
         .footer-copy { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
 
+        /* ============ RESPONSIVE ============ */
         @media (max-width: 900px) {
-            .contact-wrapper { grid-template-columns: 1fr; }
+            .form-card-single { grid-template-columns: 1fr; }
+            .form-info-panel { padding: 2.5rem; }
+            .form-fields-panel { padding: 2.5rem; }
         }
         @media (max-width: 768px) {
             :root { --nav-height: 64px; }
@@ -276,10 +313,19 @@
             .hamburger { display: flex; }
             .navbar-container { padding: 0 1.2rem; }
             .contact-hero { height: 55vh; min-height: 380px; }
-            .contact-hero h1 { font-size: clamp(2rem, 6vw, 2.6rem); }
-            .form-row { grid-template-columns: 1fr; }
+            .contact-hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+            .contact-hero p { font-size: 1rem; }
+            
+            .form-row-inputs { grid-template-columns: 1fr; }
+            .form-fields-panel { padding: 2rem; }
+            .map-container iframe { height: 300px; }
+            
             .footer-container { flex-direction: column; text-align: center; }
             .footer-links { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .map-container iframe { height: 250px; }
+            .contact-hero p { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -306,95 +352,111 @@
         <a href="portfolio.html">Portfolio</a><a href="industry.html">Industries</a><a href="contact.html">Contact</a>
     </div>
 
-    <!-- HERO -->
+    <!-- UPDATED HERO SLIDER WITH SUBTITLE -->
     <section class="contact-hero">
         <div class="hero-content">
-            <h1>Let's Create Something Cinematic</h1>
-            <p>Every frame tells a story — tell us yours and we'll bring it to life with passion and precision.</p>
+            <h1>Contact Us</h1>
+            <p>Let's create something extraordinary together. Reach out to our team today.</p>
         </div>
     </section>
 
-    <!-- CONTACT SECTION (animated on scroll) -->
-    <section class="contact-section">
-        <div class="contact-wrapper">
-            <!-- Info column - reveals from left -->
-            <div class="info-card reveal reveal-left">
-                <h3>FlyLense Studio</h3>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                    <div class="info-text">
-                        <strong>Visit Us</strong>
-                        <p>1200 Creative Drive, Los Angeles, CA 90028</p>
+    <!-- PROFESSIONAL SPLIT CONTACT FORM SECTION -->
+    <section class="contact-form-section">
+        <div class="contact-wrapper-single reveal">
+            
+            <!-- Premium Split Card -->
+            <div class="form-card-single">
+                
+                <!-- Left Side Panel: Info & Branding -->
+                <div class="form-info-panel">
+                    <div>
+                        <span class="brand-icon"><i class="fa-solid fa-film"></i></span>
+                        <h3>Let's Talk</h3>
+                        <p class="tagline">We'd love to hear about your project. Our expert team is ready to bring your cinematic vision to life.</p>
+                    </div>
+                    
+                    <div>
+                        <div class="info-details">
+                            <div class="info-detail-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <p>hello@flylense.com</p>
+                            </div>
+                            <div class="info-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <p> +91 99895 71223</p>
+                                <p> +91 90143 23594</p>
+                            </div>
+                            <div class="info-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <p>Talwar Plaza, 4th, beside Podium Mall, Toli Chowki, Hyderabad, Telangana 500008</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
                     </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="info-text">
-                        <strong>Email</strong>
-                        <p>hello@flylense.com</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
-                    <div class="info-text">
-                        <strong>Phone</strong>
-                        <p>+1 (323) 555-0192</p>
-                    </div>
-                </div>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-            </div>
 
-            <!-- Form column - reveals from right -->
-            <div class="form-card reveal reveal-right">
-                <h2>Get In Touch</h2>
-                <p class="form-subtitle">We typically respond within a few hours.</p>
-                <form id="contactForm" onsubmit="handleFormSubmit(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>First Name *</label>
-                            <input type="text" placeholder="John" required>
+                <!-- Right Side Panel: Form -->
+                <div class="form-fields-panel">
+                    <h2>Send a Message</h2>
+                    <p class="form-subtitle">We typically respond within a few hours.</p>
+                    
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row-inputs">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-row-inputs">
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" placeholder="">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Last Name *</label>
-                            <input type="text" placeholder="Doe" required>
+                            <label>Service *</label>
+                            <select required>
+                                <option value="">Select a service...</option>
+                                <option>Commercial Films</option>
+                                <option>Brand Storytelling</option>
+                                <option>Aerial Drone Footage</option>
+                                <option>Corporate Videos</option>
+                                <option>Social Media Content</option>
+                                <option>Full Digital Branding</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group">
-                            <label>Email *</label>
-                            <input type="email" placeholder="john@example.com" required>
+                            <label>Project Details *</label>
+                            <textarea rows="4" placeholder="Describe your vision, timeline, and any specific requirements..." required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="tel" placeholder="+1 (555) 000-0000">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Service *</label>
-                        <select required>
-                            <option value="">Select a service...</option>
-                            <option>Commercial Films</option>
-                            <option>Brand Storytelling</option>
-                            <option>Aerial Drone Footage</option>
-                            <option>Corporate Videos</option>
-                            <option>Social Media Content</option>
-                            <option>Full Digital Branding</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Project Details *</label>
-                        <textarea rows="4" placeholder="Describe your vision, timeline, and any specific requirements..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fa-solid fa-paper-plane"></i> Send Message
-                    </button>
-                </form>
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="map-section">
+        <div class="map-container reveal">
+            <!-- Replace the 'src' attribute with your actual Google Maps embed URL -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15229.00291930383!2d78.415173!3d17.399751!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97bde1b0e383%3A0x3267bc2693dfbeba!2sFlylense%20Media%20Partner%20Private%20Limited!5e0!3m2!1sen!2sin!4v1783069668926!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
     </section>
 
