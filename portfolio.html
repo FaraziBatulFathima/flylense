@@ -137,7 +137,7 @@
         .portfolio-hero {
             position: relative;
             height: 500px;
-            background: url('img/slider/1.png') center/cover no-repeat;
+            background: url('img/slider/4.png') center/cover no-repeat;
             display: flex; align-items: center; justify-content: center; flex-direction: column;
             color: #fff; overflow: hidden;
         }
@@ -206,7 +206,6 @@
         .card-media.playing img { display: none; }
         .card-body { padding: 1.2rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
         .card-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; color: var(--text-primary); }
-        .card-body .category { font-size: 0.8rem; color: var(--blue); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
 
         .logos-section { padding: 4rem 2rem; background: var(--bg-secondary); }
         .logos-container { max-width: var(--max-width); margin: 0 auto; }
@@ -373,10 +372,9 @@
                         <div class="card-media" data-src="${item.src}">
                             <div class="play-overlay"><i class="fa-solid fa-play-circle"></i></div>
                             <img src="${thumbSrc}" alt="${item.title}">
-                            <video src="${item.src}" muted playsinline></video>
+                            <video src="${item.src}" playsinline></video>
                         </div>
                         <div class="card-body">
-                            <span class="category">${item.category}</span>
                             <h3>${item.title}</h3>
                         </div>
                     `;
@@ -396,7 +394,7 @@
                             vid.currentTime = 0;
                             this.classList.remove('playing');
                         } else {
-                            // Play inline
+                            // Play inline with sound (user gesture allows unmuted)
                             const vid = this.querySelector('video');
                             this.classList.add('playing');
                             vid.play().catch(() => {});
@@ -421,7 +419,7 @@
                 Furniture: ["alzo logo.jpg","Raja Furniture logo.jpg","vanto logo.jpg"],
                 Hospital: ["ankura logo.jpg","onus logo.jpg","Solis logo.jpg"],
                 Jewellers: ["ij logo.jpg","iqbal logo.jpg","krishi logo.jpg","mamanram logo.jpg","nisar logo.jpg","royal jewellerslogo.jpg","s craft logo.jpg","sree nakoda jewllers logo.jpg","tia logo.jpg"],
-                Other: ["arced logo.jpg","code for india logo.jpg","edulan logo.jpg","epw logo.jpg","insomania logo.jpg","maaya logo.jpg","mubarak travels logo.jpg","nasar logo.jpg","quake arena logo.jpg","srisa logo.jpg"]
+                Other: ["arced logo.jpg","code for india logo.jpg","edulan logo.jpg","epw logo.jpg","insomania logo.jpg","maaya logo.jpg","mubarak travels logo.jpg","nasar logo.jpg","quake arena logo.jpg"]
             };
 
             const logosGrid = document.getElementById('logosGrid');
