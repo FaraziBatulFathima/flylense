@@ -1516,7 +1516,172 @@
                 padding: 0 1.2rem;
             }
             .fade-slider {
-                height: 60vh;
+                height: 80vh;
+                min-height: 380px;
+            }
+            .hero-static-content h1 {
+                font-size: clamp(1.6rem, 4vw, 2.2rem);
+            }
+            .hero-static-content .slide-desc {
+                font-size: 0.9rem;
+            }
+            .section {
+                padding: 3rem 1.2rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .portfolio-overlay {
+                opacity: 1;
+                background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+            }
+            .cta-banner {
+                padding: 1.5rem;
+            }
+            .cta-banner-text h2 {
+                font-size: 1.3rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 1rem;
+            }
+            .btn-cta-white {
+                padding: 14px 24px;
+                font-size: 0.9rem;
+            }
+            .brand-carousel {
+                padding: 35px 0;
+            }
+            .stats-ribbon {
+                padding: 0 1rem;
+            }
+            .stats-ribbon-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat-item {
+                padding: 1.2rem 1rem;
+            }
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            /* Video grid mobile */
+            .video-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 200px;
+                gap: 0.8rem;
+            }
+            .video-card.span-2-col,
+            .video-card.span-2-row,
+            .video-card.span-2-both {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            .video-card .video-play-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+            .video-card:hover .video-play-btn {
+                width: 50px;
+                height: 50px;
+            }
+            .video-card .video-label {
+                font-size: 0.78rem;
+                bottom: 0.8rem;
+                left: 1rem;
+            }
+            .video-card .video-duration {
+                font-size: 0.65rem;
+                bottom: 0.8rem;
+                right: 1rem;
+            }
+            .video-showcase-section {
+                padding: 3rem 1rem;
+            }
+            .video-showcase-section .section-header {
+                margin-bottom: 2rem;
+            }
+
+            /* Brand grid mobile */
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px 20px;
+            }
+            .brand-item img {
+                max-width: 85px;
+                max-height: 55px;
+            }
+
+            /* About mobile */
+            .about-text h3 {
+                font-size: 1.5rem;
+            }
+            .about-text .lead {
+                font-size: 0.95rem;
+            }
+            .about-stats-row {
+                gap: 1rem;
+                justify-content: center;
+            }
+            .about-stat {
+                padding: 0.8rem 1rem;
+                min-width: 70px;
+            }
+            .about-stat .num {
+                font-size: 1.4rem;
+            }
+            .about-cta {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            /* Contact mobile */
+            .contact-form {
+                padding: 1.5rem;
+            }
+            .contact-info h3 {
+                font-size: 1.3rem;
+            }
+        }
+        @media (max-width: 576px) {
+            :root {
+                --nav-height: 64px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .navbar-container {
+                padding: 0 1.2rem;
+            }
+            .fade-slider {
+                height: 80vh;
                 min-height: 380px;
             }
             .hero-static-content h1 {
@@ -1670,6 +1835,7 @@
 
         @media (max-width: 480px) {
             .fade-slider {
+                top: 50;
                 height: 55vh;
                 min-height: 300px;
             }
@@ -1891,6 +2057,7 @@
                 <li><a href="service.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="industry.html">Industries</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
