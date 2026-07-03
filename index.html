@@ -78,7 +78,7 @@
             min-height: 100vh;
             -webkit-tap-highlight-color: transparent;
         }
-
+/*
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -95,7 +95,7 @@
         ::selection {
             background: rgba(0, 116, 246, 0.35);
             color: #fff;
-        }
+        }*/
 
         /* Reveal animations */
         .reveal {
@@ -2429,7 +2429,7 @@
                 });
 
                 video.addEventListener('ended', () => updatePlayIcon(false));
-                video.addEventListener('pause', () => updatePlayIcon(false));
+                video.addEventListenerener('pause', () => updatePlayIcon(false));
                 video.addEventListener('play', () => updatePlayIcon(true));
             });
             /* ========== END VIDEO SHOWCASE LOGIC ========== */
