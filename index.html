@@ -779,65 +779,64 @@
             color: var(--blue-dark);
         }
 
-        /* ── PORTFOLIO (UPDATED: 4 VIDEOS IN ROW) ── */
-        /* ── PORTFOLIO (MATCHING EXTERNAL PAGE LAYOUT) ── */
-#portfolio {
-    background-color: #000; /* Black background to match the 2nd file */
-    padding: 60px 20px;
-}
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible responsive grid */
-    gap: 40px;
-}
-.portfolio-item {
-    background-color: #000;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-    aspect-ratio: auto; /* Reset the fixed aspect-ratio */
-    border: none;
-    padding: 0;
-}
-.portfolio-item:hover {
-    transform: translateY(-5px);
-}
-.portfolio-video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* Perfect 16:9 ratio for YouTube iframes */
-}
-.portfolio-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-.portfolio-content {
-    padding: 15px;
-}
-.portfolio-content h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #fff;
-}
-.portfolio-content p {
-    color: #ccc;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-.portfolio-title {
-    color: #fff;
-}
-/* Remove old elements */
-.portfolio-item-video,
-.portfolio-overlay,
-.video-badge {
-    display: none !important;
-}
+        /* ── PORTFOLIO ── */
+        #portfolio {
+            background-color: #000; /* Black background to match the 2nd file */
+            padding: 60px 20px;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible responsive grid */
+            gap: 40px;
+        }
+        .portfolio-item {
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            aspect-ratio: auto; /* Reset the fixed aspect-ratio */
+            border: none;
+            padding: 0;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+        .portfolio-video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Perfect 16:9 ratio for YouTube iframes */
+        }
+        .portfolio-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .portfolio-content {
+            padding: 15px;
+        }
+        .portfolio-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        .portfolio-content p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .portfolio-title {
+            color: #fff;
+        }
+        /* Remove old elements */
+        .portfolio-item-video,
+        .portfolio-overlay,
+        .video-badge {
+            display: none !important;
+        }
         .btn-outline {
             background: transparent;
             color: var(--text-primary);
@@ -1329,6 +1328,62 @@
             grid-row: span 2;
         }
 
+        /* ── VIDEO OVERLAY LIGHTBOX ── */
+        .video-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .video-overlay.active {
+            display: flex;
+        }
+        .overlay-content {
+            width: 85%;
+            max-width: 850px;
+            max-height: 90vh; /* Prevents video from going off screen */
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .overlay-content video {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            display: block;
+            object-fit: contain; /* Crucial: Ensures video maintains its native aspect ratio without stretching */
+        }
+        .overlay-close-btn {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 44px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 10000;
+            line-height: 1;
+        }
+        .overlay-close-btn:hover {
+            transform: rotate(90deg);
+        }
+        @media (max-width: 768px) {
+            .overlay-content { width: 95%; }
+            .overlay-close-btn { top: 15px; right: 20px; font-size: 32px; }
+        }
+
         /* ── REVEAL ANIMATIONS ── */
         .reveal {
             opacity: 0;
@@ -1644,274 +1699,173 @@
 
         /* 576px */
         @media (max-width: 576px) {
-            .video-grid {
-                grid-template-columns: 1fr;
-                grid-auto-rows: 200px;
-                gap: 0.8rem;
+            /* --- 1. Make Title Image (Logo) Small --- */
+            .nav-logo img { height: 28px !important; }
+            .nav-logo img.logo-title { height: 32px !important; padding-left: 10px !important; }
+            .nav-logo img.logo-icon { height: 32px !important; }
+
+            /* --- 2. Center About Section & Text --- */
+            .about-text { text-align: center !important; padding-left: 0 !important; }
+            .about-text h3 { text-align: center !important; }
+            .about-text h3::after { left: 50% !important; transform: translateX(-50%) !important; }
+            .about-text .lead { text-align: center !important; }
+            .about-stats-row { justify-content: center !important; }
+            .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; width: fit-content; }
+
+            /* --- 3. Center Contact Section on Mobile --- */
+            .contact-info { text-align: center !important; }
+            .contact-detail { justify-content: center !important; }
+
+            /* --- 4. Video Showcase: Only 1 Card per row --- */
+            .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 220px !important; gap: 0.8rem !important; }
+            .video-card.span-2-col, .video-card.span-2-row, .video-card.span-2-both { grid-column: span 1 !important; grid-row: span 1 !important; }
+            .video-card .video-play-btn { width: 44px; height: 44px; font-size: 1rem; }
+            .video-card:hover .video-play-btn { width: 50px; height: 50px; }
+            .video-card .video-label { font-size: 0.78rem; bottom: 0.8rem; left: 1rem; }
+            .video-card .video-duration { font-size: 0.65rem; bottom: 0.8rem; right: 1rem; }
+
+            /* --- 5. Force 2 Cards for Services & Portfolio --- */
+            .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .service-card-body { padding: 0.8rem !important; }
+            .service-card-body h3 { font-size: 0.9rem !important; }
+            .service-card-body p { font-size: 0.75rem !important; }
+            .portfolio-content { padding: 10px !important; }
+            .portfolio-content h3 { font-size: 1rem !important; }
+            .portfolio-content p { font-size: 0.75rem !important; line-height: 1.4 !important; }
+
+            /* --- 6. Make Hamburger Smaller & Neater --- */
+            .hamburger { padding: 4px !important; }
+            .hamburger span { width: 22px !important; height: 2px !important; }
+
+            /* --- 7. Slider Content Larger & Button Smaller --- */
+            .hero-static-content h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+            .hero-static-content .slide-desc { font-size: 1rem; }
+            .hero-static-content .slide-cta { padding: 0.6rem 1.2rem !important; font-size: 0.85rem !important; }
+
+            /* --- 8. Keep First 4 Sections Matched to 768px Layout --- */
+            .fade-slider { height: 80vh; min-height: 380px; }
+            .stats-ribbon-inner { grid-template-columns: 1fr 1fr; }
+            .stat-item { padding: 1.2rem 1rem; }
+            .stat-number { font-size: 1.8rem; }
+            .brand-grid { grid-template-columns: repeat(3, 1fr); gap: 30px 20px; }
+            .brand-item img { max-width: 85px; max-height: 55px; }
+            .video-showcase-section { padding: 3rem 1rem; }
+            .video-showcase-section .section-header { margin-bottom: 2rem; }
+            .section { padding: 3rem 1.2rem !important; }
+
+            /* --- 9. Make Section Titles Smaller --- */
+            .section-title { font-size: 1.4rem; }
+
+            /* --- 10. Center all buttons --- */
+            .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
+                margin: 0 auto !important;
+                justify-content: center;
             }
-            .video-card.span-2-col,
-            .video-card.span-2-row,
-            .video-card.span-2-both {
-                grid-column: span 1;
-                grid-row: span 1;
+            .portfolio-cta, .cta-banner, .contact-form .btn-primary {
+                text-align: center !important;
+                display: flex !important;
+                justify-content: center !important;
             }
-            .brand-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 25px 15px;
-            }
-            .brand-item img {
-                max-width: 75px;
-                max-height: 50px;
-            }
-            .stats-ribbon-inner {
-                grid-template-columns: 1fr 1fr;
-            }
-            .stat-item {
-                padding: 1rem 0.8rem;
-            }
-            .stat-number {
-                font-size: 1.6rem;
-            }
-            .stat-label {
-                font-size: 0.75rem;
-            }
-            .section {
-                padding: 2.5rem 1rem;
-            }
-            .section-title {
-                font-size: 1.4rem;
-            }
-            .section-subtitle {
-                font-size: 0.85rem;
-            }
+            .cta-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
         }
 
         /* 480px */
         @media (max-width: 480px) {
-            .fade-slider {
-                height: 55vh;
-                min-height: 300px;
+            /* --- 1. Make Logo Even Smaller --- */
+            .nav-logo img { height: 24px !important; }
+            .nav-logo img.logo-title { height: 28px !important; padding-left: 8px !important; }
+            .nav-logo img.logo-icon { height: 28px !important; }
+
+            /* --- 2. Center About & Contact --- */
+            .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; }
+            .contact-info { text-align: center !important; }
+            .contact-detail { justify-content: center !important; }
+
+            /* --- 3. Video Showcase: 1 Card per row --- */
+            .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px !important; gap: 0.8rem !important; }
+
+            /* --- 4. Force 2 Columns for Services & Portfolio --- */
+            .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+            .service-card-body { padding: 0.6rem !important; }
+            .portfolio-content { padding: 8px !important; }
+
+            /* --- 5. Hamburger Even Smaller --- */
+            .hamburger span { width: 20px !important; height: 2px !important; }
+
+            /* --- 6. Slider Content Larger & Button Smaller --- */
+            .hero-static-content h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
+            .hero-static-content .slide-desc { font-size: 0.95rem; }
+            .hero-static-content .slide-cta { padding: 0.5rem 1rem !important; font-size: 0.8rem !important; }
+
+            /* --- 7. Keep First 4 Sections Matched to 768px Layout --- */
+            .stats-ribbon-inner { grid-template-columns: 1fr 1fr !important; }
+            .stat-item { border-right: 1px solid var(--border); border-bottom: none; padding: 1.2rem 1rem !important; }
+            .stat-item:nth-child(2) { border-right: 1px solid var(--border); }
+            .stat-item:last-child { border-bottom: none; }
+            .brand-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 30px 20px !important; }
+            .brand-item img { max-width: 85px; max-height: 55px; }
+            .brand-carousel { padding: 35px 0 !important; }
+            .fade-slider { height: 80vh; min-height: 380px; }
+            .section { padding: 3rem 1.2rem !important; }
+
+            /* --- 8. Smaller Titles --- */
+            .section-title { font-size: 1.2rem !important; }
+
+            /* --- 9. Center Buttons --- */
+            .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
+                margin: 0 auto !important;
+                justify-content: center;
             }
-            .hero-static-content h1 {
-                font-size: 1.3rem;
+            .portfolio-cta, .cta-banner, .contact-form .btn-primary {
+                text-align: center !important;
+                display: flex !important;
+                justify-content: center !important;
             }
-            .hero-static-content .slide-desc {
-                font-size: 0.8rem;
-            }
-            .hero-static-content .slide-cta {
-                padding: 0.65rem 1.5rem;
-                font-size: 0.85rem;
-            }
-            .hero-static-content .slide-tag {
-                font-size: 0.65rem;
-                padding: 4px 12px;
-            }
-            .brand-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px 12px;
-            }
-            .brand-item img {
-                max-width: 60px;
-                max-height: 40px;
-            }
-            .brand-carousel {
-                padding: 25px 0;
-            }
-            .stats-ribbon-inner {
-                grid-template-columns: 1fr;
-            }
-            .stat-item {
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-                padding: 1rem;
-            }
-            .stat-item:last-child {
-                border-bottom: none;
-            }
-            .stat-number {
-                font-size: 1.6rem;
-            }
-            .stat-label {
-                font-size: 0.75rem;
-            }
-            .section {
-                padding: 2.5rem 0.8rem;
-            }
-            .section-title {
-                font-size: 1.4rem;
-            }
-            .section-subtitle {
-                font-size: 0.85rem;
-            }
-            .services-grid {
-                gap: 1rem;
-            }
-            .service-card-body {
-                padding: 1.2rem 1rem;
-            }
-            .service-card-body h3 {
-                font-size: 1rem;
-            }
-            .service-card-body p {
-                font-size: 0.8rem;
-            }
-            .portfolio-grid {
-                gap: 0.8rem;
-            }
-            .video-grid {
-                grid-auto-rows: 170px;
-                gap: 0.6rem;
-            }
-            .video-card .video-play-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 0.85rem;
-            }
-            .video-card:hover .video-play-btn {
-                width: 44px;
-                height: 44px;
-            }
-            .video-card .video-label {
-                font-size: 0.7rem;
-                bottom: 0.6rem;
-                left: 0.8rem;
-            }
-            .video-card .video-duration {
-                font-size: 0.6rem;
-                bottom: 0.6rem;
-                right: 0.8rem;
-                padding: 0.2rem 0.45rem;
-            }
-            .about-stats-row {
-                gap: 0.6rem;
-            }
-            .about-stat {
-                padding: 0.6rem 0.8rem;
-                min-width: 60px;
-            }
-            .about-stat .num {
-                font-size: 1.2rem;
-            }
-            .about-stat .lbl {
-                font-size: 0.6rem;
-            }
-            .btn-outline {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.85rem;
-            }
-            .btn-primary {
-                padding: 0.7rem 1.4rem;
-                font-size: 0.9rem;
-            }
-            .contact-detail {
-                gap: 0.6rem;
-                margin-bottom: 0.8rem;
-            }
-            .contact-detail-icon {
-                width: 36px;
-                height: 36px;
-                min-width: 36px;
-            }
-            .footer {
-                padding: 1.8rem 1rem;
-            }
-            .footer-logo {
-                font-size: 1.1rem;
-            }
-            .footer-links a {
-                font-size: 0.75rem;
-            }
-            .footer-social a {
-                width: 32px;
-                height: 32px;
-            }
-            .footer-copy {
-                font-size: 0.7rem;
-            }
-            .back-to-top {
-                width: 38px;
-                height: 38px;
-                bottom: 1.2rem;
-                right: 1.2rem;
-            }
-            .cta-banner {
-                padding: 1.2rem;
-                border-radius: var(--radius-md);
-            }
-            .cta-banner-text h2 {
-                font-size: 1.1rem;
-            }
-            .cta-banner-text h4 {
-                font-size: 0.85rem;
-            }
-            .btn-cta-white {
-                padding: 12px 20px;
-                font-size: 0.8rem;
-            }
-            .about-text h3 {
-                font-size: 1.3rem;
-            }
-            .contact-form {
-                padding: 1.2rem;
-            }
+            .cta-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
         }
 
         /* 360px */
         @media (max-width: 360px) {
-            .fade-slider {
-                height: 50vh;
-                min-height: 250px;
+            /* --- 1. Make Logo Smallest --- */
+            .nav-logo img { height: 20px !important; }
+            .nav-logo img.logo-title { height: 24px !important; padding-left: 6px !important; }
+            .nav-logo img.logo-icon { height: 24px !important; }
+
+            /* --- 2. Center About Button --- */
+            .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; }
+
+            /* --- 3. Video Showcase: 1 Card --- */
+            .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px !important; gap: 0.8rem !important; }
+
+            /* --- 4. Force 2 Columns for Services & Portfolio --- */
+            .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
+
+            /* --- 5. Keep First 4 Sections Matched to 768px Layout --- */
+            .brand-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 30px 20px !important; }
+            .brand-item img { max-width: 85px; max-height: 55px; }
+            .fade-slider { height: 80vh; min-height: 380px; }
+            .hero-static-content h1 { font-size: clamp(1.4rem, 4vw, 1.8rem); }
+            .hero-static-content .slide-desc { font-size: 0.9rem; }
+            .hero-static-content .slide-cta { padding: 0.5rem 1rem !important; font-size: 0.75rem !important; }
+            .section { padding: 3rem 1.2rem !important; }
+
+            /* --- 6. Smallest Titles --- */
+            .section-title { font-size: 1rem !important; }
+
+            /* --- 7. Center Buttons --- */
+            .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
+                margin: 0 auto !important;
+                justify-content: center;
             }
-            .hero-static-content h1 {
-                font-size: 1.1rem;
+            .portfolio-cta, .cta-banner, .contact-form .btn-primary {
+                text-align: center !important;
+                display: flex !important;
+                justify-content: center !important;
             }
-            .hero-static-content .slide-desc {
-                font-size: 0.7rem;
-                margin-bottom: 14px;
-            }
-            .hero-static-content .slide-cta {
-                padding: 0.5rem 1.2rem;
-                font-size: 0.75rem;
-            }
-            .brand-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px 10px;
-            }
-            .brand-item img {
-                max-width: 50px;
-                max-height: 35px;
-            }
-            .video-grid {
-                grid-auto-rows: 150px;
-                gap: 0.5rem;
-            }
-            .video-card .video-play-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 0.75rem;
-            }
-            .video-card:hover .video-play-btn {
-                width: 38px;
-                height: 38px;
-            }
-            .section {
-                padding: 2rem 0.6rem;
-            }
-            .section-title {
-                font-size: 1.2rem;
-            }
-            .stats-ribbon {
-                padding: 0 0.6rem;
-            }
-            .stat-item {
-                padding: 0.8rem 0.6rem;
-            }
-            .stat-number {
-                font-size: 1.4rem;
-            }
-            .stat-label {
-                font-size: 0.7rem;
-            }
+            .cta-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
         }
     </style>
 </head>
@@ -2007,7 +1961,7 @@
             </div>
             <div class="video-grid">
                 <div class="video-card span-2-both reveal reveal-scale delay-1">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/1.jpg">
                         <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2015,7 +1969,7 @@
                     <span class="video-duration">4:32</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-2">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/2.jpg">
                         <source src="assets/Videos/Food%20&%20Restaurent/Videos/Barbeque%20Spice%20Reel%2001.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2023,7 +1977,7 @@
                     <span class="video-duration">2:18</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-3">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/3.jpg">
                         <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2031,7 +1985,7 @@
                     <span class="video-duration">3:45</span>
                 </div>
                 <div class="video-card span-2-col reveal reveal-scale delay-4">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/4.jpg">
                         <source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2039,7 +1993,7 @@
                     <span class="video-duration">6:10</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-5">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/5.jpg">
                         <source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2047,7 +2001,7 @@
                     <span class="video-duration">1:55</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-6">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/1.jpg">
                         <source src="assets/Videos/Food%20&%20Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2055,7 +2009,7 @@
                     <span class="video-duration">5:20</span>
                 </div>
                 <div class="video-card span-2-col reveal reveal-scale delay-7">
-                    <video class="video-bg" playsinline preload="metadata" loop muted>
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/2.jpg">
                         <source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -2133,7 +2087,7 @@
         </div>
     </section>
 
-    <!-- Portfolio (UPDATED: 4 Videos in One Row) -->
+    <!-- Portfolio -->
     <section class="section" id="portfolio">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -2143,67 +2097,67 @@
                 <p class="section-subtitle">A curated selection of projects that showcase our passion for visual storytelling.</p>
             </div>
             <div class="portfolio-grid">
-    <!-- Video 1 -->
-    <div class="portfolio-item reveal reveal-scale delay-1">
-        <div class="portfolio-video-wrapper">
-            <iframe 
-                src="https://www.youtube.com/embed/gPT_pgNJ55I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
-                title="VIP’s International School"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                class="portfolio-video"></iframe>
-        </div>
-        <div class="portfolio-content">
-            <h3>VIP’s International School</h3>
-            <p>A heartwarming visual campaign capturing the spirit of learning, care, and community at VIP’s International School. From classrooms to smiles, we brought their story to life.</p>
-        </div>
-    </div>
-    <!-- Video 2 -->
-    <div class="portfolio-item reveal reveal-scale delay-2">
-        <div class="portfolio-video-wrapper">
-            <iframe 
-                src="https://www.youtube.com/embed/GEdQxYsXfaQ?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
-                title="Oakridge International School"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                class="portfolio-video"></iframe>
-        </div>
-        <div class="portfolio-content">
-            <h3>Oakridge International School</h3>
-            <p>A cinematic journey showcasing Oakridge’s excellence in education, innovation, and student empowerment. We captured the vibrant campus life, inspiring teachers, and future-ready learners.</p>
-        </div>
-    </div>
-    <!-- Video 3 -->
-    <div class="portfolio-item reveal reveal-scale delay-3">
-        <div class="portfolio-video-wrapper">
-            <iframe 
-                src="https://www.youtube.com/embed/RNqbai7vk5I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
-                title="Furniture World"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                class="portfolio-video"></iframe>
-        </div>
-        <div class="portfolio-content">
-            <h3>Furniture World</h3>
-            <p>At Furniture World, we offer elegant, functional furniture that transforms your living spaces. Our designs combine style with comfort, providing timeless solutions for every room.</p>
-        </div>
-    </div>
-    <!-- Video 4 -->
-    <div class="portfolio-item reveal reveal-scale delay-4">
-        <div class="portfolio-video-wrapper">
-            <iframe 
-                src="https://www.youtube.com/embed/6yp347JWb3o?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
-                title="Maaya Luxury Convention"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                class="portfolio-video"></iframe>
-        </div>
-        <div class="portfolio-content">
-            <h3>Maaya Luxury Convention</h3>
-            <p>An elegant visual showcase of grandeur, celebration, and timeless moments at Maaya Luxury Convention. From luxurious decor to unforgettable events, we captured its charm in every frame.</p>
-        </div>
-    </div>
-</div>
+                <!-- Video 1 -->
+                <div class="portfolio-item reveal reveal-scale delay-1">
+                    <div class="portfolio-video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/gPT_pgNJ55I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                            title="VIP’s International School"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            class="portfolio-video"></iframe>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>VIP’s International School</h3>
+                        <p>A heartwarming visual campaign capturing the spirit of learning, care, and community at VIP’s International School. From classrooms to smiles, we brought their story to life.</p>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="portfolio-item reveal reveal-scale delay-2">
+                    <div class="portfolio-video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/GEdQxYsXfaQ?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                            title="Oakridge International School"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            class="portfolio-video"></iframe>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Oakridge International School</h3>
+                        <p>A cinematic journey showcasing Oakridge’s excellence in education, innovation, and student empowerment. We captured the vibrant campus life, inspiring teachers, and future-ready learners.</p>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="portfolio-item reveal reveal-scale delay-3">
+                    <div class="portfolio-video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/RNqbai7vk5I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                            title="Furniture World"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            class="portfolio-video"></iframe>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Furniture World</h3>
+                        <p>At Furniture World, we offer elegant, functional furniture that transforms your living spaces. Our designs combine style with comfort, providing timeless solutions for every room.</p>
+                    </div>
+                </div>
+                <!-- Video 4 -->
+                <div class="portfolio-item reveal reveal-scale delay-4">
+                    <div class="portfolio-video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/6yp347JWb3o?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                            title="Maaya Luxury Convention"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            class="portfolio-video"></iframe>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Maaya Luxury Convention</h3>
+                        <p>An elegant visual showcase of grandeur, celebration, and timeless moments at Maaya Luxury Convention. From luxurious decor to unforgettable events, we captured its charm in every frame.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2280,6 +2234,16 @@
     </footer>
 
     <button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- Video Overlay Modal -->
+    <div id="videoOverlay" class="video-overlay">
+        <span class="overlay-close-btn">&times;</span>
+        <div class="overlay-content">
+            <video id="overlayVideo" controls autoplay>
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
     <script>
         (function() {
@@ -2441,65 +2405,67 @@
                 }, 1200);
             };
 
-            // Video playback
-            const videoCards = document.querySelectorAll('.video-card');
-            videoCards.forEach(card => {
-                const video = card.querySelector('video.video-bg');
-                const playBtn = card.querySelector('.video-play-btn');
-                const icon = playBtn ? playBtn.querySelector('i') : null;
-                if (!video || !playBtn || !icon) return;
+            // ── Video Overlay Playback Logic ──
+            const videoOverlay = document.getElementById('videoOverlay');
+            const overlayVideo = document.getElementById('overlayVideo');
+            const closeBtn = document.querySelector('.overlay-close-btn');
 
-                function updatePlayIcon(isPlaying) {
-                    if (isPlaying) {
-                        icon.className = 'fa-solid fa-pause';
-                        card.classList.add('playing');
-                    } else {
-                        icon.className = 'fa-solid fa-play';
-                        card.classList.remove('playing');
-                    }
+            // Open overlay and play video
+            function openVideoOverlay(src) {
+                const sourceElement = overlayVideo.querySelector('source');
+                if(sourceElement) {
+                    sourceElement.src = src;
+                    overlayVideo.load();
+                    videoOverlay.classList.add('active');
+                    setTimeout(() => overlayVideo.play(), 100); 
                 }
+            }
 
-                function playThisVideo() {
-                    videoCards.forEach(otherCard => {
-                        const otherVideo = otherCard.querySelector('video.video-bg');
-                        const otherIcon = otherCard.querySelector('.video-play-btn i');
-                        if (otherVideo && otherVideo !== video && !otherVideo.paused) {
-                            otherVideo.pause();
-                            if (otherIcon) otherIcon.className = 'fa-solid fa-play';
-                            otherCard.classList.remove('playing');
+            // Close overlay and reset video
+            function closeVideoOverlay() {
+                videoOverlay.classList.remove('active');
+                overlayVideo.pause();
+                overlayVideo.currentTime = 0;
+            }
+
+            // Pause any currently playing in-place videos so they don't bleed sound
+            function pauseAllInPlaceVideos() {
+                document.querySelectorAll('.video-card video.video-bg').forEach(v => {
+                    if(!v.paused) {
+                        v.pause();
+                        const parent = v.closest('.video-card');
+                        if(parent) {
+                            parent.classList.remove('playing');
+                            const icon = parent.querySelector('.video-play-btn i');
+                            if(icon) icon.className = 'fa-solid fa-play';
                         }
-                    });
-                    video.muted = false;
-                    video.play().then(() => updatePlayIcon(true)).catch(err => console.warn(
-                        'Video playback failed:', err));
-                }
-
-                function pauseThisVideo() {
-                    video.pause();
-                    updatePlayIcon(false);
-                }
-
-                playBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (video.paused) {
-                        playThisVideo();
-                    } else {
-                        pauseThisVideo();
                     }
                 });
+            }
 
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('.video-play-btn')) return;
-                    if (video.paused) {
-                        playThisVideo();
-                    } else {
-                        pauseThisVideo();
+            // Assign click event to video cards to trigger the Overlay
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if(e.target.closest('.video-play-btn')) return;
+                    const videoSource = this.querySelector('video.video-bg source');
+                    if(videoSource) {
+                        pauseAllInPlaceVideos();
+                        openVideoOverlay(videoSource.src);
                     }
                 });
+            });
 
-                video.addEventListener('ended', () => updatePlayIcon(false));
-                video.addEventListener('pause', () => updatePlayIcon(false));
-                video.addEventListener('play', () => updatePlayIcon(true));
+            // Event listener for the Close button
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent bubbling to parent
+                closeVideoOverlay();
+            });
+
+            // Clicking the dark background overlay closes it too
+            videoOverlay.addEventListener('click', function(e) {
+                if (e.target === videoOverlay) {
+                    closeVideoOverlay();
+                }
             });
         })();
     </script>
