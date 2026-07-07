@@ -538,7 +538,7 @@
         .services-hero {
             position: relative;
             height: 500px;
-            background: url('img/slider/5.png') center/cover no-repeat;
+            background: url('img/slider/3.png') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1709,6 +1709,17 @@
                 right: 1rem;
                 font-size: 0.8rem;
             }
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 30px 20px !important;
+            }
+            .brand-item img {
+                width: 100px;
+                height: 60px;
+            }
+            .brand-carousel {
+                padding: 35px 0 !important;
+            }
 
             .mobile-menu {
                 width: 260px !important;
@@ -1805,6 +1816,14 @@
             }
             .video-wrapper i.fa-clapperboard {
                 font-size: 2.5rem;
+            }
+             .brand-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 30px 20px !important;
+            }
+            .brand-item img {
+                width: 25px;
+                height: 55px;
             }
 
             /* ── SERVICE CATEGORIES ── */
@@ -1956,6 +1975,50 @@
     transition: opacity 0.3s ease;
     z-index: 1;
 }
+ /* ── BRAND GRID ── */
+        .brand-carousel {
+            background: #fff;
+            padding: 90px 0;
+            overflow: hidden;
+        }
+        .brand-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 55px 45px;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        .brand-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .brand-item img {
+            max-width: 250px;
+            max-height: 100px;
+            object-fit: contain;
+            transition: .35s;
+        }
+        .brand-item:hover img {
+            transform: scale(1.08);
+        }
+        .brand-item.show {
+            animation: brandReveal .8s ease forwards;
+        }
+        @keyframes brandReveal {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -2073,7 +2136,7 @@
     <div class="play-btn" id="videoPlayBtn">
         <i class="fa-solid fa-play"></i>
     </div>
-    <video id="showreelVideo" class="video-element" playsinline preload="metadata" muted poster="assets/thumbnails/Tandos_Grill_June_Reel_04.png">
+    <video id="showreelVideo" class="video-element" playsinline preload="metadata" muted poster="assets/thumbnails/Tandos_Grill_Reel_01.png">
         <source src="assets\Videos\Food & Restaurent\Videos\Tandos_Grill_Reel_01.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -2134,7 +2197,7 @@
     </section>
 
     <!-- ===== TRUSTED BRANDS ===== -->
-    <section class="section trusted-brands-section">
+   <!--  <section class="section trusted-brands-section">
         <div class="section-container">
             <h2 class="trusted-title reveal reveal-up">Video Production that's Trusted - Across India.</h2>
             <div class="clients-grid">
@@ -2156,6 +2219,33 @@
                 <div class="client-logo-box reveal reveal-scale"><img src="img/clients/16.png" alt="Client 16" /></div>
                 <div class="client-logo-box reveal reveal-scale"><img src="img/clients/17.png" alt="Client 17" /></div>
             </div>
+        </div>
+    </section> -->
+    <section class="brand-carousel" id="brands">
+        <div class="section-header reveal reveal-up">
+            <span class="section-tag">Trusted by</span>
+            <h2 class="section-title">Trusted Brands</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="brand-grid">
+            <div class="brand-item"><img src="img/clients/1.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/2.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/3.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/4.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/5.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/6.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/7.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/8.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/9.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/10.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/11.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/12.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/13.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/14.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/15.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/16.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/17.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/3.png" alt=""></div>
         </div>
     </section>
 
@@ -2317,6 +2407,18 @@
                 btn.addEventListener('click', function() {
                 });
             });
+            // ── BRAND GRID ──
+            const brandGrid = document.querySelector('.brand-grid');
+            if (brandGrid) {
+                const brandObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        document.querySelectorAll('.brand-item').forEach((item, i) => setTimeout(() =>
+                            item.classList.add('show'), i * 80));
+                        brandObserver.unobserve(brandGrid);
+                    }
+                }, { threshold: 0.25 });
+                brandObserver.observe(brandGrid);
+            }
 
             // ── Reveal animations ──
             const revealObserver = new IntersectionObserver(function(entries) {
