@@ -229,6 +229,7 @@
             will-change: background, backdrop-filter, box-shadow, border-color;
         }
         .navbar.scrolled {
+            height: 100px;
             top: 0px;
             background: rgba(12, 18, 30, .96);
             backdrop-filter: blur(18px);
@@ -396,7 +397,7 @@
             width: 340px;
             max-width: 88%;
             height: 100vh;
-            background: lightslategray;
+            background: #ffffff;
             z-index: 999;
             padding: 80px 2rem 2rem 2rem;
             transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -422,15 +423,10 @@
             border-radius: 10px;
         }
 
-        .mobile-menu .menu-header {
-            display: none;
-        }
-
         .mobile-menu a {
-            font-family: sans-serif;
             text-decoration: none;
-            color: white;
-            font-size: 1.4rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
             font-weight: 500;
             padding: 0.75rem 1rem;
             border-radius: var(--radius-sm);
@@ -1990,6 +1986,10 @@
 
         /* 576px */
         @media (max-width: 576px) {
+            .navbar.scrolled{
+                height: 80px;
+            }
+
             .nav-logo img {
                 height: 28px !important;
             }
@@ -2188,6 +2188,9 @@
 
         /* 480px */
         @media (max-width: 480px) {
+             .navbar.scrolled{
+                height: 80px;
+            }
             .nav-logo img {
                 height: 30px !important;
             }
@@ -2310,6 +2313,9 @@
 
         /* 360px */
         @media (max-width: 360px) {
+             .navbar.scrolled{
+                height: 80px;
+            }
             .nav-logo img {
                 height: 20px !important;
             }
@@ -2457,7 +2463,7 @@
 
     <!-- Mobile Menu (Drawer) -->
     <div class="mobile-menu" id="mobileMenu">
-        <br><a href="index.html" class="active">Home</a>
+        <br><br><a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
         <a href="service.html">Services</a>
         <a href="portfolio.html">Portfolio</a>
