@@ -149,7 +149,7 @@
         }
         /* Instagram Button */
         .social-instagram {
-            background: radial-gradient(circle at 30% 30%, #fdf497, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
+            background: radial-gradient(circle at 50% 50%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
         }
         .social-instagram:hover {
             opacity: 0.9;
@@ -161,6 +161,15 @@
             inset: -4px;
             border-radius: 50%;
             border: 2px solid #25D366;
+            animation: pulse-ring 2s ease-out infinite;
+            opacity: 0;
+        }
+        .social-instagram::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid #fd5949;
             animation: pulse-ring 2s ease-out infinite;
             opacity: 0;
         }
@@ -1849,6 +1858,11 @@
                 font-size: 1.3rem;
             }
         }
+        .back-to-top{
+            display: none;
+        }
+        
+
 
         /* 576px */
         @media (max-width: 576px) {
@@ -1904,6 +1918,9 @@
             }
             .cta-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
         }
+        .back-to-top{
+            display: none;
+        }
 
         /* 480px */
         @media (max-width: 480px) {
@@ -1941,6 +1958,9 @@
             }
             .cta-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
         }
+        .back-to-top{
+            display: none;
+        }
 
         /* 360px */
         @media (max-width: 360px) {
@@ -1970,15 +1990,18 @@
             }
             .cta-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
         }
+        .back-to-top{
+            display: none;
+        }
     </style>
 </head>
 <body>
     <!-- ── FLOATING SOCIAL ICONS ── -->
     <!-- Instagram - Left Side -->
     <div class="floating-social floating-social-left">
-        <a href="https://www.instagram.com/flylense/" target="_blank" class="social-instagram" aria-label="Instagram">
+        <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
-            <span class="tooltip">Follow us on Instagram</span>
+            <span class="tooltip">Follow on Instagram</span>
         </a>
     </div>
 
