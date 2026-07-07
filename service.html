@@ -1919,6 +1919,42 @@
         .back-to-top {
             display: none;
         }
+        /* ── VIDEO SHOWREEL STYLES (adds video functionality without breaking theme) ── */
+.video-wrapper .video-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    border-radius: var(--radius-lg);
+    background: #000;
+}
+
+.video-wrapper .play-btn {
+    z-index: 4;
+    transition: all 0.3s ease;
+}
+
+.video-wrapper.playing .video-element {
+    z-index: 3;
+}
+
+.video-wrapper.playing .play-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-wrapper.playing #videoPlaceholder {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-wrapper #videoPlaceholder {
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
     </style>
 </head>
 <body>
@@ -1998,18 +2034,18 @@
                 <div class="promo-images reveal reveal-right">
                     <div class="promo-col">
                         <div class="img-wrapper img-tall">
-                            <img src="assets/images/Landscape/3.png" alt="Woman thumbs up" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+1'" />
+                            <img src="assets\Logos\Furniture\vanto logo.jpg" alt="Woman thumbs up" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+1'" />
                         </div>
                         <div class="img-wrapper img-short">
-                            <img src="assets/images/Education/1.png" alt="Ghee Jar" onerror="this.src='https://placehold.co/600x400/005dcf/fff?text=Image+3'" />
+                            <img src="assets\Logos\Hospital\Solis logo.jpg" alt="Ghee Jar" onerror="this.src='https://placehold.co/600x400/005dcf/fff?text=Image+3'" />
                         </div>
                     </div>
                     <div class="promo-col">
                         <div class="img-wrapper img-short">
-                            <img src="assets/images/Food & Restaurent/5.avif" alt="Modern Oven" onerror="this.src='https://placehold.co/600x400/005dcf/fff?text=Image+2'" />
+                            <img src="assets\Logos\Food\tabar spice logo.jpg" alt="Modern Oven" onerror="this.src='https://placehold.co/600x400/005dcf/fff?text=Image+2'" />
                         </div>
                         <div class="img-wrapper img-tall">
-                            <img src="assets/images/Jwellery/4.avif" alt="Woman reaching shelf" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+4'" />
+                            <img src="assets\Logos\Jewllers\tia logo.jpg" alt="Woman reaching shelf" onerror="this.src='https://placehold.co/600x800/005dcf/fff?text=Image+4'" />
                         </div>
                     </div>
                 </div>
@@ -2033,9 +2069,15 @@
                     <p>Need someone to manage everything? Our Digital Branding & Marketing Services handle your entire visual identity—from social media strategies and daily posts to Meta ads and monthly performance analytics.</p>
                 </div>
                 <div class="video-wrapper reveal reveal-right">
-                    <div class="play-btn"><i class="fa-solid fa-play"></i></div>
-                    <i class="fa-solid fa-clapperboard"></i>
-                </div>
+    <div class="play-btn" id="videoPlayBtn">
+        <i class="fa-solid fa-play"></i>
+    </div>
+    <video id="showreelVideo" class="video-element" playsinline preload="metadata" muted poster="assets/thumbnails/showreel-poster.jpg">
+        <source src="assets\Videos\Food & Restaurent\Videos\Tandos_Grill_Reel_01.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <i class="fa-solid fa-clapperboard" id="videoPlaceholder"></i>
+</div>
             </div>
         </div>
     </section>
@@ -2290,6 +2332,59 @@
             });
 
         });
+        // ── Video Showreel Playback ──
+const videoWrapper = document.querySelector('.video-wrapper');
+const videoPlayBtn = document.getElementById('videoPlayBtn');
+const showreelVideo = document.getElementById('showreelVideo');
+const videoPlaceholder = document.getElementById('videoPlaceholder');
+
+if (videoPlayBtn && showreelVideo) {
+    // Play/Pause on button click
+    videoPlayBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (showreelVideo.paused) {
+            // Unmute before playing (user gesture required)
+            showreelVideo.muted = false;
+            showreelVideo.play().then(() => {
+                videoWrapper.classList.add('playing');
+            }).catch(err => {
+                console.warn('Video playback failed:', err);
+                // Fallback: show alert
+                alert('🎬 Video playback would start here. Please check your video file path.');
+            });
+        } else {
+            showreelVideo.pause();
+            videoWrapper.classList.remove('playing');
+        }
+    });
+    
+    // Also allow clicking on the wrapper itself (but not on the play button)
+    videoWrapper.addEventListener('click', function(e) {
+        if (e.target.closest('.play-btn')) return;
+        if (e.target.closest('#videoPlaceholder')) {
+            // Click on placeholder icon triggers play
+            if (showreelVideo.paused) {
+                showreelVideo.muted = false;
+                showreelVideo.play().then(() => {
+                    videoWrapper.classList.add('playing');
+                }).catch(() => {});
+            }
+        }
+    });
+    
+    // Reset when video ends
+    showreelVideo.addEventListener('ended', function() {
+        videoWrapper.classList.remove('playing');
+    });
+    
+    // Reset when video is paused
+    showreelVideo.addEventListener('pause', function() {
+        if (!showreelVideo.ended) {
+            videoWrapper.classList.remove('playing');
+        }
+    });
+}
     </script>
 
 </body>
