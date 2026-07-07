@@ -610,7 +610,8 @@
 
         /* Left side: Info + Branding */
         .form-info-panel {
-            background: var(--gradient-blue);
+            display: block;
+            background: url('img/blue.png');
             padding: 3rem 2.5rem;
             color: #fff;
             display: flex;
@@ -702,6 +703,25 @@
             background: #fff;
             color: var(--blue);
             transform: translateY(-3px);
+        }
+
+        /* ── INFO LINK STYLES (email, phone, address hover) ── */
+        .form-info-panel .info-detail-item a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            display: inline-block;
+        }
+        .form-info-panel .info-detail-item a:hover {
+            color: #fff;
+            transform: translateX(3px);
+            text-decoration: underline;
+        }
+        .form-info-panel .info-detail-item .phone-group a {
+            display: inline-block;
+        }
+        .form-info-panel .info-detail-item .phone-group a:hover {
+            transform: translateX(3px);
         }
 
         /* Right side: Form Fields */
@@ -951,7 +971,7 @@
         }
 
         /* ════════════════════════════════════════════ */
-        /* ── RESPONSIVE STYLES (matches about page) ── */
+        /* ── RESPONSIVE STYLES (ENHANCED FONT SIZES) ── */
         /* ════════════════════════════════════════════ */
 
         /* ── 1200px ── */
@@ -999,7 +1019,7 @@
                 font-size: clamp(1.8rem, 5vw, 2.4rem);
             }
             .contact-hero p {
-                font-size: 0.95rem;
+                font-size: 1rem;
                 padding: 0 1rem;
             }
 
@@ -1017,10 +1037,13 @@
                 font-size: 1.6rem;
             }
             .form-info-panel .tagline {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .form-info-panel .info-detail-item p {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
+            }
+            .form-info-panel .info-detail-item a {
+                font-size: 0.9rem;
             }
 
             .form-fields-panel {
@@ -1030,7 +1053,7 @@
                 font-size: 1.5rem;
             }
             .form-fields-panel .form-subtitle {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             .form-row-inputs {
                 grid-template-columns: 1fr;
@@ -1039,15 +1062,18 @@
             .form-group {
                 margin-bottom: 1rem;
             }
+            .form-group label {
+                font-size: 0.85rem;
+            }
             .form-group input,
             .form-group textarea,
             .form-group select {
                 padding: 0.7rem 1rem;
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .btn-submit {
                 padding: 0.85rem 2rem;
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
 
             .map-section {
@@ -1070,7 +1096,7 @@
             }
             .btn-cta-white {
                 padding: 14px 24px;
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
 
             .footer-container {
@@ -1128,91 +1154,97 @@
 
             /* ── HERO ── */
             .contact-hero {
-                height: 380px !important;
+                height: 400px !important;
                 padding: 0 1.2rem;
             }
             .contact-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2.4rem !important;
                 margin-bottom: 0.6rem;
             }
             .contact-hero p {
-                font-size: 0.95rem;
+                font-size: 1.05rem !important;
                 padding: 0 0.5rem;
                 max-width: 100%;
             }
             .slide-tag {
-                font-size: 0.7rem;
-                padding: 4px 14px;
-                margin-bottom: 10px;
+                font-size: 0.75rem;
+                padding: 5px 16px;
+                margin-bottom: 12px;
             }
 
             /* ── SECTION PADDING ── */
             .contact-form-section {
-                padding: 2.5rem 1rem 2rem !important;
+                padding: 2.8rem 1rem 2.2rem !important;
             }
             .map-section {
-                padding: 0 1rem 2.5rem !important;
+                padding: 0 1rem 2.8rem !important;
             }
 
-            /* ── FORM ── */
+            /* ── FORM INFO PANEL ── */
             .form-info-panel {
-                padding: 1.5rem 1.2rem !important;
+                padding: 1.8rem 1.4rem !important;
             }
             .form-info-panel .brand-icon {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             .form-info-panel h3 {
-                font-size: 1.3rem !important;
+                font-size: 1.6rem !important;
             }
             .form-info-panel .tagline {
-                font-size: 0.85rem !important;
-                margin-bottom: 1.5rem;
+                font-size: 1rem !important;
+                margin-bottom: 1.6rem;
+                line-height: 1.6;
             }
             .form-info-panel .info-details {
-                gap: 0.8rem;
-                margin-bottom: 1.5rem;
+                gap: 1rem;
+                margin-bottom: 1.6rem;
             }
             .form-info-panel .info-detail-item {
-                gap: 0.7rem;
+                gap: 0.8rem;
             }
             .form-info-panel .info-detail-item i {
-                width: 20px;
-                font-size: 0.95rem;
+                width: 22px;
+                font-size: 1.1rem;
             }
             .form-info-panel .info-detail-item p {
-                font-size: 0.8rem !important;
+                font-size: 0.95rem !important;
+            }
+            .form-info-panel .info-detail-item a {
+                font-size: 0.95rem !important;
             }
             .form-info-panel .social-links a {
-                width: 34px;
-                height: 34px;
-                font-size: 0.85rem;
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
             }
 
+            /* ── FORM FIELDS PANEL ── */
             .form-fields-panel {
-                padding: 1.5rem 1.2rem !important;
-                text-align: center !important;
-                align-items: center !important;
+                padding: 1.8rem 1.4rem !important;
+                text-align: left !important;
+                align-items: stretch !important;
             }
             .form-fields-panel h2 {
-                font-size: 1.3rem !important;
+                font-size: 1.5rem !important;
             }
             .form-fields-panel .form-subtitle {
-                font-size: 0.8rem !important;
-                margin-bottom: 1.2rem;
+                font-size: 0.95rem !important;
+                margin-bottom: 1.4rem;
             }
             .form-group {
-                margin-bottom: 0.8rem;
+                margin-bottom: 0.9rem;
             }
             .form-group label {
-                font-size: 0.75rem !important;
+                font-size: 0.9rem !important;
                 text-align: left;
                 width: 100%;
             }
             .form-group input,
             .form-group textarea,
             .form-group select {
-                padding: 0.6rem 0.9rem !important;
-                font-size: 0.85rem !important;
+                padding: 0.7rem 1rem !important;
+                font-size: 0.95rem !important;
+                border-radius: var(--radius-sm);
             }
             .form-row-inputs {
                 grid-template-columns: 1fr;
@@ -1220,13 +1252,14 @@
                 width: 100%;
             }
             .btn-submit {
-                padding: 0.75rem 1.5rem !important;
-                font-size: 0.85rem !important;
+                padding: 0.85rem 1.8rem !important;
+                font-size: 1rem !important;
                 width: 100%;
+                border-radius: 50px;
             }
 
             .map-container iframe {
-                height: 250px;
+                height: 280px;
             }
 
             /* ── CTA ── */
@@ -1237,14 +1270,14 @@
                 border-radius: var(--radius-md);
             }
             .cta-banner-text h2 {
-                font-size: 1.3rem !important;
+                font-size: 1.4rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 1rem !important;
+                font-size: 1.05rem !important;
             }
             .btn-cta-white {
                 padding: 14px 24px !important;
-                font-size: 0.9rem !important;
+                font-size: 0.95rem !important;
                 justify-content: center;
             }
 
@@ -1259,14 +1292,14 @@
                 font-size: 1.2rem;
             }
             .footer-links a {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .footer-social a {
                 width: 36px;
                 height: 36px;
             }
             .footer-copy {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
 
             .back-to-top {
@@ -1328,66 +1361,85 @@
                 padding: 0 1rem;
             }
             .contact-hero h1 {
-                font-size: 2.4rem !important;
+                font-size: 2.6rem !important;
             }
             .contact-hero p {
-                font-size: 1rem !important;
+                font-size: 1.1rem !important;
                 padding: 0 0.3rem;
             }
 
             /* ── SECTION ── */
             .contact-form-section {
-                padding: 2rem 0.8rem 1.5rem !important;
+                padding: 2.2rem 0.8rem 1.8rem !important;
             }
             .map-section {
-                padding: 0 0.8rem 2rem !important;
+                padding: 0 0.8rem 2.2rem !important;
             }
 
-            /* ── FORM ── */
+            /* ── FORM INFO ── */
             .form-info-panel {
-                padding: 1.2rem 1rem !important;
+                padding: 1.4rem 1.1rem !important;
             }
             .form-info-panel .brand-icon {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             .form-info-panel h3 {
-                font-size: 1.1rem !important;
+                font-size: 1.4rem !important;
             }
             .form-info-panel .tagline {
-                font-size: 0.8rem !important;
-                margin-bottom: 1.2rem;
+                font-size: 0.95rem !important;
+                margin-bottom: 1.3rem;
+            }
+            .form-info-panel .info-details {
+                gap: 0.8rem;
+                margin-bottom: 1.3rem;
+            }
+            .form-info-panel .info-detail-item {
+                gap: 0.7rem;
+            }
+            .form-info-panel .info-detail-item i {
+                width: 20px;
+                font-size: 1rem;
             }
             .form-info-panel .info-detail-item p {
-                font-size: 0.75rem !important;
+                font-size: 0.9rem !important;
+            }
+            .form-info-panel .info-detail-item a {
+                font-size: 0.9rem !important;
             }
             .form-info-panel .social-links a {
-                width: 30px;
-                height: 30px;
-                font-size: 0.75rem;
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
             }
 
+            /* ── FORM FIELDS ── */
             .form-fields-panel {
-                padding: 1.2rem 1rem !important;
+                padding: 1.4rem 1.1rem !important;
             }
             .form-fields-panel h2 {
-                font-size: 1.1rem !important;
+                font-size: 1.4rem !important;
             }
             .form-fields-panel .form-subtitle {
-                font-size: 0.75rem !important;
+                font-size: 0.9rem !important;
+                margin-bottom: 1.2rem;
+            }
+            .form-group label {
+                font-size: 0.85rem !important;
             }
             .form-group input,
             .form-group textarea,
             .form-group select {
-                padding: 0.5rem 0.8rem !important;
-                font-size: 0.8rem !important;
+                padding: 0.6rem 0.9rem !important;
+                font-size: 0.9rem !important;
             }
             .btn-submit {
-                padding: 0.65rem 1.2rem !important;
-                font-size: 0.8rem !important;
+                padding: 0.75rem 1.5rem !important;
+                font-size: 0.95rem !important;
             }
 
             .map-container iframe {
-                height: 200px;
+                height: 220px;
             }
 
             /* ── CTA ── */
@@ -1395,14 +1447,14 @@
                 padding: 1.2rem !important;
             }
             .cta-banner-text h2 {
-                font-size: 1.1rem !important;
+                font-size: 1.2rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .btn-cta-white {
                 padding: 12px 20px !important;
-                font-size: 0.8rem !important;
+                font-size: 0.85rem !important;
             }
 
             /* ── FOOTER ── */
@@ -1413,15 +1465,15 @@
                 font-size: 1rem;
             }
             .footer-links a {
-                font-size: 0.7rem !important;
+                font-size: 0.75rem !important;
             }
             .footer-social a {
                 width: 30px;
                 height: 30px;
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .footer-copy {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
             }
 
             .back-to-top {
@@ -1476,69 +1528,89 @@
                 padding: 0 0.8rem;
             }
             .contact-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2.4rem !important;
             }
             .contact-hero p {
-                font-size: 0.9rem !important;
+                font-size: 1rem !important;
                 padding: 0 0.2rem;
             }
             .slide-tag {
-                font-size: 0.6rem !important;
-                padding: 3px 12px !important;
+                font-size: 0.65rem !important;
+                padding: 4px 12px !important;
             }
 
             /* ── SECTION ── */
             .contact-form-section {
-                padding: 1.5rem 0.6rem 1rem !important;
+                padding: 1.8rem 0.6rem 1.2rem !important;
             }
             .map-section {
-                padding: 0 0.6rem 1.5rem !important;
+                padding: 0 0.6rem 1.8rem !important;
             }
 
-            /* ── FORM ── */
+            /* ── FORM INFO ── */
             .form-info-panel {
-                padding: 1rem 0.8rem !important;
+                padding: 1.2rem 0.9rem !important;
             }
             .form-info-panel .brand-icon {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             .form-info-panel h3 {
-                font-size: 1rem !important;
+                font-size: 1.2rem !important;
             }
             .form-info-panel .tagline {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
+                margin-bottom: 1rem;
+            }
+            .form-info-panel .info-details {
+                gap: 0.7rem;
+                margin-bottom: 1rem;
+            }
+            .form-info-panel .info-detail-item {
+                gap: 0.6rem;
+            }
+            .form-info-panel .info-detail-item i {
+                width: 18px;
+                font-size: 0.85rem;
             }
             .form-info-panel .info-detail-item p {
-                font-size: 0.7rem !important;
+                font-size: 0.8rem !important;
+            }
+            .form-info-panel .info-detail-item a {
+                font-size: 0.8rem !important;
             }
             .form-info-panel .social-links a {
-                width: 26px;
-                height: 26px;
-                font-size: 0.65rem;
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
             }
 
+            /* ── FORM FIELDS ── */
             .form-fields-panel {
-                padding: 1rem 0.8rem !important;
+                padding: 1.2rem 0.9rem !important;
             }
             .form-fields-panel h2 {
-                font-size: 1rem !important;
+                font-size: 1.2rem !important;
             }
             .form-fields-panel .form-subtitle {
-                font-size: 0.7rem !important;
+                font-size: 0.8rem !important;
+                margin-bottom: 1rem;
+            }
+            .form-group label {
+                font-size: 0.8rem !important;
             }
             .form-group input,
             .form-group textarea,
             .form-group select {
-                padding: 0.4rem 0.6rem !important;
-                font-size: 0.75rem !important;
+                padding: 0.5rem 0.7rem !important;
+                font-size: 0.85rem !important;
             }
             .btn-submit {
-                padding: 0.55rem 1rem !important;
-                font-size: 0.75rem !important;
+                padding: 0.65rem 1.2rem !important;
+                font-size: 0.85rem !important;
             }
 
             .map-container iframe {
-                height: 180px;
+                height: 200px;
             }
 
             /* ── CTA ── */
@@ -1546,14 +1618,14 @@
                 padding: 1rem !important;
             }
             .cta-banner-text h2 {
-                font-size: 0.95rem !important;
+                font-size: 1rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 0.75rem !important;
+                font-size: 0.8rem !important;
             }
             .btn-cta-white {
                 padding: 10px 16px !important;
-                font-size: 0.7rem !important;
+                font-size: 0.75rem !important;
             }
 
             /* ── FOOTER ── */
@@ -1564,16 +1636,16 @@
                 font-size: 0.9rem;
             }
             .footer-links a {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
                 gap: 0.5rem;
             }
             .footer-social a {
                 width: 28px;
                 height: 28px;
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
             .footer-copy {
-                font-size: 0.6rem !important;
+                font-size: 0.65rem !important;
             }
 
             .back-to-top {
@@ -1659,7 +1731,7 @@
     <div class="menu-backdrop" id="menuBackdrop"></div>
 
     <!-- ===== MOBILE MENU (DRAWER - matches homepage) ===== -->
-    <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu" id="mobileMenu"><br><br>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="service.html">Services</a>
@@ -1697,27 +1769,32 @@
 
                     <div>
                         <div class="info-details">
+                            <!-- Email with clickable link -->
                             <div class="info-detail-item">
                                 <i class="fa-solid fa-envelope"></i>
-                                <p>flylensemediapartner@gmail.com</p>
+                                <p><a href="mailto:flylensemediapartner@gmail.com">flylensemediapartner@gmail.com</a></p>
                             </div>
+                            <!-- Phone with clickable links -->
                             <div class="info-detail-item">
                                 <i class="fa-solid fa-phone"></i>
                                 <div class="phone-group">
-                                    <p>+91 99895 71223</p>
-                                    <p>+91 90143 23594</p>
+                                    <a href="tel:+919989571223">+91 99895 71223</a>
+                                    <a href="tel:+919014323594">+91 90143 23594</a>
                                 </div>
                             </div>
+                            <!-- Address (non-clickable but with hover style) -->
                             <div class="info-detail-item">
                                 <i class="fa-solid fa-location-dot"></i>
                                 <p>Talwar Plaza, 4th, beside Podium Mall, Toli Chowki, Hyderabad, Telangana 500008</p>
                             </div>
                         </div>
 
+                        <!-- Social links with proper URLs -->
                         <div class="social-links">
-                            <a href="https://www.instagram.com/flylensemediapartner/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://www.youtube.com/user/Wix" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                            <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@flylensemediapartner" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="https://www.linkedin.com/company/flylensemediapartner" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://www.facebook.com/flylensemediapartner" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1806,10 +1883,10 @@
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://www.instagram.com/wix"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.youtube.com/user/Wix"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.facebook.com/wix"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/wix" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/Wix" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/wix" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <div class="footer-copy">&copy; 2026 FlyLense. All rights reserved.</div>
         </div>

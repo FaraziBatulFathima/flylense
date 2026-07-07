@@ -689,23 +689,15 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 70%;
+            max-width: 100%;
             transition: color var(--transition-fast);
         }
         .video-carousel-card:hover .card-title {
             color: #4da3ff;
         }
+        /* Arrow removed - hiding the duration element */
         .video-carousel-card .card-duration {
-            font-size: 0.7rem;
-            font-weight: 500;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            letter-spacing: 0.03em;
-            transition: background var(--transition-fast);
-        }
-        .video-carousel-card:hover .card-duration {
-            background: rgba(0, 116, 246, 0.8);
+            display: none;
         }
 
         /* ── INDUSTRY DETAIL SECTIONS ── */
@@ -797,13 +789,12 @@
         }
         .industry-info h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.9rem;
+            font-size: 2.9rem;
             font-weight: 700;
             color: #111;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
         }
         .industry-info p {
+            font-family: 'Poppins', sans-serif;
             color: #444;
             font-size: 1rem;
             line-height: 1.7;
@@ -847,13 +838,10 @@
             letter-spacing: 0.01em;
             align-self: flex-start;
             margin-top: 0.5rem;
-            border: 2px solid #0074f6;
         }
         .btn-outline-blue:hover {
-            background: #0074f6;
-            color: #fff;
+            color: #0074f6;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 116, 246, 0.3);
         }
 
         /* ── CTA BANNER ── */
@@ -1174,82 +1162,80 @@
 
             /* ── HERO ── */
             .industries-hero {
-                height: 380px !important;
+                height: 400px !important;
                 padding: 0 1.2rem;
             }
             .industries-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 1.6rem !important;
                 margin-bottom: 0.6rem;
             }
             .industries-hero p {
-                font-size: 0.95rem;
+                font-size: 0.6rem !important;
                 padding: 0 0.5rem;
                 max-width: 100%;
             }
             .slide-tag {
                 font-size: 0.7rem;
-                padding: 4px 14px;
-                margin-bottom: 10px;
             }
 
             /* ── SECTION PADDING ── */
             .section {
-                padding: 2.5rem 1rem !important;
+                padding: 2.8rem 1rem !important;
             }
 
             /* ── CAROUSEL ── */
             .video-carousel-card {
-                width: 140px;
-                height: 100px;
+                width: 160px;
+                height: 110px;
             }
             .video-carousel-card .card-title {
-                font-size: 0.7rem;
-            }
-            .video-carousel-card .card-duration {
-                font-size: 0.6rem;
-                padding: 0.1rem 0.4rem;
+                font-size: 0.8rem;
             }
 
             /* ── INDUSTRY ROW ── */
             .industry-row {
-                gap: 1.5rem;
+                gap: 1.8rem;
             }
             .industry-collage {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
+                gap: 0.6rem;
             }
             .industry-collage .logo-card {
-                padding: 0.5rem;
+                padding: 0.6rem;
                 aspect-ratio: 1/0.85;
             }
             .industry-collage .logo-card.featured {
                 grid-column: span 2;
                 grid-row: span 1;
             }
+            /* Hide the 6th image on mobile (only 5 visible) */
+            .industry-collage .logo-card:nth-child(6) {
+                display: none;
+            }
             .industry-info {
                 text-align: center !important;
                 align-items: center !important;
             }
             .industry-info h3 {
-                font-size: 1.3rem !important;
+                font-size: 1.6rem !important;
             }
             .industry-info p {
-                font-size: 0.9rem !important;
+                font-size: 1rem !important;
                 padding: 0 0.25rem;
             }
             .industry-info .industry-stats {
                 justify-content: center;
-                gap: 1rem;
+                gap: 1.2rem;
             }
             .industry-info .industry-stat .stat-number {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             .industry-info .industry-stat .stat-label {
-                font-size: 0.7rem;
+                font-size: 0.8rem;
             }
             .btn-outline-blue {
-                font-size: 0.85rem;
-                padding: 0.6rem 1.2rem;
+                font-size: 0.95rem;
+                padding: 0.7rem 1.4rem;
                 align-self: center !important;
             }
 
@@ -1259,14 +1245,14 @@
                 border-radius: var(--radius-md);
             }
             .cta-banner-text h2 {
-                font-size: 1.3rem !important;
+                font-size: 1.4rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 1rem !important;
+                font-size: 1.05rem !important;
             }
             .btn-cta-white {
                 padding: 14px 24px !important;
-                font-size: 0.9rem !important;
+                font-size: 0.95rem !important;
                 justify-content: center;
             }
 
@@ -1281,14 +1267,14 @@
                 font-size: 1.2rem;
             }
             .footer-links a {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .footer-social a {
                 width: 36px;
                 height: 36px;
             }
             .footer-copy {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
 
             .back-to-top {
@@ -1350,44 +1336,48 @@
                 padding: 0 1rem;
             }
             .industries-hero h1 {
-                font-size: 2.4rem !important;
+                font-size: 2.3rem !important;
             }
             .industries-hero p {
-                font-size: 1rem !important;
+                align-items: center;
+                font-size: 0.9rem !important;
                 padding: 0 0.3rem;
             }
 
             /* ── SECTION ── */
             .section {
-                padding: 2rem 0.8rem !important;
+                padding: 2.2rem 0.8rem !important;
             }
 
             /* ── CAROUSEL ── */
             .video-carousel-card {
-                width: 120px;
-                height: 90px;
+                width: 140px;
+                height: 100px;
+            }
+            .video-carousel-card .card-title {
+                font-size: 0.75rem;
             }
 
             /* ── INDUSTRY ── */
             .industry-collage {
-                gap: 0.4rem;
+                gap: 0.5rem;
             }
             .industry-collage .logo-card {
-                padding: 0.3rem;
+                padding: 0.4rem;
                 aspect-ratio: 1/0.85;
             }
             .industry-info h3 {
-                font-size: 1.1rem !important;
+                font-size: 2.4rem !important;
             }
             .industry-info p {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .industry-info .industry-stat .stat-number {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
             .btn-outline-blue {
-                font-size: 0.8rem;
-                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
             }
 
             /* ── CTA ── */
@@ -1395,14 +1385,14 @@
                 padding: 1.2rem !important;
             }
             .cta-banner-text h2 {
-                font-size: 1.1rem !important;
+                font-size: 1.2rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .btn-cta-white {
                 padding: 12px 20px !important;
-                font-size: 0.8rem !important;
+                font-size: 0.85rem !important;
             }
 
             /* ── FOOTER ── */
@@ -1413,15 +1403,15 @@
                 font-size: 1rem;
             }
             .footer-links a {
-                font-size: 0.7rem !important;
+                font-size: 0.75rem !important;
             }
             .footer-social a {
                 width: 30px;
                 height: 30px;
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .footer-copy {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
             }
 
             .back-to-top {
@@ -1476,15 +1466,14 @@
                 padding: 0 0.8rem;
             }
             .industries-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2.6rem !important;
             }
             .industries-hero p {
-                font-size: 0.9rem !important;
+                font-size: 1.05rem !important;
                 padding: 0 0.2rem;
             }
             .slide-tag {
                 font-size: 0.6rem !important;
-                padding: 3px 12px !important;
             }
 
             /* ── SECTION ── */
@@ -1494,29 +1483,35 @@
 
             /* ── CAROUSEL ── */
             .video-carousel-card {
-                width: 100px;
-                height: 75px;
+                width: 120px;
+                height: 85px;
+            }
+            .video-carousel-card .card-title {
+                font-size: 0.7rem;
             }
 
             /* ── INDUSTRY ── */
             .industry-collage {
-                gap: 0.3rem;
+                gap: 0.4rem;
             }
             .industry-collage .logo-card {
-                padding: 0.2rem;
+                padding: 0.3rem;
             }
             .industry-info h3 {
-                font-size: 1rem !important;
+                font-size: 1.2rem !important;
             }
             .industry-info p {
-                font-size: 0.8rem !important;
+                font-size: 0.9rem !important;
             }
             .industry-info .industry-stat .stat-number {
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+            .industry-info .industry-stat .stat-label {
+                font-size: 0.7rem;
             }
             .btn-outline-blue {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
             }
 
             /* ── CTA ── */
@@ -1524,14 +1519,14 @@
                 padding: 1rem !important;
             }
             .cta-banner-text h2 {
-                font-size: 0.95rem !important;
+                font-size: 1rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 0.75rem !important;
+                font-size: 0.8rem !important;
             }
             .btn-cta-white {
                 padding: 10px 16px !important;
-                font-size: 0.7rem !important;
+                font-size: 0.75rem !important;
             }
 
             /* ── FOOTER ── */
@@ -1542,16 +1537,16 @@
                 font-size: 0.9rem;
             }
             .footer-links a {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
                 gap: 0.5rem;
             }
             .footer-social a {
                 width: 28px;
                 height: 28px;
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
             .footer-copy {
-                font-size: 0.6rem !important;
+                font-size: 0.65rem !important;
             }
 
             .back-to-top {
@@ -1637,7 +1632,7 @@
     <div class="menu-backdrop" id="menuBackdrop"></div>
 
     <!-- ===== MOBILE MENU (DRAWER - matches homepage) ===== -->
-    <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu" id="mobileMenu"><br><br>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="service.html">Services</a>
@@ -2062,8 +2057,9 @@
                     const card = document.createElement('div');
                     card.className = 'video-carousel-card';
                     card.style.backgroundImage = `url('${thumbnail}')`;
+                    // Arrow removed - only title shown
                     card.innerHTML =
-                        `<div class="card-info"><span class="card-title">${item.name}</span><span class="card-duration">→</span></div>`;
+                        `<div class="card-info"><span class="card-title">${item.name}</span></div>`;
                     card.addEventListener('click', () => alert(`Explore our work in ${item.name}`));
                     track.appendChild(card);
                 });
