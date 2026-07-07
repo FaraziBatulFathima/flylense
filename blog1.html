@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <title>Contact | FlyLense Media Production</title>
+    <title>Mastering Lighting: The Secret to Cinematic Shots | FlyLense Blog</title>
     <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png" />
-    <meta name="description" content="Get in touch with FlyLense for cinematic media production and digital branding." />
+    <meta name="description" content="Discover essential lighting techniques for cinematic shots. Learn from professional filmmakers and elevate your video production skills." />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
@@ -220,7 +220,6 @@
             will-change: background, backdrop-filter, box-shadow, border-color;
         }
         .navbar.scrolled {
-            height: 100px;
             top: 0px;
             background: rgba(12, 18, 30, .96);
             backdrop-filter: blur(18px);
@@ -503,36 +502,20 @@
         .reveal-scale.revealed {
             transform: scale(1);
         }
-        .delay-1 {
-            transition-delay: 0.05s;
-        }
-        .delay-2 {
-            transition-delay: 0.12s;
-        }
-        .delay-3 {
-            transition-delay: 0.19s;
-        }
-        .delay-4 {
-            transition-delay: 0.26s;
-        }
-        .delay-5 {
-            transition-delay: 0.33s;
-        }
-        .delay-6 {
-            transition-delay: 0.40s;
-        }
-        .delay-7 {
-            transition-delay: 0.47s;
-        }
-        .delay-8 {
-            transition-delay: 0.54s;
-        }
+        .delay-1 { transition-delay: 0.05s; }
+        .delay-2 { transition-delay: 0.12s; }
+        .delay-3 { transition-delay: 0.19s; }
+        .delay-4 { transition-delay: 0.26s; }
+        .delay-5 { transition-delay: 0.33s; }
+        .delay-6 { transition-delay: 0.40s; }
+        .delay-7 { transition-delay: 0.47s; }
+        .delay-8 { transition-delay: 0.54s; }
 
         /* ── HERO ── */
-        .contact-hero {
+        .blog-hero {
             position: relative;
             height: 500px;
-            background: url('img/slider/3.png') center/cover no-repeat;
+            background: url('img/slider/1.png') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -541,19 +524,18 @@
             overflow: hidden;
             padding: 0 1.5rem;
         }
-        .contact-hero::before {
+        .blog-hero::before {
             content: '';
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0.65);
             z-index: 1;
         }
-        .contact-hero>* {
+        .blog-hero>* {
             position: relative;
             z-index: 2;
         }
 
-        /* Slide tag (inherited from homepage slider) */
         .slide-tag {
             display: inline-block;
             font-size: 0.75rem;
@@ -568,261 +550,304 @@
             border: 1px solid rgba(0, 116, 246, 0.3);
         }
 
-        .contact-hero h1 {
+        .blog-hero h1 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(2.4rem, 5vw, 4rem);
             font-weight: 700;
             margin-bottom: 0.8rem;
             text-align: center;
         }
-        .contact-hero p {
+        .blog-hero p {
             color: rgba(255, 255, 255, 0.9);
-            max-width: 550px;
+            max-width: 600px;
             font-size: 1.1rem;
             text-align: center;
             padding: 0 1.5rem;
         }
 
-        /* ── CONTACT FORM SECTION ── */
-        .contact-form-section {
-            padding: 5rem 2rem 4rem 2rem;
-            background: var(--bg-secondary);
-            position: relative;
+        /* ── BLOG CONTENT ── */
+        .blog-content-section {
+            padding: 4rem 2rem;
+            background: var(--bg-primary);
         }
-        .contact-wrapper-single {
-            max-width: 1300px;
+        .blog-content-container {
+            max-width: 820px;
             margin: 0 auto;
+        }
+
+        .blog-meta {
             display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 2;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
-
-        /* Premium Split Card */
-        .form-card-single {
-            background: #fff;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-elevated);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            border: 1px solid rgba(0, 116, 246, 0.05);
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
-
-        /* Left side: Info + Branding */
-        .form-info-panel {
-            display: block;
-            background: url('img/blue.png');
-            padding: 3rem 2.5rem;
+        .blog-meta .cat-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
             color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: var(--blue);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .blog-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-featured-video {
             position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #0a0a0f;
+            border-radius: var(--radius-lg);
             overflow: hidden;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-elevated);
+            border: 1px solid var(--border);
         }
-        .form-info-panel::after {
-            content: '';
-            position: absolute;
-            top: -40%;
-            right: -30%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .form-info-panel .brand-icon {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
+        .blog-featured-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
             display: block;
         }
-        .form-info-panel h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+
+        .blog-body {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .blog-body h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
             font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-body h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .blog-body p {
+            margin-bottom: 1.2rem;
+        }
+        .blog-body ul,
+        .blog-body ol {
+            padding-left: 1.8rem;
+            margin-bottom: 1.2rem;
+        }
+        .blog-body ul li,
+        .blog-body ol li {
             margin-bottom: 0.5rem;
         }
-        .form-info-panel .tagline {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
+        .blog-body blockquote {
+            border-left: 4px solid var(--blue);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            padding: 1.2rem 1.8rem;
+            border-radius: var(--radius-sm);
         }
-        .form-info-panel .info-details {
+        .blog-body blockquote p {
+            margin-bottom: 0;
+        }
+        .blog-body .highlight-box {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+        .blog-body .highlight-box h4 {
+            color: var(--blue);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .blog-body .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        /* ── AUTHOR BOX ── */
+        .author-box {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin-top: 3rem;
+            border: 1px solid var(--border);
         }
-        .form-info-panel .info-detail-item {
+        .author-box .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--gradient-blue);
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        .form-info-panel .info-detail-item i {
-            width: 24px;
-            text-align: center;
-            font-size: 1.1rem;
-            margin-top: 0.1rem;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 600;
             flex-shrink: 0;
+            font-family: 'Poppins', sans-serif;
         }
-        .form-info-panel .info-detail-item p {
+        .author-box .author-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .author-box .author-info .role {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .author-box .author-info p {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.95);
-            margin: 0;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
         }
-        .form-info-panel .info-detail-item .phone-group {
+
+        /* ── SHARE SECTION ── */
+        .share-section {
             display: flex;
-            flex-direction: column;
-        }
-        .form-info-panel .info-detail-item .phone-group p {
-            line-height: 1.4;
-        }
-        .form-info-panel .social-links {
-            display: flex;
-            gap: 0.8rem;
-            position: relative;
-            z-index: 2;
+            align-items: center;
+            gap: 1rem;
             flex-wrap: wrap;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-top: 2.5rem;
         }
-        .form-info-panel .social-links a {
+        .share-section .share-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .share-section .share-links {
+            display: flex;
+            gap: 0.6rem;
+        }
+        .share-section .share-links a {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
             text-decoration: none;
             transition: all var(--transition-fast);
+            font-size: 1rem;
         }
-        .form-info-panel .social-links a:hover {
-            background: #fff;
-            color: var(--blue);
+        .share-section .share-links a:hover {
             transform: translateY(-3px);
         }
+        .share-section .share-links .fb { background: #1877f2; }
+        .share-section .share-links .tw { background: #000; }
+        .share-section .share-links .li { background: #0a66c2; }
+        .share-section .share-links .wa { background: #25D366; }
 
-        /* ── INFO LINK STYLES (email, phone, address hover) ── */
-        .form-info-panel .info-detail-item a {
-            color: rgba(255, 255, 255, 0.95);
-            text-decoration: none;
-            transition: all var(--transition-fast);
-            display: inline-block;
+        /* ── RELATED POSTS ── */
+        .related-posts {
+            margin-top: 3.5rem;
         }
-        .form-info-panel .info-detail-item a:hover {
-            color: #fff;
-            transform: translateX(3px);
-            text-decoration: underline;
-        }
-        .form-info-panel .info-detail-item .phone-group a {
-            display: inline-block;
-        }
-        .form-info-panel .info-detail-item .phone-group a:hover {
-            transform: translateX(3px);
-        }
-
-        /* Right side: Form Fields */
-        .form-fields-panel {
-            padding: 3rem 3rem 3rem 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .form-fields-panel h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
+        .related-posts h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             color: var(--text-primary);
-            margin-bottom: 0.2rem;
         }
-        .form-fields-panel .form-subtitle {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.8rem;
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
         }
-        .form-group {
-            margin-bottom: 1.3rem;
+        .related-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all var(--transition-smooth);
+            text-decoration: none;
+            color: inherit;
         }
-        .form-group label {
-            font-size: 0.82rem;
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-elevated);
+            border-color: var(--blue-light);
+        }
+        .related-card .rel-img {
+            aspect-ratio: 16/9;
+            background: var(--bg-tertiary);
+            overflow: hidden;
+        }
+        .related-card .rel-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .related-card:hover .rel-img img {
+            transform: scale(1.05);
+        }
+        .related-card .rel-content {
+            padding: 1rem 1.2rem 1.2rem;
+        }
+        .related-card .rel-content .rel-tag {
+            font-size: 0.6rem;
             font-weight: 600;
-            color: var(--text-secondary);
-            display: block;
+            color: #fff;
+            background: var(--blue);
+            padding: 0.15rem 0.7rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            display: inline-block;
             margin-bottom: 0.4rem;
         }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.85rem 1.2rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
+        .related-card .rel-content h4 {
             font-size: 0.95rem;
-            outline: none;
-            transition: all var(--transition-fast);
-        }
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px rgba(0, 116, 246, 0.1);
-        }
-        .form-row-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
-        }
-        .btn-submit {
-            width: 100%;
-            justify-content: center;
-            background: var(--gradient-blue);
-            color: #fff;
-            padding: 1rem 2.8rem;
-            border-radius: 50px;
             font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all var(--transition-bounce);
-            box-shadow: 0 8px 25px rgba(0, 116, 246, 0.3);
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        /* ── BACK BUTTON ── */
+        .back-to-blog {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: gap var(--transition-fast);
         }
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 40px rgba(0, 116, 246, 0.5);
-        }
-
-        /* ── MAP SECTION ── */
-        .map-section {
-            padding: 0 2rem 5rem 2rem;
-            background: var(--bg-secondary);
-        }
-        .map-container {
-            width: 90%;
-            margin: 0 auto;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-elevated);
-            border: 1px solid var(--border);
-            transition: all var(--transition-smooth);
-        }
-        .map-container:hover {
-            box-shadow: var(--shadow-blue);
-            transform: scale(1.005);
-        }
-        .map-container iframe {
-            width: 100%;
-            height: 450px;
-            display: block;
-            border: none;
+        .back-to-blog:hover {
+            gap: 0.8rem;
         }
 
         /* ── CTA BANNER ── */
@@ -972,116 +997,63 @@
         }
 
         /* ════════════════════════════════════════════ */
-        /* ── RESPONSIVE STYLES (ENHANCED FONT SIZES) ── */
+        /* ── RESPONSIVE ── */
         /* ════════════════════════════════════════════ */
 
-        /* ── 1200px ── */
-        @media (max-width: 1200px) {
-            /* no changes */
-        }
-
-        /* ── 1024px ── */
         @media (max-width: 1024px) {
-            .contact-hero {
+            .blog-hero {
                 height: 400px;
             }
-            .form-card-single {
-                grid-template-columns: 1fr;
-            }
-            .form-info-panel {
-                padding: 2.5rem;
-            }
-            .form-fields-panel {
-                padding: 2.5rem;
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* ── 768px (HAMBURGER APPEARS) ── */
         @media (max-width: 768px) {
-            :root {
-                --nav-height: 64px;
-            }
+            :root { --nav-height: 64px; }
 
-            .hamburger {
-                display: flex !important;
-            }
-            .nav-links {
-                display: none !important;
-            }
+            .hamburger { display: flex !important; }
+            .nav-links { display: none !important; }
+            .navbar-container { padding: 0 1.2rem; }
 
-            .navbar-container {
-                padding: 0 1.2rem;
-            }
-
-            .contact-hero {
+            .blog-hero {
                 height: 350px;
             }
-            .contact-hero h1 {
+            .blog-hero h1 {
                 font-size: clamp(1.8rem, 5vw, 2.4rem);
             }
-            .contact-hero p {
-                font-size: 1rem;
+            .blog-hero p {
+                font-size: 0.95rem;
                 padding: 0 1rem;
             }
 
-            .contact-form-section {
-                padding: 3rem 1.2rem 2.5rem;
+            .blog-content-section {
+                padding: 2.5rem 1.2rem;
             }
-
-            .form-card-single {
-                border-radius: var(--radius-md);
-            }
-            .form-info-panel {
-                padding: 2rem 1.8rem;
-            }
-            .form-info-panel h3 {
+            .blog-title {
                 font-size: 1.6rem;
             }
-            .form-info-panel .tagline {
-                font-size: 0.95rem;
-            }
-            .form-info-panel .info-detail-item p {
-                font-size: 0.9rem;
-            }
-            .form-info-panel .info-detail-item a {
-                font-size: 0.9rem;
-            }
 
-            .form-fields-panel {
-                padding: 2rem 1.8rem;
+            .author-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
             }
-            .form-fields-panel h2 {
+            .author-box .avatar {
+                width: 60px;
+                height: 60px;
                 font-size: 1.5rem;
             }
-            .form-fields-panel .form-subtitle {
-                font-size: 0.9rem;
-            }
-            .form-row-inputs {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            .form-group label {
-                font-size: 0.85rem;
-            }
-            .form-group input,
-            .form-group textarea,
-            .form-group select {
-                padding: 0.7rem 1rem;
-                font-size: 0.95rem;
-            }
-            .btn-submit {
-                padding: 0.85rem 2rem;
-                font-size: 1rem;
-            }
 
-            .map-section {
-                padding: 0 1.2rem 3rem;
+            .related-grid {
+                grid-template-columns: 1fr;
             }
-            .map-container iframe {
-                height: 300px;
+            .share-section {
+                justify-content: center;
+            }
+            .share-section .share-label {
+                width: 100%;
+                text-align: center;
             }
 
             .cta-banner {
@@ -1097,7 +1069,7 @@
             }
             .btn-cta-white {
                 padding: 14px 24px;
-                font-size: 0.95rem;
+                font-size: 0.9rem;
             }
 
             .footer-container {
@@ -1106,18 +1078,15 @@
                 gap: 1rem;
             }
             .footer-links {
-                flex-wrap: wrap;
                 justify-content: center;
                 gap: 1rem;
             }
-
             .back-to-top {
                 bottom: 1.5rem;
                 right: 1.5rem;
                 width: 40px;
                 height: 40px;
             }
-
             .mobile-menu {
                 width: 300px;
                 max-width: 85%;
@@ -1136,183 +1105,93 @@
             }
         }
 
-        /* ── 576px ── */
         @media (max-width: 576px) {
-            .navbar.scrolled {
-                height: 80px;
-            }
+            .navbar.scrolled { height: 80px; }
+            .nav-logo img { height: 28px !important; }
+            .nav-logo img.logo-title { height: 40px !important; padding-left: 10px !important; }
+            .nav-logo img.logo-icon { height: 32px !important; }
 
-            .nav-logo img {
-                height: 28px !important;
-            }
-            .nav-logo img.logo-title {
-                height: 40px !important;
-                padding-left: 10px !important;
-            }
-            .nav-logo img.logo-icon {
-                height: 32px !important;
-            }
-
-            /* ── HERO ── */
-            .contact-hero {
-                height: 400px !important;
+            .blog-hero {
+                height: 380px !important;
                 padding: 0 1.2rem;
             }
-            .contact-hero h1 {
-                font-size: 2.4rem !important;
+            .blog-hero h1 {
+                font-size: 2.2rem !important;
                 margin-bottom: 0.6rem;
             }
-            .contact-hero p {
-                font-size: 1.05rem !important;
+            .blog-hero p {
+                font-size: 0.95rem;
                 padding: 0 0.5rem;
                 max-width: 100%;
             }
             .slide-tag {
-                font-size: 0.75rem;
-                padding: 5px 16px;
-                margin-bottom: 12px;
+                font-size: 0.7rem;
+                padding: 4px 14px;
+                margin-bottom: 10px;
             }
 
-            /* ── SECTION PADDING ── */
-            .contact-form-section {
-                padding: 2.8rem 1rem 2.2rem !important;
+            .blog-content-section {
+                padding: 2rem 1rem !important;
             }
-            .map-section {
-                padding: 0 1rem 2.8rem !important;
+            .blog-title {
+                font-size: 1.3rem !important;
             }
-
-            /* ── FORM INFO PANEL ── */
-            .form-info-panel {
-                padding: 1.8rem 1.4rem !important;
+            .blog-body {
+                font-size: 0.95rem !important;
             }
-            .form-info-panel .brand-icon {
-                font-size: 2rem;
+            .blog-body h2 {
+                font-size: 1.3rem !important;
             }
-            .form-info-panel h3 {
-                font-size: 1.6rem !important;
+            .blog-body h3 {
+                font-size: 1.05rem !important;
             }
-            .form-info-panel .tagline {
-                font-size: 1rem !important;
-                margin-bottom: 1.6rem;
-                line-height: 1.6;
+            .blog-body blockquote {
+                padding: 1rem 1.2rem;
             }
-            .form-info-panel .info-details {
-                gap: 1rem;
-                margin-bottom: 1.6rem;
-            }
-            .form-info-panel .info-detail-item {
+            .blog-meta {
+                font-size: 0.8rem;
                 gap: 0.8rem;
             }
-            .form-info-panel .info-detail-item i {
-                width: 22px;
-                font-size: 1.1rem;
+
+            .author-box {
+                padding: 1rem;
             }
-            .form-info-panel .info-detail-item p {
-                font-size: 0.95rem !important;
+            .author-box .avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
-            .form-info-panel .info-detail-item a {
-                font-size: 0.95rem !important;
-            }
-            .form-info-panel .social-links a {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
+            .author-box .author-info p {
+                font-size: 0.85rem;
             }
 
-            /* ── FORM FIELDS PANEL ── */
-            .form-fields-panel {
-                padding: 1.8rem 1.4rem !important;
-                text-align: left !important;
-                align-items: stretch !important;
-            }
-            .form-fields-panel h2 {
-                font-size: 1.5rem !important;
-            }
-            .form-fields-panel .form-subtitle {
-                font-size: 0.95rem !important;
-                margin-bottom: 1.4rem;
-            }
-            .form-group {
-                margin-bottom: 0.9rem;
-            }
-            .form-group label {
-                font-size: 0.9rem !important;
-                text-align: left;
-                width: 100%;
-            }
-            .form-group input,
-            .form-group textarea,
-            .form-group select {
-                padding: 0.7rem 1rem !important;
-                font-size: 0.95rem !important;
-                border-radius: var(--radius-sm);
-            }
-            .form-row-inputs {
-                grid-template-columns: 1fr;
-                gap: 0;
-                width: 100%;
-            }
-            .btn-submit {
-                padding: 0.85rem 1.8rem !important;
-                font-size: 1rem !important;
-                width: 100%;
-                border-radius: 50px;
-            }
-
-            .map-container iframe {
-                height: 280px;
-            }
-
-            /* ── CTA ── */
             .cta-banner {
-                flex-direction: column !important;
-                text-align: center !important;
                 padding: 1.5rem !important;
                 border-radius: var(--radius-md);
             }
             .cta-banner-text h2 {
-                font-size: 1.4rem !important;
+                font-size: 1.3rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 1.05rem !important;
+                font-size: 1rem !important;
             }
             .btn-cta-white {
                 padding: 14px 24px !important;
-                font-size: 0.95rem !important;
+                font-size: 0.9rem !important;
                 justify-content: center;
             }
 
-            /* ── FOOTER ── */
             .footer {
                 padding: 2rem 1rem !important;
             }
-            .footer-container {
-                gap: 0.8rem;
-            }
-            .footer-logo {
-                font-size: 1.2rem;
-            }
-            .footer-links a {
-                font-size: 0.85rem;
-            }
-            .footer-social a {
-                width: 36px;
-                height: 36px;
-            }
-            .footer-copy {
-                font-size: 0.75rem;
-            }
+            .footer-container { gap: 0.8rem; }
+            .footer-logo { font-size: 1.2rem; }
+            .footer-links a { font-size: 0.8rem; }
+            .footer-social a { width: 36px; height: 36px; }
+            .footer-copy { font-size: 0.7rem; }
 
-            .back-to-top {
-                width: 38px;
-                height: 38px;
-                bottom: 1.2rem;
-                right: 1.2rem;
-            }
-
-            .cta-banner-section {
-                padding: 15px 1rem !important;
-            }
+            .back-to-top { width: 38px; height: 38px; bottom: 1.2rem; right: 1.2rem; }
+            .cta-banner-section { padding: 15px 1rem !important; }
 
             .mobile-menu {
                 width: 280px !important;
@@ -1326,165 +1205,52 @@
                 font-size: 0.9rem !important;
                 padding: 0.7rem 1.2rem !important;
             }
-            .hamburger {
-                padding: 4px !important;
-            }
-            .hamburger span {
-                width: 22px !important;
-                height: 2px !important;
-            }
+            .hamburger { padding: 4px !important; }
+            .hamburger span { width: 22px !important; height: 2px !important; }
             .hamburger.active span:nth-child(1),
-            .hamburger.active span:nth-child(3) {
-                width: 24px !important;
-            }
+            .hamburger.active span:nth-child(3) { width: 24px !important; }
         }
 
-        /* ── 480px ── */
         @media (max-width: 480px) {
-            .navbar.scrolled {
-                height: 80px;
-            }
+            .navbar.scrolled { height: 80px; }
+            .nav-logo img { height: 30px !important; }
+            .nav-logo img.logo-title { height: 40px !important; padding-left: 8px !important; }
+            .nav-logo img.logo-icon { height: 35px !important; }
 
-            .nav-logo img {
-                height: 30px !important;
-            }
-            .nav-logo img.logo-title {
-                height: 40px !important;
-                padding-left: 8px !important;
-            }
-            .nav-logo img.logo-icon {
-                height: 35px !important;
-            }
-
-            /* ── HERO ── */
-            .contact-hero {
+            .blog-hero {
                 height: 420px !important;
                 padding: 0 1rem;
             }
-            .contact-hero h1 {
-                font-size: 2.6rem !important;
+            .blog-hero h1 {
+                font-size: 2.4rem !important;
             }
-            .contact-hero p {
-                font-size: 1.1rem !important;
+            .blog-hero p {
+                font-size: 1rem !important;
                 padding: 0 0.3rem;
             }
 
-            /* ── SECTION ── */
-            .contact-form-section {
-                padding: 2.2rem 0.8rem 1.8rem !important;
-            }
-            .map-section {
-                padding: 0 0.8rem 2.2rem !important;
-            }
-
-            /* ── FORM INFO ── */
-            .form-info-panel {
-                padding: 1.4rem 1.1rem !important;
-            }
-            .form-info-panel .brand-icon {
-                font-size: 1.8rem;
-            }
-            .form-info-panel h3 {
-                font-size: 1.4rem !important;
-            }
-            .form-info-panel .tagline {
-                font-size: 0.95rem !important;
-                margin-bottom: 1.3rem;
-            }
-            .form-info-panel .info-details {
-                gap: 0.8rem;
-                margin-bottom: 1.3rem;
-            }
-            .form-info-panel .info-detail-item {
-                gap: 0.7rem;
-            }
-            .form-info-panel .info-detail-item i {
-                width: 20px;
-                font-size: 1rem;
-            }
-            .form-info-panel .info-detail-item p {
-                font-size: 0.9rem !important;
-            }
-            .form-info-panel .info-detail-item a {
-                font-size: 0.9rem !important;
-            }
-            .form-info-panel .social-links a {
-                width: 34px;
-                height: 34px;
-                font-size: 0.9rem;
-            }
-
-            /* ── FORM FIELDS ── */
-            .form-fields-panel {
-                padding: 1.4rem 1.1rem !important;
-            }
-            .form-fields-panel h2 {
-                font-size: 1.4rem !important;
-            }
-            .form-fields-panel .form-subtitle {
-                font-size: 0.9rem !important;
-                margin-bottom: 1.2rem;
-            }
-            .form-group label {
-                font-size: 0.85rem !important;
-            }
-            .form-group input,
-            .form-group textarea,
-            .form-group select {
-                padding: 0.6rem 0.9rem !important;
-                font-size: 0.9rem !important;
-            }
-            .btn-submit {
-                padding: 0.75rem 1.5rem !important;
-                font-size: 0.95rem !important;
-            }
-
-            .map-container iframe {
-                height: 220px;
-            }
-
-            /* ── CTA ── */
-            .cta-banner {
-                padding: 1.2rem !important;
-            }
-            .cta-banner-text h2 {
-                font-size: 1.2rem !important;
-            }
-            .cta-banner-text h4 {
-                font-size: 0.95rem !important;
-            }
-            .btn-cta-white {
-                padding: 12px 20px !important;
-                font-size: 0.85rem !important;
-            }
-
-            /* ── FOOTER ── */
-            .footer {
+            .blog-content-section {
                 padding: 1.5rem 0.8rem !important;
             }
-            .footer-logo {
-                font-size: 1rem;
+            .blog-title {
+                font-size: 1.1rem !important;
             }
-            .footer-links a {
-                font-size: 0.75rem !important;
-            }
-            .footer-social a {
-                width: 30px;
-                height: 30px;
-                font-size: 0.85rem;
-            }
-            .footer-copy {
-                font-size: 0.7rem !important;
+            .blog-body {
+                font-size: 0.9rem !important;
             }
 
-            .back-to-top {
-                width: 34px;
-                height: 34px;
-                bottom: 1rem;
-                right: 1rem;
-                font-size: 0.8rem;
-            }
+            .cta-banner { padding: 1.2rem !important; }
+            .cta-banner-text h2 { font-size: 1.1rem !important; }
+            .cta-banner-text h4 { font-size: 0.85rem !important; }
+            .btn-cta-white { padding: 12px 20px !important; font-size: 0.8rem !important; }
 
+            .footer { padding: 1.5rem 0.8rem !important; }
+            .footer-logo { font-size: 1rem; }
+            .footer-links a { font-size: 0.7rem !important; }
+            .footer-social a { width: 30px; height: 30px; font-size: 0.8rem; }
+            .footer-copy { font-size: 0.65rem !important; }
+
+            .back-to-top { width: 34px; height: 34px; bottom: 1rem; right: 1rem; font-size: 0.8rem; }
             .mobile-menu {
                 width: 260px !important;
                 padding: 60px 1rem 1rem 1rem !important;
@@ -1497,166 +1263,51 @@
                 font-size: 0.85rem !important;
                 padding: 0.65rem 1rem !important;
             }
-            .hamburger {
-                padding: 6px 10px !important;
-            }
-            .hamburger span {
-                width: 20px !important;
-                height: 2px !important;
-            }
+            .hamburger { padding: 6px 10px !important; }
+            .hamburger span { width: 20px !important; height: 2px !important; }
         }
 
-        /* ── 360px ── */
         @media (max-width: 360px) {
-            .navbar.scrolled {
-                height: 80px;
-            }
+            .navbar.scrolled { height: 80px; }
+            .nav-logo img { height: 20px !important; }
+            .nav-logo img.logo-title { height: 24px !important; padding-left: 6px !important; }
+            .nav-logo img.logo-icon { height: 24px !important; }
 
-            .nav-logo img {
-                height: 20px !important;
-            }
-            .nav-logo img.logo-title {
-                height: 24px !important;
-                padding-left: 6px !important;
-            }
-            .nav-logo img.logo-icon {
-                height: 24px !important;
-            }
-
-            /* ── HERO ── */
-            .contact-hero {
+            .blog-hero {
                 height: 440px !important;
                 padding: 0 0.8rem;
             }
-            .contact-hero h1 {
-                font-size: 2.4rem !important;
+            .blog-hero h1 {
+                font-size: 2.2rem !important;
             }
-            .contact-hero p {
-                font-size: 1rem !important;
+            .blog-hero p {
+                font-size: 0.9rem !important;
                 padding: 0 0.2rem;
             }
             .slide-tag {
-                font-size: 0.65rem !important;
-                padding: 4px 12px !important;
+                font-size: 0.6rem !important;
+                padding: 3px 12px !important;
             }
 
-            /* ── SECTION ── */
-            .contact-form-section {
-                padding: 1.8rem 0.6rem 1.2rem !important;
-            }
-            .map-section {
-                padding: 0 0.6rem 1.8rem !important;
-            }
-
-            /* ── FORM INFO ── */
-            .form-info-panel {
-                padding: 1.2rem 0.9rem !important;
-            }
-            .form-info-panel .brand-icon {
-                font-size: 1.5rem;
-            }
-            .form-info-panel h3 {
-                font-size: 1.2rem !important;
-            }
-            .form-info-panel .tagline {
-                font-size: 0.85rem !important;
-                margin-bottom: 1rem;
-            }
-            .form-info-panel .info-details {
-                gap: 0.7rem;
-                margin-bottom: 1rem;
-            }
-            .form-info-panel .info-detail-item {
-                gap: 0.6rem;
-            }
-            .form-info-panel .info-detail-item i {
-                width: 18px;
-                font-size: 0.85rem;
-            }
-            .form-info-panel .info-detail-item p {
-                font-size: 0.8rem !important;
-            }
-            .form-info-panel .info-detail-item a {
-                font-size: 0.8rem !important;
-            }
-            .form-info-panel .social-links a {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-            }
-
-            /* ── FORM FIELDS ── */
-            .form-fields-panel {
-                padding: 1.2rem 0.9rem !important;
-            }
-            .form-fields-panel h2 {
-                font-size: 1.2rem !important;
-            }
-            .form-fields-panel .form-subtitle {
-                font-size: 0.8rem !important;
-                margin-bottom: 1rem;
-            }
-            .form-group label {
-                font-size: 0.8rem !important;
-            }
-            .form-group input,
-            .form-group textarea,
-            .form-group select {
-                padding: 0.5rem 0.7rem !important;
-                font-size: 0.85rem !important;
-            }
-            .btn-submit {
-                padding: 0.65rem 1.2rem !important;
-                font-size: 0.85rem !important;
-            }
-
-            .map-container iframe {
-                height: 200px;
-            }
-
-            /* ── CTA ── */
-            .cta-banner {
-                padding: 1rem !important;
-            }
-            .cta-banner-text h2 {
-                font-size: 1rem !important;
-            }
-            .cta-banner-text h4 {
-                font-size: 0.8rem !important;
-            }
-            .btn-cta-white {
-                padding: 10px 16px !important;
-                font-size: 0.75rem !important;
-            }
-
-            /* ── FOOTER ── */
-            .footer {
+            .blog-content-section {
                 padding: 1.2rem 0.6rem !important;
             }
-            .footer-logo {
-                font-size: 0.9rem;
-            }
-            .footer-links a {
-                font-size: 0.7rem !important;
-                gap: 0.5rem;
-            }
-            .footer-social a {
-                width: 28px;
-                height: 28px;
-                font-size: 0.75rem;
-            }
-            .footer-copy {
-                font-size: 0.65rem !important;
+            .blog-title {
+                font-size: 1rem !important;
             }
 
-            .back-to-top {
-                width: 30px;
-                height: 30px;
-                bottom: 0.8rem;
-                right: 0.8rem;
-                font-size: 0.7rem;
-            }
+            .cta-banner { padding: 1rem !important; }
+            .cta-banner-text h2 { font-size: 0.95rem !important; }
+            .cta-banner-text h4 { font-size: 0.75rem !important; }
+            .btn-cta-white { padding: 10px 16px !important; font-size: 0.7rem !important; }
 
+            .footer { padding: 1.2rem 0.6rem !important; }
+            .footer-logo { font-size: 0.9rem; }
+            .footer-links a { font-size: 0.65rem !important; gap: 0.5rem; }
+            .footer-social a { width: 28px; height: 28px; font-size: 0.7rem; }
+            .footer-copy { font-size: 0.6rem !important; }
+
+            .back-to-top { width: 30px; height: 30px; bottom: 0.8rem; right: 0.8rem; font-size: 0.7rem; }
             .mobile-menu {
                 width: 240px !important;
                 padding: 55px 0.8rem 0.8rem 0.8rem !important;
@@ -1669,18 +1320,10 @@
                 font-size: 0.8rem !important;
                 padding: 0.6rem 0.8rem !important;
             }
-            .hamburger {
-                padding: 5px 8px !important;
-                gap: 4px !important;
-            }
-            .hamburger span {
-                width: 18px !important;
-                height: 2px !important;
-            }
+            .hamburger { padding: 5px 8px !important; gap: 4px !important; }
+            .hamburger span { width: 18px !important; height: 2px !important; }
             .hamburger.active span:nth-child(1),
-            .hamburger.active span:nth-child(3) {
-                width: 20px !important;
-            }
+            .hamburger.active span:nth-child(3) { width: 20px !important; }
         }
 
         .back-to-top {
@@ -1690,7 +1333,7 @@
 </head>
 <body>
 
-    <!-- ── FLOATING SOCIAL ICONS (inherited from homepage) ── -->
+    <!-- ── FLOATING SOCIAL ICONS ── -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
@@ -1704,7 +1347,7 @@
         </a>
     </div>
 
-    <!-- ===== NAVBAR (matches homepage & about) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <a href="index.html" class="nav-logo">
@@ -1717,13 +1360,11 @@
                 <li><a href="service.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="industry.html">Industries</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="blogs.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
@@ -1731,130 +1372,190 @@
     <!-- Menu Backdrop -->
     <div class="menu-backdrop" id="menuBackdrop"></div>
 
-    <!-- ===== MOBILE MENU (DRAWER - matches homepage) ===== -->
+    <!-- ===== MOBILE MENU ===== -->
     <div class="mobile-menu" id="mobileMenu"><br><br>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="service.html">Services</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="industry.html">Industries</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="contact.html" class="active">Contact</a>
+        <a href="blogs.html" class="active">Blog</a>
         <a href="contact.html" class="mobile-cta">Let's Talk</a>
         <div class="menu-footer-text">
             <span>© 2026 FlyLense</span>
         </div>
     </div>
 
-    <!-- ===== HERO (with slide tag) ===== -->
-    <section class="contact-hero">
-        <span class="slide-tag">Get in Touch</span>
-        <h1 class="reveal reveal-up">Contact Us</h1>
-        <p class="reveal reveal-up delay-1">Let's create something extraordinary together. Reach out to our team today.</p>
+    <!-- ===== HERO ===== -->
+    <section class="blog-hero">
+        <span class="slide-tag">Creators</span>
+        <h1 class="reveal reveal-up">Mastering Lighting</h1>
+        <p class="reveal reveal-up delay-1">The Secret to Cinematic Shots — Discover the essential lighting techniques that separate amateur footage from professional cinematography.</p>
     </section>
 
-    <!-- ===== CONTACT FORM SECTION ===== -->
-    <section class="contact-form-section">
-        <div class="contact-wrapper-single reveal">
+    <!-- ===== BLOG CONTENT ===== -->
+    <section class="blog-content-section">
+        <div class="blog-content-container">
 
-            <!-- Premium Split Card -->
-            <div class="form-card-single">
+            <!-- Back Button -->
+            <a href="blogs.html" class="back-to-blog"><i class="fa-solid fa-arrow-left"></i> Back to Blog</a>
 
-                <!-- Left Side Panel: Info & Branding -->
-                <div class="form-info-panel">
-                    <div>
-                        <span class="brand-icon"><i class="fa-solid fa-film"></i></span>
-                        <h3>Let's Talk</h3>
-                        <p class="tagline">We'd love to hear about your project. Our expert team is ready to bring your cinematic vision to life.</p>
-                    </div>
+            <!-- Meta -->
+            <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> March 15, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 8 min read</span>
+                <span class="cat-tag">Creators</span>
+                <span><i class="fa-regular fa-eye"></i> 2.4k views</span>
+            </div>
 
-                    <div>
-                        <div class="info-details">
-                            <!-- Email with clickable link -->
-                            <div class="info-detail-item">
-                                <i class="fa-solid fa-envelope"></i>
-                                <p><a href="mailto:flylensemediapartner@gmail.com">flylensemediapartner@gmail.com</a></p>
-                            </div>
-                            <!-- Phone with clickable links -->
-                            <div class="info-detail-item">
-                                <i class="fa-solid fa-phone"></i>
-                                <div class="phone-group">
-                                    <a href="tel:+919989571223">+91 99895 71223</a>
-                                    <a href="tel:+919014323594">+91 90143 23594</a>
-                                </div>
-                            </div>
-                            <!-- Address (non-clickable but with hover style) -->
-                            <div class="info-detail-item">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <p>Talwar Plaza, 4th, beside Podium Mall, Toli Chowki, Hyderabad, Telangana 500008</p>
-                            </div>
-                        </div>
+            <!-- Title -->
+            <h1 class="blog-title">Mastering Lighting: The Secret to Cinematic Shots</h1>
 
-                        <!-- Social links with proper URLs -->
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://www.youtube.com/@flylensemediapartner" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                            <a href="https://www.linkedin.com/company/flylensemediapartner" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="https://www.facebook.com/flylensemediapartner" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        </div>
-                    </div>
+            <!-- Featured Video -->
+            <div class="blog-featured-video">
+                <iframe src="https://www.youtube.com/embed/0suVZjz3_Uw?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+
+            <!-- Blog Body -->
+            <div class="blog-body">
+
+                <p>Lighting is the single most important element in filmmaking. It shapes mood, directs attention, and transforms ordinary footage into something cinematic. Whether you're shooting with a high-end cinema camera or your smartphone, understanding light will dramatically elevate your work.</p>
+
+                <p>In this guide, we'll break down the essential lighting techniques that professional cinematographers use every day — and show you how to apply them to your own projects.</p>
+
+                <h2>1. The Three-Point Lighting Setup</h2>
+                <p>This is the foundation of all cinematic lighting. Every filmmaker should master this before moving on to more complex setups.</p>
+
+                <ul>
+                    <li><strong>Key Light:</strong> Your main light source. Place it at a 45° angle to your subject for natural, dimensional lighting.</li>
+                    <li><strong>Fill Light:</strong> Reduces harsh shadows created by the key light. Use a softer light or a reflector on the opposite side.</li>
+                    <li><strong>Back Light (Rim Light):</strong> Positioned behind the subject to separate them from the background, adding depth and dimension.</li>
+                </ul>
+
+                <blockquote>
+                    <p>"Great lighting isn't about having expensive equipment — it's about understanding how light behaves and using it intentionally." — <strong>Roger Deakins, ASC</strong></p>
+                </blockquote>
+
+                <h2>2. Quality of Light: Hard vs. Soft</h2>
+                <p>The quality of your light dramatically affects the mood of your scene:</p>
+
+                <ul>
+                    <li><strong>Hard Light:</strong> Creates sharp shadows and high contrast. Great for dramatic, intense scenes or noir-inspired looks. Produced by small, focused light sources (direct sunlight, bare bulbs).</li>
+                    <li><strong>Soft Light:</strong> Creates gentle shadows with smooth transitions. Ideal for beauty shots, interviews, and warm, inviting scenes. Produced by diffused sources (cloudy skies, softboxes, bounced light).</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h4>Pro Tip: Diffusion</h4>
+                    <p>You don't need expensive diffusion panels. A white shower curtain, baking paper, or a white bed sheet stretched over a frame can soften harsh light beautifully — giving you that cinematic, natural look without breaking the bank.</p>
                 </div>
 
-                <!-- Right Side Panel: Form -->
-                <div class="form-fields-panel">
-                    <h2>Send a Message</h2>
-                    <p class="form-subtitle">We typically respond within a few hours.</p>
+                <h2>3. Color Temperature & White Balance</h2>
+                <p>Light comes in different colors, measured in Kelvin (K). Understanding color temperature helps you create mood and consistency:</p>
 
-                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
-                        <div class="form-row-inputs">
-                            <div class="form-group">
-                                <label>First Name *</label>
-                                <input type="text" placeholder="" required />
-                            </div>
-                            <div class="form-group">
-                                <label>Last Name *</label>
-                                <input type="text" placeholder="" required />
-                            </div>
-                        </div>
-                        <div class="form-row-inputs">
-                            <div class="form-group">
-                                <label>Email *</label>
-                                <input type="email" placeholder="" required />
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="tel" placeholder="" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Service *</label>
-                            <select required>
-                                <option value="">Select a service...</option>
-                                <option>Commercial Films</option>
-                                <option>Brand Storytelling</option>
-                                <option>Aerial Drone Footage</option>
-                                <option>Corporate Videos</option>
-                                <option>Social Media Content</option>
-                                <option>Full Digital Branding</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Project Details *</label>
-                            <textarea rows="4" placeholder="Describe your vision, timeline, and any specific requirements..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">
-                            <i class="fa-solid fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+                <ul>
+                    <li><strong>Warm Light (2700K–3200K):</strong> Golden, cozy feel — great for sunsets, candlelit scenes, or intimate moments.</li>
+                    <li><strong>Neutral Light (4000K–5000K):</strong> Natural daylight feel — balanced and versatile.</li>
+                    <li><strong>Cool Light (5500K–6500K):</strong> Blue, crisp feel — often used for nighttime, sci-fi, or clinical environments.</li>
+                </ul>
+
+                <p>Always set your white balance manually. Auto white balance can introduce unwanted color shifts between shots, making post-production color grading much harder.</p>
+
+                <h2>4. Practical Lights — Cinematic Storytelling</h2>
+                <p>Practical lights are visible light sources within your scene — lamps, windows, neon signs, candles. They serve two purposes:</p>
+
+                <ul>
+                    <li>They <strong>motivate</strong> your lighting (justifying why your key light exists).</li>
+                    <li>They add <strong>visual interest</strong> and depth to your frame.</li>
+                </ul>
+
+                <p>When you see a lamp in a scene, it's not accidental. Cinematographers use practicals to create natural motivation for their lighting — making the scene feel authentic and lived-in.</p>
+
+                <h2>5. Negative Fill — The Secret Weapon</h2>
+                <p>Most filmmakers focus on adding light, but removing light can be equally powerful. Negative fill is the use of black flags or dark materials to absorb light and create deeper shadows.</p>
+
+                <p>Position a black flag on the shadow side of your subject to increase contrast and create a more dramatic, cinematic look. This is a favorite technique among portrait and fashion cinematographers.</p>
+
+                <h2>6. Lighting Patterns — Key Placements</h2>
+                <p>Where you place your key light changes the story you're telling:</p>
+
+                <ul>
+                    <li><strong>Front Lighting:</strong> Flat, even light. Reduces dimension — often used for comedies or news.</li>
+                    <li><strong>45° Lighting:</strong> Classic Hollywood. Creates dimension and depth — the most cinematic option.</li>
+                    <li><strong>Side Lighting:</strong> High contrast, dramatic. Emphasizes texture and character.</li>
+                    <li><strong>Back Lighting:</strong> Creates silhouette and separation — powerful for mystery or romantic scenes.</li>
+                    <li><strong>Under Lighting:</strong> Unnatural, unsettling — used for horror or thriller scenes.</li>
+                </ul>
+
+                <h2>7. Working with Natural Light</h2>
+                <p>Natural light is free and beautiful, but it's also unpredictable. Here's how to work with it:</p>
+
+                <ul>
+                    <li><strong>Golden Hour:</strong> The hour after sunrise and before sunset — warm, soft, directional light that flatters every subject.</li>
+                    <li><strong>Overcast Days:</strong> Soft, even light perfect for interviews or outdoor scenes without harsh shadows.</li>
+                    <li><strong>Window Light:</strong> Large, soft, directional — one of the most flattering light sources available. Position your subject near a window and use reflectors to fill shadows.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h4>Quick Tip: The Window Trick</h4>
+                    <p>Position your subject at a 45° angle to a window. Use a white foam board on the opposite side as a reflector to fill shadows. You'll get a beautifully lit shot without any artificial lights — perfect for interviews, YouTube videos, or indie films.</p>
+                </div>
+
+                <h2>Practice Over Perfection</h2>
+                <p>The best way to master lighting is to practice. Start with one light and move it around — observe how shadows change, how mood shifts, and how your subject transforms. Then add a second light, then a third.</p>
+
+                <p>Remember: <strong>Cinematic lighting is not about having the most expensive gear — it's about being intentional with what you have.</strong> Every great cinematographer started with a single light and a willingness to experiment.</p>
+
+            </div>
+
+            <!-- Share Section -->
+            <div class="share-section">
+                <span class="share-label"><i class="fa-regular fa-share-from-square"></i> Share this article</span>
+                <div class="share-links">
+                    <a href="#" class="fb" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="tw" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="li" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ===== MAP SECTION ===== -->
-    <section class="map-section">
-        <div class="map-container reveal">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15229.00291930383!2d78.415173!3d17.399751!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97bde1b0e383%3A0x3267bc2693dfbeba!2sFlylense%20Media%20Partner%20Private%20Limited!5e0!3m2!1sen!2sin!4v1783069668926!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="avatar">AS</div>
+                <div class="author-info">
+                    <h4>Abdul Sami</h4>
+                    <p class="role">Director &amp; COO, FlyLense</p>
+                    <p>An early adopter, a tech enthusiast, and a rock-solid guy who can stay smiling even on the craziest of days. Prashant leads our Sales and BD with a passion for cinematic storytelling.</p>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="related-posts">
+                <h3>You Might Also Like</h3>
+                <div class="related-grid">
+                    <a href="#" class="related-card">
+                        <div class="rel-img"><img src="https://img.youtube.com/vi/278IRQ6HSi4/maxresdefault.jpg" alt="Drone Filmmaking" loading="lazy"></div>
+                        <div class="rel-content">
+                            <span class="rel-tag">Creators</span>
+                            <h4>Drone Filmmaking: 5 Tips for Epic Aerial Shots</h4>
+                        </div>
+                    </a>
+                    <a href="#" class="related-card">
+                        <div class="rel-img"><img src="https://img.youtube.com/vi/NeTJRCycYXQ/maxresdefault.jpg" alt="Brand Storytelling" loading="lazy"></div>
+                        <div class="rel-content">
+                            <span class="rel-tag">Brands</span>
+                            <h4>Brand Storytelling: Connecting with Hearts &amp; Minds</h4>
+                        </div>
+                    </a>
+                    <a href="#" class="related-card">
+                        <div class="rel-img"><img src="https://img.youtube.com/vi/gMRr6ej8lEE/maxresdefault.jpg" alt="Camera Movement" loading="lazy"></div>
+                        <div class="rel-content">
+                            <span class="rel-tag">Creators</span>
+                            <h4>Dynamic Camera Movement for Storytelling</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1862,15 +1563,15 @@
     <section class="cta-banner-section">
         <div class="cta-banner reveal reveal-up">
             <div class="cta-banner-text">
-                <h2>Ready to Bring Your Vision to Life?</h2>
-                <h4>Let's Create Something Incredible Together</h4>
+                <h2>Ready to create something remarkable?</h2>
+                <h4>Let's bring your vision to the screen</h4>
             </div>
-            <a href="contact.html" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Let's Get Started</a>
+            <a href="contact.html" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Get in Touch</a>
         </div>
     </section>
     <br /><br />
 
-    <!-- ===== FOOTER (matches homepage) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
@@ -1880,20 +1581,20 @@
                 <a href="service.html">Services</a>
                 <a href="portfolio.html">Portfolio</a>
                 <a href="industry.html">Industries</a>
-                <a href="blogs.html">Blogs</a>
+                <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://www.instagram.com/wix" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.youtube.com/user/Wix" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.facebook.com/wix" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/wix" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/Wix" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/wix" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <div class="footer-copy">&copy; 2026 FlyLense. All rights reserved.</div>
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+    <button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1903,24 +1604,22 @@
                 document.getElementById('navbar').classList.add('loaded');
             }, 100);
 
-            // ── Elements ──
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const menuBackdrop = document.getElementById('menuBackdrop');
             const backToTop = document.getElementById('backToTop');
 
-            // ── Scroll events ──
+            // ── Scroll ──
             window.addEventListener('scroll', function() {
                 const scrollY = window.scrollY;
                 navbar.classList.toggle('scrolled', scrollY > 60);
                 backToTop.classList.toggle('visible', scrollY > 600);
             });
 
-            // ── MOBILE MENU TOGGLE (Drawer - matches homepage) ──
+            // ── Mobile Menu ──
             function toggleMenu(forceState) {
                 const isOpen = typeof forceState === 'boolean' ? forceState : !mobileMenu.classList.contains('active');
-
                 if (isOpen) {
                     mobileMenu.classList.add('active');
                     menuBackdrop.classList.add('active');
@@ -1939,23 +1638,19 @@
                     e.stopPropagation();
                     toggleMenu();
                 });
-
                 menuBackdrop.addEventListener('click', function() {
                     toggleMenu(false);
                 });
-
                 mobileMenu.querySelectorAll('a').forEach(function(link) {
                     link.addEventListener('click', function() {
                         toggleMenu(false);
                     });
                 });
-
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                         toggleMenu(false);
                     }
                 });
-
                 document.addEventListener('touchmove', function(e) {
                     if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target)) {
                         e.preventDefault();
@@ -1968,24 +1663,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // ── Smooth scroll for anchor links ──
-            document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href.length > 1) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            const offset = navbar.offsetHeight + 10;
-                            const targetPosition = target.getBoundingClientRect().top + window.scrollY -
-                                offset;
-                            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                        }
-                    }
-                });
-            });
-
-            // ── Reveal observer ──
+            // ── Reveal ──
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
@@ -1998,27 +1676,6 @@
             document.querySelectorAll('.reveal').forEach(function(el) {
                 observer.observe(el);
             });
-
-            // ── Form submission ──
-            window.handleFormSubmit = function(e) {
-                e.preventDefault();
-                const btn = e.target.querySelector('button[type="submit"]');
-                const orig = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-                btn.disabled = true;
-                setTimeout(function() {
-                    btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Sent!';
-                    btn.style.background = '#27c93f';
-                    btn.style.color = '#fff';
-                    e.target.reset();
-                    setTimeout(function() {
-                        btn.innerHTML = orig;
-                        btn.style.background = '';
-                        btn.style.color = '';
-                        btn.disabled = false;
-                    }, 2500);
-                }, 1200);
-            };
 
         });
     </script>
