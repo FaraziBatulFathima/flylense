@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>FlyLense | Cinematic Media Production</title>
-    <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png" />
-    <meta name="description" content="FlyLense - A dynamic media production company specializing in commercial films, brand storytelling, aerial drone footage, corporate videos, and social media content." />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png">
+    <meta name="description" content="FlyLense - A dynamic media production company specializing in commercial films, brand storytelling, aerial drone footage, corporate videos, and social media content.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ── RESET & BASE ── */
         *,
@@ -185,63 +185,59 @@
             background: rgba(0, 116, 246, .25);
             border: 1px solid rgba(0, 116, 246, .35);
         }
-
-        /* ── HAMBURGER (FIXED & BULLETPROOF) ── */
+        .nav-cta {
+            background: var(--gradient-blue);
+            color: #fff !important;
+            font-weight: 600 !important;
+            padding: 0.55rem 1.5rem !important;
+            border-radius: 50px !important;
+            box-shadow: 0 4px 20px rgba(0, 116, 246, 0.4);
+            transition: all var(--transition-bounce) !important;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 116, 246, 0.6) !important;
+        }
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
             z-index: 1001;
-            padding: 10px 14px;
-            background: rgba(0, 0, 0, 0.45);
+            padding: 8px;
+            background: none;
             border: none;
-            border-radius: 10px;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            transition: background 0.3s ease;
-        }
-        .hamburger:hover {
-            background: rgba(0, 0, 0, 0.7);
         }
         .hamburger span {
             display: block;
-            width: 24px;
+            width: 26px;
             height: 2.5px;
-            background: #ffffff;
-            border-radius: 4px;
-            transition: all 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            transform-origin: center;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.35s ease;
         }
-        .navbar.scrolled .hamburger {
-            background: rgba(0, 0, 0, 0.5);
+        .navbar.scrolled .hamburger span {
+            box-shadow: none;
         }
         .hamburger.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
-            width: 26px;
         }
         .hamburger.active span:nth-child(2) {
             opacity: 0;
-            transform: scaleX(0);
+            transform: translateX(-10px);
         }
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -5px);
-            width: 26px;
         }
-
-        /* ── MOBILE MENU ── */
         .mobile-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            height: 100dvh;
-            /* dynamic viewport height */;
-            background: rgba(10, 10, 20, 0.97);
+            background: rgba(10, 10, 20, 0.96);
             backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            z-index: 9999;
+            z-index: 999;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -251,7 +247,6 @@
             visibility: hidden;
             transition: all 0.4s ease;
             pointer-events: none;
-            padding: 2rem;
         }
         .mobile-menu.active {
             opacity: 1;
@@ -259,28 +254,26 @@
             pointer-events: auto;
         }
         .mobile-menu.scrolled-bg {
-            background: rgba(15, 15, 30, 0.98);
+            background: rgba(255, 255, 255, 0.97);
         }
         .mobile-menu a {
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.4rem;
             font-weight: 500;
-            padding: 0.6rem 1.8rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 280px;
-            text-align: center;
+        }
+        .mobile-menu.scrolled-bg a {
+            color: var(--text-secondary);
         }
         .mobile-menu a:hover {
             color: #fff;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
         }
-        .mobile-menu a.active {
-            background: rgba(0, 116, 246, 0.25);
-            color: #fff;
-            border: 1px solid rgba(0, 116, 246, 0.3);
+        .mobile-menu.scrolled-bg a:hover {
+            color: var(--blue);
+            background: rgba(0, 116, 246, 0.06);
         }
         .mobile-cta {
             background: var(--gradient-blue);
@@ -291,11 +284,6 @@
             margin-top: 0.5rem;
             font-size: 1.1rem !important;
             box-shadow: 0 6px 25px rgba(0, 116, 246, 0.4);
-            max-width: 280px !important;
-        }
-        .mobile-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 35px rgba(0, 116, 246, 0.6) !important;
         }
 
         /* ── SLIDER ── */
@@ -382,6 +370,29 @@
             line-height: 1.6;
             margin-bottom: 22px;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+        }
+        .slide-stat-row {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+        .slide-stat {
+            text-align: center;
+        }
+        .slide-stat .s-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+        .slide-stat .s-lbl {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.7);
         }
         .hero-static-content .slide-cta {
             display: inline-flex;
@@ -569,6 +580,37 @@
             object-fit: cover;
             display: block;
         }
+        .about-experience-badge {
+            position: absolute;
+            top: 20px;
+            left: -15px;
+            background: var(--gradient-blue);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 8px 25px rgba(0, 116, 246, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 700;
+            z-index: 3;
+            transition: all var(--transition-bounce);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+        .about-experience-badge:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 14px 40px rgba(0, 116, 246, 0.55);
+        }
+        .about-experience-badge .years {
+            font-size: 2rem;
+            line-height: 1;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .about-experience-badge .text {
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
         .about-text {
             padding-left: 1rem;
         }
@@ -737,86 +779,65 @@
             color: var(--blue-dark);
         }
 
-        /* ── PORTFOLIO ── */
-        #portfolio {
-            background: var(--bg-primary);
-        }
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-        .portfolio-item {
-            position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            box-shadow: var(--shadow-card);
-            transition: all var(--transition-smooth);
-        }
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--blue);
-            box-shadow: var(--shadow-elevated), var(--shadow-blue);
-        }
-        .portfolio-item-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .portfolio-item:hover .portfolio-item-image {
-            transform: scale(1.06);
-        }
-        .portfolio-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.3rem;
-            opacity: 0;
-            transition: opacity var(--transition-smooth);
-        }
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-        .portfolio-overlay-info h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-        .portfolio-overlay-info span {
-            font-size: 0.78rem;
-            color: var(--blue-light);
-            letter-spacing: 0.03em;
-        }
-        .video-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            z-index: 3;
-            backdrop-filter: blur(6px);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-        .portfolio-cta {
-            text-align: center;
-            margin-top: 2.5rem;
-        }
+        /* ── PORTFOLIO (UPDATED: 4 VIDEOS IN ROW) ── */
+        /* ── PORTFOLIO (MATCHING EXTERNAL PAGE LAYOUT) ── */
+#portfolio {
+    background-color: #000; /* Black background to match the 2nd file */
+    padding: 60px 20px;
+}
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible responsive grid */
+    gap: 40px;
+}
+.portfolio-item {
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    aspect-ratio: auto; /* Reset the fixed aspect-ratio */
+    border: none;
+    padding: 0;
+}
+.portfolio-item:hover {
+    transform: translateY(-5px);
+}
+.portfolio-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Perfect 16:9 ratio for YouTube iframes */
+}
+.portfolio-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.portfolio-content {
+    padding: 15px;
+}
+.portfolio-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #fff;
+}
+.portfolio-content p {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.portfolio-title {
+    color: #fff;
+}
+/* Remove old elements */
+.portfolio-item-video,
+.portfolio-overlay,
+.video-badge {
+    display: none !important;
+}
         .btn-outline {
             background: transparent;
             color: var(--text-primary);
@@ -836,6 +857,59 @@
             color: var(--blue);
             background: rgba(0, 116, 246, 0.05);
             transform: translateY(-3px);
+        }
+
+        /* ── CTA BANNER ── */
+        .cta-banner-section {
+            padding: 20px 2rem;
+            background: var(--bg-primary);
+        }
+        .cta-banner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            background: var(--gradient-blue);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35);
+            transition: all var(--transition-smooth);
+        }
+        .cta-banner:hover {
+            box-shadow: 0 14px 45px rgba(0, 116, 246, 0.5);
+            transform: translateY(-2px);
+        }
+        .cta-banner-text h2 {
+            font-weight: 700;
+            font-size: 2rem;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+        .cta-banner-text h4 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .btn-cta-white {
+            background: #fff;
+            color: #0074f6;
+            padding: 18px 32px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: all var(--transition-bounce);
+        }
+        .btn-cta-white:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            background: #f0f4ff;
         }
 
         /* ── BRAND GRID ── */
@@ -1313,11 +1387,9 @@
             transition-delay: 0.54s;
         }
 
-        /* ════════════════════════════════════════════ */
-        /* ── RESPONSIVE STYLES (FULLY FIXED) ── */
-        /* ════════════════════════════════════════════ */
+        /* ── RESPONSIVE ── */
 
-        /* ── 1200px ── */
+        /* 1200px */
         @media (max-width: 1200px) {
             .brand-grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -1329,7 +1401,7 @@
             }
         }
 
-        /* ── 1024px ── */
+        /* 1024px */
         @media (max-width: 1024px) {
             .fade-slider {
                 height: 70vh;
@@ -1358,6 +1430,10 @@
                 max-width: 500px;
                 margin: 0 auto;
             }
+            .about-experience-badge {
+                left: 0;
+                top: 15px;
+            }
             .about-text {
                 padding-left: 0;
             }
@@ -1365,11 +1441,15 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
             }
             .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+            }
+            .cta-banner {
+                flex-direction: column;
+                text-align: center;
             }
             .video-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1403,20 +1483,17 @@
             }
         }
 
-        /* ── 768px (TABLET & MOBILE ─ HAMBURGER APPEARS) ── */
+        /* 768px */
         @media (max-width: 768px) {
             :root {
                 --nav-height: 64px;
             }
-
-            /* ─── HAMBURGER VISIBLE ─── */
-            .hamburger {
-                display: flex !important;
-            }
             .nav-links {
-                display: none !important;
+                display: none;
             }
-
+            .hamburger {
+                display: flex;
+            }
             .navbar-container {
                 padding: 0 1.2rem;
             }
@@ -1444,7 +1521,7 @@
                 gap: 1.2rem;
             }
             .portfolio-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* 1 column on mobile */
                 gap: 1rem;
             }
             .form-row {
@@ -1463,6 +1540,19 @@
             .portfolio-overlay {
                 opacity: 1;
                 background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+            }
+            .cta-banner {
+                padding: 1.5rem;
+            }
+            .cta-banner-text h2 {
+                font-size: 1.3rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 1rem;
+            }
+            .btn-cta-white {
+                padding: 14px 24px;
+                font-size: 0.9rem;
             }
             .brand-carousel {
                 padding: 35px 0;
@@ -1550,15 +1640,9 @@
             .contact-info h3 {
                 font-size: 1.3rem;
             }
-
-            /* Mobile menu links — larger tap targets */
-            .mobile-menu a {
-                font-size: 1.3rem;
-                padding: 0.7rem 1.5rem;
-            }
         }
 
-        /* ── 576px ── */
+        /* 576px */
         @media (max-width: 576px) {
             .video-grid {
                 grid-template-columns: 1fr;
@@ -1600,20 +1684,9 @@
             .section-subtitle {
                 font-size: 0.85rem;
             }
-            .hamburger {
-                padding: 8px 12px;
-            }
-            .hamburger span {
-                width: 22px;
-                height: 2.5px;
-            }
-            .hamburger.active span:nth-child(1),
-            .hamburger.active span:nth-child(3) {
-                width: 24px;
-            }
         }
 
-        /* ── 480px ── */
+        /* 480px */
         @media (max-width: 480px) {
             .fade-slider {
                 height: 55vh;
@@ -1761,26 +1834,29 @@
                 bottom: 1.2rem;
                 right: 1.2rem;
             }
+            .cta-banner {
+                padding: 1.2rem;
+                border-radius: var(--radius-md);
+            }
+            .cta-banner-text h2 {
+                font-size: 1.1rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 0.85rem;
+            }
+            .btn-cta-white {
+                padding: 12px 20px;
+                font-size: 0.8rem;
+            }
             .about-text h3 {
                 font-size: 1.3rem;
             }
             .contact-form {
                 padding: 1.2rem;
             }
-            .hamburger {
-                padding: 6px 10px;
-            }
-            .hamburger span {
-                width: 20px;
-                height: 2px;
-            }
-            .mobile-menu a {
-                font-size: 1.1rem;
-                padding: 0.6rem 1.2rem;
-            }
         }
 
-        /* ── 360px ── */
+        /* 360px */
         @media (max-width: 360px) {
             .fade-slider {
                 height: 50vh;
@@ -1836,28 +1912,16 @@
             .stat-label {
                 font-size: 0.7rem;
             }
-            .hamburger {
-                padding: 5px 8px;
-                gap: 4px;
-            }
-            .hamburger span {
-                width: 18px;
-                height: 2px;
-            }
-            .mobile-menu a {
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- ===== NAVBAR ===== -->
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <a href="index.html" class="nav-logo">
-                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" />
-                <img class="logo-title" src="img/title.png" alt="FlyLense" />
+                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo">
+                <img class="logo-title" src="img/title.png" alt="FlyLense">
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
@@ -1868,27 +1932,15 @@
                 <li><a href="blogs.html">Blogs</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <!-- HAMBURGER — now visible on mobile with dark background -->
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
         </div>
     </nav>
-
-    <!-- ===== MOBILE MENU ===== -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="service.html">Services</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="industry.html">Industries</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="contact.html" class="mobile-cta">Contact</a>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="service.html">Services</a>
+        <a href="portfolio.html">Portfolio</a><a href="industry.html">Industries</a><a href="contact.html">Contact</a>
     </div>
 
-    <!-- ===== SLIDER ===== -->
+    <!-- Slider -->
     <section class="hero-slider-wrapper" id="home">
         <div class="fade-slider" id="fadeSlider">
             <div class="fade-slide" style="background-image: url('assets/images/slider/1.jpg');"><div class="slide-overlay"></div></div>
@@ -1899,14 +1951,13 @@
             <div class="hero-static-content" id="heroContent">
                 <span class="slide-tag">Cinematic Excellence</span>
                 <h1 class="slide-heading">Every Frame Tells a Story</h1>
-                <p class="slide-desc">Precision-crafted visuals that captivate audiences and elevate your brand.</p>
-                <br />
+                <p class="slide-desc">Precision-crafted visuals that captivate audiences and elevate your brand.</p><br>
                 <a href="contact.html" class="slide-cta">Start Your Project <i class="fa-solid fa-paper-plane"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- ===== STATS RIBBON ===== -->
+    <!-- Stats Ribbon -->
     <div class="stats-ribbon">
         <div class="stats-ribbon-inner reveal reveal-up">
             <div class="stat-item delay-1"><div class="stat-number" data-count="500">0</div><div class="stat-label">Projects Delivered</div></div>
@@ -1916,7 +1967,7 @@
         </div>
     </div>
 
-    <!-- ===== BRANDS ===== -->
+    <!-- Brand Section -->
     <section class="brand-carousel" id="brands">
         <div class="section-header reveal reveal-up">
             <span class="section-tag">Trusted by</span>
@@ -1924,28 +1975,28 @@
             <div class="section-divider"></div>
         </div>
         <div class="brand-grid">
-            <div class="brand-item"><img src="img/clients/1.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/2.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/3.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/4.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/5.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/6.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/7.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/8.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/9.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/10.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/11.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/12.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/13.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/14.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/15.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/16.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/17.png" alt="" /></div>
-            <div class="brand-item"><img src="img/clients/3.png" alt="" /></div>
+            <div class="brand-item"><img src="img/clients/1.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/2.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/3.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/4.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/5.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/6.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/7.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/8.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/9.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/10.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/11.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/12.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/13.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/14.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/15.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/16.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/17.png" alt=""></div>
+            <div class="brand-item"><img src="img/clients/3.png" alt=""></div>
         </div>
     </section>
 
-    <!-- ===== VIDEO SHOWCASE ===== -->
+    <!-- Video Showcase -->
     <section class="section video-showcase-section">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -1957,7 +2008,7 @@
             <div class="video-grid">
                 <div class="video-card span-2-both reveal reveal-scale delay-1">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Luxury Villa Tour</span>
@@ -1965,7 +2016,7 @@
                 </div>
                 <div class="video-card reveal reveal-scale delay-2">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Food%20&%20Restaurent/Videos/Barbeque%20Spice%20Reel%2001.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Food%20&%20Restaurent/Videos/Barbeque%20Spice%20Reel%2001.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Hotel Brand Film</span>
@@ -1973,7 +2024,7 @@
                 </div>
                 <div class="video-card reveal reveal-scale delay-3">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Corporate HQ Reveal</span>
@@ -1981,7 +2032,7 @@
                 </div>
                 <div class="video-card span-2-col reveal reveal-scale delay-4">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Wedding Cinema</span>
@@ -1989,7 +2040,7 @@
                 </div>
                 <div class="video-card reveal reveal-scale delay-5">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Product Launch</span>
@@ -1997,7 +2048,7 @@
                 </div>
                 <div class="video-card reveal reveal-scale delay-6">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Food%20&%20Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Food%20&%20Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Festival Aftermovie</span>
@@ -2005,7 +2056,7 @@
                 </div>
                 <div class="video-card span-2-col reveal reveal-scale delay-7">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
-                        <source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4" />
+                        <source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Brand Documentary</span>
@@ -2015,7 +2066,7 @@
         </div>
     </section>
 
-    <!-- ===== ABOUT ===== -->
+    <!-- About -->
     <section class="section" id="about">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -2027,7 +2078,7 @@
             <div class="about-grid">
                 <div class="about-image-block reveal reveal-left">
                     <div class="about-image-main">
-                        <img src="img/3.png" alt="FlyLense team" />
+                        <img src="img/3.png" alt="FlyLense team">
                     </div>
                 </div>
                 <div class="about-text reveal reveal-right">
@@ -2044,7 +2095,7 @@
         </div>
     </section>
 
-    <!-- ===== SERVICES ===== -->
+    <!-- Services -->
     <section class="section" id="services">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -2055,78 +2106,108 @@
             </div>
             <div class="services-grid">
                 <div class="service-card reveal reveal-scale delay-1">
-                    <div class="service-card-image"><img src="assets/images/Education/1.AVIF" alt="Education" /></div>
+                    <div class="service-card-image"><img src="assets/images/Education/1.AVIF" alt="Education"></div>
                     <div class="service-card-body"><h3>EDUCATION</h3><p>Bringing education to life with creative media that informs, engages, and inspires.</p><a href="Service.html" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
                 </div>
                 <div class="service-card reveal reveal-scale delay-2">
-                    <div class="service-card-image"><img src="assets/images/Education/1.png" alt="School" /></div>
+                    <div class="service-card-image"><img src="assets/images/Education/1.png" alt="School"></div>
                     <div class="service-card-body"><h3>SCHOOL</h3><p>Partnering with schools to transform ideas into engaging stories that leave a lasting impact.</p><a href="Service.html" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
                 </div>
                 <div class="service-card reveal reveal-scale delay-3">
-                    <div class="service-card-image"><img src="assets/images/Food & Restaurent/5.AVIF" alt="Food" /></div>
+                    <div class="service-card-image"><img src="assets/images/Food & Restaurent/5.AVIF" alt="Food"></div>
                     <div class="service-card-body"><h3>FOOD</h3><p>Captivating food visuals and creative storytelling that attract customers and elevate your brand.</p><a href="Service.html" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
                 </div>
                 <div class="service-card reveal reveal-scale delay-4">
-                    <div class="service-card-image"><img src="assets/images/Food & Restaurent/7.AVIF" alt="Restaurant" /></div>
+                    <div class="service-card-image"><img src="assets/images/Food & Restaurent/7.AVIF" alt="Restaurant"></div>
                     <div class="service-card-body"><h3>RESTAURANT</h3><p>Crafting delicious visual experiences that turn first impressions into loyal customers.</p><a href="Service.html" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
                 </div>
                 <div class="service-card reveal reveal-scale delay-5">
-                    <div class="service-card-image"><img src="assets/images/Jwellery/6.AVIF" alt="Jewellery" /></div>
+                    <div class="service-card-image"><img src="assets/images/Jwellery/6.AVIF" alt="Jewellery"></div>
                     <div class="service-card-body"><h3>JEWELLERY</h3><p>Bringing fine jewellery to life through cinematic visuals and elegant brand experiences.</p><a href="Service.html" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
                 </div>
                 <div class="service-card reveal reveal-scale delay-6">
-                    <div class="service-card-image"><img src="assets/images/Landscape/1.png" alt="Landscape" /></div>
+                    <div class="service-card-image"><img src="assets/images/Landscape/1.png" alt="Landscape"></div>
                     <div class="service-card-body"><h3>LANDSCAPE</h3><p>From gardens to grand landscapes, we craft visuals that inspire and connect.</p><a href="Service.html" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== PORTFOLIO ===== -->
+    <!-- Portfolio (UPDATED: 4 Videos in One Row) -->
     <section class="section" id="portfolio">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
                 <span class="section-tag">Our Work</span>
-                <h2 class="section-title">Portfolio</h2>
+                <h2 class="section-title" style="color: white;">Portfolio</h2>
                 <div class="section-divider"></div>
                 <p class="section-subtitle">A curated selection of projects that showcase our passion for visual storytelling.</p>
             </div>
             <div class="portfolio-grid">
-                <div class="portfolio-item reveal reveal-scale delay-1">
-                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/summit/800/500" alt="Summit Adventures" />
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Summit Adventures</h4><span>Commercial • 2025</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-2">
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/urban/800/500" alt="Urban Horizons" />
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Urban Horizons</h4><span>Brand Film • 2025</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-3">
-                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/ocean/800/500" alt="Ocean's Edge" />
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Ocean's Edge</h4><span>Aerial • 2024</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-4">
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/technova/800/500" alt="TechNova Corp" />
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>TechNova Corp</h4><span>Corporate • 2024</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-5">
-                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/luxe/800/500" alt="Luxe Launch" />
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Luxe Launch</h4><span>Social Media • 2025</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-6">
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/greenfuture/800/500" alt="Green Future" />
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Green Future</h4><span>Documentary • 2024</span></div></div>
-                </div>
-            </div>
-            <div class="portfolio-cta reveal reveal-up delay-3">
-                <a href="portfolio.html" class="btn btn-outline"><i class="fa-solid fa-folder-open"></i> View Full Portfolio</a>
-            </div>
+    <!-- Video 1 -->
+    <div class="portfolio-item reveal reveal-scale delay-1">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/gPT_pgNJ55I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="VIP’s International School"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>VIP’s International School</h3>
+            <p>A heartwarming visual campaign capturing the spirit of learning, care, and community at VIP’s International School. From classrooms to smiles, we brought their story to life.</p>
+        </div>
+    </div>
+    <!-- Video 2 -->
+    <div class="portfolio-item reveal reveal-scale delay-2">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/GEdQxYsXfaQ?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="Oakridge International School"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>Oakridge International School</h3>
+            <p>A cinematic journey showcasing Oakridge’s excellence in education, innovation, and student empowerment. We captured the vibrant campus life, inspiring teachers, and future-ready learners.</p>
+        </div>
+    </div>
+    <!-- Video 3 -->
+    <div class="portfolio-item reveal reveal-scale delay-3">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/RNqbai7vk5I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="Furniture World"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>Furniture World</h3>
+            <p>At Furniture World, we offer elegant, functional furniture that transforms your living spaces. Our designs combine style with comfort, providing timeless solutions for every room.</p>
+        </div>
+    </div>
+    <!-- Video 4 -->
+    <div class="portfolio-item reveal reveal-scale delay-4">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/6yp347JWb3o?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="Maaya Luxury Convention"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>Maaya Luxury Convention</h3>
+            <p>An elegant visual showcase of grandeur, celebration, and timeless moments at Maaya Luxury Convention. From luxurious decor to unforgettable events, we captured its charm in every frame.</p>
+        </div>
+    </div>
+</div>
         </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
+    <!-- Contact -->
     <section class="section" id="contact">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -2154,12 +2235,12 @@
                 </div>
                 <form class="contact-form reveal reveal-right" id="contactForm" onsubmit="handleFormSubmit(event)">
                     <div class="form-row">
-                        <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="John" required /></div>
-                        <div class="form-group"><label>Last Name *</label><input type="text" id="lastName" placeholder="Doe" required /></div>
+                        <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="John" required></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="lastName" placeholder="Doe" required></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="john@example.com" required /></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000" /></div>
+                        <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="john@example.com" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000"></div>
                     </div>
                     <div class="form-group">
                         <label>Service Interested In *</label>
@@ -2180,7 +2261,7 @@
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
@@ -2201,14 +2282,13 @@
     <button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // ── Navbar intro ──
+        (function() {
+            // Navbar intro
             setTimeout(() => {
                 document.getElementById('navbar').classList.add('loaded');
             }, 100);
 
-            // ── Hero content intro ──
+            // Hero content intro
             const heroContent = document.getElementById('heroContent');
             if (heroContent) {
                 setTimeout(() => {
@@ -2216,13 +2296,10 @@
                 }, 350);
             }
 
-            // ── Elements ──
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const backToTop = document.getElementById('backToTop');
-
-            // ── Slider ──
             const slides = document.querySelectorAll('.fade-slide');
             let currentSlide = 0;
             const slideInterval = 3000;
@@ -2242,7 +2319,6 @@
                 slideTimer = setInterval(nextSlide, slideInterval);
             }
             if (slides.length > 1) startTimer();
-
             const slider = document.getElementById('fadeSlider');
             if (slider) {
                 slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
@@ -2251,19 +2327,17 @@
                 slider.addEventListener('touchend', startTimer);
             }
 
-            // ── Scroll events ──
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
                 navbar.classList.toggle('scrolled', scrollY > 60);
                 mobileMenu.classList.toggle('scrolled-bg', scrollY > 60);
                 backToTop.classList.toggle('visible', scrollY > 600);
 
-                // Active nav link
                 const sections = document.querySelectorAll('section[id], .hero-slider-wrapper[id]');
                 let current = 'home';
                 sections.forEach(sec => {
                     const top = sec.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight -
-                        100;
+                    100;
                     if (scrollY >= top && scrollY < top + sec.offsetHeight) {
                         const id = sec.getAttribute('id');
                         if (id) current = id;
@@ -2273,7 +2347,6 @@
                     link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
                 });
 
-                // Stats counter
                 const stats = document.querySelector('.stats-ribbon');
                 if (stats && stats.getBoundingClientRect().top < window.innerHeight && !stats.dataset
                     .animated) {
@@ -2295,85 +2368,59 @@
                 }
             });
 
-            // ── HAMBURGER MENU TOGGLE (FIXED & RELIABLE) ──
-            if (hamburger && mobileMenu) {
-                hamburger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    this.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-                });
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }));
 
-                // Close menu when a link is clicked
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        hamburger.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    });
-                });
-
-                // Close menu on outside click (optional)
-                document.addEventListener('click', function(e) {
-                    if (mobileMenu.classList.contains('active') &&
-                        !mobileMenu.contains(e.target) &&
-                        !hamburger.contains(e.target)) {
-                        hamburger.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-
-            // ── Smooth scroll for anchor links ──
             document.querySelectorAll('a[href^="#"]').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
                     if (href.length > 1) {
                         e.preventDefault();
                         const target = document.querySelector(href);
-                        if (target) {
-                            window.scrollTo({
-                                top: target.getBoundingClientRect().top + window.scrollY - navbar
-                                    .offsetHeight - 10,
-                                behavior: 'smooth'
-                            });
-                        }
+                        if (target) window.scrollTo({
+                            top: target.getBoundingClientRect().top + window.scrollY - navbar
+                                .offsetHeight - 10,
+                            behavior: 'smooth'
+                        });
                     }
                 });
             });
 
-            // ── Back to top ──
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            // ── Reveal animations (Intersection Observer) ──
-            const revealObserver = new IntersectionObserver((entries) => {
+            // Intersection Observer for reveal
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
-                        revealObserver.unobserve(entry.target);
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // ── Brand grid stagger ──
+            // Brand grid stagger
             const brandGrid = document.querySelector('.brand-grid');
             if (brandGrid) {
                 const brandObserver = new IntersectionObserver((entries) => {
                     if (entries[0].isIntersecting) {
-                        document.querySelectorAll('.brand-item').forEach((item, i) => {
-                            setTimeout(() => item.classList.add('show'), i * 80);
-                        });
+                        document.querySelectorAll('.brand-item').forEach((item, i) => setTimeout(() =>
+                            item.classList.add('show'), i * 80));
                         brandObserver.unobserve(brandGrid);
                     }
                 }, { threshold: 0.25 });
                 brandObserver.observe(brandGrid);
             }
 
-            // ── Contact form ──
+            // Contact form
             window.handleFormSubmit = function(e) {
                 e.preventDefault();
                 const btn = e.target.querySelector('button[type="submit"]');
@@ -2394,7 +2441,7 @@
                 }, 1200);
             };
 
-            // ── Video playback ──
+            // Video playback
             const videoCards = document.querySelectorAll('.video-card');
             videoCards.forEach(card => {
                 const video = card.querySelector('video.video-bg');
@@ -2432,7 +2479,7 @@
                     updatePlayIcon(false);
                 }
 
-                playBtn.addEventListener('click', function(e) {
+                playBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     if (video.paused) {
                         playThisVideo();
@@ -2441,7 +2488,7 @@
                     }
                 });
 
-                card.addEventListener('click', function(e) {
+                card.addEventListener('click', (e) => {
                     if (e.target.closest('.video-play-btn')) return;
                     if (video.paused) {
                         playThisVideo();
@@ -2454,8 +2501,7 @@
                 video.addEventListener('pause', () => updatePlayIcon(false));
                 video.addEventListener('play', () => updatePlayIcon(true));
             });
-
-        }); // end DOMContentLoaded
+        })();
     </script>
 </body>
 </html>
