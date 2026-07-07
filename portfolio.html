@@ -559,7 +559,6 @@
             z-index: 2;
         }
 
-        /* Slide tag (inherited from homepage slider) */
         .slide-tag {
             display: inline-block;
             font-size: 0.75rem;
@@ -732,52 +731,98 @@
             color: var(--text-primary);
         }
 
-        /* ── LOGOS SECTION ── */
-        .logos-section {
-            padding: 4rem 2rem;
-            background: var(--bg-secondary);
+        /* ── BRAND CAROUSEL (matches homepage exactly) ── */
+        .brand-carousel {
+            background: #fff;
+            padding: 90px 0;
+            overflow: hidden;
         }
-        .logos-container {
+        .brand-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 55px 45px;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        .brand-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .brand-item img {
+            max-width: 250px;
+            max-height: 100px;
+            object-fit: contain;
+            transition: .35s;
+        }
+        .brand-item:hover img {
+            transform: scale(1.08);
+        }
+        .brand-item.show {
+            animation: brandReveal .8s ease forwards;
+        }
+        @keyframes brandReveal {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── SECTION COMMONS ── */
+        .section {
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-container {
             max-width: var(--max-width);
             margin: 0 auto;
         }
-        .logos-container>h2 {
+        .section-header {
             text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 3.5rem;
         }
-        .logos-container>p {
-            text-align: center;
+        .section-tag {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+        .section-subtitle {
             color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
-        .logos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .section-divider {
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-blue);
+            border-radius: 3px;
+            margin: 1rem auto;
+            transition: width var(--transition-bounce);
         }
-        .logo-card {
-            background: #fff;
-            border-radius: var(--radius-md);
-            padding: 1rem;
-            box-shadow: var(--shadow-card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-smooth);
-            cursor: default;
-            border: 1px solid var(--border);
-        }
-        .logo-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-blue);
-            border-color: var(--blue-light);
-        }
-        .logo-card img {
-            max-width: 100%;
-            max-height: 80px;
-            object-fit: contain;
+        .section-header:hover .section-divider {
+            width: 80px;
         }
 
         /* ── CTA BANNER ── */
@@ -930,15 +975,22 @@
         }
 
         /* ════════════════════════════════════════════ */
-        /* ── RESPONSIVE STYLES (matches about page) ── */
+        /* ── RESPONSIVE STYLES ── */
         /* ════════════════════════════════════════════ */
 
-        /* ── 1200px ── */
+        /* 1200px */
         @media (max-width: 1200px) {
-            /* no changes */
+            .brand-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 40px 30px;
+            }
+            .brand-item img {
+                max-width: 150px;
+                max-height: 80px;
+            }
         }
 
-        /* ── 1024px ── */
+        /* 1024px */
         @media (max-width: 1024px) {
             .portfolio-hero {
                 height: 400px;
@@ -949,7 +1001,7 @@
             }
         }
 
-        /* ── 768px (HAMBURGER APPEARS) ── */
+        /* 768px (HAMBURGER APPEARS) */
         @media (max-width: 768px) {
             :root {
                 --nav-height: 64px;
@@ -1008,21 +1060,16 @@
                 font-size: 2.5rem;
             }
 
-            .logos-section {
-                padding: 2.5rem 1rem;
+            .brand-carousel {
+                padding: 60px 0;
             }
-            .logos-container>h2 {
-                font-size: 1.6rem;
+            .brand-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 35px 25px;
             }
-            .logos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 1rem;
-            }
-            .logo-card {
-                padding: 0.8rem;
-            }
-            .logo-card img {
-                max-height: 60px;
+            .brand-item img {
+                max-width: 120px;
+                max-height: 70px;
             }
 
             .cta-banner {
@@ -1077,7 +1124,7 @@
             }
         }
 
-        /* ── 576px ── */
+        /* 576px */
         @media (max-width: 576px) {
             .navbar.scrolled {
                 height: 80px;
@@ -1094,7 +1141,6 @@
                 height: 32px !important;
             }
 
-            /* ── HERO ── */
             .portfolio-hero {
                 height: 380px !important;
                 padding: 0 1.2rem;
@@ -1114,7 +1160,6 @@
                 margin-bottom: 10px;
             }
 
-            /* ── FILTER ── */
             .filter-section {
                 padding: 0.8rem 0.8rem 1.2rem !important;
             }
@@ -1128,7 +1173,6 @@
                 flex: 0 1 auto;
             }
 
-            /* ── PORTFOLIO GRID ── */
             .portfolio-section {
                 padding: 1.5rem 0.8rem 3rem !important;
             }
@@ -1149,28 +1193,18 @@
                 font-size: 0.85rem;
             }
 
-            /* ── LOGOS ── */
-            .logos-section {
-                padding: 2rem 0.8rem !important;
+            .brand-carousel {
+                padding: 35px 0 !important;
             }
-            .logos-container>h2 {
-                font-size: 1.3rem !important;
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 30px 20px !important;
             }
-            .logos-container>p {
-                font-size: 0.85rem;
-            }
-            .logos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-                gap: 0.8rem;
-            }
-            .logo-card {
-                padding: 0.5rem;
-            }
-            .logo-card img {
-                max-height: 45px;
+            .brand-item img {
+                max-width: 100px !important;
+                max-height: 60px !important;
             }
 
-            /* ── CTA ── */
             .cta-banner {
                 flex-direction: column !important;
                 text-align: center !important;
@@ -1189,7 +1223,6 @@
                 justify-content: center;
             }
 
-            /* ── FOOTER ── */
             .footer {
                 padding: 2rem 1rem !important;
             }
@@ -1246,7 +1279,7 @@
             }
         }
 
-        /* ── 480px ── */
+        /* 480px */
         @media (max-width: 480px) {
             .navbar.scrolled {
                 height: 80px;
@@ -1263,7 +1296,6 @@
                 height: 35px !important;
             }
 
-            /* ── HERO ── */
             .portfolio-hero {
                 height: 420px !important;
                 padding: 0 1rem;
@@ -1276,14 +1308,12 @@
                 padding: 0 0.3rem;
             }
 
-            /* ── FILTER ── */
             .filter-btn {
                 font-size: 0.8rem;
                 padding: 0.35rem 0.8rem;
                 min-width: 50px;
             }
 
-            /* ── PORTFOLIO ── */
             .portfolio-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.6rem;
@@ -1295,16 +1325,15 @@
                 font-size: 0.78rem;
             }
 
-            /* ── LOGOS ── */
-            .logos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-                gap: 0.6rem;
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 25px 15px !important;
             }
-            .logo-card img {
-                max-height: 35px;
+            .brand-item img {
+                max-width: 85px !important;
+                max-height: 50px !important;
             }
 
-            /* ── CTA ── */
             .cta-banner {
                 padding: 1.2rem !important;
             }
@@ -1319,7 +1348,6 @@
                 font-size: 0.8rem !important;
             }
 
-            /* ── FOOTER ── */
             .footer {
                 padding: 1.5rem 0.8rem !important;
             }
@@ -1367,7 +1395,7 @@
             }
         }
 
-        /* ── 360px ── */
+        /* 360px */
         @media (max-width: 360px) {
             .navbar.scrolled {
                 height: 80px;
@@ -1384,7 +1412,6 @@
                 height: 24px !important;
             }
 
-            /* ── HERO ── */
             .portfolio-hero {
                 height: 440px !important;
                 padding: 0 0.8rem;
@@ -1401,14 +1428,12 @@
                 padding: 3px 12px !important;
             }
 
-            /* ── FILTER ── */
             .filter-btn {
                 font-size: 0.8rem;
                 padding: 0.25rem 0.6rem;
                 min-width: 40px;
             }
 
-            /* ── PORTFOLIO ── */
             .portfolio-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
@@ -1423,19 +1448,15 @@
                 font-size: 0.7rem;
             }
 
-            /* ── LOGOS ── */
-            .logos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-                gap: 0.5rem;
+            .brand-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px 12px !important;
             }
-            .logo-card {
-                padding: 0.4rem;
-            }
-            .logo-card img {
-                max-height: 30px;
+            .brand-item img {
+                max-width: 75px !important;
+                max-height: 45px !important;
             }
 
-            /* ── CTA ── */
             .cta-banner {
                 padding: 1rem !important;
             }
@@ -1450,7 +1471,6 @@
                 font-size: 0.7rem !important;
             }
 
-            /* ── FOOTER ── */
             .footer {
                 padding: 1.2rem 0.6rem !important;
             }
@@ -1511,7 +1531,7 @@
 </head>
 <body>
 
-    <!-- ── FLOATING SOCIAL ICONS (inherited from homepage) ── -->
+    <!-- ── FLOATING SOCIAL ICONS ── -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
@@ -1525,7 +1545,7 @@
         </a>
     </div>
 
-    <!-- ===== NAVBAR (matches homepage & about) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <a href="index.html" class="nav-logo">
@@ -1552,7 +1572,7 @@
     <!-- Menu Backdrop -->
     <div class="menu-backdrop" id="menuBackdrop"></div>
 
-    <!-- ===== MOBILE MENU (DRAWER - matches homepage) ===== -->
+    <!-- ===== MOBILE MENU ===== -->
     <div class="mobile-menu" id="mobileMenu"><br><br>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -1566,7 +1586,7 @@
         </div>
     </div>
 
-    <!-- ===== HERO (with slide tag) ===== -->
+    <!-- ===== HERO ===== -->
     <section class="portfolio-hero">
         <span class="slide-tag">Our Work</span>
         <h1 class="reveal reveal-up">Our Portfolio</h1>
@@ -1591,13 +1611,14 @@
         </div>
     </section>
 
-    <!-- ===== TRUSTED BRANDS ===== -->
-    <section class="logos-section" id="logos">
-        <div class="logos-container reveal reveal-up">
-            <h2>Trusted Brands</h2>
-            <p>A selection of clients we've proudly worked with.</p>
-            <div class="logos-grid" id="logosGrid"></div>
+    <!-- ===== BRAND CAROUSEL (populated from logoFiles) ===== -->
+    <section class="brand-carousel" id="brands">
+        <div class="section-header reveal reveal-up">
+            <span class="section-tag">Trusted by</span>
+            <h2 class="section-title">Brands We've Worked With</h2>
+            <div class="section-divider"></div>
         </div>
+        <div class="brand-grid" id="brandGrid"></div>
     </section>
 
     <!-- ===== CTA BANNER ===== -->
@@ -1612,7 +1633,7 @@
     </section>
     <br /><br />
 
-    <!-- ===== FOOTER (matches homepage) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
@@ -1659,7 +1680,7 @@
                 backToTop.classList.toggle('visible', scrollY > 600);
             });
 
-            // ── MOBILE MENU TOGGLE (Drawer - matches homepage) ──
+            // ── MOBILE MENU TOGGLE ──
             function toggleMenu(forceState) {
                 const isOpen = typeof forceState === 'boolean' ? forceState : !mobileMenu.classList.contains('active');
 
@@ -1856,8 +1877,26 @@
                 });
             });
 
-            // ── Logos data ──
-            var logoFiles = {
+            // ── Reveal observer ──
+            function observeRevealItems() {
+                var reveals = document.querySelectorAll('.reveal');
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+                reveals.forEach(function(el) { observer.observe(el); });
+            }
+
+            renderItems('all');
+
+            // ────────────────────────────────────────────────
+            // ── BRAND GRID – populate from logoFiles ──
+            // ────────────────────────────────────────────────
+            const logoFiles = {
                 Education: ["3nd expo logo.jpg", "4th expo logo.jpg", "akshrs logo.jpg", "brirhtfield logo.jpg",
                     "dawn school logo.jpg", "expo logo.jpg", "focus logo.jpg", "full stack academy logo.jpg",
                     "gems logo.jpg", "global logo.jpg", "hyderabad international school logo.jpg",
@@ -1883,39 +1922,42 @@
                 ]
             };
 
-            var logosGrid = document.getElementById('logosGrid');
-
-            function renderLogos() {
-                logosGrid.innerHTML = '';
-                for (var cat in logoFiles) {
-                    logoFiles[cat].forEach(function(file) {
-                        var img = document.createElement('div');
-                        img.className = 'logo-card reveal reveal-scale';
-                        img.innerHTML = '<img src="assets/Logos/' + cat + '/' + file +
-                            '" alt="' + cat +
-                            ' logo" onerror="this.parentElement.style.display=\'none\'">';
-                        logosGrid.appendChild(img);
+            // Flatten all logos into an array with category and path
+            const allLogos = [];
+            for (const category in logoFiles) {
+                logoFiles[category].forEach(function(file) {
+                    allLogos.push({
+                        category: category,
+                        path: 'assets/Logos/' + category + '/' + file
                     });
-                }
-                observeRevealItems();
-            }
-            renderLogos();
-
-            // ── Reveal observer ──
-            function observeRevealItems() {
-                var reveals = document.querySelectorAll('.reveal');
-                var observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('revealed');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-                reveals.forEach(function(el) { observer.observe(el); });
+                });
             }
 
-            renderItems('all');
+            const brandGrid = document.getElementById('brandGrid');
+            if (brandGrid) {
+                brandGrid.innerHTML = '';
+                allLogos.forEach(function(logo, index) {
+                    const div = document.createElement('div');
+                    div.className = 'brand-item';
+                    div.innerHTML =
+                        '<img src="' + logo.path + '" alt="' + logo.category + ' logo" onerror="this.parentElement.style.display=\'none\'">';
+                    brandGrid.appendChild(div);
+                });
+
+                // ── Brand reveal animation (same as homepage) ──
+                const brandObserver = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        document.querySelectorAll('.brand-item').forEach(function(item, i) {
+                            setTimeout(function() {
+                                item.classList.add('show');
+                            }, i * 80);
+                        });
+                        brandObserver.unobserve(brandGrid);
+                    }
+                }, { threshold: 0.25 });
+                brandObserver.observe(brandGrid);
+            }
+
             observeRevealItems();
 
         });
