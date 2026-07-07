@@ -2003,59 +2003,59 @@
             </div>
             <div class="video-grid">
                 <div class="video-card span-2-both reveal reveal-scale delay-1">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/1.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\Oakridge_Promo_Video_01.png">
                         <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Luxury Villa Tour</span>
+                    <span class="video-label">Luxury School Tour</span>
                     <span class="video-duration">4:32</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-2">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/2.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\Barbeque Spice Reel 01.png">
                         <source src="assets/Videos/Food%20&%20Restaurent/Videos/Barbeque%20Spice%20Reel%2001.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Hotel Brand Film</span>
+                    <span class="video-label">Barbeque Spice Video</span>
                     <span class="video-duration">2:18</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-3">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/3.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\SNJ_Reel_03.png">
                         <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Corporate HQ Reveal</span>
+                    <span class="video-label">Jewellery vlog</span>
                     <span class="video-duration">3:45</span>
                 </div>
                 <div class="video-card span-2-col reveal reveal-scale delay-4">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/4.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\Code.in_Video_04.png">
                         <source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Wedding Cinema</span>
+                    <span class="video-label">Code.in</span>
                     <span class="video-duration">6:10</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-5">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/5.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\Full_Stack_Reel.png">
                         <source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Product Launch</span>
+                    <span class="video-label">Education Vlog</span>
                     <span class="video-duration">1:55</span>
                 </div>
                 <div class="video-card reveal reveal-scale delay-6">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/1.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\Tandos_Grill_Reel_01.png">
                         <source src="assets/Videos/Food%20&%20Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Festival Aftermovie</span>
+                    <span class="video-label">Food Festival</span>
                     <span class="video-duration">5:20</span>
                 </div>
                 <div class="video-card span-2-col reveal reveal-scale delay-7">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/images/slider/2.jpg">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets\thumbnails\Nisar_Jewellery_Reel_09.png">
                         <source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Brand Documentary</span>
+                    <span class="video-label">Nisar Jewellery</span>
                     <span class="video-duration">8:42</span>
                 </div>
             </div>
@@ -2485,7 +2485,7 @@
                 }, 1200);
             };
 
-            // ── Video Overlay Playback Logic ──
+            // ── VIDEO OVERLAY PLAYBACK LOGIC ──
             const videoOverlay = document.getElementById('videoOverlay');
             const overlayVideo = document.getElementById('overlayVideo');
             const closeBtn = document.querySelector('.overlay-close-btn');
@@ -2526,18 +2526,36 @@
             // Assign click event to video cards to trigger the Overlay
             document.querySelectorAll('.video-card').forEach(card => {
                 card.addEventListener('click', function(e) {
-                    if(e.target.closest('.video-play-btn')) return;
+                    // If the user clicked the play button itself, we'll also handle it
+                    // But we need to prevent the play button from triggering twice
+                    if(e.target.closest('.video-play-btn')) {
+                        e.stopPropagation();
+                    }
+                    
                     const videoSource = this.querySelector('video.video-bg source');
-                    if(videoSource) {
+                    if(videoSource && videoSource.src) {
                         pauseAllInPlaceVideos();
                         openVideoOverlay(videoSource.src);
                     }
                 });
+
+                // Also handle play button click separately
+                const playBtn = card.querySelector('.video-play-btn');
+                if(playBtn) {
+                    playBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const videoSource = card.querySelector('video.video-bg source');
+                        if(videoSource && videoSource.src) {
+                            pauseAllInPlaceVideos();
+                            openVideoOverlay(videoSource.src);
+                        }
+                    });
+                }
             });
 
             // Event listener for the Close button
             closeBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent bubbling to parent
+                e.stopPropagation();
                 closeVideoOverlay();
             });
 
@@ -2571,6 +2589,7 @@
                     changeSlide(1);
                 });
             }
+
         })();
     </script>
 </body>
