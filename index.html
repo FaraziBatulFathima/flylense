@@ -779,87 +779,65 @@
             color: var(--blue-dark);
         }
 
-        /* ── PORTFOLIO ── */
-        #portfolio {
-            background: var(--bg-primary);
-        }
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-        .portfolio-item {
-            position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            box-shadow: var(--shadow-card);
-            transition: all var(--transition-smooth);
-        }
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--blue);
-            box-shadow: var(--shadow-elevated), var(--shadow-blue);
-        }
-        .portfolio-item-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .portfolio-item:hover .portfolio-item-image {
-            transform: scale(1.06);
-        }
-        .portfolio-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.3rem;
-            opacity: 0;
-            transition: opacity var(--transition-smooth);
-        }
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-        .portfolio-overlay-info h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-        .portfolio-overlay-info span {
-            font-size: 0.78rem;
-            color: var(--blue-light);
-            letter-spacing: 0.03em;
-        }
-        .video-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            z-index: 3;
-            backdrop-filter: blur(6px);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .portfolio-cta {
-            text-align: center;
-            margin-top: 2.5rem;
-        }
+        /* ── PORTFOLIO (UPDATED: 4 VIDEOS IN ROW) ── */
+        /* ── PORTFOLIO (MATCHING EXTERNAL PAGE LAYOUT) ── */
+#portfolio {
+    background-color: #000; /* Black background to match the 2nd file */
+    padding: 60px 20px;
+}
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible responsive grid */
+    gap: 40px;
+}
+.portfolio-item {
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    aspect-ratio: auto; /* Reset the fixed aspect-ratio */
+    border: none;
+    padding: 0;
+}
+.portfolio-item:hover {
+    transform: translateY(-5px);
+}
+.portfolio-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Perfect 16:9 ratio for YouTube iframes */
+}
+.portfolio-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.portfolio-content {
+    padding: 15px;
+}
+.portfolio-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #fff;
+}
+.portfolio-content p {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.portfolio-title {
+    color: #fff;
+}
+/* Remove old elements */
+.portfolio-item-video,
+.portfolio-overlay,
+.video-badge {
+    display: none !important;
+}
         .btn-outline {
             background: transparent;
             color: var(--text-primary);
@@ -1463,7 +1441,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
             }
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -1543,7 +1521,7 @@
                 gap: 1.2rem;
             }
             .portfolio-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* 1 column on mobile */
                 gap: 1rem;
             }
             .form-row {
@@ -2155,47 +2133,77 @@
         </div>
     </section>
 
-    <!-- Portfolio -->
+    <!-- Portfolio (UPDATED: 4 Videos in One Row) -->
     <section class="section" id="portfolio">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
                 <span class="section-tag">Our Work</span>
-                <h2 class="section-title">Portfolio</h2>
+                <h2 class="section-title" style="color: white;">Portfolio</h2>
                 <div class="section-divider"></div>
                 <p class="section-subtitle">A curated selection of projects that showcase our passion for visual storytelling.</p>
             </div>
             <div class="portfolio-grid">
-                <div class="portfolio-item reveal reveal-scale delay-1">
-                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/summit/800/500" alt="Summit Adventures">
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Summit Adventures</h4><span>Commercial • 2025</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-2">
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/urban/800/500" alt="Urban Horizons">
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Urban Horizons</h4><span>Brand Film • 2025</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-3">
-                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/ocean/800/500" alt="Ocean's Edge">
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Ocean's Edge</h4><span>Aerial • 2024</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-4">
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/technova/800/500" alt="TechNova Corp">
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>TechNova Corp</h4><span>Corporate • 2024</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-5">
-                    <div class="video-badge"><i class="fa-solid fa-play"></i></div>
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/luxe/800/500" alt="Luxe Launch">
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Luxe Launch</h4><span>Social Media • 2025</span></div></div>
-                </div>
-                <div class="portfolio-item reveal reveal-scale delay-6">
-                    <img class="portfolio-item-image" src="https://picsum.photos/seed/greenfuture/800/500" alt="Green Future">
-                    <div class="portfolio-overlay"><div class="portfolio-overlay-info"><h4>Green Future</h4><span>Documentary • 2024</span></div></div>
-                </div>
-            </div>
-            <div class="portfolio-cta reveal reveal-up delay-3">
-                <a href="portfolio.html" class="btn btn-outline"><i class="fa-solid fa-folder-open"></i> View Full Portfolio</a>
-            </div>
+    <!-- Video 1 -->
+    <div class="portfolio-item reveal reveal-scale delay-1">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/gPT_pgNJ55I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="VIP’s International School"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>VIP’s International School</h3>
+            <p>A heartwarming visual campaign capturing the spirit of learning, care, and community at VIP’s International School. From classrooms to smiles, we brought their story to life.</p>
+        </div>
+    </div>
+    <!-- Video 2 -->
+    <div class="portfolio-item reveal reveal-scale delay-2">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/GEdQxYsXfaQ?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="Oakridge International School"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>Oakridge International School</h3>
+            <p>A cinematic journey showcasing Oakridge’s excellence in education, innovation, and student empowerment. We captured the vibrant campus life, inspiring teachers, and future-ready learners.</p>
+        </div>
+    </div>
+    <!-- Video 3 -->
+    <div class="portfolio-item reveal reveal-scale delay-3">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/RNqbai7vk5I?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="Furniture World"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>Furniture World</h3>
+            <p>At Furniture World, we offer elegant, functional furniture that transforms your living spaces. Our designs combine style with comfort, providing timeless solutions for every room.</p>
+        </div>
+    </div>
+    <!-- Video 4 -->
+    <div class="portfolio-item reveal reveal-scale delay-4">
+        <div class="portfolio-video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/6yp347JWb3o?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                title="Maaya Luxury Convention"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                class="portfolio-video"></iframe>
+        </div>
+        <div class="portfolio-content">
+            <h3>Maaya Luxury Convention</h3>
+            <p>An elegant visual showcase of grandeur, celebration, and timeless moments at Maaya Luxury Convention. From luxurious decor to unforgettable events, we captured its charm in every frame.</p>
+        </div>
+    </div>
+</div>
         </div>
     </section>
 
