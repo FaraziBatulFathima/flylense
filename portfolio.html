@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Portfolio | FlyLense Media Production</title>
-    <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png">
-    <meta name="description" content="Explore FlyLense's portfolio of commercial films, brand storytelling, aerial drone footage, and more.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png" />
+    <meta name="description" content="Explore FlyLense's portfolio of commercial films, brand storytelling, aerial drone footage, and more." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* ── RESET & BASE ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+        }
+
+        img,
+        video,
+        svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
         :root {
             --bg-primary: #ffffff;
             --bg-secondary: #f7f9fc;
@@ -35,213 +74,1089 @@
             --radius-sm: 8px;
             --radius-md: 14px;
             --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 50%;
             --nav-height: 80px;
             --nav-height-mobile: 64px;
             --max-width: 1280px;
         }
 
+        /* ── NAVBAR INTRO ── */
         .navbar {
             opacity: 0;
             transform: translateY(-30px);
-            transition: opacity 0.7s ease, transform 0.7s ease, top 0.45s cubic-bezier(0.4,0,0.2,1), background 0.45s cubic-bezier(0.4,0,0.2,1);
+            transition: opacity 0.7s ease, transform 0.7s ease, top 0.45s cubic-bezier(0.4, 0, 0.2, 1), background 0.45s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .navbar.loaded { opacity: 1; transform: translateY(0); }
-
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: var(--nav-height);
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
+        .navbar.loaded {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-/*
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--blue-dark); }
-        ::selection { background: rgba(0, 116, 246, 0.35); color: #fff; }*/
-
-        .reveal {
-            opacity: 0;
-            transition: opacity 0.75s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
-        }
-        .reveal.revealed { opacity: 1; }
-        .reveal-up { transform: translateY(50px); }
-        .reveal-up.revealed { transform: translateY(0); }
-        .reveal-left { transform: translateX(-50px); }
-        .reveal-left.revealed { transform: translateX(0); }
-        .reveal-right { transform: translateX(50px); }
-        .reveal-right.revealed { transform: translateX(0); }
-        .reveal-scale { transform: scale(0.88); }
-        .reveal-scale.revealed { transform: scale(1); }
-        .delay-1 { transition-delay: 0.05s; }
-        .delay-2 { transition-delay: 0.12s; }
-        .delay-3 { transition-delay: 0.19s; }
-        .delay-4 { transition-delay: 0.26s; }
-        .delay-5 { transition-delay: 0.33s; }
-        .delay-6 { transition-delay: 0.40s; }
-        .delay-7 { transition-delay: 0.47s; }
-        .delay-8 { transition-delay: 0.54s; }
-
+        /* ── NAVIGATION ── */
         .navbar {
-            position: fixed; top: 20px; left: 0; width: 100%; z-index: 1000;
-            height: var(--nav-height); background: transparent;
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: 1px solid transparent;
+            box-shadow: none;
+            will-change: background, backdrop-filter, box-shadow, border-color;
         }
         .navbar.scrolled {
-            top: 0px; background: rgba(12, 18, 30, .96); backdrop-filter: blur(18px);
+            top: 0px;
+            background: rgba(12, 18, 30, .96);
+            backdrop-filter: blur(18px);
             border-bottom: 1px solid rgba(255, 255, 255, .08);
             box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
         }
-        .navbar-container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; z-index: 1001; transition: transform var(--transition-bounce); }
-        .nav-logo:hover { transform: scale(1.03); }
-        .nav-logo img { height: 42px; width: auto; object-fit: contain; }
-        .nav-logo img.logo-icon { height: 42px; }
-        .nav-logo img.logo-title { padding-left: 20px; height: 50px; }
-        .nav-links { display: flex; align-items: center; gap: 0.3rem; list-style: none; }
+        .navbar-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            z-index: 1001;
+            flex-shrink: 0;
+            transition: transform var(--transition-bounce);
+        }
+        .nav-logo:hover {
+            transform: scale(1.03);
+        }
+        .nav-logo img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+        }
+        .nav-logo img.logo-icon {
+            height: 42px;
+        }
+        .nav-logo img.logo-title {
+            padding-left: 20px;
+            height: 50px;
+        }
+        .navbar.scrolled .nav-logo img {
+            filter: brightness(1) invert(0);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            list-style: none;
+        }
         .nav-links a {
-            text-decoration: none; color: rgba(255, 255, 255, 0.92); font-size: 0.9rem;
-            font-weight: 500; padding: 0.55rem 1.1rem; border-radius: 50px;
-            transition: all 0.35s ease; white-space: nowrap;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            transition: all 0.35s ease;
+            position: relative;
+            white-space: nowrap;
         }
-        .navbar.scrolled .nav-links a { color: rgba(255,255,255,.88); }
-        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
-        .nav-links a.active { color: #fff; background: rgba(255,255,255,0.15); font-weight: 600; }
-        .navbar.scrolled .nav-links a.active { background: rgba(0,116,246,.25); border: 1px solid rgba(0,116,246,.35); }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; padding: 8px; background: none; border: none; }
-        .hamburger span { display: block; width: 26px; height: 2.5px; background: #fff; border-radius: 2px; transition: all 0.35s ease; }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-        .mobile-menu {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: rgba(10,10,20,0.96); backdrop-filter: blur(30px);
-            z-index: 999; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; gap: 1.2rem; opacity: 0; visibility: hidden;
-            transition: all 0.4s ease; pointer-events: none;
+        .navbar.scrolled .nav-links a {
+            color: rgba(255, 255, 255, .88);
         }
-        .mobile-menu.active { opacity: 1; visibility: visible; pointer-events: auto; }
-        .mobile-menu a { text-decoration: none; color: rgba(255,255,255,0.9); font-size: 1.4rem; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 50px; }
-        .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .nav-links a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .navbar.scrolled .nav-links a:hover {
+            background: rgba(255, 255, 255, .08);
+        }
+        .nav-links a.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            font-weight: 600;
+        }
+        .navbar.scrolled .nav-links a.active {
+            background: rgba(0, 116, 246, .25);
+            border: 1px solid rgba(0, 116, 246, .35);
+        }
 
+        /* ── HAMBURGER (FIXED) ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.45);
+            border: none;
+            border-radius: 10px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: background 0.3s ease;
+        }
+        .hamburger:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2.5px;
+            background: #ffffff;
+            border-radius: 4px;
+            transition: all 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform-origin: center;
+        }
+        .navbar.scrolled .hamburger {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            width: 26px;
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            width: 26px;
+        }
+
+        /* ── MOBILE MENU ── */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(10, 10, 20, 0.97);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            padding: 2rem;
+        }
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .mobile-menu.scrolled-bg {
+            background: rgba(15, 15, 30, 0.98);
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 1.4rem;
+            font-weight: 500;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+        }
+        .mobile-menu a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .mobile-menu a.active {
+            background: rgba(0, 116, 246, 0.25);
+            color: #fff;
+            border: 1px solid rgba(0, 116, 246, 0.3);
+        }
+        .mobile-cta {
+            background: var(--gradient-blue);
+            color: #fff !important;
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 0.8rem 2rem !important;
+            margin-top: 0.5rem;
+            font-size: 1.1rem !important;
+            box-shadow: 0 6px 25px rgba(0, 116, 246, 0.4);
+            max-width: 280px !important;
+        }
+        .mobile-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(0, 116, 246, 0.6) !important;
+        }
+
+        /* ── REVEAL ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.revealed {
+            opacity: 1;
+        }
+        .reveal-up {
+            transform: translateY(50px);
+        }
+        .reveal-up.revealed {
+            transform: translateY(0);
+        }
+        .reveal-left {
+            transform: translateX(-50px);
+        }
+        .reveal-left.revealed {
+            transform: translateX(0);
+        }
+        .reveal-right {
+            transform: translateX(50px);
+        }
+        .reveal-right.revealed {
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            transform: scale(0.88);
+        }
+        .reveal-scale.revealed {
+            transform: scale(1);
+        }
+        .delay-1 {
+            transition-delay: 0.05s;
+        }
+        .delay-2 {
+            transition-delay: 0.12s;
+        }
+        .delay-3 {
+            transition-delay: 0.19s;
+        }
+        .delay-4 {
+            transition-delay: 0.26s;
+        }
+        .delay-5 {
+            transition-delay: 0.33s;
+        }
+        .delay-6 {
+            transition-delay: 0.40s;
+        }
+        .delay-7 {
+            transition-delay: 0.47s;
+        }
+        .delay-8 {
+            transition-delay: 0.54s;
+        }
+
+        /* ── HERO ── */
         .portfolio-hero {
             position: relative;
             height: 500px;
             background: url('img/slider/4.png') center/cover no-repeat;
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
-            color: #fff; overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            overflow: hidden;
         }
-        .portfolio-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.65); z-index: 1; }
-        .portfolio-hero > * { position: relative; z-index: 2; }
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+        .portfolio-hero>* {
+            position: relative;
+            z-index: 2;
+        }
         .portfolio-hero h1 {
-            font-family: 'Poppins', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem);
-            font-weight: 700; margin-bottom: 0.8rem; margin-top: 60px;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            margin-top: 60px;
+            text-align: center;
+            padding: 0 1rem;
         }
         .portfolio-hero p {
-            color: rgba(255,255,255,0.9); max-width: 600px; font-size: 1.1rem; text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0 1.5rem;
         }
 
-        .filter-section { padding: 1.5rem 2rem 2rem; background: #fff; }
-        .filter-container { max-width: var(--max-width); margin: 0 auto; display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+        /* ── FILTER BUTTONS ── */
+        .filter-section {
+            padding: 1.5rem 2rem 2rem;
+            background: #fff;
+        }
+        .filter-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
         .filter-btn {
-            background: #fff; border: 2px solid var(--border); padding: 0.7rem 1.8rem;
-            border-radius: 50px; font-weight: 600; font-size: 0.95rem; cursor: pointer;
-            transition: all 0.3s ease; color: var(--text-secondary); box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            background: #fff;
+            border: 2px solid var(--border);
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            flex-shrink: 0;
         }
         .filter-btn:hover {
-            border-color: var(--blue); color: var(--blue); background: var(--bg-card-hover);
-            transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,116,246,0.15);
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 116, 246, 0.15);
         }
         .filter-btn.active {
-            background: var(--gradient-blue); color: #fff; border-color: transparent;
-            box-shadow: 0 6px 18px rgba(0,116,246,0.4);
+            background: var(--gradient-blue);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 6px 18px rgba(0, 116, 246, 0.4);
         }
 
-        .portfolio-section { padding: 2rem 2rem 5rem; background: #fff; }
-        .portfolio-container { max-width: var(--max-width); margin: 0 auto; }
+        /* ── PORTFOLIO GRID ── */
+        .portfolio-section {
+            padding: 2rem 2rem 5rem;
+            background: #fff;
+        }
+        .portfolio-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 2rem;
         }
         .portfolio-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); overflow: hidden;
-            box-shadow: var(--shadow-card); transition: all var(--transition-smooth);
-            display: flex; flex-direction: column;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
         }
-        .portfolio-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-elevated), var(--shadow-blue); }
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-elevated), var(--shadow-blue);
+        }
         .card-media {
-            position: relative; aspect-ratio: 9 / 16; /* vertical video */
+            position: relative;
+            aspect-ratio: 9/16;
             background: var(--bg-tertiary);
-            cursor: pointer; overflow: hidden;
+            cursor: pointer;
+            overflow: hidden;
         }
-        .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-        .portfolio-card:hover .card-media img { transform: scale(1.03); }
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .portfolio-card:hover .card-media img {
+            transform: scale(1.03);
+        }
         .play-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;
-            transition: background var(--transition-fast); z-index: 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-fast);
+            z-index: 2;
         }
-        .play-overlay i { font-size: 3.5rem; color: #fff; opacity: 0.9; transition: transform var(--transition-bounce); }
-        .portfolio-card:hover .play-overlay { background: rgba(0,0,0,0.35); }
-        .portfolio-card:hover .play-overlay i { transform: scale(1.1); }
+        .play-overlay i {
+            font-size: 3.5rem;
+            color: #fff;
+            opacity: 0.9;
+            transition: transform var(--transition-bounce);
+        }
+        .portfolio-card:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.35);
+        }
+        .portfolio-card:hover .play-overlay i {
+            transform: scale(1.1);
+        }
         .card-media video {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; object-fit: cover;
-            display: none; z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            z-index: 1;
         }
-        .card-media.playing video { display: block; }
-        .card-media.playing .play-overlay { display: none; }
-        .card-media.playing img { display: none; }
-        .card-body { padding: 1.2rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
-        .card-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; color: var(--text-primary); }
+        .card-media.playing video {
+            display: block;
+        }
+        .card-media.playing .play-overlay {
+            display: none;
+        }
+        .card-media.playing img {
+            display: none;
+        }
+        .card-body {
+            padding: 1.2rem 1.4rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
 
-        .logos-section { padding: 4rem 2rem; background: var(--bg-secondary); }
-        .logos-container { max-width: var(--max-width); margin: 0 auto; }
-        .logos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .logo-card { background: #fff; border-radius: var(--radius-md); padding: 1rem; box-shadow: var(--shadow-card); display: flex; align-items: center; justify-content: center; transition: all var(--transition-smooth); cursor: default; border: 1px solid var(--border); }
-        .logo-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-blue); border-color: var(--blue-light); }
-        .logo-card img { max-width: 100%; max-height: 80px; object-fit: contain; }
+        /* ── LOGOS SECTION ── */
+        .logos-section {
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+        }
+        .logos-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        .logos-container>h2 {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .logos-container>p {
+            text-align: center;
+            color: var(--text-muted);
+        }
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .logo-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+            cursor: default;
+            border: 1px solid var(--border);
+        }
+        .logo-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-blue);
+            border-color: var(--blue-light);
+        }
+        .logo-card img {
+            max-width: 100%;
+            max-height: 80px;
+            object-fit: contain;
+        }
 
-        .footer { background: #0a1628; color: #e5e7eb; border-top: 1px solid rgba(255,255,255,0.08); padding: 2.5rem 2rem; }
-        .footer-container { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: #ffffff; }
-        .footer-links { display: flex; gap: 1.5rem; }
-        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-        .footer-links a:hover { color: #ffffff; }
-        .footer-social { display: flex; gap: 0.8rem; }
-        .footer-social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: all var(--transition-smooth); }
-        .footer-social a:hover { border-color: var(--blue); color: #fff; background: var(--gradient-blue); }
-        .footer-copy { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+        /* ── CTA BANNER ── */
+        .cta-banner-section {
+            padding: 20px 2rem;
+            background: var(--bg-primary);
+            position: relative;
+            z-index: 2;
+        }
+        .cta-banner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0074f6, #0040c1);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .cta-banner-text h2 {
+            font-weight: 700;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .cta-banner-text h4 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Poppins', sans-serif;
+        }
+        .cta-banner .btn-cta-white {
+            background: #fff;
+            color: #0074f6;
+            border: none;
+            padding: 18px 32px;
+            font-weight: 700;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .cta-banner .btn-cta-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: #f0f4ff;
+        }
 
+        /* ── FOOTER ── */
+        .footer {
+            background: #0a1628;
+            color: #e5e7eb;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2.5rem 2rem;
+        }
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        .footer-social {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+        }
+        .footer-social a:hover {
+            border-color: var(--blue);
+            color: #fff;
+            background: var(--gradient-blue);
+        }
+        .footer-copy {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            cursor: pointer;
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: var(--gradient-blue);
+            color: #fff;
+            border-color: var(--blue);
+        }
+
+        /* ════════════════════════════════════════════ */
+        /* ── RESPONSIVE STYLES ── */
+        /* ════════════════════════════════════════════ */
+
+        /* ── 1024px ── */
+        @media (max-width: 1024px) {
+            .portfolio-hero {
+                height: 400px;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        /* ── 768px (HAMBURGER APPEARS) ── */
         @media (max-width: 768px) {
-            :root { --nav-height: 64px; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .navbar-container { padding: 0 1.2rem; }
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .portfolio-hero { height: 400px; }
-            .portfolio-hero h1 { margin-top: 40px; }
+            :root {
+                --nav-height: 64px;
+            }
+
+            .hamburger {
+                display: flex !important;
+            }
+            .nav-links {
+                display: none !important;
+            }
+
+            .navbar-container {
+                padding: 0 1.2rem;
+            }
+
+            .portfolio-hero {
+                height: 350px;
+            }
+            .portfolio-hero h1 {
+                margin-top: 40px;
+                font-size: clamp(1.8rem, 5vw, 2.4rem);
+            }
+            .portfolio-hero p {
+                font-size: 0.95rem;
+                padding: 0 1rem;
+            }
+
+            .filter-section {
+                padding: 1rem 1rem 1.5rem;
+            }
+            .filter-container {
+                gap: 0.6rem;
+            }
+            .filter-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+                flex: 1 0 auto;
+                min-width: 80px;
+                text-align: center;
+            }
+
+            .portfolio-section {
+                padding: 1.5rem 1rem 3rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .card-body {
+                padding: 0.8rem 1rem;
+            }
+            .card-body h3 {
+                font-size: 0.95rem;
+            }
+            .play-overlay i {
+                font-size: 2.5rem;
+            }
+
+            .logos-section {
+                padding: 2.5rem 1rem;
+            }
+            .logos-container>h2 {
+                font-size: 1.6rem;
+            }
+            .logos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 1rem;
+            }
+            .logo-card {
+                padding: 0.8rem;
+            }
+            .logo-card img {
+                max-height: 60px;
+            }
+
+            .cta-banner {
+                padding: 1.5rem;
+                border-radius: 16px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .cta-banner-text h2 {
+                font-size: 1.3rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 1rem;
+            }
+            .cta-banner .btn-cta-white {
+                padding: 14px 24px;
+                font-size: 0.9rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-links {
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .back-to-top {
+                bottom: 1.2rem;
+                right: 1.2rem;
+                width: 38px;
+                height: 38px;
+            }
+
+            .mobile-menu a {
+                font-size: 1.3rem;
+                padding: 0.7rem 1.5rem;
+            }
+        }
+
+        /* ── 576px ── */
+        @media (max-width: 576px) {
+            .portfolio-hero {
+                height: 280px;
+            }
+            .portfolio-hero h1 {
+                font-size: 1.6rem;
+                margin-top: 30px;
+            }
+            .portfolio-hero p {
+                font-size: 0.85rem;
+            }
+
+            .filter-btn {
+                font-size: 0.78rem;
+                padding: 0.4rem 1rem;
+                min-width: 60px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+            .card-media {
+                aspect-ratio: 9/16;
+            }
+            .play-overlay i {
+                font-size: 2rem;
+            }
+            .card-body {
+                padding: 0.6rem 0.8rem;
+            }
+            .card-body h3 {
+                font-size: 0.85rem;
+            }
+
+            .logos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 0.8rem;
+            }
+            .logo-card {
+                padding: 0.5rem;
+            }
+            .logo-card img {
+                max-height: 45px;
+            }
+            .logos-container>h2 {
+                font-size: 1.3rem;
+            }
+            .logos-container>p {
+                font-size: 0.85rem;
+            }
+
+            .cta-banner {
+                padding: 1.2rem;
+                border-radius: var(--radius-md);
+            }
+            .cta-banner-text h2 {
+                font-size: 1.1rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 0.85rem;
+            }
+            .cta-banner .btn-cta-white {
+                padding: 12px 20px;
+                font-size: 0.8rem;
+            }
+
+            .footer {
+                padding: 1.8rem 1rem;
+            }
+            .footer-logo {
+                font-size: 1.1rem;
+            }
+            .footer-links a {
+                font-size: 0.75rem;
+            }
+            .footer-social a {
+                width: 32px;
+                height: 32px;
+            }
+            .footer-copy {
+                font-size: 0.7rem;
+            }
+
+            .back-to-top {
+                width: 36px;
+                height: 36px;
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .hamburger {
+                padding: 8px 12px;
+            }
+            .hamburger span {
+                width: 22px;
+                height: 2.5px;
+            }
+            .hamburger.active span:nth-child(1),
+            .hamburger.active span:nth-child(3) {
+                width: 24px;
+            }
+
+            .mobile-menu a {
+                font-size: 1.1rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        /* ── 480px ── */
+        @media (max-width: 480px) {
+            .portfolio-hero {
+                height: 240px;
+            }
+            .portfolio-hero h1 {
+                font-size: 1.4rem;
+                margin-top: 20px;
+            }
+            .portfolio-hero p {
+                font-size: 0.8rem;
+                padding: 0 0.8rem;
+            }
+
+            .filter-section {
+                padding: 0.8rem 0.8rem 1rem;
+            }
+            .filter-container {
+                gap: 0.4rem;
+            }
+            .filter-btn {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.8rem;
+                min-width: 50px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+            .play-overlay i {
+                font-size: 1.6rem;
+            }
+            .card-body h3 {
+                font-size: 0.78rem;
+            }
+
+            .logos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 0.6rem;
+            }
+            .logo-card img {
+                max-height: 35px;
+            }
+
+            .cta-banner {
+                padding: 1rem;
+            }
+            .cta-banner-text h2 {
+                font-size: 0.95rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 0.75rem;
+            }
+            .cta-banner .btn-cta-white {
+                padding: 10px 16px;
+                font-size: 0.7rem;
+            }
+
+            .hamburger {
+                padding: 6px 10px;
+            }
+            .hamburger span {
+                width: 20px;
+                height: 2px;
+            }
+
+            .mobile-menu a {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* ── 360px ── */
+        @media (max-width: 360px) {
+            .portfolio-hero {
+                height: 200px;
+            }
+            .portfolio-hero h1 {
+                font-size: 1.2rem;
+                margin-top: 16px;
+            }
+            .portfolio-hero p {
+                font-size: 0.7rem;
+            }
+
+            .filter-btn {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.6rem;
+                min-width: 40px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .play-overlay i {
+                font-size: 1.4rem;
+            }
+            .card-body {
+                padding: 0.4rem 0.6rem;
+            }
+            .card-body h3 {
+                font-size: 0.7rem;
+            }
+
+            .logos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+                gap: 0.5rem;
+            }
+            .logo-card {
+                padding: 0.4rem;
+            }
+            .logo-card img {
+                max-height: 30px;
+            }
+
+            .cta-banner {
+                padding: 0.8rem;
+            }
+            .cta-banner-text h2 {
+                font-size: 0.8rem;
+            }
+            .cta-banner-text h4 {
+                font-size: 0.65rem;
+            }
+            .cta-banner .btn-cta-white {
+                padding: 8px 14px;
+                font-size: 0.65rem;
+            }
+
+            .footer {
+                padding: 1.2rem 0.6rem;
+            }
+            .footer-logo {
+                font-size: 1rem;
+            }
+            .footer-links a {
+                font-size: 0.7rem;
+            }
+            .footer-social a {
+                width: 28px;
+                height: 28px;
+            }
+            .footer-copy {
+                font-size: 0.65rem;
+            }
+
+            .hamburger {
+                padding: 5px 8px;
+                gap: 4px;
+            }
+            .hamburger span {
+                width: 18px;
+                height: 2px;
+            }
+
+            .back-to-top {
+                width: 32px;
+                height: 32px;
+                bottom: 0.8rem;
+                right: 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .mobile-menu a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <a href="index.html" class="nav-logo">
-                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo">
-                <img class="logo-title" src="img/title.png" alt="FlyLense">
+                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" />
+                <img class="logo-title" src="img/title.png" alt="FlyLense" />
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
@@ -252,19 +1167,32 @@
                 <li><a href="blogs.html">Blogs</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a><a href="about.html">About</a><a href="service.html">Services</a>
-        <a href="portfolio.html">Portfolio</a><a href="industry.html">Industries</a><a href="contact.html">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="service.html">Services</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="industry.html">Industries</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html" class="mobile-cta">Contact</a>
     </div>
 
+    <!-- ===== HERO ===== -->
     <section class="portfolio-hero">
         <h1 class="reveal reveal-up">Our Portfolio</h1>
         <p class="reveal reveal-up delay-1">Showcasing cinematic video production, brand storytelling, and visual campaigns across multiple industries.</p>
     </section>
 
+    <!-- ===== FILTER BUTTONS ===== -->
     <div class="filter-section">
         <div class="filter-container" id="filterContainer">
             <button class="filter-btn active" data-filter="all">All Work</button>
@@ -275,110 +1203,227 @@
         </div>
     </div>
 
+    <!-- ===== PORTFOLIO GRID ===== -->
     <section class="portfolio-section">
         <div class="portfolio-container">
             <div class="portfolio-grid" id="portfolioGrid"></div>
         </div>
     </section>
 
+    <!-- ===== TRUSTED BRANDS ===== -->
     <section class="logos-section" id="logos">
         <div class="logos-container reveal reveal-up">
-            <h2 style="text-align:center; font-family:'Poppins',sans-serif; font-size:2rem; margin-bottom:0.5rem;">Trusted Brands</h2>
-            <p style="text-align:center; color:var(--text-muted);">A selection of clients we've proudly worked with.</p>
+            <h2>Trusted Brands</h2>
+            <p>A selection of clients we've proudly worked with.</p>
             <div class="logos-grid" id="logosGrid"></div>
         </div>
     </section>
 
+    <!-- ===== CTA BANNER ===== -->
+    <section class="cta-banner-section">
+        <div class="cta-banner reveal reveal-up">
+            <div class="cta-banner-text">
+                <h2>Ready to Bring Your Vision to Life?</h2>
+                <h4>Let's Create Something Incredible Together</h4>
+            </div>
+            <a href="contact.html" class="btn-cta-white"><i class="fa-solid fa-paper-plane"></i> Let's Get Started</a>
+        </div>
+    </section>
+    <br /><br />
+
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
             <div class="footer-links">
-                <a href="index.html">Home</a><a href="about.html">About</a><a href="service.html">Services</a>
-                <a href="portfolio.html">Portfolio</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="service.html">Services</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <div class="footer-copy">&copy; 2026 FlyLense. All rights reserved.</div>
         </div>
     </footer>
 
-    <script>
-        (function() {
-            setTimeout(() => document.getElementById('navbar').classList.add('loaded'), 100);
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ── Navbar intro ──
+            setTimeout(function() {
+                document.getElementById('navbar').classList.add('loaded');
+            }, 100);
+
+            // ── Elements ──
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-            window.addEventListener('scroll', () => {
-                navbar.classList.toggle('scrolled', window.scrollY > 60);
+            const backToTop = document.getElementById('backToTop');
+
+            // ── Scroll events ──
+            window.addEventListener('scroll', function() {
+                const scrollY = window.scrollY;
+                navbar.classList.toggle('scrolled', scrollY > 60);
+                mobileMenu.classList.toggle('scrolled-bg', scrollY > 60);
+                backToTop.classList.toggle('visible', scrollY > 600);
             });
 
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-            });
-            mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }));
+            // ── HAMBURGER MENU TOGGLE ──
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                });
 
-            // Portfolio data
+                mobileMenu.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (mobileMenu.classList.contains('active') &&
+                        !mobileMenu.contains(e.target) &&
+                        !hamburger.contains(e.target)) {
+                        hamburger.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // ── Back to top ──
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ── Smooth scroll for anchor links ──
+            document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const offset = navbar.offsetHeight + 10;
+                            const targetPosition = target.getBoundingClientRect().top + window.scrollY -
+                                offset;
+                            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // ── Portfolio data ──
             const portfolioItems = [
-                { category: "education", type: "video", title: "Code.in Promo", src: "assets/Videos/Education/Code.in_Video_04.mp4", thumbnail: "assets/thumbnails/Code.in_Video_04.png" },
-                { category: "education", type: "video", title: "Full Stack Academy Reel", src: "assets/Videos/Education/Full_Stack_Reel.mp4", thumbnail: "assets/thumbnails/Full_Stack_Reel.png" },
-                { category: "education", type: "video", title: "Global School", src: "assets/Videos/Education/Global.mp4", thumbnail: "assets/thumbnails/Global.png" },
-                { category: "education", type: "video", title: "Muay Thai Championship", src: "assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT....mp4", thumbnail: "assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" },
-                { category: "education", type: "video", title: "Saritha Reel 06", src: "assets/Videos/Education/Saritha Reel_06.mp4", thumbnail: "assets/thumbnails/Saritha Reel_06.png" },
-                { category: "education", type: "video", title: "Silver Crest Reel", src: "assets/Videos/Education/Silver Crest Reel 01.mp4", thumbnail: "assets/thumbnails/Silver Crest Reel 01.png" },
-                { category: "education", type: "video", title: "Success Podcast", src: "assets/Videos/Education/Success_Podcast_Reel_03.mp4", thumbnail: "assets/thumbnails/Success_Podcast_Reel_03.png" },
-                { category: "education", type: "video", title: "Unique Reel", src: "assets/Videos/Education/Unique Reel.mp4", thumbnail: "assets/thumbnails/Unique Reel.png" },
-                { category: "food", type: "video", title: "Barbeque Spice Reel", src: "assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4", thumbnail: "assets/thumbnails/Barbeque Spice Reel 01.png" },
-                { category: "food", type: "video", title: "Fresh & Flavorful", src: "assets/Videos/Food & Restaurent/Videos/FRESH, FLAVORFUL, FABULOUS....mp4", thumbnail: "assets/thumbnails/FRESH, FLAVORFUL, FABULOUS.png" },
-                { category: "food", type: "video", title: "Tandos Grill June", src: "assets/Videos/Food & Restaurent/Videos/Tandos_Grill_June_Reel_04.mp4", thumbnail: "assets/thumbnails/Tandos_Grill_June_Reel_04.png" },
-                { category: "food", type: "video", title: "Tandos Grill Reel", src: "assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4", thumbnail: "assets/thumbnails/Tandos_Grill_Reel_01.png" },
-                { category: "jewellery", type: "video", title: "Iqbal Jewellers", src: "assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4", thumbnail: "assets/thumbnails/Iqbal_jewellers_Reel_03.png" },
-                { category: "jewellery", type: "video", title: "Maram Jewellery", src: "assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4", thumbnail: "assets/thumbnails/Maram_jewellery_01.png" },
-                { category: "jewellery", type: "video", title: "Nisar Jewellery", src: "assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4", thumbnail: "assets/thumbnails/Nisar_Jewellery_Reel_09.png" },
-                { category: "jewellery", type: "video", title: "S-Craft Reel", src: "assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4", thumbnail: "assets/thumbnails/S-Craft_Feb_Reel_01.png" },
-                { category: "jewellery", type: "video", title: "SNJ Reel 03", src: "assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4", thumbnail: "assets/thumbnails/SNJ_Reel_03.png" },
-                { category: "jewellery", type: "video", title: "SNJ Reel 04", src: "assets/Videos/Jwellery/Videos/SNJ_Reel_04.mp4", thumbnail: "assets/thumbnails/SNJ_Reel_04.png" },
-                { category: "jewellery", type: "video", title: "SNJ Reel 09", src: "assets/Videos/Jwellery/Videos/SNJ_Reel_09.mp4", thumbnail: "assets/thumbnails/SNJ_Reel_09.png" },
-                { category: "landscape", type: "video", title: "Oakridge Promo", src: "assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4", thumbnail: "assets/thumbnails/Oakridge_Promo_Video_01.png" },
-                { category: "landscape", type: "video", title: "Springfield Trailer", src: "assets/Videos/Landscape/Springfield_Trailer_01.mp4", thumbnail: "assets/thumbnails/Springfield_Trailer_01.png" },
-                { category: "landscape", type: "video", title: "Success Sports Carnival", src: "assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4", thumbnail: "assets/thumbnails/Success_Sports_Carnival_Reel_01.png" },
-                { category: "landscape", type: "video", title: "Vip's Trailer", src: "assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4", thumbnail: "assets/thumbnails/Vip's_Trailer_Video_02.png" }
+                { category: "education", type: "video", title: "Code.in Promo",
+                    src: "assets/Videos/Education/Code.in_Video_04.mp4",
+                    thumbnail: "assets/thumbnails/Code.in_Video_04.png" },
+                { category: "education", type: "video", title: "Full Stack Academy Reel",
+                    src: "assets/Videos/Education/Full_Stack_Reel.mp4",
+                    thumbnail: "assets/thumbnails/Full_Stack_Reel.png" },
+                { category: "education", type: "video", title: "Global School",
+                    src: "assets/Videos/Education/Global.mp4",
+                    thumbnail: "assets/thumbnails/Global.png" },
+                { category: "education", type: "video", title: "Muay Thai Championship",
+                    src: "assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT....mp4",
+                    thumbnail: "assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" },
+                { category: "education", type: "video", title: "Saritha Reel 06",
+                    src: "assets/Videos/Education/Saritha Reel_06.mp4",
+                    thumbnail: "assets/thumbnails/Saritha Reel_06.png" },
+                { category: "education", type: "video", title: "Silver Crest Reel",
+                    src: "assets/Videos/Education/Silver Crest Reel 01.mp4",
+                    thumbnail: "assets/thumbnails/Silver Crest Reel 01.png" },
+                { category: "education", type: "video", title: "Success Podcast",
+                    src: "assets/Videos/Education/Success_Podcast_Reel_03.mp4",
+                    thumbnail: "assets/thumbnails/Success_Podcast_Reel_03.png" },
+                { category: "education", type: "video", title: "Unique Reel",
+                    src: "assets/Videos/Education/Unique Reel.mp4",
+                    thumbnail: "assets/thumbnails/Unique Reel.png" },
+                { category: "food", type: "video", title: "Barbeque Spice Reel",
+                    src: "assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4",
+                    thumbnail: "assets/thumbnails/Barbeque Spice Reel 01.png" },
+                { category: "food", type: "video", title: "Fresh & Flavorful",
+                    src: "assets/Videos/Food & Restaurent/Videos/FRESH, FLAVORFUL, FABULOUS....mp4",
+                    thumbnail: "assets/thumbnails/FRESH, FLAVORFUL, FABULOUS.png" },
+                { category: "food", type: "video", title: "Tandos Grill June",
+                    src: "assets/Videos/Food & Restaurent/Videos/Tandos_Grill_June_Reel_04.mp4",
+                    thumbnail: "assets/thumbnails/Tandos_Grill_June_Reel_04.png" },
+                { category: "food", type: "video", title: "Tandos Grill Reel",
+                    src: "assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4",
+                    thumbnail: "assets/thumbnails/Tandos_Grill_Reel_01.png" },
+                { category: "jewellery", type: "video", title: "Iqbal Jewellers",
+                    src: "assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4",
+                    thumbnail: "assets/thumbnails/Iqbal_jewellers_Reel_03.png" },
+                { category: "jewellery", type: "video", title: "Maram Jewellery",
+                    src: "assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4",
+                    thumbnail: "assets/thumbnails/Maram_jewellery_01.png" },
+                { category: "jewellery", type: "video", title: "Nisar Jewellery",
+                    src: "assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4",
+                    thumbnail: "assets/thumbnails/Nisar_Jewellery_Reel_09.png" },
+                { category: "jewellery", type: "video", title: "S-Craft Reel",
+                    src: "assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4",
+                    thumbnail: "assets/thumbnails/S-Craft_Feb_Reel_01.png" },
+                { category: "jewellery", type: "video", title: "SNJ Reel 03",
+                    src: "assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4",
+                    thumbnail: "assets/thumbnails/SNJ_Reel_03.png" },
+                { category: "jewellery", type: "video", title: "SNJ Reel 04",
+                    src: "assets/Videos/Jwellery/Videos/SNJ_Reel_04.mp4",
+                    thumbnail: "assets/thumbnails/SNJ_Reel_04.png" },
+                { category: "jewellery", type: "video", title: "SNJ Reel 09",
+                    src: "assets/Videos/Jwellery/Videos/SNJ_Reel_09.mp4",
+                    thumbnail: "assets/thumbnails/SNJ_Reel_09.png" },
+                { category: "landscape", type: "video", title: "Oakridge Promo",
+                    src: "assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4",
+                    thumbnail: "assets/thumbnails/Oakridge_Promo_Video_01.png" },
+                { category: "landscape", type: "video", title: "Springfield Trailer",
+                    src: "assets/Videos/Landscape/Springfield_Trailer_01.mp4",
+                    thumbnail: "assets/thumbnails/Springfield_Trailer_01.png" },
+                { category: "landscape", type: "video", title: "Success Sports Carnival",
+                    src: "assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4",
+                    thumbnail: "assets/thumbnails/Success_Sports_Carnival_Reel_01.png" },
+                { category: "landscape", type: "video", title: "Vip's Trailer",
+                    src: "assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4",
+                    thumbnail: "assets/thumbnails/Vip's_Trailer_Video_02.png" }
             ];
 
             const grid = document.getElementById('portfolioGrid');
             const filterBtns = document.querySelectorAll('.filter-btn');
             let currentFilter = 'all';
 
-            const placeholder = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230074f6'/%3E%3Cstop offset='100%25' stop-color='%233391ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='250' fill='url(%23grad)' opacity='0.85'/%3E%3Cpolygon points='170,90 170,160 260,125' fill='white' opacity='0.95'/%3E%3Ctext x='200' y='200' font-family='Arial' font-size='20' fill='white' text-anchor='middle' font-weight='bold'%3EClick to Play%3C/text%3E%3C/svg%3E`;
+            const placeholder =
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230074f6'/%3E%3Cstop offset='100%25' stop-color='%233391ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='250' fill='url(%23grad)' opacity='0.85'/%3E%3Cpolygon points='170,90 170,160 260,125' fill='white' opacity='0.95'/%3E%3Ctext x='200' y='200' font-family='Arial' font-size='20' fill='white' text-anchor='middle' font-weight='bold'%3EClick to Play%3C/text%3E%3C/svg%3E";
 
             function renderItems(filter) {
                 grid.innerHTML = '';
-                const filtered = filter === 'all' ? portfolioItems : portfolioItems.filter(item => item.category === filter);
-                filtered.forEach((item, idx) => {
+                const filtered = filter === 'all' ? portfolioItems : portfolioItems.filter(function(item) {
+                    return item.category === filter;
+                });
+                filtered.forEach(function(item, idx) {
                     const thumbSrc = item.thumbnail && item.thumbnail.trim() ? item.thumbnail : placeholder;
                     const card = document.createElement('div');
                     card.className = 'portfolio-card reveal reveal-scale';
-                    card.style.transitionDelay = `${idx * 0.05}s`;
-                    card.innerHTML = `
-                        <div class="card-media" data-src="${item.src}">
-                            <div class="play-overlay"><i class="fa-solid fa-play-circle"></i></div>
-                            <img src="${thumbSrc}" alt="${item.title}">
-                            <video src="${item.src}" playsinline></video>
-                        </div>
-                        <div class="card-body">
-                            <h3>${item.title}</h3>
-                        </div>
-                    `;
+                    card.style.transitionDelay = (idx * 0.05) + 's';
+                    card.innerHTML =
+                        '<div class="card-media" data-src="' + item.src + '">' +
+                        '<div class="play-overlay"><i class="fa-solid fa-play-circle"></i></div>' +
+                        '<img src="' + thumbSrc + '" alt="' + item.title + '">' +
+                        '<video src="' + item.src + '" playsinline></video>' +
+                        '</div>' +
+                        '<div class="card-body"><h3>' + item.title + '</h3></div>';
                     grid.appendChild(card);
                 });
                 attachVideoEvents();
@@ -386,51 +1431,69 @@
             }
 
             function attachVideoEvents() {
-                document.querySelectorAll('.card-media').forEach(media => {
+                document.querySelectorAll('.card-media').forEach(function(media) {
                     media.addEventListener('click', function(e) {
                         if (this.classList.contains('playing')) {
-                            // Pause and reset if already playing
-                            const vid = this.querySelector('video');
+                            var vid = this.querySelector('video');
                             vid.pause();
                             vid.currentTime = 0;
                             this.classList.remove('playing');
                         } else {
-                            // Play inline with sound (user gesture allows unmuted)
-                            const vid = this.querySelector('video');
+                            var vid = this.querySelector('video');
                             this.classList.add('playing');
-                            vid.play().catch(() => {});
+                            vid.play().catch(function() {});
                         }
                     });
                 });
             }
 
-            filterBtns.forEach(btn => {
+            filterBtns.forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    filterBtns.forEach(b => b.classList.remove('active'));
+                    filterBtns.forEach(function(b) { b.classList.remove('active'); });
                     this.classList.add('active');
                     currentFilter = this.dataset.filter;
                     renderItems(currentFilter);
                 });
             });
 
-            // Logos grid (unchanged)
-            const logoFiles = {
-                Education: ["3nd expo logo.jpg","4th expo logo.jpg","akshrs logo.jpg","brirhtfield logo.jpg","dawn school logo.jpg","expo logo.jpg","focus logo.jpg","full stack academy logo.jpg","gems logo.jpg","global logo.jpg","hyderabad international school logo.jpg","izm logo.jpg","jamiatul muflihaat logo.jpg","laksh logo.jpg","logo hidiya.jpg","logo sarita.jpg","master mind logo.jpg","moral model logo.jpg","ms missios logo.jpg","nobal logo.jpg","oakridge.jpg","Phonix logo.jpg","prodress logo.jpg","Rainbow School logo.jpg","Rockwoods logo.jpg","shuja grammer logo.jpg","silver crest logo.jpg","Spring Fields Logo.jpg","st.joseph's.jpg","success logo.jpg","unique logo.jpg","vidvaniketan logo.jpg","vikas_high_school_logo.jpg","Vip's logo.jpg"],
-                Food: ["barbi q spice logo.jpg","errababu logo.jpg","khaja sutad logo.jpg","master choise logo.jpg","strong punch logo.jpg","tabar spice logo.jpg","Tando's logo.jpg"],
-                Furniture: ["alzo logo.jpg","Raja Furniture logo.jpg","vanto logo.jpg"],
-                Hospital: ["ankura logo.jpg","onus logo.jpg","Solis logo.jpg"],
-                Jewellers: ["ij logo.jpg","iqbal logo.jpg","krishi logo.jpg","mamanram logo.jpg","nisar logo.jpg","royal jewellerslogo.jpg","s craft logo.jpg","sree nakoda jewllers logo.jpg","tia logo.jpg"],
-                Other: ["arced logo.jpg","code for india logo.jpg","edulan logo.jpg","epw logo.jpg","insomania logo.jpg","maaya logo.jpg","mubarak travels logo.jpg","nasar logo.jpg","quake arena logo.jpg"]
+            // ── Logos data ──
+            var logoFiles = {
+                Education: ["3nd expo logo.jpg", "4th expo logo.jpg", "akshrs logo.jpg", "brirhtfield logo.jpg",
+                    "dawn school logo.jpg", "expo logo.jpg", "focus logo.jpg", "full stack academy logo.jpg",
+                    "gems logo.jpg", "global logo.jpg", "hyderabad international school logo.jpg",
+                    "izm logo.jpg", "jamiatul muflihaat logo.jpg", "laksh logo.jpg", "logo hidiya.jpg",
+                    "logo sarita.jpg", "master mind logo.jpg", "moral model logo.jpg", "ms missios logo.jpg",
+                    "nobal logo.jpg", "oakridge.jpg", "Phonix logo.jpg", "prodress logo.jpg",
+                    "Rainbow School logo.jpg", "Rockwoods logo.jpg", "shuja grammer logo.jpg",
+                    "silver crest logo.jpg", "Spring Fields Logo.jpg", "st.joseph's.jpg", "success logo.jpg",
+                    "unique logo.jpg", "vidvaniketan logo.jpg", "vikas_high_school_logo.jpg", "Vip's logo.jpg"
+                ],
+                Food: ["barbi q spice logo.jpg", "errababu logo.jpg", "khaja sutad logo.jpg",
+                    "master choise logo.jpg", "strong punch logo.jpg", "tabar spice logo.jpg", "Tando's logo.jpg"
+                ],
+                Furniture: ["alzo logo.jpg", "Raja Furniture logo.jpg", "vanto logo.jpg"],
+                Hospital: ["ankura logo.jpg", "onus logo.jpg", "Solis logo.jpg"],
+                Jewellers: ["ij logo.jpg", "iqbal logo.jpg", "krishi logo.jpg", "mamanram logo.jpg",
+                    "nisar logo.jpg", "royal jewellerslogo.jpg", "s craft logo.jpg",
+                    "sree nakoda jewllers logo.jpg", "tia logo.jpg"
+                ],
+                Other: ["arced logo.jpg", "code for india logo.jpg", "edulan logo.jpg", "epw logo.jpg",
+                    "insomania logo.jpg", "maaya logo.jpg", "mubarak travels logo.jpg", "nasar logo.jpg",
+                    "quake arena logo.jpg"
+                ]
             };
 
-            const logosGrid = document.getElementById('logosGrid');
+            var logosGrid = document.getElementById('logosGrid');
+
             function renderLogos() {
                 logosGrid.innerHTML = '';
-                for (let cat in logoFiles) {
-                    logoFiles[cat].forEach(file => {
-                        const img = document.createElement('div');
+                for (var cat in logoFiles) {
+                    logoFiles[cat].forEach(function(file) {
+                        var img = document.createElement('div');
                         img.className = 'logo-card reveal reveal-scale';
-                        img.innerHTML = `<img src="assets/Logos/${cat}/${file}" alt="${cat} logo" onerror="this.parentElement.style.display='none'">`;
+                        img.innerHTML = '<img src="assets/Logos/' + cat + '/' + file +
+                            '" alt="' + cat +
+                            ' logo" onerror="this.parentElement.style.display=\'none\'">';
                         logosGrid.appendChild(img);
                     });
                 }
@@ -438,34 +1501,24 @@
             }
             renderLogos();
 
+            // ── Reveal observer ──
             function observeRevealItems() {
-                const reveals = document.querySelectorAll('.reveal');
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
+                var reveals = document.querySelectorAll('.reveal');
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('revealed');
                             observer.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-                reveals.forEach(el => observer.observe(el));
+                reveals.forEach(function(el) { observer.observe(el); });
             }
 
             renderItems('all');
             observeRevealItems();
 
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href.length > 1) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 10, behavior: 'smooth' });
-                    }
-                });
-            });
-        })();
+        });
     </script>
 </body>
 </html>
