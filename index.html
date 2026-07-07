@@ -1832,7 +1832,7 @@
                 padding: 3rem 1.2rem;
             }
             .section-title {
-                font-size: 1.6rem;
+                font-size: 2.6rem;
             }
             .section-header {
                 margin-bottom: 2.5rem;
@@ -1959,6 +1959,7 @@
                 padding: 1.5rem;
             }
             .contact-info h3 {
+                display: center;
                 font-size: 1.3rem;
             }
 
@@ -2139,7 +2140,7 @@
                 padding: 3rem 1.2rem !important;
             }
             .section-title {
-                font-size: 1.4rem;
+                font-size: 2.4rem;
             }
             .slide-cta,
             .btn-cta-white,
@@ -2272,7 +2273,7 @@
                 padding: 3rem 1.2rem !important;
             }
             .section-title {
-                font-size: 1.2rem !important;
+                font-size: 2.2rem !important;
             }
             .slide-cta,
             .btn-cta-white,
@@ -2370,7 +2371,7 @@
                 padding: 3rem 1.2rem !important;
             }
             .section-title {
-                font-size: 1rem !important;
+                font-size: 2rem !important;
             }
             .slide-cta,
             .btn-cta-white,
@@ -2416,6 +2417,17 @@
         .back-to-top {
             display: none;
         }
+        .contact-email {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+.contact-email:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
@@ -2793,9 +2805,19 @@
                         <div class="contact-detail-text"><span>Studio Location</span><p>Talwar Plaza, 4th, beside Podium Mall, Toli Chowki, Hyderabad, Telangana 500008</p></div>
                     </div>
                     <div class="contact-detail">
-                        <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
-                        <div class="contact-detail-text"><span>Email</span><p>flylensemediapartner@gmail.com</p></div>
-                    </div>
+    <div class="contact-detail-icon">
+        <i class="fa-solid fa-envelope"></i>
+    </div>
+
+    <div class="contact-detail-text">
+        <span>Email</span>
+        <p>
+            <a href="mailto:flylensemediapartner@gmail.com" class="contact-email">
+                flylensemediapartner@gmail.com
+            </a>
+        </p>
+    </div>
+</div>
                     <div class="contact-detail">
                         <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
                         <div class="contact-detail-text"><span>Phone</span><p>+91 99895 71223<br>+91 90143 23594</p></div>
