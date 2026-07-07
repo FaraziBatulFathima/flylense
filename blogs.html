@@ -220,6 +220,7 @@
             will-change: background, backdrop-filter, box-shadow, border-color;
         }
         .navbar.scrolled {
+            height: 100px;
             top: 0px;
             background: rgba(12, 18, 30, .96);
             backdrop-filter: blur(18px);
@@ -1054,7 +1055,7 @@
             }
         }
 
-        /* ── 576px ── */
+        /* ── 576px (2 Cards Per Row) ── */
         @media (max-width: 576px) {
             .navbar.scrolled {
                 height: 80px;
@@ -1112,29 +1113,34 @@
                 width: 60px;
             }
 
-            /* ── BLOG GRID ── */
+            /* ── BLOG GRID (2 Columns) ── */
             .blog-grid {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: 1fr 1fr !important;
                 gap: 0.8rem;
-                max-width: 480px;
+                max-width: 100%;
             }
             .blog-card-content {
-                padding: 1rem 1rem 1.2rem !important;
+                padding: 0.8rem 0.8rem 1rem !important;
             }
             .blog-card-content h4 {
-                font-size: 1rem !important;
+                font-size: 0.9rem !important;
             }
             .blog-card-content p {
-                font-size: 0.85rem !important;
+                font-size: 0.8rem !important;
+                display: none; /* Hide description on small mobile for cleaner 2-col layout */
             }
             .blog-card-content .cat-tag {
-                font-size: 0.6rem;
-                padding: 0.2rem 0.7rem;
+                font-size: 0.55rem;
+                padding: 0.15rem 0.6rem;
+                margin-bottom: 0.5rem;
             }
             .blog-card-video .play-btn-overlay {
-                width: 48px;
-                height: 48px;
-                font-size: 1.1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+            .blog-card-content a {
+                font-size: 0.8rem;
             }
 
             /* ── CTA ── */
@@ -1213,7 +1219,7 @@
             }
         }
 
-        /* ── 480px ── */
+        /* ── 480px (2 Cards Per Row) ── */
         @media (max-width: 480px) {
             .navbar.scrolled {
                 height: 80px;
@@ -1259,24 +1265,31 @@
 
             /* ── BLOG ── */
             .blog-grid {
+                grid-template-columns: 1fr 1fr !important;
                 gap: 0.6rem;
+                max-width: 100%;
             }
             .blog-card-content {
-                padding: 0.8rem 0.8rem 1rem !important;
+                padding: 0.6rem 0.6rem 0.8rem !important;
             }
             .blog-card-content h4 {
-                font-size: 0.95rem !important;
-            }
-            .blog-card-content p {
                 font-size: 0.8rem !important;
             }
+            .blog-card-content p {
+                font-size: 0.75rem !important;
+                display: none;
+            }
             .blog-card-content a {
-                font-size: 0.8rem;
+                font-size: 0.7rem;
+            }
+            .blog-card-content .cat-tag {
+                font-size: 0.5rem;
+                padding: 0.1rem 0.5rem;
             }
             .blog-card-video .play-btn-overlay {
-                width: 44px;
-                height: 44px;
-                font-size: 1rem;
+                width: 36px;
+                height: 36px;
+                font-size: 0.8rem;
             }
 
             /* ── CTA ── */
@@ -1387,9 +1400,11 @@
                 font-size: 0.8rem !important;
             }
 
-            /* ── BLOG ── */
+            /* ── BLOG (Single Column for very small screens) ── */
             .blog-grid {
+                grid-template-columns: 1fr !important;
                 gap: 0.5rem;
+                max-width: 100%;
             }
             .blog-card-content {
                 padding: 0.6rem 0.6rem 0.8rem !important;
@@ -1399,6 +1414,7 @@
             }
             .blog-card-content p {
                 font-size: 0.75rem !important;
+                display: block; /* Show description on single column */
             }
             .blog-card-content a {
                 font-size: 0.7rem;
@@ -1562,126 +1578,217 @@
             </div>
             <div class="blog-grid">
 
-                <!-- Blog 1 -->
+                <!-- Blog 1: Lighting -->
                 <div class="blog-card reveal reveal-up delay-1">
-                    <div class="blog-card-video" data-video-id="8rU7J1VRyjA">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/8rU7J1VRyjA/maxresdefault.jpg" alt="Mastering Lighting thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/8rU7J1VRyjA?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Creators</span>
-                        <h4>Mastering Lighting: The Secret to Cinematic Shots</h4>
-                        <p>Discover the essential lighting techniques that separate amateur footage from professional, high-end cinematography.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-video" data-video-id="0suVZjz3_Uw">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/0suVZjz3_Uw/maxresdefault.jpg"
+                 alt="Mastering Lighting thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
 
-                <!-- Blog 2 -->
-                <div class="blog-card reveal reveal-up delay-2">
-                    <div class="blog-card-video" data-video-id="7ejF3c8f6rU">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/7ejF3c8f6rU/maxresdefault.jpg" alt="Drone Filmmaking thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/7ejF3c8f6rU?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Creators</span>
-                        <h4>Drone Filmmaking: 5 Tips for Epic Aerial Shots</h4>
-                        <p>Take your aerial footage to the next level with these expert tips on composition, movement, and drone settings.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
 
-                <!-- Blog 3 -->
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/0suVZjz3_Uw?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Creators</span>
+        <h4>Mastering Lighting: The Secret to Cinematic Shots</h4>
+        <p>Discover the essential lighting techniques that separate amateur footage from professional, high-end cinematography.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+                <!-- Blog 2: Drone -->
+                <div class="blog-card reveal reveal-up delay-1">
+    <div class="blog-card-video" data-video-id="278IRQ6HSi4">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/278IRQ6HSi4/maxresdefault.jpg"
+                 alt="Drone Cinematography thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
+
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/278IRQ6HSi4?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Creators</span>
+        <h4>Drone Filmmaking: 5 Tips for Epic Aerial Shots</h4>
+        <p>Take your aerial footage to the next level with expert techniques for cinematic FPV flying, smooth camera movement, and breathtaking aerial compositions.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+                <!-- Blog 4: Camera Movement -->
                 <div class="blog-card reveal reveal-up delay-3">
-                    <div class="blog-card-video" data-video-id="M5Bj0TK8qB0">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/M5Bj0TK8qB0/maxresdefault.jpg" alt="Color Grading thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/M5Bj0TK8qB0?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Creators</span>
-                        <h4>The Art of Color Grading: Tonal Storytelling</h4>
-                        <p>Learn how color grading sets the emotional tone of your film and how to build a cohesive visual palette.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-video" data-video-id="zgMHWFolli8">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/zgMHWFolli8/maxresdefault.jpg"
+                 alt="3D Camera Techniques thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
 
-                <!-- Blog 4 -->
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
+
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/zgMHWFolli8?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Creators</span>
+        <h4>Mastering 3D Camera Techniques in After Effects</h4>
+        <p>Learn cinematic 3D camera movement, depth, parallax, and professional motion graphics techniques to create visually stunning videos.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+                <!-- Blog 6: Editing -->
                 <div class="blog-card reveal reveal-up delay-4">
-                    <div class="blog-card-video" data-video-id="wIeD9lM_F7E">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/wIeD9lM_F7E/maxresdefault.jpg" alt="Camera Movement thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/wIeD9lM_F7E?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Creators</span>
-                        <h4>Dynamic Camera Movement for Storytelling</h4>
-                        <p>Master the art of camera movement — from smooth gimbal shots to dramatic handheld sequences that captivate your audience.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-video" data-video-id="gMRr6ej8lEE">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/gMRr6ej8lEE/maxresdefault.jpg"
+                 alt="Camera Movement thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
 
-                <!-- Blog 5 -->
-                <div class="blog-card reveal reveal-up delay-5">
-                    <div class="blog-card-video" data-video-id="QyBxIegMcb4">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/QyBxIegMcb4/maxresdefault.jpg" alt="Sound Design thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/QyBxIegMcb4?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Creators</span>
-                        <h4>Sound Design: The Unsung Hero of Cinema</h4>
-                        <p>Great visuals are only half the story. Learn how professional sound design elevates your film and immerses your audience.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
 
-                <!-- Blog 6 -->
-                <div class="blog-card reveal reveal-up delay-6">
-                    <div class="blog-card-video" data-video-id="GJXxOu3uChk">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/GJXxOu3uChk/maxresdefault.jpg" alt="Editing Workflow thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/GJXxOu3uChk?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Creators</span>
-                        <h4>Efficient Editing Workflow for Creators</h4>
-                        <p>Streamline your post-production process with proven editing workflows that save time without compromising quality.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
 
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/gMRr6ej8lEE?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Creators</span>
+        <h4>Dynamic Camera Movement for Storytelling</h4>
+        <p>Learn professional camera movement techniques that add depth, emotion, and cinematic quality to every shot using smooth and purposeful motion.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+<div class="blog-card reveal reveal-up delay-5">
+    <div class="blog-card-video" data-video-id="1La4QzGeaaQ">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/1La4QzGeaaQ/maxresdefault.jpg"
+                 alt="Cinematic Transitions thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
+
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/1La4QzGeaaQ?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Creators</span>
+        <h4>Create Seamless Cinematic Transitions</h4>
+        <p>Learn how to create smooth, professional transitions that naturally connect scenes and keep your audience engaged throughout your film.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+<div class="blog-card reveal reveal-up delay-6">
+    <div class="blog-card-video" data-video-id="KVBc2Pg81rw">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/KVBc2Pg81rw/maxresdefault.jpg"
+                 alt="Cinematic Storytelling thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
+
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/KVBc2Pg81rw?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Creators</span>
+        <h4>Cinematic Storytelling: Create Films That Connect</h4>
+        <p>Learn how professional filmmakers use composition, pacing, camera movement, and emotion to turn ordinary footage into compelling cinematic stories.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
             </div>
         </div>
     </section>
@@ -1697,125 +1804,172 @@
             </div>
             <div class="blog-grid">
 
-                <!-- Blog 7 -->
-                <div class="blog-card reveal reveal-up delay-1">
-                    <div class="blog-card-video" data-video-id="gYOYfE9sU5Q">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/gYOYfE9sU5Q/maxresdefault.jpg" alt="Brand Film thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/gYOYfE9sU5Q?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Brands</span>
-                        <h4>Why Your Brand Needs a Professional Brand Film</h4>
-                        <p>Discover the ROI of a high-quality brand film and how it builds trust, credibility, and emotional connection with your audience.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                <!-- Blog 7: Brand Film -->
+              <div class="blog-card reveal reveal-up delay-1">
+    <div class="blog-card-video" data-video-id="sO4te2QNsHY">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/sO4te2QNsHY/maxresdefault.jpg"
+                 alt="Branding Basics thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i><span>Preview unavailable</span>
+            </div>
+            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="video-iframe-wrap">
+            <iframe src="https://www.youtube.com/embed/sO4te2QNsHY?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
 
-                <!-- Blog 8 -->
-                <div class="blog-card reveal reveal-up delay-2">
-                    <div class="blog-card-video" data-video-id="jWTWYcRZ1RQ">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/jWTWYcRZ1RQ/maxresdefault.jpg" alt="Social Media Reels thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/jWTWYcRZ1RQ?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Brands</span>
-                        <h4>Stop the Scroll: Producing High-Impact Reels</h4>
-                        <p>Viral social media videos don't happen by accident. Learn the formula for crafting thumb-stopping short-form content.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-content">
+        <span class="cat-tag">Brands</span>
+        <h4>Branding 101: Build a Brand People Remember</h4>
+        <p>Understand the fundamentals of branding and learn how strong brand identity creates trust, recognition, and lasting customer relationships.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
 
-                <!-- Blog 9 -->
-                <div class="blog-card reveal reveal-up delay-3">
-                    <div class="blog-card-video" data-video-id="qYgRjVnP8tE">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/qYgRjVnP8tE/maxresdefault.jpg" alt="Corporate Video thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/qYgRjVnP8tE?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Brands</span>
-                        <h4>Corporate Videos: Building Company Culture</h4>
-                        <p>From recruiting top talent to engaging internal teams, corporate videos are the modern engine of company culture.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                <!-- Blog 8: Social Reels -->
+               <div class="blog-card reveal reveal-up delay-2">
+    <div class="blog-card-video" data-video-id="_GohNBxyMPk">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/_GohNBxyMPk/maxresdefault.jpg"
+                 alt="Social Media Marketing thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i><span>Preview unavailable</span>
+            </div>
+            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="video-iframe-wrap">
+            <iframe src="https://www.youtube.com/embed/_GohNBxyMPk?autoplay=1&rel=0"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
 
-                <!-- Blog 10 -->
+    <div class="blog-card-content">
+        <span class="cat-tag">Brands</span>
+        <h4>Grow Your Brand with Social Media Marketing</h4>
+        <p>Discover proven strategies to create engaging content, increase reach, and convert followers into loyal customers.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+                <!-- Blog 9: Corporate Video -->
+               <div class="blog-card reveal reveal-up delay-3">
+    <div class="blog-card-video" data-video-id="fNxjNFiwxiA">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/fNxjNFiwxiA/maxresdefault.jpg"
+                 alt="Corporate Video thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i><span>Preview unavailable</span>
+            </div>
+            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="video-iframe-wrap">
+            <iframe src="https://www.youtube.com/embed/fNxjNFiwxiA?autoplay=1&rel=0"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Brands</span>
+        <h4>Corporate Videos That Inspire Trust</h4>
+        <p>Learn how professional corporate videos strengthen company culture, improve communication, and enhance brand credibility.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+                <!-- Blog 10: Video Marketing ROI -->
                 <div class="blog-card reveal reveal-up delay-4">
-                    <div class="blog-card-video" data-video-id="zPjQyPxCv2U">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/zPjQyPxCv2U/maxresdefault.jpg" alt="Video Marketing ROI thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/zPjQyPxCv2U?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Brands</span>
-                        <h4>Video Marketing ROI: Measuring What Matters</h4>
-                        <p>Understand the key metrics that prove video marketing ROI and how to optimize your strategy for maximum business impact.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-video" data-video-id="U-InaQW0xe4">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/U-InaQW0xe4/maxresdefault.jpg"
+                 alt="Video Marketing thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i><span>Preview unavailable</span>
+            </div>
+            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="video-iframe-wrap">
+            <iframe src="https://www.youtube.com/embed/U-InaQW0xe4?autoplay=1&rel=0"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
 
-                <!-- Blog 11 -->
-                <div class="blog-card reveal reveal-up delay-5">
-                    <div class="blog-card-video" data-video-id="fZ2GScBqTJo">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/fZ2GScBqTJo/maxresdefault.jpg" alt="Brand Storytelling thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/fZ2GScBqTJo?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Brands</span>
-                        <h4>Brand Storytelling: Connecting with Hearts &amp; Minds</h4>
-                        <p>Explore how powerful brand storytelling creates emotional connections that drive customer loyalty and business growth.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-content">
+        <span class="cat-tag">Brands</span>
+        <h4>Video Marketing Strategies That Drive Sales</h4>
+        <p>Explore practical video marketing techniques to increase engagement, generate leads, and maximize your business growth.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
 
-                <!-- Blog 12 -->
+                <!-- Blog 11: Brand Storytelling -->
+                <div class="blog-card reveal reveal-up delay-1">
+    <div class="blog-card-video" data-video-id="NeTJRCycYXQ">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/NeTJRCycYXQ/maxresdefault.jpg"
+                 alt="Storytelling Framework thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i>
+                <span>Preview unavailable</span>
+            </div>
+
+            <div class="play-btn-overlay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <div class="video-iframe-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/NeTJRCycYXQ?autoplay=1&rel=0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Brands</span>
+        <h4>The 5-Line Story Framework Every Brand Should Know</h4>
+        <p>Learn a simple storytelling framework that helps brands create compelling marketing videos, connect emotionally with audiences, and communicate their message with clarity.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+                <!-- Blog 12: Influencer Marketing -->
                 <div class="blog-card reveal reveal-up delay-6">
-                    <div class="blog-card-video" data-video-id="GJHrN7wXbNw">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/GJHrN7wXbNw/maxresdefault.jpg" alt="Influencer Marketing thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="video-placeholder" style="display:none;"><i class="fa-solid fa-video"></i><span>Preview unavailable</span></div>
-                            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="video-iframe-wrap">
-                            <iframe src="https://www.youtube.com/embed/GJHrN7wXbNw?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="cat-tag">Brands</span>
-                        <h4>Influencer Video Marketing: A Modern Strategy</h4>
-                        <p>Learn how to leverage influencer partnerships and video content to reach new audiences and build authentic brand advocacy.</p>
-                        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
+    <div class="blog-card-video" data-video-id="3MwMII8n1qM">
+        <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/3MwMII8n1qM/maxresdefault.jpg"
+                 alt="Influencer Marketing thumbnail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="video-placeholder" style="display:none;">
+                <i class="fa-solid fa-video"></i><span>Preview unavailable</span>
+            </div>
+            <div class="play-btn-overlay"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="video-iframe-wrap">
+            <iframe src="https://www.youtube.com/embed/3MwMII8n1qM?autoplay=1&rel=0"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <div class="blog-card-content">
+        <span class="cat-tag">Brands</span>
+        <h4>Influencer Marketing That Builds Brand Authority</h4>
+        <p>Learn how successful influencer collaborations expand your reach, increase credibility, and turn audiences into loyal customers.</p>
+        <a href="#">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
 
             </div>
         </div>
