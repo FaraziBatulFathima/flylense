@@ -2,13 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>FlyLense | Cinematic Media Production</title>
     <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png">
     <meta name="description" content="FlyLense - A dynamic media production company specializing in commercial films, brand storytelling, aerial drone footage, corporate videos, and social media content.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ── RESET & BASE ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+        }
+
+        img,
+        video,
+        svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
         :root {
             --bg-primary: #ffffff;
             --bg-secondary: #f7f9fc;
@@ -42,7 +81,7 @@
             --max-width: 1280px;
         }
 
-        /* Navbar intro animation */
+        /* ── NAVBAR INTRO ── */
         .navbar {
             opacity: 0;
             transform: translateY(-30px);
@@ -53,109 +92,7 @@
             transform: translateY(0);
         }
 
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: var(--nav-height);
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            -webkit-tap-highlight-color: transparent;
-        }
-/*
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--blue-dark);
-        }
-        ::selection {
-            background: rgba(0, 116, 246, 0.35);
-            color: #fff;
-        }*/
-
-        /* Reveal animations */
-        .reveal {
-            opacity: 0;
-            transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .reveal.revealed {
-            opacity: 1;
-        }
-        .reveal-up {
-            transform: translateY(50px);
-        }
-        .reveal-up.revealed {
-            transform: translateY(0);
-        }
-        .reveal-left {
-            transform: translateX(-50px);
-        }
-        .reveal-left.revealed {
-            transform: translateX(0);
-        }
-        .reveal-right {
-            transform: translateX(50px);
-        }
-        .reveal-right.revealed {
-            transform: translateX(0);
-        }
-        .reveal-scale {
-            transform: scale(0.88);
-        }
-        .reveal-scale.revealed {
-            transform: scale(1);
-        }
-        .delay-1 {
-            transition-delay: 0.05s;
-        }
-        .delay-2 {
-            transition-delay: 0.12s;
-        }
-        .delay-3 {
-            transition-delay: 0.19s;
-        }
-        .delay-4 {
-            transition-delay: 0.26s;
-        }
-        .delay-5 {
-            transition-delay: 0.33s;
-        }
-        .delay-6 {
-            transition-delay: 0.40s;
-        }
-        .delay-7 {
-            transition-delay: 0.47s;
-        }
-        .delay-8 {
-            transition-delay: 0.54s;
-        }
-
-        /* NAVIGATION */
+        /* ── NAVIGATION ── */
         .navbar {
             position: fixed;
             top: 20px;
@@ -349,12 +286,13 @@
             box-shadow: 0 6px 25px rgba(0, 116, 246, 0.4);
         }
 
-        /* SLIDER – STATIC CONTENT WITH CREATIVE INTRO ANIMATION */
+        /* ── SLIDER ── */
         .hero-slider-wrapper {
             position: relative;
             width: 100%;
             background: var(--bg-primary);
             padding-bottom: 2rem;
+            overflow: hidden;
         }
         .fade-slider {
             position: relative;
@@ -387,7 +325,6 @@
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.50) 50%, rgba(0, 0, 0, 0.80) 100%);
         }
 
-        /* Static hero content with intro animation */
         .hero-static-content {
             position: absolute;
             top: 50%;
@@ -439,6 +376,7 @@
             gap: 1.5rem;
             justify-content: center;
             margin-bottom: 22px;
+            flex-wrap: wrap;
         }
         .slide-stat {
             text-align: center;
@@ -477,7 +415,7 @@
             gap: 0.65rem;
         }
 
-        /* STATS RIBBON */
+        /* ── STATS RIBBON ── */
         .stats-ribbon {
             position: relative;
             z-index: 3;
@@ -532,10 +470,11 @@
             margin-top: 0.4rem;
         }
 
-        /* SECTION COMMONS */
+        /* ── SECTION COMMONS ── */
         .section {
             padding: 5rem 2rem;
             position: relative;
+            overflow: hidden;
         }
         .section-container {
             max-width: var(--max-width);
@@ -580,7 +519,7 @@
             width: 80px;
         }
 
-        /* ABOUT */
+        /* ── ABOUT ── */
         #about {
             background: var(--bg-primary);
             position: relative;
@@ -761,7 +700,7 @@
             gap: 0.7rem;
         }
 
-        /* SERVICES */
+        /* ── SERVICES ── */
         #services {
             background: var(--bg-secondary);
             position: relative;
@@ -840,7 +779,7 @@
             color: var(--blue-dark);
         }
 
-        /* PORTFOLIO */
+        /* ── PORTFOLIO ── */
         #portfolio {
             background: var(--bg-primary);
         }
@@ -917,7 +856,6 @@
             border: 2px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* Portfolio CTA button */
         .portfolio-cta {
             text-align: center;
             margin-top: 2.5rem;
@@ -943,7 +881,7 @@
             transform: translateY(-3px);
         }
 
-        /* CTA BANNER */
+        /* ── CTA BANNER ── */
         .cta-banner-section {
             padding: 20px 2rem;
             background: var(--bg-primary);
@@ -996,10 +934,11 @@
             background: #f0f4ff;
         }
 
-        /* BRAND GRID */
+        /* ── BRAND GRID ── */
         .brand-carousel {
             background: #fff;
             padding: 90px 0;
+            overflow: hidden;
         }
         .brand-grid {
             max-width: 1200px;
@@ -1040,7 +979,7 @@
             }
         }
 
-        /* CONTACT */
+        /* ── CONTACT ── */
         #contact {
             background: var(--bg-secondary);
         }
@@ -1057,7 +996,7 @@
         }
         .contact-detail {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1rem;
             margin-bottom: 1.2rem;
             transition: all var(--transition-fast);
@@ -1068,6 +1007,7 @@
         .contact-detail-icon {
             width: 44px;
             height: 44px;
+            min-width: 44px;
             background: rgba(0, 116, 246, 0.08);
             border-radius: 50%;
             display: flex;
@@ -1080,6 +1020,17 @@
             background: var(--gradient-blue);
             color: #fff;
             box-shadow: var(--shadow-blue);
+        }
+        .contact-detail-text span {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .contact-detail-text p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
         }
         .contact-form {
             background: var(--bg-card);
@@ -1098,9 +1049,11 @@
             margin-bottom: 1rem;
         }
         .form-group label {
+            display: block;
             font-size: 0.82rem;
             font-weight: 500;
             color: var(--text-secondary);
+            margin-bottom: 0.3rem;
         }
         .form-group input,
         .form-group textarea,
@@ -1113,6 +1066,7 @@
             font-family: 'Inter', sans-serif;
             outline: none;
             transition: all var(--transition-fast);
+            font-size: 0.95rem;
         }
         .form-group input:focus,
         .form-group textarea:focus,
@@ -1130,13 +1084,17 @@
             cursor: pointer;
             transition: all var(--transition-bounce);
             box-shadow: 0 6px 25px rgba(0, 116, 246, 0.3);
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .btn-primary:hover {
             transform: translateY(-4px);
             box-shadow: 0 14px 40px rgba(0, 116, 246, 0.5);
         }
 
-        /* FOOTER – DARK BLUE THEME */
+        /* ── FOOTER ── */
         .footer {
             background: #0a1628;
             color: #e5e7eb;
@@ -1161,6 +1119,7 @@
         .footer-links {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
@@ -1228,7 +1187,7 @@
             border-color: var(--blue);
         }
 
-        /* ========== VIDEO SHOWCASE SECTION ========== */
+        /* ── VIDEO SHOWCASE ── */
         .video-showcase-section {
             background: #0a0a0f;
             padding: 5rem 2rem;
@@ -1292,8 +1251,6 @@
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
             border-color: #0074f6;
         }
-
-        /* Video element inside card */
         .video-card video.video-bg {
             position: absolute;
             top: 0;
@@ -1306,8 +1263,6 @@
             background: #1a1a2e;
             display: block;
         }
-
-        /* Play/Pause button */
         .video-card .video-play-btn {
             position: absolute;
             top: 50%;
@@ -1336,8 +1291,6 @@
             color: #fff;
             box-shadow: 0 12px 40px rgba(0, 116, 246, 0.6);
         }
-
-        /* When video is actively playing */
         .video-card.playing .video-play-btn {
             background: rgba(0, 0, 0, 0.6);
             color: #fff;
@@ -1353,8 +1306,6 @@
             color: #fff;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
         }
-
-        /* Label & duration */
         .video-card .video-label {
             position: absolute;
             bottom: 1rem;
@@ -1399,9 +1350,68 @@
             grid-column: span 2;
             grid-row: span 2;
         }
-        /* ========== END VIDEO SHOWCASE SECTION ========== */
 
-        /* ==================== RESPONSIVE STYLES ==================== */
+        /* ── REVEAL ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.revealed {
+            opacity: 1;
+        }
+        .reveal-up {
+            transform: translateY(50px);
+        }
+        .reveal-up.revealed {
+            transform: translateY(0);
+        }
+        .reveal-left {
+            transform: translateX(-50px);
+        }
+        .reveal-left.revealed {
+            transform: translateX(0);
+        }
+        .reveal-right {
+            transform: translateX(50px);
+        }
+        .reveal-right.revealed {
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            transform: scale(0.88);
+        }
+        .reveal-scale.revealed {
+            transform: scale(1);
+        }
+        .delay-1 {
+            transition-delay: 0.05s;
+        }
+        .delay-2 {
+            transition-delay: 0.12s;
+        }
+        .delay-3 {
+            transition-delay: 0.19s;
+        }
+        .delay-4 {
+            transition-delay: 0.26s;
+        }
+        .delay-5 {
+            transition-delay: 0.33s;
+        }
+        .delay-6 {
+            transition-delay: 0.40s;
+        }
+        .delay-7 {
+            transition-delay: 0.47s;
+        }
+        .delay-8 {
+            transition-delay: 0.54s;
+        }
+
+        /* ── RESPONSIVE ── */
+
+        /* 1200px */
         @media (max-width: 1200px) {
             .brand-grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -1413,6 +1423,7 @@
             }
         }
 
+        /* 1024px */
         @media (max-width: 1024px) {
             .fade-slider {
                 height: 70vh;
@@ -1462,18 +1473,12 @@
                 flex-direction: column;
                 text-align: center;
             }
-
-            /* Video grid tablet */
             .video-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 180px;
             }
-            .video-card.span-2-col {
-                grid-column: span 1;
-            }
-            .video-card.span-2-row {
-                grid-row: span 1;
-            }
+            .video-card.span-2-col,
+            .video-card.span-2-row,
             .video-card.span-2-both {
                 grid-column: span 1;
                 grid-row: span 1;
@@ -1487,8 +1492,6 @@
                 width: 54px;
                 height: 54px;
             }
-
-            /* Brand grid tablet */
             .brand-grid {
                 grid-template-columns: repeat(4, 1fr);
                 gap: 35px 25px;
@@ -1502,6 +1505,7 @@
             }
         }
 
+        /* 768px */
         @media (max-width: 768px) {
             :root {
                 --nav-height: 64px;
@@ -1587,11 +1591,9 @@
             .stat-number {
                 font-size: 1.8rem;
             }
-
-            /* Video grid mobile */
             .video-grid {
-                grid-template-columns: 1fr;
-                grid-auto-rows: 200px;
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: 180px;
                 gap: 0.8rem;
             }
             .video-card.span-2-col,
@@ -1625,8 +1627,6 @@
             .video-showcase-section .section-header {
                 margin-bottom: 2rem;
             }
-
-            /* Brand grid mobile */
             .brand-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 30px 20px;
@@ -1635,8 +1635,6 @@
                 max-width: 85px;
                 max-height: 55px;
             }
-
-            /* About mobile */
             .about-text h3 {
                 font-size: 1.5rem;
             }
@@ -1658,8 +1656,6 @@
                 padding: 0.7rem 1.5rem;
                 font-size: 0.9rem;
             }
-
-            /* Contact mobile */
             .contact-form {
                 padding: 1.5rem;
             }
@@ -1667,175 +1663,54 @@
                 font-size: 1.3rem;
             }
         }
+
+        /* 576px */
         @media (max-width: 576px) {
-            :root {
-                --nav-height: 64px;
-            }
-            .nav-links {
-                display: none;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .navbar-container {
-                padding: 0 1.2rem;
-            }
-            .fade-slider {
-                height: 80vh;
-                min-height: 380px;
-            }
-            .hero-static-content h1 {
-                font-size: clamp(1.6rem, 4vw, 2.2rem);
-            }
-            .hero-static-content .slide-desc {
-                font-size: 0.9rem;
-            }
-            .section {
-                padding: 3rem 1.2rem;
-            }
-            .section-title {
-                font-size: 1.6rem;
-            }
-            .section-header {
-                margin-bottom: 2.5rem;
-            }
-            .services-grid {
+            .video-grid {
                 grid-template-columns: 1fr;
-                gap: 1.2rem;
+                grid-auto-rows: 200px;
+                gap: 0.8rem;
             }
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+            .video-card.span-2-col,
+            .video-card.span-2-row,
+            .video-card.span-2-both {
+                grid-column: span 1;
+                grid-row: span 1;
             }
-            .form-row {
-                grid-template-columns: 1fr;
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px 15px;
             }
-            .footer-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            .portfolio-overlay {
-                opacity: 1;
-                background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
-            }
-            .cta-banner {
-                padding: 1.5rem;
-            }
-            .cta-banner-text h2 {
-                font-size: 1.3rem;
-            }
-            .cta-banner-text h4 {
-                font-size: 1rem;
-            }
-            .btn-cta-white {
-                padding: 14px 24px;
-                font-size: 0.9rem;
-            }
-            .brand-carousel {
-                padding: 35px 0;
-            }
-            .stats-ribbon {
-                padding: 0 1rem;
+            .brand-item img {
+                max-width: 75px;
+                max-height: 50px;
             }
             .stats-ribbon-inner {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
             }
             .stat-item {
-                padding: 1.2rem 1rem;
+                padding: 1rem 0.8rem;
             }
             .stat-number {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
-
-            /* Video grid mobile */
-            .video-grid {
-                grid-template-columns: 1fr;
-                grid-auto-rows: 200px;
-                gap: 0.8rem;
+            .stat-label {
+                font-size: 0.75rem;
             }
-            .video-card.span-2-col,
-            .video-card.span-2-row,
-            .video-card.span-2-both {
-                grid-column: span 1;
-                grid-row: span 1;
+            .section {
+                padding: 2.5rem 1rem;
             }
-            .video-card .video-play-btn {
-                width: 44px;
-                height: 44px;
-                font-size: 1rem;
-            }
-            .video-card:hover .video-play-btn {
-                width: 50px;
-                height: 50px;
-            }
-            .video-card .video-label {
-                font-size: 0.78rem;
-                bottom: 0.8rem;
-                left: 1rem;
-            }
-            .video-card .video-duration {
-                font-size: 0.65rem;
-                bottom: 0.8rem;
-                right: 1rem;
-            }
-            .video-showcase-section {
-                padding: 3rem 1rem;
-            }
-            .video-showcase-section .section-header {
-                margin-bottom: 2rem;
-            }
-
-            /* Brand grid mobile */
-            .brand-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px 20px;
-            }
-            .brand-item img {
-                max-width: 85px;
-                max-height: 55px;
-            }
-
-            /* About mobile */
-            .about-text h3 {
-                font-size: 1.5rem;
-            }
-            .about-text .lead {
-                font-size: 0.95rem;
-            }
-            .about-stats-row {
-                gap: 1rem;
-                justify-content: center;
-            }
-            .about-stat {
-                padding: 0.8rem 1rem;
-                min-width: 70px;
-            }
-            .about-stat .num {
+            .section-title {
                 font-size: 1.4rem;
             }
-            .about-cta {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            /* Contact mobile */
-            .contact-form {
-                padding: 1.5rem;
-            }
-            .contact-info h3 {
-                font-size: 1.3rem;
+            .section-subtitle {
+                font-size: 0.85rem;
             }
         }
 
+        /* 480px */
         @media (max-width: 480px) {
             .fade-slider {
-                top: 50;
                 height: 55vh;
                 min-height: 300px;
             }
@@ -1855,11 +1730,11 @@
             }
             .brand-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 25px 15px;
+                gap: 20px 12px;
             }
             .brand-item img {
-                max-width: 75px;
-                max-height: 50px;
+                max-width: 60px;
+                max-height: 40px;
             }
             .brand-carousel {
                 padding: 25px 0;
@@ -1957,6 +1832,7 @@
             .contact-detail-icon {
                 width: 36px;
                 height: 36px;
+                min-width: 36px;
             }
             .footer {
                 padding: 1.8rem 1rem;
@@ -1994,8 +1870,15 @@
                 padding: 12px 20px;
                 font-size: 0.8rem;
             }
+            .about-text h3 {
+                font-size: 1.3rem;
+            }
+            .contact-form {
+                padding: 1.2rem;
+            }
         }
 
+        /* 360px */
         @media (max-width: 360px) {
             .fade-slider {
                 height: 50vh;
@@ -2014,11 +1897,11 @@
             }
             .brand-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px 12px;
+                gap: 16px 10px;
             }
             .brand-item img {
-                max-width: 60px;
-                max-height: 40px;
+                max-width: 50px;
+                max-height: 35px;
             }
             .video-grid {
                 grid-auto-rows: 150px;
@@ -2039,8 +1922,19 @@
             .section-title {
                 font-size: 1.2rem;
             }
+            .stats-ribbon {
+                padding: 0 0.6rem;
+            }
+            .stat-item {
+                padding: 0.8rem 0.6rem;
+            }
+            .stat-number {
+                font-size: 1.4rem;
+            }
+            .stat-label {
+                font-size: 0.7rem;
+            }
         }
-        /* ==================== END RESPONSIVE STYLES ==================== */
     </style>
 </head>
 <body>
@@ -2068,7 +1962,7 @@
         <a href="portfolio.html">Portfolio</a><a href="industry.html">Industries</a><a href="contact.html">Contact</a>
     </div>
 
-    <!-- Slider with static content and creative intro animation -->
+    <!-- Slider -->
     <section class="hero-slider-wrapper" id="home">
         <div class="fade-slider" id="fadeSlider">
             <div class="fade-slide" style="background-image: url('assets/images/slider/1.jpg');"><div class="slide-overlay"></div></div>
@@ -2124,7 +2018,7 @@
         </div>
     </section>
 
-    <!-- Video Showcase with real videos + intro animations -->
+    <!-- Video Showcase -->
     <section class="section video-showcase-section">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -2134,7 +2028,6 @@
                 <div class="section-divider"></div>
             </div>
             <div class="video-grid">
-                <!-- Card 1: span-2-both (large) -->
                 <div class="video-card span-2-both reveal reveal-scale delay-1">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4">
@@ -2143,7 +2036,6 @@
                     <span class="video-label">Luxury Villa Tour</span>
                     <span class="video-duration">4:32</span>
                 </div>
-                <!-- Card 2: small -->
                 <div class="video-card reveal reveal-scale delay-2">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Food%20&%20Restaurent/Videos/Barbeque%20Spice%20Reel%2001.mp4" type="video/mp4">
@@ -2152,7 +2044,6 @@
                     <span class="video-label">Hotel Brand Film</span>
                     <span class="video-duration">2:18</span>
                 </div>
-                <!-- Card 3: small -->
                 <div class="video-card reveal reveal-scale delay-3">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4">
@@ -2161,7 +2052,6 @@
                     <span class="video-label">Corporate HQ Reveal</span>
                     <span class="video-duration">3:45</span>
                 </div>
-                <!-- Card 4: span-2-col (wide) -->
                 <div class="video-card span-2-col reveal reveal-scale delay-4">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4">
@@ -2170,7 +2060,6 @@
                     <span class="video-label">Wedding Cinema</span>
                     <span class="video-duration">6:10</span>
                 </div>
-                <!-- Card 5: small -->
                 <div class="video-card reveal reveal-scale delay-5">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4">
@@ -2179,7 +2068,6 @@
                     <span class="video-label">Product Launch</span>
                     <span class="video-duration">1:55</span>
                 </div>
-                <!-- Card 6: small -->
                 <div class="video-card reveal reveal-scale delay-6">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Food%20&%20Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4">
@@ -2188,7 +2076,6 @@
                     <span class="video-label">Festival Aftermovie</span>
                     <span class="video-duration">5:20</span>
                 </div>
-                <!-- Card 7: span-2-col (wide) -->
                 <div class="video-card span-2-col reveal reveal-scale delay-7">
                     <video class="video-bg" playsinline preload="metadata" loop muted>
                         <source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4">
@@ -2201,7 +2088,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section class="section" id="about">
         <div class="section-container">
             <div class="section-header reveal reveal-up">
@@ -2327,7 +2214,7 @@
                     <p>Every great project starts with a conversation. Reach out to our team and let's discuss how we can bring your brand's story to the screen.</p>
                     <div class="contact-detail">
                         <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="contact-detail-text"><span>Studio Location</span><p>Los Angeles, CA 90028</p></div>
+                        <div class="contact-detail-text"><span>Studio Location</span><p>Talwar Plaza, 4th, beside Podium Mall, Toli Chowki, Hyderabad, Telangana 500008</p></div>
                     </div>
                     <div class="contact-detail">
                         <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
@@ -2388,12 +2275,12 @@
 
     <script>
         (function() {
-            // Navbar intro animation
+            // Navbar intro
             setTimeout(() => {
                 document.getElementById('navbar').classList.add('loaded');
             }, 100);
 
-            // Creative intro animation for slider static content
+            // Hero content intro
             const heroContent = document.getElementById('heroContent');
             if (heroContent) {
                 setTimeout(() => {
@@ -2441,7 +2328,8 @@
                 const sections = document.querySelectorAll('section[id], .hero-slider-wrapper[id]');
                 let current = 'home';
                 sections.forEach(sec => {
-                    const top = sec.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 100;
+                    const top = sec.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight -
+                    100;
                     if (scrollY >= top && scrollY < top + sec.offsetHeight) {
                         const id = sec.getAttribute('id');
                         if (id) current = id;
@@ -2452,15 +2340,18 @@
                 });
 
                 const stats = document.querySelector('.stats-ribbon');
-                if (stats && stats.getBoundingClientRect().top < window.innerHeight && !stats.dataset.animated) {
+                if (stats && stats.getBoundingClientRect().top < window.innerHeight && !stats.dataset
+                    .animated) {
                     stats.dataset.animated = 'true';
                     document.querySelectorAll('.stat-number[data-count]').forEach(el => {
                         const target = parseInt(el.getAttribute('data-count'));
                         let start = null;
+
                         function step(timestamp) {
                             if (!start) start = timestamp;
                             const progress = Math.min((timestamp - start) / 2000, 1);
-                            el.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))) + (target >= 100 ? '+' : '');
+                            el.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))) + (
+                                target >= 100 ? '+' : '');
                             if (progress < 1) requestAnimationFrame(step);
                             else el.textContent = target + (target >= 100 ? '+' : '');
                         }
@@ -2487,7 +2378,8 @@
                         e.preventDefault();
                         const target = document.querySelector(href);
                         if (target) window.scrollTo({
-                            top: target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 10,
+                            top: target.getBoundingClientRect().top + window.scrollY - navbar
+                                .offsetHeight - 10,
                             behavior: 'smooth'
                         });
                     }
@@ -2496,7 +2388,7 @@
 
             backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            // Intersection Observer for reveal animations
+            // Intersection Observer for reveal
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -2507,19 +2399,20 @@
             }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // Brand grid staggered reveal
+            // Brand grid stagger
             const brandGrid = document.querySelector('.brand-grid');
             if (brandGrid) {
                 const brandObserver = new IntersectionObserver((entries) => {
                     if (entries[0].isIntersecting) {
-                        document.querySelectorAll('.brand-item').forEach((item, i) => setTimeout(() => item.classList.add('show'), i * 80));
+                        document.querySelectorAll('.brand-item').forEach((item, i) => setTimeout(() =>
+                            item.classList.add('show'), i * 80));
                         brandObserver.unobserve(brandGrid);
                     }
                 }, { threshold: 0.25 });
                 brandObserver.observe(brandGrid);
             }
 
-            // Contact form handler
+            // Contact form
             window.handleFormSubmit = function(e) {
                 e.preventDefault();
                 const btn = e.target.querySelector('button[type="submit"]');
@@ -2540,12 +2433,12 @@
                 }, 1200);
             };
 
-            /* ========== VIDEO SHOWCASE PLAYBACK LOGIC ========== */
+            // Video playback
             const videoCards = document.querySelectorAll('.video-card');
             videoCards.forEach(card => {
                 const video = card.querySelector('video.video-bg');
                 const playBtn = card.querySelector('.video-play-btn');
-                const icon = playBtn.querySelector('i');
+                const icon = playBtn ? playBtn.querySelector('i') : null;
                 if (!video || !playBtn || !icon) return;
 
                 function updatePlayIcon(isPlaying) {
@@ -2569,7 +2462,8 @@
                         }
                     });
                     video.muted = false;
-                    video.play().then(() => updatePlayIcon(true)).catch(err => console.warn('Video playback failed:', err));
+                    video.play().then(() => updatePlayIcon(true)).catch(err => console.warn(
+                        'Video playback failed:', err));
                 }
 
                 function pauseThisVideo() {
@@ -2596,10 +2490,9 @@
                 });
 
                 video.addEventListener('ended', () => updatePlayIcon(false));
-                video.addEventListenerener('pause', () => updatePlayIcon(false));
+                video.addEventListener('pause', () => updatePlayIcon(false));
                 video.addEventListener('play', () => updatePlayIcon(true));
             });
-            /* ========== END VIDEO SHOWCASE LOGIC ========== */
         })();
     </script>
 </body>
