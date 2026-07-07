@@ -81,6 +81,119 @@
             --max-width: 1280px;
         }
 
+        /* ── FLOATING SOCIAL ICONS ── */
+        .floating-social {
+            position: fixed;
+            bottom: 30px;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .floating-social-left {
+            left: 25px;
+        }
+        .floating-social-right {
+            right: 25px;
+        }
+        .floating-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+        .floating-social a:hover {
+            transform: scale(1.15) translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+        }
+        .floating-social a .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .floating-social a:hover .tooltip {
+            opacity: 1;
+        }
+        .floating-social-left a .tooltip {
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .floating-social-right a .tooltip {
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        /* WhatsApp Button */
+        .social-whatsapp {
+            background: #25D366;
+        }
+        .social-whatsapp:hover {
+            background: #1ebe5c;
+        }
+        /* Instagram Button */
+        .social-instagram {
+            background: radial-gradient(circle at 30% 30%, #fdf497, #fdf497 25%, #fd5949 50%, #d6249f 75%, #285AEB 100%);
+        }
+        .social-instagram:hover {
+            opacity: 0.9;
+        }
+        /* Pulse animation for WhatsApp */
+        .social-whatsapp::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid #25D366;
+            animation: pulse-ring 2s ease-out infinite;
+            opacity: 0;
+        }
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        @media (max-width: 576px) {
+            .floating-social a {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .floating-social {
+                gap: 10px;
+            }
+            .floating-social-left {
+                left: 15px;
+            }
+            .floating-social-right {
+                right: 15px;
+            }
+            .floating-social a .tooltip {
+                display: none;
+            }
+        }
+
         /* ── NAVBAR INTRO ── */
         .navbar {
             opacity: 0;
@@ -815,12 +928,12 @@
 
         /* ── PORTFOLIO ── */
         #portfolio {
-            background-color: #000; /* Black background to match the 2nd file */
+            background-color: #000;
             padding: 60px 20px;
         }
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible responsive grid */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
         }
         .portfolio-item {
@@ -829,7 +942,7 @@
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
-            aspect-ratio: auto; /* Reset the fixed aspect-ratio */
+            aspect-ratio: auto;
             border: none;
             padding: 0;
         }
@@ -839,7 +952,7 @@
         .portfolio-video-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* Perfect 16:9 ratio for YouTube iframes */
+            padding-bottom: 56.25%;
         }
         .portfolio-video {
             position: absolute;
@@ -865,7 +978,6 @@
         .portfolio-title {
             color: #fff;
         }
-        /* Remove old elements */
         .portfolio-item-video,
         .portfolio-overlay,
         .video-badge {
@@ -1537,7 +1649,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+                grid-template-columns: repeat(2, 1fr);
             }
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -1617,7 +1729,7 @@
                 gap: 1.2rem;
             }
             .portfolio-grid {
-                grid-template-columns: 1fr; /* 1 column on mobile */
+                grid-template-columns: 1fr;
                 gap: 1rem;
             }
             .form-row {
@@ -1740,28 +1852,21 @@
 
         /* 576px */
         @media (max-width: 576px) {
-            /* --- 1. Make Title Image (Logo) Small --- */
             .nav-logo img { height: 28px !important; }
             .nav-logo img.logo-title { height: 40px !important; padding-left: 10px !important; }
             .nav-logo img.logo-icon { height: 32px !important; }
-
-            /* --- 2. Center About Section & Text --- */
             .about-text { text-align: center !important; padding-left: 0 !important; }
             .about-text h3 { text-align: center !important; }
             .about-text h3::after { left: 50% !important; transform: translateX(-50%) !important; }
             .about-text .lead { text-align: center !important; }
             .about-stats-row { justify-content: center !important; }
             .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; width: fit-content; }
-
-            /* --- 3. Video Showcase: Only 1 Card per row --- */
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 220px !important; gap: 0.8rem !important; }
             .video-card.span-2-col, .video-card.span-2-row, .video-card.span-2-both { grid-column: span 1 !important; grid-row: span 1 !important; }
             .video-card .video-play-btn { width: 44px; height: 44px; font-size: 1rem; }
             .video-card:hover .video-play-btn { width: 50px; height: 50px; }
             .video-card .video-label { font-size: 0.78rem; bottom: 0.8rem; left: 1rem; }
             .video-card .video-duration { font-size: 0.65rem; bottom: 0.8rem; right: 1rem; }
-
-            /* --- 4. Services & Portfolio: Only 1 Card per row --- */
             .services-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
             .portfolio-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
             .service-card-body { padding: 1.2rem 1.5rem !important; }
@@ -1770,20 +1875,14 @@
             .portfolio-content { padding: 15px !important; }
             .portfolio-content h3 { font-size: 1.1rem !important; }
             .portfolio-content p { font-size: 0.85rem !important; line-height: 1.5 !important; }
-
-            /* --- 5. Make Hamburger Smaller & Neater --- */
             .hamburger { padding: 4px !important; }
             .hamburger span { width: 22px !important; height: 2px !important; }
-
-            /* --- 6. Slider Content Larger & Button Smaller --- */
             .hero-static-content h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
             .hero-static-content .slide-desc { font-size: 1rem; }
             .hero-static-content .slide-cta { padding: 0.6rem 1.2rem !important; font-size: 0.85rem !important; }
             .slider-btn { width: 36px !important; height: 36px !important; font-size: 0.8rem !important; }
             .prev-btn { left: 10px !important; }
             .next-btn { right: 10px !important; }
-
-            /* --- 7. Keep First 4 Sections Matched to 768px Layout --- */
             .fade-slider { height: 80vh; min-height: 380px; }
             .stats-ribbon-inner { grid-template-columns: 1fr 1fr; }
             .stat-item { padding: 1.2rem 1rem; }
@@ -1793,11 +1892,7 @@
             .video-showcase-section { padding: 3rem 1rem; }
             .video-showcase-section .section-header { margin-bottom: 2rem; }
             .section { padding: 3rem 1.2rem !important; }
-
-            /* --- 8. Make Section Titles Smaller --- */
             .section-title { font-size: 1.4rem; }
-
-            /* --- 9. Center all buttons --- */
             .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
                 margin: 0 auto !important;
                 justify-content: center;
@@ -1812,32 +1907,19 @@
 
         /* 480px */
         @media (max-width: 480px) {
-            /* --- 1. Make Logo Even Smaller --- */
             .nav-logo img { height: 30px !important; }
             .nav-logo img.logo-title { height: 40px !important; padding-left: 8px !important; }
             .nav-logo img.logo-icon { height: 35px !important; }
-
-            /* --- 2. Center About & Contact --- */
             .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; }
-
-            /* --- 3. Video Showcase: 1 Card per row --- */
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px !important; gap: 0.8rem !important; }
-
-            /* --- 4. Services & Portfolio: Only 1 Card per row --- */
             .services-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
             .portfolio-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
             .service-card-body { padding: 1rem 1.2rem !important; }
             .portfolio-content { padding: 12px !important; }
-
-            /* --- 5. Hamburger Even Smaller --- */
             .hamburger span { width: 20px !important; height: 2px !important; }
-
-            /* --- 6. Slider Content Larger & Button Smaller --- */
             .hero-static-content h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
             .hero-static-content .slide-desc { font-size: 0.95rem; }
             .hero-static-content .slide-cta { padding: 0.5rem 1rem !important; font-size: 0.8rem !important; }
-
-            /* --- 7. Keep First 4 Sections Matched to 768px Layout --- */
             .stats-ribbon-inner { grid-template-columns: 1fr 1fr !important; }
             .stat-item { border-right: 1px solid var(--border); border-bottom: none; padding: 1.2rem 1rem !important; }
             .stat-item:nth-child(2) { border-right: 1px solid var(--border); }
@@ -1847,11 +1929,7 @@
             .brand-carousel { padding: 35px 0 !important; }
             .fade-slider { height: 80vh; min-height: 380px; }
             .section { padding: 3rem 1.2rem !important; }
-
-            /* --- 8. Smaller Titles --- */
             .section-title { font-size: 1.2rem !important; }
-
-            /* --- 9. Center Buttons --- */
             .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
                 margin: 0 auto !important;
                 justify-content: center;
@@ -1866,22 +1944,13 @@
 
         /* 360px */
         @media (max-width: 360px) {
-            /* --- 1. Make Logo Smallest --- */
             .nav-logo img { height: 20px !important; }
             .nav-logo img.logo-title { height: 24px !important; padding-left: 6px !important; }
             .nav-logo img.logo-icon { height: 24px !important; }
-
-            /* --- 2. Center About Button --- */
             .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; }
-
-            /* --- 3. Video Showcase: 1 Card --- */
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px !important; gap: 0.8rem !important; }
-
-            /* --- 4. Services & Portfolio: Only 1 Card per row --- */
             .services-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
             .portfolio-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
-
-            /* --- 5. Keep First 4 Sections Matched to 768px Layout --- */
             .brand-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 30px 20px !important; }
             .brand-item img { max-width: 85px; max-height: 55px; }
             .fade-slider { height: 80vh; min-height: 380px; }
@@ -1889,11 +1958,7 @@
             .hero-static-content .slide-desc { font-size: 0.9rem; }
             .hero-static-content .slide-cta { padding: 0.5rem 1rem !important; font-size: 0.75rem !important; }
             .section { padding: 3rem 1.2rem !important; }
-
-            /* --- 6. Smallest Titles --- */
             .section-title { font-size: 1rem !important; }
-
-            /* --- 7. Center Buttons --- */
             .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
                 margin: 0 auto !important;
                 justify-content: center;
@@ -1908,6 +1973,23 @@
     </style>
 </head>
 <body>
+    <!-- ── FLOATING SOCIAL ICONS ── -->
+    <!-- Instagram - Left Side -->
+    <div class="floating-social floating-social-left">
+        <a href="https://www.instagram.com/flylense/" target="_blank" class="social-instagram" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+            <span class="tooltip">Follow us on Instagram</span>
+        </a>
+    </div>
+
+    <!-- WhatsApp - Right Side -->
+    <div class="floating-social floating-social-right">
+        <a href="https://wa.me/919989571223" target="_blank" class="social-whatsapp" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="tooltip">Chat on WhatsApp</span>
+        </a>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
@@ -2526,8 +2608,6 @@
             // Assign click event to video cards to trigger the Overlay
             document.querySelectorAll('.video-card').forEach(card => {
                 card.addEventListener('click', function(e) {
-                    // If the user clicked the play button itself, we'll also handle it
-                    // But we need to prevent the play button from triggering twice
                     if(e.target.closest('.video-play-btn')) {
                         e.stopPropagation();
                     }
@@ -2539,7 +2619,6 @@
                     }
                 });
 
-                // Also handle play button click separately
                 const playBtn = card.querySelector('.video-play-btn');
                 if(playBtn) {
                     playBtn.addEventListener('click', function(e) {
@@ -2553,13 +2632,11 @@
                 }
             });
 
-            // Event listener for the Close button
             closeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 closeVideoOverlay();
             });
 
-            // Clicking the dark background overlay closes it too
             videoOverlay.addEventListener('click', function(e) {
                 if (e.target === videoOverlay) {
                     closeVideoOverlay();
@@ -2574,7 +2651,7 @@
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (currentSlide + direction + slides.length) % slides.length;
                 slides[currentSlide].classList.add('active');
-                startTimer(); // Reset timer on manual change
+                startTimer();
             }
 
             if(prevBtn) {
