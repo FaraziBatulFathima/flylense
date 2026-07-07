@@ -415,6 +415,40 @@
             gap: 0.65rem;
         }
 
+        /* ── SLIDER SIDE BUTTONS ── */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        .slider-btn:hover {
+            background: var(--gradient-blue);
+            border-color: var(--blue);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1 !important;
+            box-shadow: 0 4px 15px rgba(0, 116, 246, 0.5);
+        }
+        .fade-slider:hover .slider-btn {
+            opacity: 1;
+        }
+        .prev-btn { left: 25px; }
+        .next-btn { right: 25px; }
+
         /* ── STATS RIBBON ── */
         .stats-ribbon {
             position: relative;
@@ -786,7 +820,7 @@
         }
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible responsive grid */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible responsive grid */
             gap: 40px;
         }
         .portfolio-item {
@@ -971,6 +1005,12 @@
             font-weight: 600;
             margin-bottom: 1rem;
         }
+        .contact-info p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1 rem;
+            font-weight: 200;
+            margin-bottom: 1rem;
+        }
         .contact-detail {
             display: flex;
             align-items: flex-start;
@@ -999,6 +1039,7 @@
             box-shadow: var(--shadow-blue);
         }
         .contact-detail-text span {
+            font-family: 'Poppins', sans-serif;
             display: block;
             font-weight: 600;
             font-size: 0.85rem;
@@ -1348,7 +1389,7 @@
         .overlay-content {
             width: 85%;
             max-width: 850px;
-            max-height: 90vh; /* Prevents video from going off screen */
+            max-height: 90vh;
             border-radius: 14px;
             overflow: hidden;
             background: #000;
@@ -1362,7 +1403,7 @@
             height: auto;
             max-height: 90vh;
             display: block;
-            object-fit: contain; /* Crucial: Ensures video maintains its native aspect ratio without stretching */
+            object-fit: contain;
         }
         .overlay-close-btn {
             position: absolute;
@@ -1712,11 +1753,7 @@
             .about-stats-row { justify-content: center !important; }
             .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; width: fit-content; }
 
-            /* --- 3. Center Contact Section on Mobile --- */
-            .contact-info { text-align: center !important; }
-            .contact-detail { justify-content: center !important; }
-
-            /* --- 4. Video Showcase: Only 1 Card per row --- */
+            /* --- 3. Video Showcase: Only 1 Card per row --- */
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 220px !important; gap: 0.8rem !important; }
             .video-card.span-2-col, .video-card.span-2-row, .video-card.span-2-both { grid-column: span 1 !important; grid-row: span 1 !important; }
             .video-card .video-play-btn { width: 44px; height: 44px; font-size: 1rem; }
@@ -1724,26 +1761,29 @@
             .video-card .video-label { font-size: 0.78rem; bottom: 0.8rem; left: 1rem; }
             .video-card .video-duration { font-size: 0.65rem; bottom: 0.8rem; right: 1rem; }
 
-            /* --- 5. Force 2 Cards for Services & Portfolio --- */
-            .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-            .service-card-body { padding: 0.8rem !important; }
-            .service-card-body h3 { font-size: 0.9rem !important; }
-            .service-card-body p { font-size: 0.75rem !important; }
-            .portfolio-content { padding: 10px !important; }
-            .portfolio-content h3 { font-size: 1rem !important; }
-            .portfolio-content p { font-size: 0.75rem !important; line-height: 1.4 !important; }
+            /* --- 4. Services & Portfolio: Only 1 Card per row --- */
+            .services-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
+            .portfolio-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
+            .service-card-body { padding: 1.2rem 1.5rem !important; }
+            .service-card-body h3 { font-size: 1rem !important; }
+            .service-card-body p { font-size: 0.85rem !important; }
+            .portfolio-content { padding: 15px !important; }
+            .portfolio-content h3 { font-size: 1.1rem !important; }
+            .portfolio-content p { font-size: 0.85rem !important; line-height: 1.5 !important; }
 
-            /* --- 6. Make Hamburger Smaller & Neater --- */
+            /* --- 5. Make Hamburger Smaller & Neater --- */
             .hamburger { padding: 4px !important; }
             .hamburger span { width: 22px !important; height: 2px !important; }
 
-            /* --- 7. Slider Content Larger & Button Smaller --- */
+            /* --- 6. Slider Content Larger & Button Smaller --- */
             .hero-static-content h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
             .hero-static-content .slide-desc { font-size: 1rem; }
             .hero-static-content .slide-cta { padding: 0.6rem 1.2rem !important; font-size: 0.85rem !important; }
+            .slider-btn { width: 36px !important; height: 36px !important; font-size: 0.8rem !important; }
+            .prev-btn { left: 10px !important; }
+            .next-btn { right: 10px !important; }
 
-            /* --- 8. Keep First 4 Sections Matched to 768px Layout --- */
+            /* --- 7. Keep First 4 Sections Matched to 768px Layout --- */
             .fade-slider { height: 80vh; min-height: 380px; }
             .stats-ribbon-inner { grid-template-columns: 1fr 1fr; }
             .stat-item { padding: 1.2rem 1rem; }
@@ -1754,10 +1794,10 @@
             .video-showcase-section .section-header { margin-bottom: 2rem; }
             .section { padding: 3rem 1.2rem !important; }
 
-            /* --- 9. Make Section Titles Smaller --- */
+            /* --- 8. Make Section Titles Smaller --- */
             .section-title { font-size: 1.4rem; }
 
-            /* --- 10. Center all buttons --- */
+            /* --- 9. Center all buttons --- */
             .slide-cta, .btn-cta-white, .btn-outline, .btn-primary {
                 margin: 0 auto !important;
                 justify-content: center;
@@ -1779,17 +1819,15 @@
 
             /* --- 2. Center About & Contact --- */
             .about-cta { margin: 0 auto !important; display: flex !important; justify-content: center !important; }
-            .contact-info { text-align: center !important; }
-            .contact-detail { justify-content: center !important; }
 
             /* --- 3. Video Showcase: 1 Card per row --- */
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px !important; gap: 0.8rem !important; }
 
-            /* --- 4. Force 2 Columns for Services & Portfolio --- */
-            .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
-            .service-card-body { padding: 0.6rem !important; }
-            .portfolio-content { padding: 8px !important; }
+            /* --- 4. Services & Portfolio: Only 1 Card per row --- */
+            .services-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+            .portfolio-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+            .service-card-body { padding: 1rem 1.2rem !important; }
+            .portfolio-content { padding: 12px !important; }
 
             /* --- 5. Hamburger Even Smaller --- */
             .hamburger span { width: 20px !important; height: 2px !important; }
@@ -1839,9 +1877,9 @@
             /* --- 3. Video Showcase: 1 Card --- */
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px !important; gap: 0.8rem !important; }
 
-            /* --- 4. Force 2 Columns for Services & Portfolio --- */
-            .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
+            /* --- 4. Services & Portfolio: Only 1 Card per row --- */
+            .services-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+            .portfolio-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
 
             /* --- 5. Keep First 4 Sections Matched to 768px Layout --- */
             .brand-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 30px 20px !important; }
@@ -1902,6 +1940,10 @@
             <div class="fade-slide" style="background-image: url('assets/images/slider/3.jpg');"><div class="slide-overlay"></div></div>
             <div class="fade-slide active" style="background-image: url('assets/images/slider/4.jpg');"><div class="slide-overlay"></div></div>
             <div class="fade-slide" style="background-image: url('assets/images/slider/5.jpg');"><div class="slide-overlay"></div></div>
+            
+            <button class="slider-btn prev-btn" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+
             <div class="hero-static-content" id="heroContent">
                 <span class="slide-tag">Cinematic Excellence</span>
                 <h1 class="slide-heading">Every Frame Tells a Story</h1>
@@ -2157,6 +2199,37 @@
                         <p>An elegant visual showcase of grandeur, celebration, and timeless moments at Maaya Luxury Convention. From luxurious decor to unforgettable events, we captured its charm in every frame.</p>
                     </div>
                 </div>
+                <div class="portfolio-item">
+                     <div class="portfolio-video-wrapper">
+                        <iframe 
+                           src="https://www.youtube.com/embed/c5R-1gy5bE0?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                           title="Commercial Shoot"
+                           allow="autoplay; encrypted-media"
+                           allowfullscreen
+                           class="portfolio-video"
+                           ></iframe>
+                     </div>
+                     <div class="portfolio-content">
+                        <h3>Ankura Hospital for Women & Children</h3>
+                        <p>A compassionate visual story highlighting the care, expertise, and warmth of Ankura Hospital. From maternity to pediatric care, we captured the trust and comfort they bring to every family.</p>
+                     </div>
+                  </div>
+                  <!-- Video 6 -->
+                  <div class="portfolio-item">
+                     <div class="portfolio-video-wrapper">
+                        <iframe 
+                           src="https://www.youtube.com/embed/0w7sh7rY7hI?rel=0&modestbranding=1&autoplay=0&mute=1&controls=0"
+                           title="Commercial Shoot"
+                           allow="autoplay; encrypted-media"
+                           allowfullscreen
+                           class="portfolio-video"
+                           ></iframe>
+                     </div>
+                     <div class="portfolio-content">
+                        <h3>Tando’s Grill Restaurant</h3>
+                        <p>A sizzling showcase of flavors, ambience, and culinary passion. We brought the essence of Tando’s Grill to life — where great taste meets great vibes.</p>
+                     </div>
+                  </div>
             </div>
         </div>
     </section>
@@ -2173,7 +2246,7 @@
             <div class="contact-grid">
                 <div class="contact-info reveal reveal-left">
                     <h3>Let's Talk</h3>
-                    <p>Every great project starts with a conversation. Reach out to our team and let's discuss how we can bring your brand's story to the screen.</p>
+                    <p>Every great project starts with a conversation. Reach out to our team and let's discuss how we can bring your brand's story to the screen.</p><br>
                     <div class="contact-detail">
                         <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
                         <div class="contact-detail-text"><span>Studio Location</span><p>Talwar Plaza, 4th, beside Podium Mall, Toli Chowki, Hyderabad, Telangana 500008</p></div>
@@ -2189,15 +2262,15 @@
                 </div>
                 <form class="contact-form reveal reveal-right" id="contactForm" onsubmit="handleFormSubmit(event)">
                     <div class="form-row">
-                        <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="John" required></div>
-                        <div class="form-group"><label>Last Name *</label><input type="text" id="lastName" placeholder="Doe" required></div>
+                        <div class="form-group"><label>First Name </label><input type="text" id="firstName" placeholder="" required></div>
+                        <div class="form-group"><label>Last Name </label><input type="text" id="lastName" placeholder="" required></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="john@example.com" required></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000"></div>
+                        <div class="form-group"><label>Email Address </label><input type="email" id="email" placeholder="" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder=""></div>
                     </div>
                     <div class="form-group">
-                        <label>Service Interested In *</label>
+                        <label>Service Interested In </label>
                         <select id="service" required>
                             <option value="">Select a service...</option>
                             <option>Commercial Films</option>
@@ -2208,7 +2281,7 @@
                             <option>Post‑Production</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Your Project *</label><textarea id="message" placeholder="Describe your vision..." required></textarea></div>
+                    <div class="form-group"><label>Your Project </label><textarea id="message" placeholder="Describe your vision..." ></textarea></div>
                     <button type="submit" class="btn btn-primary form-submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
                 </form>
             </div>
@@ -2239,7 +2312,7 @@
     <div id="videoOverlay" class="video-overlay">
         <span class="overlay-close-btn">&times;</span>
         <div class="overlay-content">
-            <video id="overlayVideo" controls autoplay>
+            <video id="overlayVideo" controls>
                 <source src="" type="video/mp4">
             </video>
         </div>
@@ -2279,7 +2352,14 @@
                 slides[currentSlide].classList.add('active');
             }
 
+            function prevSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+
             function startTimer() {
+                clearInterval(slideTimer);
                 slideTimer = setInterval(nextSlide, slideInterval);
             }
             if (slides.length > 1) startTimer();
@@ -2467,6 +2547,30 @@
                     closeVideoOverlay();
                 }
             });
+
+            // ── Slider Side Buttons Logic ──
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+
+            function changeSlide(direction) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + direction + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                startTimer(); // Reset timer on manual change
+            }
+
+            if(prevBtn) {
+                prevBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    changeSlide(-1);
+                });
+            }
+            if(nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    changeSlide(1);
+                });
+            }
         })();
     </script>
 </body>
