@@ -559,7 +559,6 @@
             z-index: 2;
         }
 
-        /* Slide tag (inherited from homepage slider) */
         .slide-tag {
             display: inline-block;
             font-size: 0.75rem;
@@ -638,7 +637,7 @@
             width: 80px;
         }
 
-        /* ── ABOUT WITH IMAGE ── */
+        /* ── ABOUT WITH IMAGE & VIDEO THUMBNAIL ── */
         #about-info {
             background: var(--bg-primary);
             position: relative;
@@ -688,6 +687,7 @@
             box-shadow: var(--shadow-elevated);
             transition: all var(--transition-smooth);
             position: relative;
+            cursor: pointer;
         }
         .about-image-main:hover {
             transform: translateY(-4px);
@@ -701,7 +701,61 @@
             background-size: cover;
             background-position: center;
             min-height: 250px;
+            transition: transform var(--transition-smooth);
         }
+        .about-image-main:hover .about-image-placeholder {
+            transform: scale(1.03);
+        }
+
+        /* ── VIDEO THUMBNAIL OVERLAY ── */
+        .video-thumbnail-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 3;
+            border-radius: var(--radius-lg);
+        }
+        .about-image-main:hover .video-thumbnail-overlay {
+            opacity: 1;
+        }
+        .video-thumbnail-overlay .play-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--blue);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+            transition: all var(--transition-bounce);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .video-thumbnail-overlay .play-btn:hover {
+            transform: scale(1.12);
+            background: #ffffff;
+            box-shadow: 0 12px 45px rgba(0, 116, 246, 0.5);
+        }
+        .video-thumbnail-overlay .play-label {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 16px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+        }
+
         .about-image-badge {
             position: absolute;
             bottom: 1.5rem;
@@ -718,7 +772,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            z-index: 2;
+            z-index: 4;
             transition: all var(--transition-smooth);
         }
         .about-image-badge:hover {
@@ -762,8 +816,9 @@
             list-style: none;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.7rem;
+            gap: 0.7rem 1.2rem;
             margin: 1.5rem 0;
+            padding: 0;
         }
         .about-features li {
             display: flex;
@@ -772,6 +827,7 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
             transition: all var(--transition-fast);
+            padding: 0.1rem 0;
         }
         .about-features li:hover {
             color: var(--text-primary);
@@ -780,6 +836,9 @@
         .about-features li i {
             color: var(--blue);
             font-size: 0.85rem;
+            flex-shrink: 0;
+            width: 1.1rem;
+            text-align: center;
         }
         .about-cta {
             display: inline-flex;
@@ -1251,13 +1310,17 @@
             border-color: var(--blue);
         }
 
+        .back-to-top {
+            display: none;
+        }
+
         /* ════════════════════════════════════════════ */
-        /* ── RESPONSIVE STYLES (MATCHES HOMEPAGE) ── */
+        /* ── RESPONSIVE STYLES (ENHANCED FOR MOBILE) ── */
         /* ════════════════════════════════════════════ */
 
         /* ── 1200px ── */
         @media (max-width: 1200px) {
-            /* no changes needed for about page */
+            /* no changes needed */
         }
 
         /* ── 1024px ── */
@@ -1332,65 +1395,68 @@
                 height: 350px;
             }
             .about-hero h1 {
-                font-size: clamp(1.8rem, 5vw, 2.4rem);
+                font-size: clamp(2rem, 5vw, 2.6rem);
             }
             .about-hero p {
-                font-size: 0.95rem;
+                font-size: 1.05rem;
                 padding: 0 1rem;
             }
 
             .section {
-                padding: 3rem 1.2rem;
+                padding: 3.5rem 1.2rem;
             }
             .section-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             .section-header {
                 margin-bottom: 2.5rem;
             }
 
             .about-text h3 {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
             }
             .about-text .lead {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
             .about-features {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem 1rem;
+            }
+            .about-features li {
+                font-size: 0.95rem;
             }
             .about-image-badge {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
                 padding: 0.5rem 1rem;
                 bottom: 1rem;
                 right: 1rem;
             }
             .about-cta {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
+                padding: 0.8rem 1.6rem;
+                font-size: 0.95rem;
             }
 
             .founder-name {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
             .founder-role {
-                font-size: 1rem;
+                font-size: 1.05rem;
             }
             .founder-bio {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
 
             .promo-section {
-                padding: 3rem 1.2rem;
+                padding: 3.5rem 1.2rem;
             }
             .promo-content h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             .promo-content h3 {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
             }
             .promo-content p {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
             .promo-col {
                 flex-direction: column;
@@ -1405,38 +1471,44 @@
             }
 
             .testimonial-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
                 gap: 1.5rem;
             }
             .testimonial-card {
                 padding: 1.5rem;
             }
-
-            .faq-question {
-                padding: 1rem 1.4rem;
+            .testimonial-card p {
                 font-size: 0.95rem;
             }
+
+            .faq-question {
+                padding: 1.1rem 1.5rem;
+                font-size: 1rem;
+            }
             .faq-answer {
-                padding: 0 1.4rem;
+                padding: 0 1.5rem;
             }
             .faq-item.active .faq-answer {
-                padding: 0 1.4rem 1rem;
+                padding: 0 1.5rem 1.1rem;
+            }
+            .faq-answer p {
+                font-size: 0.95rem;
             }
 
             .cta-banner {
                 flex-direction: column;
                 text-align: center;
-                padding: 1.5rem;
+                padding: 1.8rem;
             }
             .cta-banner-text h2 {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             .cta-banner-text h4 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .btn-cta-white {
-                padding: 14px 24px;
-                font-size: 0.9rem;
+                padding: 15px 26px;
+                font-size: 0.95rem;
             }
 
             .footer-container {
@@ -1463,15 +1535,24 @@
                 padding: 70px 1.5rem 1.5rem 1.5rem;
             }
             .mobile-menu a {
-                font-size: 1rem;
-                padding: 0.65rem 0.9rem;
+                font-size: 1.05rem;
+                padding: 0.7rem 1rem;
             }
             .mobile-menu .mobile-cta {
-                font-size: 0.95rem !important;
-                padding: 0.8rem 1.5rem !important;
+                font-size: 1rem !important;
+                padding: 0.85rem 1.6rem !important;
             }
             .mobile-menu .menu-footer-text {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
+            }
+
+            .video-thumbnail-overlay .play-btn {
+                width: 62px;
+                height: 62px;
+                font-size: 1.6rem;
+            }
+            .video-thumbnail-overlay .play-label {
+                font-size: 0.75rem;
             }
         }
 
@@ -1494,43 +1575,46 @@
 
             /* ── HERO ── */
             .about-hero {
-                height: 380px !important;
+                height: 400px !important;
                 padding: 0 1.2rem;
             }
             .about-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2.6rem !important;
                 margin-bottom: 0.6rem;
             }
             .about-hero p {
-                font-size: 0.95rem;
+                font-size: 1.1rem !important;
                 padding: 0 0.5rem;
                 max-width: 100%;
             }
             .slide-tag {
-                font-size: 0.7rem;
-                padding: 4px 14px;
+                font-size: 0.75rem;
+                padding: 5px 16px;
                 margin-bottom: 10px;
             }
 
             /* ── SECTION PADDING ── */
             .section {
-                padding: 2.5rem 1rem !important;
+                padding: 3rem 1rem !important;
             }
             .section-title {
-                font-size: 1.5rem !important;
+                font-size: 1.8rem !important;
             }
             .section-subtitle {
-                font-size: 0.9rem !important;
+                font-size: 0.95rem !important;
                 padding: 0 0.5rem;
             }
             .section-header {
-                margin-bottom: 2rem !important;
+                margin-bottom: 2.2rem !important;
             }
             .section-divider {
-                width: 40px;
+                width: 50px;
             }
             .section-header:hover .section-divider {
-                width: 60px;
+                width: 70px;
+            }
+            .section-tag {
+                font-size: 0.75rem !important;
             }
 
             /* ── ABOUT ── */
@@ -1539,44 +1623,60 @@
             }
             .about-text {
                 padding: 0 !important;
-                text-align: center !important;
+                text-align: left !important;
             }
             .about-text h3 {
-                font-size: 1.4rem !important;
-                text-align: center !important;
+                font-size: 1.6rem !important;
+                text-align: left !important;
             }
             .about-text h3::after {
-                left: 50% !important;
-                transform: translateX(-50%) !important;
+                left: 0 !important;
+                transform: none !important;
             }
             .about-text .lead {
-                font-size: 0.9rem !important;
-                text-align: center !important;
-                padding: 0 0.25rem;
+                font-size: 1.05rem !important;
+                text-align: left !important;
+                padding: 0;
             }
             .about-features {
-                grid-template-columns: 1fr !important;
-                gap: 0.4rem;
-                text-align: center;
-                padding: 0 0.5rem;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.5rem 1rem !important;
+                text-align: left;
+                padding: 0;
             }
             .about-features li {
-                font-size: 0.85rem !important;
-                justify-content: center;
+                font-size: 0.95rem !important;
+                justify-content: flex-start;
+                padding: 0.1rem 0;
+            }
+            .about-features li i {
+                width: 1.2rem;
+                font-size: 0.9rem;
             }
             .about-image-badge {
-                font-size: 0.6rem !important;
-                padding: 0.35rem 0.7rem !important;
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.8rem !important;
                 bottom: 0.8rem;
                 right: 0.8rem;
-                gap: 0.3rem;
+                gap: 0.4rem;
             }
             .about-cta {
-                padding: 0.6rem 1.4rem !important;
-                font-size: 0.85rem !important;
-                margin: 0.5rem auto 0 !important;
+                padding: 0.7rem 1.6rem !important;
+                font-size: 0.95rem !important;
+                margin: 0.5rem 0 0 !important;
                 justify-content: center;
                 width: fit-content;
+            }
+
+            /* ── VIDEO THUMBNAIL ── */
+            .video-thumbnail-overlay .play-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 1.4rem;
+            }
+            .video-thumbnail-overlay .play-label {
+                font-size: 0.7rem;
+                padding: 3px 14px;
             }
 
             /* ── FOUNDERS ── */
@@ -1584,7 +1684,7 @@
                 flex-direction: column !important;
                 gap: 1.5rem !important;
                 margin-bottom: 3rem !important;
-                text-align: center !important;
+                text-align: left !important;
             }
             .founder-row:last-child {
                 margin-bottom: 0 !important;
@@ -1598,53 +1698,53 @@
             }
             .founder-info {
                 width: 100% !important;
-                align-items: center !important;
-                text-align: center !important;
+                align-items: flex-start !important;
+                text-align: left !important;
             }
             .founder-name {
-                font-size: 1.3rem !important;
+                font-size: 1.5rem !important;
                 gap: 0.5rem;
-                justify-content: center;
+                justify-content: flex-start;
             }
             .founder-role {
-                font-size: 0.95rem !important;
+                font-size: 1.05rem !important;
             }
             .founder-bio {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
                 max-width: 100% !important;
-                padding: 0 0.5rem;
-                text-align: center !important;
+                padding: 0;
+                text-align: left !important;
             }
 
             /* ── PROMO ── */
             .promo-section {
-                padding: 2.5rem 1rem !important;
+                padding: 3rem 1rem !important;
             }
             .promo-grid {
                 gap: 2rem;
             }
             .promo-content {
-                text-align: center !important;
-                align-items: center !important;
+                text-align: left !important;
+                align-items: flex-start !important;
             }
             .promo-content h2 {
-                font-size: 1.7rem !important;
-                text-align: center;
+                font-size: 2rem !important;
+                text-align: left;
             }
             .promo-content h3 {
-                font-size: 1.05rem !important;
-                text-align: center;
+                font-size: 1.15rem !important;
+                text-align: left;
             }
             .promo-content p {
-                font-size: 0.9rem !important;
+                font-size: 1rem !important;
                 max-width: 100% !important;
-                text-align: center;
-                padding: 0 0.25rem;
+                text-align: left;
+                padding: 0;
             }
             .btn-promo {
-                align-self: center !important;
-                padding: 0.7rem 1.6rem !important;
-                font-size: 0.9rem !important;
+                align-self: flex-start !important;
+                padding: 0.8rem 1.8rem !important;
+                font-size: 0.95rem !important;
             }
             .promo-images {
                 flex-direction: column;
@@ -1666,47 +1766,47 @@
                 gap: 1.2rem;
             }
             .testimonial-card {
-                padding: 1.3rem !important;
-                text-align: center;
+                padding: 1.5rem !important;
+                text-align: left;
             }
             .testimonial-card p {
-                font-size: 0.9rem !important;
+                font-size: 0.95rem !important;
             }
             .author {
-                justify-content: center;
+                justify-content: flex-start;
             }
 
             /* ── FAQ ── */
             .faq-question {
-                padding: 0.9rem 1.2rem !important;
-                font-size: 0.9rem !important;
+                padding: 1rem 1.3rem !important;
+                font-size: 1rem !important;
             }
             .faq-question i {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .faq-answer p {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .faq-item.active .faq-answer {
-                padding: 0 1.2rem 1rem !important;
+                padding: 0 1.3rem 1rem !important;
             }
 
             /* ── CTA BANNER ── */
             .cta-banner {
                 flex-direction: column !important;
                 text-align: center !important;
-                padding: 1.5rem !important;
+                padding: 1.8rem !important;
                 border-radius: var(--radius-md);
             }
             .cta-banner-text h2 {
-                font-size: 1.3rem !important;
+                font-size: 1.5rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 1rem !important;
+                font-size: 1.1rem !important;
             }
             .btn-cta-white {
-                padding: 14px 24px !important;
-                font-size: 0.9rem !important;
+                padding: 15px 26px !important;
+                font-size: 0.95rem !important;
                 justify-content: center;
             }
 
@@ -1716,12 +1816,12 @@
                 padding: 65px 1.2rem 1.2rem 1.2rem !important;
             }
             .mobile-menu a {
-                font-size: 0.95rem !important;
-                padding: 0.6rem 0.8rem !important;
+                font-size: 1rem !important;
+                padding: 0.65rem 0.9rem !important;
             }
             .mobile-menu .mobile-cta {
-                font-size: 0.9rem !important;
-                padding: 0.7rem 1.2rem !important;
+                font-size: 0.95rem !important;
+                padding: 0.8rem 1.4rem !important;
             }
             .hamburger {
                 padding: 4px !important;
@@ -1746,14 +1846,14 @@
                 font-size: 1.2rem;
             }
             .footer-links a {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .footer-social a {
                 width: 36px;
                 height: 36px;
             }
             .footer-copy {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
 
             .back-to-top {
@@ -1791,22 +1891,26 @@
                 padding: 0 1rem;
             }
             .about-hero h1 {
-                font-size: 2.4rem !important;
+                font-size: 2.6rem !important;
             }
             .about-hero p {
-                font-size: 1rem !important;
+                font-size: 1.1rem !important;
                 padding: 0 0.3rem;
+            }
+            .slide-tag {
+                font-size: 0.7rem !important;
+                padding: 4px 14px !important;
             }
 
             /* ── SECTION ── */
             .section {
-                padding: 2rem 0.8rem !important;
+                padding: 2.5rem 0.8rem !important;
             }
             .section-title {
-                font-size: 1.3rem !important;
+                font-size: 1.6rem !important;
             }
             .section-subtitle {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .section-tag {
                 font-size: 0.7rem !important;
@@ -1814,35 +1918,61 @@
 
             /* ── ABOUT ── */
             .about-text h3 {
-                font-size: 1.2rem !important;
+                font-size: 1.4rem !important;
             }
             .about-text .lead {
-                font-size: 0.85rem !important;
+                font-size: 1rem !important;
+            }
+            .about-features {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.4rem 0.8rem !important;
             }
             .about-features li {
-                font-size: 0.8rem !important;
+                font-size: 0.9rem !important;
+                gap: 0.4rem;
+            }
+            .about-features li i {
+                font-size: 0.8rem;
+                width: 1rem;
             }
             .about-image-badge {
-                font-size: 0.55rem !important;
-                padding: 0.3rem 0.6rem !important;
+                font-size: 0.6rem !important;
+                padding: 0.3rem 0.7rem !important;
                 bottom: 0.6rem;
                 right: 0.6rem;
-                gap: 0.25rem;
+                gap: 0.3rem;
             }
             .about-cta {
-                padding: 0.5rem 1.2rem !important;
-                font-size: 0.8rem !important;
+                padding: 0.6rem 1.4rem !important;
+                font-size: 0.9rem !important;
+            }
+            .about-image-main {
+                aspect-ratio: 4/3;
+            }
+            .about-image-placeholder {
+                min-height: 200px;
+            }
+
+            /* ── VIDEO THUMBNAIL ── */
+            .video-thumbnail-overlay .play-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .video-thumbnail-overlay .play-label {
+                font-size: 0.65rem;
+                padding: 2px 12px;
             }
 
             /* ── FOUNDERS ── */
             .founder-name {
-                font-size: 1.1rem !important;
+                font-size: 1.3rem !important;
             }
             .founder-role {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .founder-bio {
-                font-size: 0.8rem !important;
+                font-size: 0.9rem !important;
             }
             .founder-row {
                 gap: 1.2rem !important;
@@ -1851,55 +1981,58 @@
 
             /* ── PROMO ── */
             .promo-content h2 {
-                font-size: 1.4rem !important;
+                font-size: 1.7rem !important;
             }
             .promo-content h3 {
-                font-size: 0.95rem !important;
+                font-size: 1.05rem !important;
             }
             .promo-content p {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .btn-promo {
-                padding: 0.6rem 1.3rem !important;
-                font-size: 0.8rem !important;
+                padding: 0.7rem 1.5rem !important;
+                font-size: 0.9rem !important;
             }
 
             /* ── TESTIMONIALS ── */
             .testimonial-card {
-                padding: 1rem !important;
+                padding: 1.2rem !important;
             }
             .testimonial-card p {
-                font-size: 0.85rem !important;
+                font-size: 0.9rem !important;
             }
             .author strong {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             .author small {
-                font-size: 0.7rem !important;
+                font-size: 0.75rem !important;
             }
 
             /* ── FAQ ── */
             .faq-question {
-                padding: 0.8rem 1rem !important;
-                font-size: 0.85rem !important;
+                padding: 0.9rem 1.1rem !important;
+                font-size: 0.95rem !important;
             }
             .faq-answer p {
-                font-size: 0.8rem !important;
+                font-size: 0.9rem !important;
+            }
+            .faq-item.active .faq-answer {
+                padding: 0 1.1rem 0.9rem !important;
             }
 
             /* ── CTA ── */
             .cta-banner {
-                padding: 1.2rem !important;
+                padding: 1.5rem !important;
             }
             .cta-banner-text h2 {
-                font-size: 1.1rem !important;
+                font-size: 1.3rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 0.85rem !important;
+                font-size: 1rem !important;
             }
             .btn-cta-white {
-                padding: 12px 20px !important;
-                font-size: 0.8rem !important;
+                padding: 14px 22px !important;
+                font-size: 0.9rem !important;
             }
 
             /* ── FOOTER ── */
@@ -1907,23 +2040,23 @@
                 padding: 1.5rem 0.8rem !important;
             }
             .footer-logo {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .footer-links a {
-                font-size: 0.7rem !important;
+                font-size: 0.8rem !important;
             }
             .footer-social a {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
             }
             .footer-copy {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
             }
 
             .back-to-top {
-                width: 34px;
-                height: 34px;
+                width: 36px;
+                height: 36px;
                 bottom: 1rem;
                 right: 1rem;
                 font-size: 0.8rem;
@@ -1934,12 +2067,12 @@
                 padding: 60px 1rem 1rem 1rem !important;
             }
             .mobile-menu a {
-                font-size: 0.9rem !important;
-                padding: 0.55rem 0.7rem !important;
+                font-size: 0.95rem !important;
+                padding: 0.6rem 0.8rem !important;
             }
             .mobile-menu .mobile-cta {
-                font-size: 0.85rem !important;
-                padding: 0.65rem 1rem !important;
+                font-size: 0.9rem !important;
+                padding: 0.7rem 1.2rem !important;
             }
             .hamburger {
                 padding: 6px 10px !important;
@@ -1973,10 +2106,10 @@
                 padding: 0 0.8rem;
             }
             .about-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2.4rem !important;
             }
             .about-hero p {
-                font-size: 0.9rem !important;
+                font-size: 1rem !important;
                 padding: 0 0.2rem;
             }
             .slide-tag {
@@ -1986,28 +2119,36 @@
 
             /* ── SECTION ── */
             .section {
-                padding: 1.8rem 0.6rem !important;
+                padding: 2rem 0.6rem !important;
             }
             .section-title {
-                font-size: 1.15rem !important;
+                font-size: 1.4rem !important;
             }
             .section-subtitle {
-                font-size: 0.8rem !important;
+                font-size: 0.85rem !important;
+            }
+            .section-tag {
+                font-size: 0.65rem !important;
             }
 
             /* ── ABOUT ── */
             .about-text h3 {
-                font-size: 1.05rem !important;
+                font-size: 1.2rem !important;
             }
             .about-text .lead {
-                font-size: 0.8rem !important;
+                font-size: 0.9rem !important;
+            }
+            .about-features {
+                grid-template-columns: 1fr !important;
+                gap: 0.3rem 0 !important;
             }
             .about-features li {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
                 gap: 0.4rem;
             }
             .about-features li i {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
+                width: 1rem;
             }
             .about-image-badge {
                 font-size: 0.5rem !important;
@@ -2016,26 +2157,36 @@
                 right: 0.5rem;
             }
             .about-cta {
-                padding: 0.4rem 1rem !important;
-                font-size: 0.75rem !important;
+                padding: 0.5rem 1.2rem !important;
+                font-size: 0.85rem !important;
             }
             .about-image-main {
                 aspect-ratio: 4/3;
             }
             .about-image-placeholder {
-                min-height: 180px;
+                min-height: 160px;
+            }
+
+            /* ── VIDEO THUMBNAIL ── */
+            .video-thumbnail-overlay .play-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+            .video-thumbnail-overlay .play-label {
+                font-size: 0.6rem;
+                padding: 2px 10px;
             }
 
             /* ── FOUNDERS ── */
             .founder-name {
-                font-size: 0.95rem !important;
+                font-size: 1.1rem !important;
             }
             .founder-role {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
             }
             .founder-bio {
-                font-size: 0.75rem !important;
-                padding: 0 0.25rem;
+                font-size: 0.8rem !important;
             }
             .founder-row {
                 gap: 1rem !important;
@@ -2044,34 +2195,34 @@
 
             /* ── PROMO ── */
             .promo-content h2 {
-                font-size: 1.2rem !important;
+                font-size: 1.4rem !important;
             }
             .promo-content h3 {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem !important;
             }
             .promo-content p {
-                font-size: 0.8rem !important;
+                font-size: 0.85rem !important;
             }
             .btn-promo {
-                padding: 0.5rem 1rem !important;
-                font-size: 0.75rem !important;
+                padding: 0.6rem 1.2rem !important;
+                font-size: 0.85rem !important;
             }
 
             /* ── TESTIMONIALS ── */
             .testimonial-card {
-                padding: 0.8rem !important;
+                padding: 1rem !important;
             }
             .testimonial-card p {
-                font-size: 0.8rem !important;
+                font-size: 0.85rem !important;
             }
             .stars {
                 font-size: 0.7rem;
             }
             .author strong {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .author small {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
             }
             .author img {
                 width: 32px;
@@ -2080,32 +2231,32 @@
 
             /* ── FAQ ── */
             .faq-question {
-                padding: 0.7rem 0.8rem !important;
-                font-size: 0.8rem !important;
+                padding: 0.8rem 0.9rem !important;
+                font-size: 0.9rem !important;
             }
             .faq-question i {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
             .faq-answer p {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
             }
             .faq-item.active .faq-answer {
-                padding: 0 0.8rem 0.8rem !important;
+                padding: 0 0.9rem 0.8rem !important;
             }
 
             /* ── CTA ── */
             .cta-banner {
-                padding: 1rem !important;
+                padding: 1.2rem !important;
             }
             .cta-banner-text h2 {
-                font-size: 0.95rem !important;
+                font-size: 1.1rem !important;
             }
             .cta-banner-text h4 {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
             }
             .btn-cta-white {
-                padding: 10px 16px !important;
-                font-size: 0.7rem !important;
+                padding: 12px 18px !important;
+                font-size: 0.8rem !important;
             }
 
             /* ── FOOTER ── */
@@ -2113,10 +2264,10 @@
                 padding: 1.2rem 0.6rem !important;
             }
             .footer-logo {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .footer-links a {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
                 gap: 0.5rem;
             }
             .footer-social a {
@@ -2125,12 +2276,12 @@
                 font-size: 0.7rem;
             }
             .footer-copy {
-                font-size: 0.6rem !important;
+                font-size: 0.65rem !important;
             }
 
             .back-to-top {
-                width: 30px;
-                height: 30px;
+                width: 32px;
+                height: 32px;
                 bottom: 0.8rem;
                 right: 0.8rem;
                 font-size: 0.7rem;
@@ -2141,12 +2292,12 @@
                 padding: 55px 0.8rem 0.8rem 0.8rem !important;
             }
             .mobile-menu a {
-                font-size: 0.85rem !important;
-                padding: 0.5rem 0.6rem !important;
+                font-size: 0.9rem !important;
+                padding: 0.55rem 0.7rem !important;
             }
             .mobile-menu .mobile-cta {
-                font-size: 0.8rem !important;
-                padding: 0.6rem 0.8rem !important;
+                font-size: 0.85rem !important;
+                padding: 0.65rem 0.9rem !important;
             }
             .hamburger {
                 padding: 5px 8px !important;
@@ -2161,15 +2312,11 @@
                 width: 20px !important;
             }
         }
-
-        .back-to-top {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
-    <!-- ── FLOATING SOCIAL ICONS (inherited from homepage) ── -->
+    <!-- ── FLOATING SOCIAL ICONS ── -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
@@ -2183,7 +2330,7 @@
         </a>
     </div>
 
-    <!-- ===== NAVBAR (matches homepage) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <a href="index.html" class="nav-logo">
@@ -2210,7 +2357,7 @@
     <!-- Menu Backdrop -->
     <div class="menu-backdrop" id="menuBackdrop"></div>
 
-    <!-- ===== MOBILE MENU (DRAWER - matches homepage) ===== -->
+    <!-- ===== MOBILE MENU ===== -->
     <div class="mobile-menu" id="mobileMenu"><br><br>
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
@@ -2224,20 +2371,27 @@
         </div>
     </div>
 
-    <!-- ===== HERO (with slide tag) ===== -->
+    <!-- ===== HERO ===== -->
     <section class="about-hero">
         <span class="slide-tag">Our Story</span>
         <h1 class="reveal reveal-up">About Us</h1>
         <p class="reveal reveal-up delay-1">Crafting cinematic masterpieces with passion, precision, and purpose since 2018.</p>
     </section>
 
-    <!-- ===== ABOUT WITH IMAGE ===== -->
+    <!-- ===== ABOUT WITH IMAGE & VIDEO THUMBNAIL ===== -->
     <section class="section" id="about-info">
         <div class="section-container">
             <div class="about-grid">
                 <div class="about-image-block reveal reveal-left">
-                    <div class="about-image-main">
+                    <div class="about-image-main" id="videoThumbnail">
                         <div class="about-image-placeholder"></div>
+                        <!-- Video Thumbnail Overlay -->
+                        <div class="video-thumbnail-overlay">
+                            <div class="play-btn">
+                                <i class="fa-solid fa-play" style="margin-left: 4px;"></i>
+                            </div>
+                            <span class="play-label">Watch Our Showreel</span>
+                        </div>
                         <div class="about-image-badge">
                             <i class="fa-solid fa-circle-check" style="color:#27c93f;"></i> Trusted by 150+ Brands
                         </div>
@@ -2305,18 +2459,18 @@
                 <div class="promo-images reveal reveal-right">
                     <div class="promo-col">
                         <div class="img-wrapper img-tall">
-                            <img src="  assets\Logos\other\srisa logo.jpg" alt="Woman thumbs up" onerror="this.src='https://placehold.co/600x800/eef3fa/0074f6?text=Image+1'" />
+                            <img src="assets/Logos/other/srisa logo.jpg" alt="Woman thumbs up" onerror="this.src='https://placehold.co/600x800/eef3fa/0074f6?text=Image+1'" />
                         </div>
                         <div class="img-wrapper img-short">
-                            <img src="assets\Logos\Education\nobal logo.jpg" alt="Product shot" onerror="this.src='https://placehold.co/600x400/eef3fa/0074f6?text=Image+3'" />
+                            <img src="assets/Logos/Education/nobal logo.jpg" alt="Product shot" onerror="this.src='https://placehold.co/600x400/eef3fa/0074f6?text=Image+3'" />
                         </div>
                     </div>
                     <div class="promo-col">
                         <div class="img-wrapper img-short">
-                            <img src="assets\Logos\Food\errababu logo.jpg" alt="Modern equipment" onerror="this.src='https://placehold.co/600x400/eef3fa/0074f6?text=Image+2'" />
+                            <img src="assets/Logos/Food/errababu logo.jpg" alt="Modern equipment" onerror="this.src='https://placehold.co/600x400/eef3fa/0074f6?text=Image+2'" />
                         </div>
                         <div class="img-wrapper img-tall">
-                            <img src="assets\Logos\Jewllers\ij logo.jpg" alt="Woman reaching" onerror="this.src='https://placehold.co/600x800/eef3fa/0074f6?text=Image+4'" />
+                            <img src="assets/Logos/Jewllers/ij logo.jpg" alt="Woman reaching" onerror="this.src='https://placehold.co/600x800/eef3fa/0074f6?text=Image+4'" />
                         </div>
                     </div>
                 </div>
@@ -2337,7 +2491,6 @@
                     <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <p>"FlyLense transformed our brand image with their stunning aerial video. The team was professional and delivered beyond expectations."</p>
                     <div class="author">
-                        <!-- <img src="" alt="" /> -->
                         <div>
                             <strong>SAMEER</strong><br />
                             <small style="color:var(--text-muted);">CEO, STRONG PUNCH</small>
@@ -2348,7 +2501,6 @@
                     <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <p>"The social media reels they produced went viral! Our engagement increased by 300%. Highly recommended for any brand."</p>
                     <div class="author">
-                        <!-- <img src="" alt="" /> -->
                         <div>
                             <strong>AYESHA</strong><br />
                             <small style="color:var(--text-muted);">PRINCIPAL, VIP INTERNATIONAL SCHOOL</small>
@@ -2359,7 +2511,6 @@
                     <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <p>"From the first call to final delivery, FlyLense was a dream to work with. Their creative direction is on another level."</p>
                     <div class="author">
-                        <!-- <img src="" alt="" /> -->
                         <div>
                             <strong>SANTOSH REDDY</strong><br />
                             <small style="color:var(--text-muted);">MANAGING DIRECTOR, ANKURA HOSPITAL</small>
@@ -2416,7 +2567,7 @@
     </section>
     <br /><br />
 
-    <!-- ===== FOOTER (matches homepage) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-logo">FlyLense</div>
@@ -2455,6 +2606,7 @@
             const mobileMenu = document.getElementById('mobileMenu');
             const menuBackdrop = document.getElementById('menuBackdrop');
             const backToTop = document.getElementById('backToTop');
+            const videoThumbnail = document.getElementById('videoThumbnail');
 
             // ── Scroll events ──
             window.addEventListener('scroll', function() {
@@ -2463,7 +2615,19 @@
                 backToTop.classList.toggle('visible', scrollY > 600);
             });
 
-            // ── MOBILE MENU TOGGLE (Drawer - matches homepage) ──
+            // ── Video Thumbnail Click ──
+            if (videoThumbnail) {
+                videoThumbnail.addEventListener('click', function() {
+                    // Replace with your actual video URL
+                    const videoUrl = 'https://www.youtube.com/embed/your-video-id?autoplay=1';
+                    // You can open in a modal or redirect
+                    window.open(videoUrl, '_blank');
+                    // Or if you want to embed inline, you can add a modal overlay
+                    // For now, we'll just open in a new tab
+                });
+            }
+
+            // ── MOBILE MENU TOGGLE ──
             function toggleMenu(forceState) {
                 const isOpen = typeof forceState === 'boolean' ? forceState : !mobileMenu.classList.contains('active');
 
