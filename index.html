@@ -220,7 +220,7 @@
         /* ── NAVBAR ── */
         .navbar {
             position: fixed;
-            top: 20px;
+            top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
@@ -228,12 +228,19 @@
             background: transparent;
             backdrop-filter: none;
             border-bottom: 1px solid transparent;
-            transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s, box-shadow 0.4s, height 0.4s;
-            will-change: background, backdrop-filter, box-shadow, border-color, top, height;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s, box-shadow 0.4s, height 0.4s;
+            will-change: background, backdrop-filter, box-shadow, border-color, height;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s, box-shadow 0.4s, height 0.4s;
+        }
+
+        .navbar.loaded {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .navbar.scrolled {
-            top: 0;
             height: 88px;
             background: rgba(5, 5, 5, 0.98);
             backdrop-filter: blur(24px);
@@ -305,23 +312,62 @@
         .nav-links a:hover::before,
         .nav-links a.active::before { width: 60%; }
 
-        .nav-links a:hover { color: var(--white); }
-        .nav-links a.active { color: var(--accent); font-weight: 600; }
+.nav-links a:hover { color: var(--white); }
+          .nav-links a.active { color: var(--white); font-weight: 600; }
 
-        .nav-links a.portfolio-link {
-            background: var(--accent-gradient);
-            color: #030508 !important;
-            font-weight: 600;
-            padding: 0.6rem 1.5rem;
-            box-shadow: var(--shadow-accent);
-        }
-
-        .nav-links a.portfolio-link::before { display: none; }
-        .nav-links a.portfolio-link:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-accent-strong);
-            color: #030508 !important;
-        }
+          .nav-links li.dropdown { position: relative; }
+          .nav-links .dropdown-toggle {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 0.55rem 1.2rem;
+              border-radius: var(--radius-full);
+              transition: all 0.3s ease;
+          }
+          .nav-links .dropdown-toggle::after {
+              content: '\f107';
+              font-family: 'Font Awesome 6 Free';
+              font-weight: 900;
+              font-size: 0.7rem;
+              transition: transform var(--transition-fast);
+          }
+          .nav-links li.dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+          .nav-links .dropdown-menu {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              min-width: 220px;
+              background: var(--bg-card);
+              border: 1px solid var(--border-light);
+              border-radius: var(--radius-md);
+              box-shadow: var(--shadow-elevated);
+              opacity: 0;
+              visibility: hidden;
+              transform: translateY(10px);
+              transition: all var(--transition-smooth);
+              z-index: 1001;
+              padding: 0.5rem 0;
+              margin-top: 8px;
+          }
+          .nav-links li.dropdown:hover .dropdown-menu {
+              opacity: 1;
+              visibility: visible;
+              transform: translateY(0);
+          }
+          .nav-links .dropdown-menu a {
+              display: block;
+              padding: 0.7rem 1.5rem;
+              color: var(--text-secondary);
+              font-size: 0.88rem;
+              font-weight: 500;
+              border-radius: 0;
+              white-space: nowrap;
+          }
+.nav-links .dropdown-menu a:hover {
+                background: rgba(6, 102, 204, 0.08);
+                color: var(--white);
+                padding-left: 1.8rem;
+            }
 
         .nav-cta {
             background: var(--accent-gradient);
@@ -422,13 +468,51 @@
         }
 
         .mobile-menu a.active { color: var(--accent); font-weight: 600; background: rgba(6, 102, 204, 0.1); border-left-color: var(--accent); }
-        .mobile-menu a.portfolio-link { background: var(--accent-gradient); color: #030508 !important; font-weight: 600; border-radius: var(--radius-full); margin-top: 8px; text-align: center; border-left: none; }
-        .mobile-menu a.portfolio-link:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-accent-strong); }
+
+        .mobile-dropdown { margin: 0.5rem 0; }
+        .mobile-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            border-left: 3px solid transparent;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            text-align: left;
+        }
+        .mobile-dropdown-toggle:hover {
+            color: var(--accent);
+            background: rgba(6, 102, 204, 0.08);
+            border-left-color: var(--accent);
+            transform: translateX(6px);
+        }
+        .mobile-dropdown-menu {
+            display: none;
+            padding: 0.5rem 0 0.5rem 2.5rem;
+        }
+        .mobile-dropdown.active .mobile-dropdown-menu { display: block; }
+        .mobile-dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        .mobile-dropdown-menu a:hover {
+            color: var(--accent);
+            padding-left: 1.5rem;
+        }
 
         .menu-divider { width: 50px; height: 2px; background: var(--accent-gradient); border-radius: 2px; margin: 0.5rem 0 1.5rem; transition: width var(--transition-smooth); }
         .mobile-menu.active .menu-divider { width: 80px; }
 
-        .menu-footer { margin-top: auto; padding-top: 1.5rem; font-size: 0.7rem; color: var(--text-dim); border-top: 1px solid var(--border-subtle); text-align: center; }
+        .menu-footer { display: none; }
 
         /* ── HERO ── */
 .hero {
@@ -442,7 +526,7 @@
 
 .hero-video-bg {
       position: absolute;
-      top: 0; left: 0;
+      top: -3%; left: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       z-index: 0;
@@ -583,12 +667,73 @@
             transition: all var(--transition-smooth);
         }
 
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(6, 102, 204, 0.08);
-            transform: translateY(-2px);
-        }
+.btn-secondary:hover {
+              border-color: var(--accent);
+              color: var(--accent);
+              background: rgba(6, 102, 204, 0.08);
+              transform: translateY(-2px);
+          }
+
+          .portfolio-dropdown {
+              position: relative;
+              display: inline-block;
+              z-index: 10000;
+          }
+          .portfolio-dropdown-toggle {
+              position: relative;
+              padding-right: 3rem;
+          }
+          .portfolio-dropdown-toggle::after {
+              content: '';
+              position: absolute;
+              right: 1rem;
+              top: 50%;
+              transform: translateY(-50%);
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 6px solid currentColor;
+              transition: transform var(--transition-fast);
+          }
+          .portfolio-dropdown.active .portfolio-dropdown-toggle::after {
+              transform: translateY(-50%) rotate(180deg);
+          }
+          .portfolio-dropdown-menu {
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              margin-left: -110px; /* half of min-width 220px */
+              min-width: 220px;
+              background: var(--bg-card);
+              border: 1px solid var(--border-light);
+              border-radius: var(--radius-md);
+              box-shadow: var(--shadow-elevated);
+              opacity: 0;
+              visibility: hidden;
+              transform: translateY(10px);
+              transition: all var(--transition-smooth);
+              z-index: 10001;
+              padding: 0.5rem 0;
+              margin-top: 8px;
+          }
+          .portfolio-dropdown.active .portfolio-dropdown-menu {
+              opacity: 1;
+              visibility: visible;
+              transform: translateY(0);
+          }
+          .portfolio-dropdown-menu a {
+              display: block;
+              padding: 0.7rem 1.5rem;
+              color: var(--text-secondary);
+              font-size: 0.88rem;
+              font-weight: 500;
+              white-space: nowrap;
+              transition: all var(--transition-fast);
+          }
+          .portfolio-dropdown-menu a:hover {
+              background: rgba(6, 102, 204, 0.08);
+              color: var(--accent);
+              padding-left: 1.8rem;
+          }
 
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(40px); }
@@ -717,8 +862,8 @@
         /* ── STATS RIBBON ── */
         .stats-ribbon {
             position: relative;
-            z-index: 3;
-            margin-top: -4rem;
+            z-index: 2;
+            margin-top: -2rem;
             padding: 0 var(--container-padding);
         }
 
@@ -787,7 +932,10 @@
         }
 
         /* ── VIDEO SHOWCASE - TWO MODES ── */
-        .video-showcase { background: var(--bg-deep); }
+        .video-showcase { 
+            background: var(--bg-deep);
+            overflow: visible;
+        }
 
         .video-tabs {
             display: flex;
@@ -980,6 +1128,9 @@
         .video-card.cinematic { aspect-ratio: 21 / 9; }
         .video-card.cinematic video.video-bg { object-fit: cover; }
 
+        /* Grid spans */
+        .video-card.span-2-col { grid-column: span 2; }
+
         
 
         /* ── VIDEO OVERLAY LIGHTBOX ── */
@@ -1067,8 +1218,9 @@
 
         .overlay-info .category { color: var(--accent); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        @media (max-width: 1024px) {
+@media (max-width: 1024px) {
             .video-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
+            .video-card.span-2-col { grid-column: span 1; }
             .video-card .video-play-btn { width: 56px; height: 56px; font-size: 1.1rem; }
             .video-card:hover .video-play-btn { width: 62px; height: 62px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1081,6 +1233,7 @@
             .video-tabs { gap: 0.5rem; }
             .tab-btn { padding: 0.75rem 1.5rem; font-size: 0.8rem; }
             .video-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 0.75rem; }
+            .video-card.span-2-col { grid-column: span 1; }
             .video-card .video-play-btn { width: 52px; height: 52px; font-size: 1rem; }
             .video-card:hover .video-play-btn { width: 58px; height: 58px; }
             .video-card .video-label { font-size: 0.78rem; bottom: 1rem; left: 1rem; }
@@ -1092,6 +1245,7 @@
 
         @media (max-width: 576px) {
             .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: auto !important; gap: 0.75rem !important; }
+            .video-card.span-2-col { grid-column: span 1 !important; }
             .stats-grid { grid-template-columns: 1fr 1fr !important; }
             .stat-item { padding: 1.5rem 1rem; }
             .stat-item:nth-child(2) { border-right: 1px solid var(--border-subtle); }
@@ -1100,182 +1254,14 @@
             .tab-btn { padding: 0.6rem 1.2rem; font-size: 0.75rem; }
         }
 
-        /* ── PORTFOLIO HIGHLIGHT ── */
-        .portfolio-highlight { background: var(--bg-deep); position: relative; overflow: hidden; }
-
-        .portfolio-highlight::before {
-            content: '';
-            position: absolute;
-            top: -50%; right: -30%;
-            width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(212, 168, 67, 0.04) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: floatGlow 12s ease-in-out infinite;
-        }
-
-        @keyframes floatGlow {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-40px, 30px) scale(1.05); }
-        }
-
-        .portfolio-showcase {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .portfolio-main-video {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            background: #000;
-            border: 1px solid var(--border-subtle);
-            aspect-ratio: 16 / 9;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            box-shadow: var(--shadow-elevated);
-        }
-
-.portfolio-main-video:hover {
-              transform: translateY(-6px);
-              box-shadow: var(--shadow-accent-strong);
-              border-color: var(--accent);
-          }
-
-        .portfolio-main-video video {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-
-.portfolio-main-video .play-overlay {
-              position: absolute;
-              inset: 0;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background: linear-gradient(180deg, rgba(3, 5, 8, 0.2) 0%, rgba(3, 5, 8, 0.6) 100%);
-              transition: all var(--transition-smooth);
-              z-index: 2;
-          }
-
-          .portfolio-main-video .play-overlay i {
-              width: 100px;
-              height: 100px;
-              border-radius: 50%;
-              background: var(--white);
-              color: var(--accent);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 2.5rem;
-              margin-left: 6px;
-              box-shadow: var(--shadow-card);
-              transition: all var(--transition-bounce);
-          }
-
-          .portfolio-main-video:hover .play-overlay {
-              background: linear-gradient(180deg, rgba(0, 102, 204, 0.1) 0%, rgba(3, 5, 8, 0.7) 100%);
-          }
-
-          .portfolio-main-video:hover .play-overlay i {
-              width: 112px;
-              height: 112px;
-              background: var(--accent-gradient);
-              color: #030508;
-              box-shadow: var(--shadow-accent);
-          }
-
-        .portfolio-side {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .portfolio-side-item {
-            position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            aspect-ratio: 16 / 9;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-        }
-
-.portfolio-side-item:hover {
-              transform: translateY(-4px);
-              box-shadow: var(--shadow-accent);
-              border-color: var(--accent);
-          }
-
-        .portfolio-side-item video {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-
-.portfolio-side-item .item-overlay {
-              position: absolute;
-              inset: 0;
-              background: linear-gradient(180deg, rgba(3, 5, 8, 0.1) 0%, rgba(3, 5, 8, 0.7) 100%);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              z-index: 2;
-          }
-
-          .portfolio-side-item .item-overlay i {
-              width: 56px;
-              height: 56px;
-              border-radius: 50%;
-              background: var(--white);
-              color: var(--accent);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 1.3rem;
-              box-shadow: var(--shadow-card);
-              transition: all var(--transition-bounce);
-          }
-
-          .portfolio-side-item:hover .item-overlay i {
-              background: var(--accent-gradient);
-              color: #030508;
-              transform: scale(1.1);
-          }
-
-.portfolio-cta {
-              display: inline-flex;
-              align-items: center;
-              gap: 10px;
-              margin-top: 1rem;
-              padding: 1rem 2rem;
-              background: var(--accent-gradient);
-              color: #030508 !important;
-              font-weight: 600;
-              border-radius: var(--radius-full);
-              box-shadow: var(--shadow-accent);
-              transition: all var(--transition-bounce);
-          }
-
-          .portfolio-cta:hover {
-              transform: translateY(-3px);
-              box-shadow: var(--shadow-accent-strong);
-              gap: 14px;
-          }
-
-        @media (max-width: 1024px) {
-            .portfolio-showcase { grid-template-columns: 1fr; }
-            .portfolio-side { flex-direction: row; flex-wrap: wrap; }
-            .portfolio-side-item { flex: 1; min-width: 280px; }
-        }
-
-        @media (max-width: 576px) {
-            .portfolio-side { flex-direction: column; }
-            .portfolio-side-item { min-width: 100%; }
-        }
-
         /* ── CLIENT LOGOS ── */
         .clients-section { background: var(--bg-deep); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+
+.brand-marquee-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
 
         .brand-marquee {
             overflow: hidden;
@@ -1287,7 +1273,7 @@
             content: '';
             position: absolute;
             top: 0; bottom: 0;
-            width: 200px;
+            width: 150px;
             z-index: 2;
             pointer-events: none;
         }
@@ -1305,7 +1291,11 @@
         .brand-track {
             display: flex;
             width: max-content;
-            animation: marquee 40s linear infinite;
+            animation: marquee 30s linear infinite;
+        }
+
+        .brand-track.reverse {
+            animation: marquee-reverse 30s linear infinite;
         }
 
         .brand-track:hover { animation-play-state: paused; }
@@ -1315,26 +1305,35 @@
             to { transform: translateX(-50%); }
         }
 
+        @keyframes marquee-reverse {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
+        }
+
         .brand-item {
             flex: 0 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 3rem;
-            min-width: 200px;
-            filter: grayscale(1) opacity(0.6);
+            padding: 0 2.5rem;
+            min-width: 180px;
             transition: all var(--transition-smooth);
+            opacity: 0.8;
         }
 
         .brand-item:hover {
-            filter: grayscale(0) opacity(1);
-            transform: scale(1.1);
+            opacity: 1;
+            transform: scale(1.08);
         }
 
         .brand-item img {
-            max-width: 160px;
-            max-height: 60px;
+            max-width: 180px;
+            max-height: 70px;
             object-fit: contain;
+        }
+
+        @media (max-width: 1024px) {
+            .brand-marquee-container { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
         /* ── ABOUT ── */
@@ -1351,12 +1350,12 @@
             position: relative;
         }
 
-        .about-main-image {
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            aspect-ratio: 4 / 5;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
+.about-main-image {
+              border-radius: var(--radius-xl);
+              overflow: hidden;
+              aspect-ratio: 4 / 3;
+              background: var(--bg-card);
+              border: 1px solid var(--border-subtle);
             box-shadow: var(--shadow-elevated);
             transition: all var(--transition-smooth);
         }
@@ -1367,44 +1366,7 @@
               border-color: var(--accent);
           }
 
-        .about-main-image img { width: 100%; height: 100%; object-fit: cover; }
-
-        .about-experience {
-            position: absolute;
-            bottom: 30px;
-            left: -30px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: 2rem 2.5rem;
-            box-shadow: var(--shadow-elevated);
-            backdrop-filter: blur(20px);
-            animation: floatSlow 6s ease-in-out infinite;
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-.about-experience .years {
-              font-family: 'Poppins', sans-serif;
-              font-size: 3.5rem;
-              font-weight: 800;
-              background: var(--accent-gradient);
-              -webkit-background-clip: text;
-              background-clip: text;
-              -webkit-text-fill-color: transparent;
-              line-height: 1;
-          }
-
-        .about-experience .text {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
+.about-main-image img { width: 100%; height: 100%; object-fit: cover; }
 
         .about-content h3 {
             font-family: 'Poppins', sans-serif;
@@ -1479,7 +1441,6 @@
         @media (max-width: 1024px) {
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
             .about-visual { max-width: 500px; margin: 0 auto; }
-            .about-experience { left: 0; bottom: 20px; }
             .about-features { grid-template-columns: 1fr; }
         }
 
@@ -1535,92 +1496,133 @@
             .cta-actions { justify-content: center; }
         }
 
-        /* ── INSTAGRAM FEED ── */
+        /* ── INSTAGRAM REELS ── */
         .instagram-section { background: var(--bg-deep); }
 
-        .insta-grid {
+        .insta-reels-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
         }
 
-        .insta-item {
+        .insta-reel-card {
             position: relative;
-            aspect-ratio: 1;
-            border-radius: var(--radius-md);
+            aspect-ratio: 9 / 16;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            cursor: pointer;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            transition: all var(--transition-smooth);
         }
 
-        .insta-item img,
-        .insta-item video {
+        .insta-reel-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-accent);
+            border-color: var(--accent);
+        }
+
+        .insta-reel-card video,
+        .insta-reel-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform var(--transition-smooth);
         }
 
-        .insta-item:hover img,
-        .insta-item:hover video { transform: scale(1.08); }
-
-        .insta-overlay {
+        .insta-reel-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(3, 5, 8, 0) 0%, rgba(3, 5, 8, 0.8) 100%);
+            background: linear-gradient(180deg, rgba(3, 5, 8, 0.1) 0%, rgba(3, 5, 8, 0.7) 100%);
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            padding: 1.5rem;
             opacity: 0;
             transition: all var(--transition-smooth);
         }
 
-        .insta-item:hover .insta-overlay { opacity: 1; }
+        .insta-reel-card:hover .insta-reel-overlay { opacity: 1; }
 
-        .insta-overlay .insta-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--white);
+        .insta-reel-overlay .insta-play-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
             color: #030508;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            font-size: 0.85rem;
-            transform: translateY(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-accent);
+            transform: scale(0.8);
             transition: all var(--transition-bounce);
-            box-shadow: var(--shadow-card);
         }
 
-        .insta-item:hover .insta-overlay .insta-link { transform: translateY(0); }
+        .insta-reel-card:hover .insta-reel-overlay .insta-play-btn { transform: scale(1); }
 
-        .insta-overlay .insta-link:hover { background: var(--accent-gradient); box-shadow: var(--shadow-accent); }
+        .insta-reel-info {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.5rem 1.2rem 1rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(3, 5, 8, 0.95) 100%);
+        }
 
-        .insta-item.featured { grid-column: span 2; grid-row: span 2; }
+        .insta-reel-info .reel-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .insta-reel-info .reel-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .insta-reel-info .reel-meta i { color: var(--accent); }
 
         @media (max-width: 1024px) {
-            .insta-grid { grid-template-columns: repeat(4, 1fr); }
-            .insta-item.featured { grid-column: span 2; grid-row: span 2; }
+            .insta-reels-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .insta-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .insta-item.featured { grid-column: span 3; grid-row: span 1; aspect-ratio: 16/9; }
+            .insta-reels-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         }
 
-        @media (max-width: 480px) {
-            .insta-grid { grid-template-columns: repeat(2, 1fr); }
-            .insta-item.featured { grid-column: span 2; }
+        @media (max-width: 576px) {
+            .insta-reels-grid { grid-template-columns: 1fr; }
         }
 
         /* ── FOOTER ── */
         .footer {
+            position: relative;
             background: #030303;
             border-top: 1px solid var(--border-subtle);
             padding: 4rem var(--container-padding) 2rem;
+            overflow: hidden;
+            clear: both;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('img/1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.04;
+            z-index: 0;
         }
 
         .footer-inner {
+            position: relative;
+            z-index: 1;
             max-width: var(--max-width);
             margin: 0 auto;
             display: grid;
@@ -1842,7 +1844,15 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html" class="portfolio-link"><i class="fa-solid fa-photo-film"></i> Portfolio</a></li>
+                <li class="dropdown">
+                    <a href="portfolio.html" class="dropdown-toggle">Portfolio</a>
+                    <div class="dropdown-menu">
+                        <a href="portfolio.html#education">Education</a>
+                        <a href="portfolio.html#jewellery">Jewellery</a>
+                        <a href="portfolio.html#food">Food & Restaurants</a>
+                        <a href="portfolio.html#events">Events</a>
+                    </div>
+                </li>
                 <li><a href="industry.html">Industries</a></li>
                 <li><a href="blogs.html">Insights</a></li>
                 <li><a href="contact.html" class="nav-cta">Let's Talk</a></li>
@@ -1860,7 +1870,15 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
-        <a href="portfolio.html" class="portfolio-link"><i class="fa-solid fa-photo-film"></i> Portfolio</a>
+<div class="mobile-dropdown">
+            <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="mobile-dropdown-menu">
+                <a href="portfolio.html#education">Education</a>
+                <a href="portfolio.html#jewellery">Jewellery</a>
+                <a href="portfolio.html#food">Food & Restaurants</a>
+                <a href="portfolio.html#events">Events</a>
+            </div>
+        </div>
         <a href="industry.html">Industries</a>
         <a href="blogs.html">Insights</a>
         <a href="contact.html" class="mobile-cta">Let's Talk</a>
@@ -1868,6 +1886,7 @@
         <div class="menu-footer">
             <span>© 2026 FlyLense Media Partner</span>
             <span>Crafting Cinematic Stories</span>
+        </div>
         </div>
     </div>
 
@@ -1910,17 +1929,17 @@
                 <p class="section-subtitle">Two distinct storytelling modes — vertical reels that dominate social feeds, and cinematic landscapes built for the big screen.</p>
             </div>
 
-            <div class="video-tabs reveal reveal-up delay-1">
-                <button class="tab-btn active" data-tab="reels"><i class="fa-solid fa-mobile-screen"></i> Reels & Shorts <span class="tab-count">(18)</span></button>
+<div class="video-tabs reveal reveal-up delay-1">
+                <button class="tab-btn active" data-tab="reels"><i class="fa-solid fa-mobile-screen"></i> Reels & Shorts <span class="tab-count">(8)</span></button>
                 <button class="tab-btn" data-tab="cinematic"><i class="fa-solid fa-film"></i> Cinematic Films <span class="tab-count">(4)</span></button>
             </div>
 
             <!-- REELS GRID (Portrait 9:16) -->
             <div class="video-grid" id="reelsGrid" data-mode="reels">
                 <!-- Education Reels (Portrait) -->
-<div class="video-card portrait reveal reveal-scale delay-1" 
-data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" 
-data-title="Code.in — Educational Brand Film" data-duration="6:10" data-category="Education">
+                <div class="video-card portrait reveal reveal-scale delay-1" 
+                data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" 
+                data-title="Code.in — Educational Brand Film" data-duration="6:10" data-category="Education">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Code.in Brand Film</span>
@@ -1932,69 +1951,25 @@ data-title="Code.in — Educational Brand Film" data-duration="6:10" data-catego
                     <span class="video-label">Full Stack Reel</span>
                     <span class="video-duration">1:55</span>
                 </div>
-                <div class="video-card portrait reveal reveal-scale delay-3" data-video="assets/Videos/Education/Global .mp4" data-poster="assets/thumbnails/Global.png" data-title="Global Education Campaign" data-duration="2:30" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Global.png"><source src="assets/Videos/Education/Global .mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Global Campaign</span>
-                    <span class="video-duration">2:30</span>
-                </div>
-<div class="video-card portrait reveal reveal-scale delay-4" 
-data-video="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" data-poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" 
-data-title="VIP's Muay Thai Championship" data-duration="3:45" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png"><source src="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">VIP's Muay Thai</span>
-                    <span class="video-duration">3:45</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-5" data-video="assets/Videos/Education/Saritha Reel_06.mp4" data-poster="assets/thumbnails/Saritha Reel_06.png" data-title="Saritha School Reel" data-duration="1:45" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Saritha Reel_06.png"><source src="assets/Videos/Education/Saritha Reel_06.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Saritha Reel</span>
-                    <span class="video-duration">1:45</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-6" data-video="assets/Videos/Education/Silver Crest Reel 01.mp4" data-poster="assets/thumbnails/Silver Crest Reel 01.png" data-title="Silver Crest School" data-duration="2:10" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Silver Crest Reel 01.png"><source src="assets/Videos/Education/Silver Crest Reel 01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Silver Crest</span>
-                    <span class="video-duration">2:10</span>
-                </div>
-
                 <!-- Food & Restaurant Reels -->
-<div class="video-card portrait reveal reveal-scale delay-1" 
-data-video="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" data-poster="assets/thumbnails/Barbeque Spice Reel 01.png" 
-data-title="Barbeque Spice — Food Reel" data-duration="2:18" data-category="Food & Restaurant">
+                <div class="video-card portrait reveal reveal-scale delay-3" data-video="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" data-poster="assets/thumbnails/Barbeque Spice Reel 01.png" data-title="Barbeque Spice — Food Reel" data-duration="2:18" data-category="Food & Restaurant">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Barbeque Spice Reel 01.png"><source src="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Barbeque Spice</span>
                     <span class="video-duration">2:18</span>
                 </div>
-                <div class="video-card portrait reveal reveal-scale delay-2" data-video="assets/Videos/Food & Restaurent/Videos/FRESH, FLAVORFUL, FABULOUS.Welcome to our Tando's, where moments are savored and memories are ma.mp4" data-poster="assets/thumbnails/FRESH, FLAVORFUL, FABULOUS.png" data-title="Tando's Grill — Flavor Reel" data-duration="1:55" data-category="Food & Restaurant">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/FRESH, FLAVORFUL, FABULOUS.png"><source src="assets/Videos/Food & Restaurent/Videos/FRESH, FLAVORFUL, FABULOUS.Welcome to our Tando's, where moments are savored and memories are ma.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Tando's Flavor</span>
-                    <span class="video-duration">1:55</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-3" data-video="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" data-poster="assets/thumbnails/Tandos_Grill_Reel_01.png" data-title="Tando's Grill Reel" data-duration="5:20" data-category="Food & Restaurant">
+                <div class="video-card portrait reveal reveal-scale delay-4" data-video="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" data-poster="assets/thumbnails/Tandos_Grill_Reel_01.png" data-title="Tando's Grill Reel" data-duration="5:20" data-category="Food & Restaurant">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Tandos_Grill_Reel_01.png"><source src="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Tando's Grill</span>
                     <span class="video-duration">5:20</span>
                 </div>
-
                 <!-- Jewellery Reels -->
-<div class="video-card portrait reveal reveal-scale delay-4" 
-data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" 
-data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Reel" data-duration="2:45" data-category="Jewellery">
+                <div class="video-card portrait reveal reveal-scale delay-5" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Reel" data-duration="2:45" data-category="Jewellery">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Iqbal Jewellers</span>
                     <span class="video-duration">2:45</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-5" data-video="assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4" data-poster="assets/thumbnails/Maram_jewellery_01.png" data-title="Maram Jewellery" data-duration="2:15" data-category="Jewellery">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Maram_jewellery_01.png"><source src="assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Maram Jewellery</span>
-                    <span class="video-duration">2:15</span>
                 </div>
                 <div class="video-card portrait reveal reveal-scale delay-6" data-video="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" data-poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png" data-title="Nisar Jewellery Reel" data-duration="8:42" data-category="Jewellery">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png"><source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4"></video>
@@ -2002,26 +1977,39 @@ data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Je
                     <span class="video-label">Nisar Jewellery</span>
                     <span class="video-duration">8:42</span>
                 </div>
-                <div class="video-card portrait reveal reveal-scale delay-7" data-video="assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4" data-poster="assets/thumbnails/S-Craft_Feb_Reel_01.png" data-title="S-Craft February Reel" data-duration="3:20" data-category="Jewellery">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/S-Craft_Feb_Reel_01.png"><source src="assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4" type="video/mp4"></video>
+                <!-- Events Reels -->
+                <div class="video-card portrait reveal reveal-scale delay-7" data-video="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" data-poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" data-title="VIP's Muay Thai Championship" data-duration="3:45" data-category="Events">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png"><source src="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">S-Craft Reel</span>
-                    <span class="video-duration">3:20</span>
+                    <span class="video-label">VIP's Muay Thai</span>
+                    <span class="video-duration">3:45</span>
                 </div>
-                <div class="video-card portrait reveal reveal-scale delay-8" data-video="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" data-poster="assets/thumbnails/SNJ_Reel_03.png" data-title="SNJ Reel 03" data-duration="2:30" data-category="Jewellery">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/SNJ_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4"></video>
+                <div class="video-card portrait reveal reveal-scale delay-8" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
+                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">SNJ Reel 03</span>
-                    <span class="video-duration">2:30</span>
-                </div>
-            </div>
+                    <span class="video-label">Sports Carnival</span>
+                    <span class="video-duration">5:20</span>
+</div>
 
-            <!-- CINEMATIC GRID (Landscape 21:9 / 16:9) -->
+<!-- View Portfolio Dropdown Button -->
+                  <div class="portfolio-dropdown-wrapper" style="grid-column: 1 / -1; margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
+                      <div class="portfolio-dropdown">
+                          <button class="btn-secondary portfolio-dropdown-toggle" type="button"><i class="fa-solid fa-arrow-right"></i> View Portfolio <i class="fa-solid fa-chevron-down"></i></button>
+                          <div class="portfolio-dropdown-menu">
+                            <a href="portfolio.html#education">Education</a>
+                            <a href="portfolio.html#jewellery">Jewellery</a>
+                            <a href="portfolio.html#food">Food & Restaurants</a>
+                            <a href="portfolio.html#events">Events</a>
+                        </div>
+                    </div>
+                </div>
+
+              <!-- CINEMATIC GRID (Landscape 21:9 / 16:9) -->
             <div class="video-grid" id="cinematicGrid" data-mode="cinematic" style="display: none;">
 <div class="video-card cinematic reveal reveal-scale delay-1" 
-data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" 
-data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge International School — Promo Film" 
-data-duration="4:32" data-category="Education">
+  data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" 
+  data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge International School — Promo Film" 
+  data-duration="4:32" data-category="Education">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">Oakridge Promo</span>
@@ -2040,52 +2028,13 @@ data-duration="4:32" data-category="Education">
                     <span class="video-duration">5:20</span>
                 </div>
 <div class="video-card cinematic reveal reveal-scale delay-4" 
-data-video="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" 
-data-poster="assets/thumbnails/Vip's_Trailer_Video_02.png" data-title="VIP's International School — Trailer" 
-data-duration="4:10" data-category="Education">
+  data-video="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" 
+  data-poster="assets/thumbnails/Vip's_Trailer_Video_02.png" data-title="VIP's International School — Trailer" 
+  data-duration="4:10" data-category="Education">
                     <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Vip's_Trailer_Video_02.png"><source src="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" type="video/mp4"></video>
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                     <span class="video-label">VIP's Trailer</span>
                     <span class="video-duration">4:10</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── PORTFOLIO HIGHLIGHT ── -->
-    <section class="section portfolio-highlight" id="portfolio">
-        <div class="section-inner">
-            <div class="section-header reveal reveal-up">
-                <span class="section-tag">Featured Project</span>
-                <h2 class="section-title">Portfolio Highlight</h2>
-                <p class="section-subtitle">A deep dive into one of our flagship productions — cinematic storytelling at its finest.</p>
-            </div>
-
-            <div class="portfolio-showcase">
-                <div class="portfolio-main-video reveal reveal-left" data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge International School — Promo Film" data-category="Education • Brand Film">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
-                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
-                </div>
-
-                <div class="portfolio-side">
-                    <div class="portfolio-side-item reveal reveal-right delay-1" data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" data-title="Code.in Brand Film" data-category="Education">
-                        <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
-                        <div class="item-overlay"><i class="fa-solid fa-play"></i></div>
-                    </div>
-                    <div class="portfolio-side-item reveal reveal-right delay-2" data-video="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" data-poster="assets/thumbnails/Barbeque Spice Reel 01.png" data-title="Barbeque Spice Reel" data-category="Food & Restaurant">
-                        <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Barbeque Spice Reel 01.png"><source src="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" type="video/mp4"></video>
-                        <div class="item-overlay"><i class="fa-solid fa-play"></i></div>
-                    </div>
-                    <div class="portfolio-side-item reveal reveal-right delay-3" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Reel" data-category="Jewellery">
-                        <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4"></video>
-                        <div class="item-overlay"><i class="fa-solid fa-play"></i></div>
-                    </div>
-                    <div class="portfolio-side-item reveal reveal-right delay-4" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-category="Events">
-                        <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
-                        <div class="item-overlay"><i class="fa-solid fa-play"></i></div>
-                    </div>
-
-                    <a href="portfolio.html" class="portfolio-cta reveal reveal-up delay-5"><span>Explore Full Portfolio</span><i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -2099,9 +2048,18 @@ data-duration="4:10" data-category="Education">
                 <h2 class="section-title">Brands We've Partnered With</h2>
                 <p class="section-subtitle">From emerging startups to established enterprises, we've helped 150+ brands tell their story.</p>
             </div>
-            <div class="brand-marquee reveal reveal-up delay-1">
-                <div class="brand-track" id="brandTrack">
-                    <!-- Populated via JS from img/clients/ -->
+            <div class="brand-marquee-container">
+                <!-- Carousel 1: Left to Right -->
+                <div class="brand-marquee reveal reveal-up delay-1">
+                    <div class="brand-track" id="brandTrack1">
+                        <!-- Populated via JS from img/clients/ -->
+                    </div>
+                </div>
+                <!-- Carousel 2: Right to Left -->
+                <div class="brand-marquee reveal reveal-up delay-1">
+                    <div class="brand-track reverse" id="brandTrack2">
+                        <!-- Populated via JS from img/clients/ -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -2115,10 +2073,6 @@ data-duration="4:10" data-category="Education">
                     <div class="about-main-image">
                         <img src="img/3.png" alt="FlyLense Team at Work">
                     </div>
-                    <div class="about-experience">
-                        <div class="years" data-count="8">0</div>
-                        <div class="text">Years of Excellence</div>
-                    </div>
                 </div>
 
                 <div class="about-content reveal reveal-right">
@@ -2128,19 +2082,11 @@ data-duration="4:10" data-category="Education">
                     <div class="about-features">
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
-                            <div class="feature-text"><h4>Cinematic Production</h4><p>Broadcast-quality films with RED & ARRI cameras</p></div>
+                            <div class="feature-text"><h4>Cinematic Production</h4></div>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                            <div class="feature-text"><h4>Social-First Content</h4><p>Reels, Shorts & TikToks optimized for algorithms</p></div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-drone"></i></div>
-                            <div class="feature-text"><h4>Aerial Cinematography</h4><p>DGCA-certified drone pilots for stunning aerials</p></div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-clapperboard"></i></div>
-                            <div class="feature-text"><h4>End-to-End Post</h4><p>Editing, color, VFX, sound design & delivery</p></div>
+                            <div class="feature-text"><h4>Social-First Content</h4></div>
                         </div>
                     </div>
 
@@ -2164,59 +2110,49 @@ data-duration="4:10" data-category="Education">
         </div>
     </section>
 
-    <!-- ── INSTAGRAM FEED ── -->
+    <!-- ── INSTAGRAM REELS ── -->
     <section class="section instagram-section" id="instagram">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
                 <span class="section-tag">Social Feed</span>
-                <h2 class="section-title">Latest from Instagram</h2>
-                <p class="section-subtitle">Follow our journey behind the scenes, on set, and in the edit suite.</p>
+                <h2 class="section-title">Instagram Reels</h2>
+                <p class="section-subtitle">Add your Instagram Reel embed links below — they'll play right here.</p>
             </div>
-            <div class="insta-grid" id="instaGrid">
-                <!-- Populated via JS - placeholder items -->
-                <div class="insta-item featured reveal reveal-scale delay-1">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> Watch on Instagram</a></div>
+            <div class="insta-reels-grid" id="instaReelsGrid">
+                <!-- Add your Instagram Reel embed codes here -->
+                <!-- Example format:
+                <div class="insta-reel-card reveal reveal-scale delay-1">
+                    <iframe src="https://www.instagram.com/reel/YOUR_REEL_CODE/embed/" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen="true"></iframe>
+                    <div class="insta-reel-overlay"><i class="fa-solid fa-play insta-play-btn"></i></div>
+                    <div class="insta-reel-info">
+                        <div class="reel-title">Your Reel Title</div>
+                        <div class="reel-meta"><i class="fa-brands fa-instagram"></i> Instagram</div>
+                    </div>
                 </div>
-                <div class="insta-item reveal reveal-scale delay-2">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
+                -->
+                <div class="insta-reel-card reveal reveal-scale delay-1">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
+                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
+                        Add Instagram Reel embed link
+                    </div>
                 </div>
-                <div class="insta-item reveal reveal-scale delay-3">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Barbeque Spice Reel 01.png"><source src="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" type="video/mp4"></video>
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
+                <div class="insta-reel-card reveal reveal-scale delay-2">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
+                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
+                        Add Instagram Reel embed link
+                    </div>
                 </div>
-                <div class="insta-item reveal reveal-scale delay-4">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4"></video>
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
+                <div class="insta-reel-card reveal reveal-scale delay-3">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
+                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
+                        Add Instagram Reel embed link
+                    </div>
                 </div>
-                <div class="insta-item reveal reveal-scale delay-5">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png"><source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4"></video>
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
-                </div>
-                <div class="insta-item reveal reveal-scale delay-6">
-                    <video playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
-                </div>
-                <div class="insta-item reveal reveal-scale delay-7">
-                    <img src="assets/thumbnails/Full_Stack_Reel.png" alt="Full Stack Reel">
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
-                </div>
-                <div class="insta-item reveal reveal-scale delay-8">
-                    <img src="assets/thumbnails/Silver Crest Reel 01.png" alt="Silver Crest Reel">
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
-                </div>
-                <div class="insta-item reveal reveal-scale delay-1">
-                    <img src="assets/thumbnails/SNJ_Reel_03.png" alt="SNJ Reel">
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
-                </div>
-                <div class="insta-item reveal reveal-scale delay-2">
-                    <img src="assets/thumbnails/Tandos_Grill_Reel_01.png" alt="Tando's Grill">
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
-                </div>
-                <div class="insta-item reveal reveal-scale delay-3">
-                    <img src="assets/thumbnails/Springfield_Trailer_01.png" alt="Springfield Trailer">
-                    <div class="insta-overlay"><a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="insta-link"><i class="fa-brands fa-instagram"></i> View Reel</a></div>
+                <div class="insta-reel-card reveal reveal-scale delay-4">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
+                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
+                        Add Instagram Reel embed link
+                    </div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 2.5rem;">
@@ -2323,8 +2259,8 @@ data-duration="4:10" data-category="Education">
             const reelsGrid = document.getElementById('reelsGrid');
             const cinematicGrid = document.getElementById('cinematicGrid');
             const statNumbers = document.querySelectorAll('.stat-number[data-count]');
-            const aboutYears = document.querySelector('.about-experience .years[data-count]');
-            const brandTrack = document.getElementById('brandTrack');
+            const brandTrack1 = document.getElementById('brandTrack1');
+            const brandTrack2 = document.getElementById('brandTrack2');
 
             // ── NAVBAR SCROLL ──
             let lastScroll = 0;
@@ -2334,6 +2270,9 @@ data-duration="4:10" data-category="Education">
             }
             window.addEventListener('scroll', handleNavbar, { passive: true });
             handleNavbar();
+
+            // Navbar intro animation
+            setTimeout(() => navbar.classList.add('loaded'), 100);
 
             // ── MOBILE MENU ──
             function toggleMenu() {
@@ -2345,7 +2284,30 @@ data-duration="4:10" data-category="Education">
             }
             hamburger.addEventListener('click', toggleMenu);
             menuBackdrop.addEventListener('click', toggleMenu);
-            mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+            mobileMenu.querySelectorAll('a:not(.mobile-dropdown-menu a)').forEach(a => a.addEventListener('click', toggleMenu));
+
+            // Mobile dropdown toggle
+            const mobileDropdown = document.querySelector('.mobile-dropdown');
+            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
+            if (mobileDropdownToggle) {
+                mobileDropdownToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileDropdown.classList.toggle('active');
+                });
+            }
+
+            // Portfolio dropdown (Our Craft section) - specifically the one in reelsGrid
+            const craftPortfolioDropdown = document.querySelector('#reelsGrid .portfolio-dropdown');
+            const craftPortfolioDropdownToggle = document.querySelector('#reelsGrid .portfolio-dropdown-toggle');
+            if (craftPortfolioDropdownToggle) {
+                craftPortfolioDropdownToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (craftPortfolioDropdown) craftPortfolioDropdown.classList.toggle('active');
+                });
+            }
+            document.addEventListener('click', () => {
+                if (craftPortfolioDropdown) craftPortfolioDropdown.classList.remove('active');
+            });
 
             // ── BACK TO TOP ──
             window.addEventListener('scroll', () => {
@@ -2378,7 +2340,6 @@ data-duration="4:10" data-category="Education">
                 });
             }, { threshold: 0.5 });
             statNumbers.forEach(el => counterObserver.observe(el));
-            if (aboutYears) counterObserver.observe(aboutYears);
 
             // ── REVEAL ANIMATIONS ──
             const revealObserver = new IntersectionObserver((entries) => {
@@ -2399,6 +2360,9 @@ data-duration="4:10" data-category="Education">
                     const tab = btn.dataset.tab;
                     reelsGrid.style.display = tab === 'reels' ? 'grid' : 'none';
                     cinematicGrid.style.display = tab === 'cinematic' ? 'grid' : 'none';
+                    // Close portfolio dropdown when switching tabs
+                    const craftPortfolioDropdown = document.querySelector('#reelsGrid .portfolio-dropdown');
+                    if (craftPortfolioDropdown) craftPortfolioDropdown.classList.remove('active');
                     // Re-observe reveals for newly shown grid
                     document.querySelectorAll(`#${tab}Grid .reveal`).forEach(el => {
                         el.classList.remove('revealed');
@@ -2512,14 +2476,18 @@ data-duration="4:10" data-category="Education">
                 '1.png','2.png','3.png','4.png','5.png','6.png','7.png','8.png',
                 '9.png','10.png','11.png','12.png','13.png','14.png','15.png','16.png','17.png'
             ];
-            if (brandTrack) {
-                const logosHTML = clientLogos.map((logo, i) => `
-                    <div class="brand-item" style="animation-delay: ${i * 0.1}s">
-                        <img src="img/clients/${logo}" alt="Client ${i + 1}">
-                    </div>
-                `).join('');
-                brandTrack.innerHTML = logosHTML + logosHTML; // Duplicate for seamless loop
+            function populateBrandTrack(track) {
+                if (track) {
+                    const logosHTML = clientLogos.map((logo, i) => `
+                        <div class="brand-item" style="animation-delay: ${i * 0.1}s">
+                            <img src="img/clients/${logo}" alt="Client ${i + 1}">
+                        </div>
+                    `).join('');
+                    track.innerHTML = logosHTML + logosHTML; // Duplicate for seamless loop
+                }
             }
+            populateBrandTrack(brandTrack1);
+            populateBrandTrack(brandTrack2);
 
             // ── HERO VIDEO PLAY POLICY ──
             const heroVideo = document.querySelector('.hero-video-bg');
