@@ -338,7 +338,7 @@
                 left: 0;
                 min-width: 220px;
                 background: transparent;
-                border: 1px solid var(--border-light);
+                border: none;
                 border-radius: var(--radius-md);
                 box-shadow: var(--shadow-elevated);
                 opacity: 0;
@@ -1247,7 +1247,7 @@
         }
 
         @media (max-width: 576px) {
-            .video-grid { grid-template-columns: 1fr !important; grid-auto-rows: auto !important; gap: 0.75rem !important; }
+            .video-grid { grid-template-columns: repeat(2, 1fr) !important; grid-auto-rows: auto !important; gap: 0.75rem !important; }
             .video-card.span-2-col { grid-column: span 1 !important; }
             .stats-grid { grid-template-columns: 1fr 1fr !important; }
             .stat-item { padding: 1.5rem 1rem; }
@@ -1807,6 +1807,9 @@
         }
 
         @media (max-width: 480px) {
+            .hero-video-bg {
+      position: absolute;
+      top: -10%; left: 0;
             :root { --container-padding: 1.25rem; }
             .hero-badge { font-size: 0.65rem; padding: 8px 16px; }
             .btn-primary, .btn-secondary { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
@@ -1849,12 +1852,11 @@
                 <li><a href="about.html">About</a></li>
                 <li class="dropdown">
                     <a href="portfolio.html" class="dropdown-toggle">Portfolio</a>
-                    <div class="dropdown-menu">
-                        <a href="portfolio.html#education">Education</a>
-                        <a href="portfolio.html#jewellery">Jewellery</a>
-                        <a href="portfolio.html#food">Food & Restaurants</a>
-                        <a href="portfolio.html#events">Events</a>
-                    </div>
+<div class="dropdown-menu">
+                      <a href="portfolio.html#education">Education</a>
+                      <a href="portfolio.html#jewellery">Jewellery</a>
+                      <a href="portfolio.html#food">Food & Restaurants</a>
+                  </div>
                 </li>
                 <li><a href="industry.html">Industries</a></li>
                 <li><a href="blogs.html">Insights</a></li>
@@ -1875,12 +1877,11 @@
         <a href="about.html">About</a>
 <div class="mobile-dropdown">
             <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="mobile-dropdown-menu">
-                <a href="portfolio.html#education">Education</a>
-                <a href="portfolio.html#jewellery">Jewellery</a>
-                <a href="portfolio.html#food">Food & Restaurants</a>
-                <a href="portfolio.html#events">Events</a>
-            </div>
+<div class="mobile-dropdown-menu">
+                  <a href="portfolio.html#education">Education</a>
+                  <a href="portfolio.html#jewellery">Jewellery</a>
+                  <a href="portfolio.html#food">Food & Restaurants</a>
+              </div>
         </div>
         <a href="industry.html">Industries</a>
         <a href="blogs.html">Insights</a>
@@ -1998,12 +1999,11 @@
                   <div class="portfolio-dropdown-wrapper" style="grid-column: 1 / -1; margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
                       <div class="portfolio-dropdown">
                           <button class="btn-secondary portfolio-dropdown-toggle" type="button"><i class="fa-solid fa-arrow-right"></i> View Portfolio <i class="fa-solid fa-chevron-down"></i></button>
-                          <div class="portfolio-dropdown-menu">
-                            <a href="portfolio.html#education">Education</a>
-                            <a href="portfolio.html#jewellery">Jewellery</a>
-                            <a href="portfolio.html#food">Food & Restaurants</a>
-                            <a href="portfolio.html#events">Events</a>
-                        </div>
+<div class="portfolio-dropdown-menu">
+                              <a href="portfolio.html#education">Education</a>
+                              <a href="portfolio.html#jewellery">Jewellery</a>
+                              <a href="portfolio.html#food">Food & Restaurants</a>
+                          </div>
                     </div>
                 </div>
 
