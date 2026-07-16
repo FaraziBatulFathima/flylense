@@ -1598,7 +1598,7 @@
         }
 
         @media (max-width: 576px) {
-            .insta-reels-grid { grid-template-columns: 1fr; }
+            .insta-reels-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         /* ── FOOTER ── */
@@ -1806,19 +1806,19 @@
             .cta-banner { padding: 2rem; }
         }
 
-        @media (max-width: 480px) {
-            .hero-video-bg {
-      position: absolute;
-      top: -10%; left: 0;
-            :root { --container-padding: 1.25rem; }
-            .hero-badge { font-size: 0.65rem; padding: 8px 16px; }
-            .btn-primary, .btn-secondary { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
-            .nav-logo img { height: 32px; }
-            .nav-logo img.logo-title { height: 38px; }
-            .stat-number { font-size: 2rem; }
-            .about-experience .years { font-size: 2.5rem; }
-            .cta-content h2 { font-size: 1.5rem; }
-        }
+@media (max-width: 480px) {
+              .hero-video-bg {
+        position: absolute;
+        top: -10%; left: 0;
+              :root { --container-padding: 1.25rem; }
+              .hero-badge { display: none; }
+              .btn-primary, .btn-secondary { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
+              .nav-logo img { height: 32px; }
+              .nav-logo img.logo-title { height: 28px; }
+              .stat-number { font-size: 2rem; }
+              .about-experience .years { font-size: 2.5rem; }
+              .cta-content h2 { font-size: 1.5rem; }
+          }
 
         /* ── UTILITY ── */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
