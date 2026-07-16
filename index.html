@@ -775,12 +775,12 @@
 }
 
 @media (max-width: 768px) {
-    .hero { min-height: 100vh; }
-    .hero-content { align-items: center; text-align: center; }
-    .hero .lead { max-width: 100%; }
-    .hero-cta-group { justify-content: center; }
-    .hero-scroll-indicator { bottom: 24px; }
-}
+      .hero { min-height: 100vh; }
+      .hero-content { align-items: center; text-align: center; }
+      .hero .lead { max-width: 100%; }
+      .hero-cta-group { justify-content: center; }
+      .hero-scroll-indicator { display: none; }
+  }
 
         /* ── SECTION COMMONS ── */
         .section {
@@ -1758,42 +1758,6 @@
             .footer-bottom { flex-direction: column; text-align: center; }
         }
 
-        /* ── BACK TO TOP ── */
-        .back-to-top {
-            position: fixed;
-            bottom: 2.5rem;
-            right: 2.5rem;
-            width: 52px;
-            height: 52px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            cursor: pointer;
-            z-index: 900;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all var(--transition-smooth);
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background: var(--accent-gradient);
-            color: #030508;
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-accent);
-        }
-
         /* ── RESPONSIVE NAVBAR ── */
         @media (max-width: 768px) {
             :root { --nav-height: 64px; }
@@ -2224,9 +2188,6 @@
         </div>
     </footer>
 
-    <!-- ── BACK TO TOP ── -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
-
     <!-- ── VIDEO OVERLAY ── -->
     <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-label="Video Player">
         <div class="overlay-content">
@@ -2241,7 +2202,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         (function() {
             'use strict';
 
@@ -2250,7 +2211,6 @@
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const menuBackdrop = document.getElementById('menuBackdrop');
-            const backToTop = document.getElementById('backToTop');
             const videoOverlay = document.getElementById('videoOverlay');
             const overlayVideo = document.getElementById('overlayVideo');
             const overlayClose = document.getElementById('overlayClose');
@@ -2262,6 +2222,7 @@
             const reelsGrid = document.getElementById('reelsGrid');
             const cinematicGrid = document.getElementById('cinematicGrid');
             const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+            const aboutYears = document.querySelector('.about-experience .years[data-count]');
             const brandTrack1 = document.getElementById('brandTrack1');
             const brandTrack2 = document.getElementById('brandTrack2');
 
@@ -2311,12 +2272,6 @@
             document.addEventListener('click', () => {
                 if (craftPortfolioDropdown) craftPortfolioDropdown.classList.remove('active');
             });
-
-            // ── BACK TO TOP ──
-            window.addEventListener('scroll', () => {
-                backToTop.classList.toggle('visible', window.scrollY > 300);
-            }, { passive: true });
-            backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
             // ── STAT COUNTERS ──
             function animateCounter(el, target) {
