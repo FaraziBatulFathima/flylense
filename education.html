@@ -1330,6 +1330,10 @@
 
         @media (max-width: 576px) {
             .video-grid { grid-template-columns: repeat(2, 1fr); }
+            /* Promotional videos: 1 per row on mobile */
+            .video-grid .video-card.cinematic.span-2-col { grid-column: auto; }
+            /* Social management: 2 per row on mobile */
+            #social-management .reveal[style*="grid-template-columns"] { grid-template-columns: repeat(2, 1fr) !important; }
         }
 
         /* UTILITY */
@@ -1470,6 +1474,12 @@
             </div>
 
             <div class="video-grid" id="reelsSocialGrid"></div>
+            
+            <div class="reel-cta" style="text-align: center; margin-top: 2.5rem;">
+                <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="btn-primary" style="display: inline-flex;">
+                    <i class="fa-brands fa-instagram"></i> <span>View More on Instagram</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -1613,10 +1623,10 @@
     <script>
         // ==================== DATA ====================
         const promoData = [
-            { id: 1, title: "Code.in Brand Film", video: "assets/Videos/Education/Code.in_Video_04.mp4", thumb: "assets/thumbnails/Code.in_Video_04.png", duration: "2:15", category: "Academy" },
-            { id: 2, title: "Global School Ad Film", video: "assets/Videos/Education/Global .mp4", thumb: "assets/thumbnails/Global.png", duration: "1:45", category: "School" },
-            { id: 3, title: "VIP's Concept Ad", video: "assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's   International School, we believe.mp4", thumb: "assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png", duration: "3:00", category: "School" },
-            { id: 4, title: "Success School Promo", video: "assets/Videos/Education/Success_Podcast_Reel_03.mp4", thumb: "assets/thumbnails/Success_Podcast_Reel_03.png", duration: "2:30", category: "School" }
+            { id: 1, title: "Oakridge Promo Film", video: "assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4", thumb: "assets/thumbnails/Oakridge_Promo_Video_01.png", duration: "2:15", category: "School" },
+            { id: 2, title: "Springfield Trailer", video: "assets/Videos/Landscape/Springfield_Trailer_01.mp4", thumb: "assets/thumbnails/Springfield_Trailer_01.png", duration: "1:45", category: "School" },
+            { id: 3, title: "VIP's Cinematic Ad", video: "assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4", thumb: "assets/thumbnails/Vip's_Trailer_Video_02.png", duration: "3:00", category: "School" },
+            { id: 4, title: "Success Sports Carnival", video: "assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4", thumb: "assets/thumbnails/Success_Sports_Carnival_Reel_01.png", duration: "2:30", category: "Events" }
         ];
 
         const reelsSocialData = [

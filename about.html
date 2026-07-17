@@ -759,6 +759,87 @@
         .delay-7 { transition-delay: 0.35s; }
         .delay-8 { transition-delay: 0.4s; }
 
+        /* ===== STATS RIBBON ===== */
+        .stats-ribbon {
+            position: relative;
+            z-index: 3;
+            margin-top: -4rem;
+            padding: 0 var(--container-padding);
+        }
+
+        .stats-grid {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-elevated);
+            overflow: hidden;
+        }
+
+        .stat-item {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-right: 1px solid var(--border-subtle);
+            transition: all var(--transition-smooth);
+            cursor: default;
+            position: relative;
+        }
+
+        .stat-item:last-child { border-right: none; }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-bounce);
+        }
+
+        .stat-item:hover::before { transform: scaleX(1); }
+
+        .stat-item:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            transition: transform var(--transition-bounce);
+        }
+
+        .stat-item:hover .stat-number { transform: scale(1.1); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stat-number { font-size: 2rem; }
+        }
+
+        /* ===== OUR STORY - NEW LAYOUT ===== */
         .our-story { background: var(--bg-deep); position: relative; overflow: hidden; }
 
         .our-story::before {
@@ -777,73 +858,51 @@
             50% { transform: translate(-40px, 30px) scale(1.05); }
         }
 
-        .story-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .story-visual {
+        .story-full-image {
             position: relative;
-        }
-
-        .story-main-image {
             border-radius: var(--radius-xl);
             overflow: hidden;
-            aspect-ratio: 4 / 5;
+            aspect-ratio: 16 / 9;
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             box-shadow: var(--shadow-elevated);
-            transition: all var(--transition-smooth);
+            margin-bottom: 3rem;
         }
 
-        .story-main-image:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-accent-strong);
-            border-color: var(--accent);
+        .story-full-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .story-main-image img { width: 100%; height: 100%; object-fit: cover; }
+        .story-full-image:hover img { transform: scale(1.05); }
 
-        .story-experience {
+        .story-image-overlay {
             position: absolute;
-            bottom: 30px;
-            left: -30px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: 2rem 2.5rem;
-            box-shadow: var(--shadow-elevated);
-            backdrop-filter: blur(20px);
-            animation: floatSlow 6s ease-in-out infinite;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 5, 8, 0) 0%, rgba(3, 5, 8, 0.7) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
         }
 
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .story-experience .years {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
+        .story-badge {
             background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .story-experience .text {
+            color: #030508;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
         }
 
-        .story-content h3 {
+        .story-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .story-text-block h3 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(1.8rem, 3.5vw, 2.5rem);
             font-weight: 700;
@@ -852,7 +911,7 @@
             position: relative;
         }
 
-        .story-content h3::after {
+        .story-text-block h3::after {
             content: '';
             position: absolute;
             bottom: -10px;
@@ -863,21 +922,21 @@
             border-radius: 3px;
         }
 
-        .story-content .lead {
+        .story-text-block .lead {
             font-size: 1.1rem;
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 2rem;
         }
 
-        .story-features {
+        .story-values {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin: 2rem 0;
         }
 
-        .feature-item {
+        .value-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
@@ -888,13 +947,13 @@
             transition: all var(--transition-smooth);
         }
 
-        .feature-item:hover {
+        .value-item:hover {
             border-color: var(--accent);
             background: var(--bg-card-hover);
             transform: translateY(-3px);
         }
 
-        .feature-icon {
+        .value-icon {
             width: 48px;
             height: 48px;
             border-radius: var(--radius-md);
@@ -907,8 +966,8 @@
             flex-shrink: 0;
         }
 
-        .feature-text h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
-        .feature-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .value-text h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+        .value-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
         .story-cta {
             display: inline-flex;
@@ -925,12 +984,128 @@
         .story-cta:hover { transform: translateY(-3px); box-shadow: var(--shadow-accent-strong); gap: 14px; }
 
         @media (max-width: 1024px) {
-            .story-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .story-visual { max-width: 500px; margin: 0 auto; }
-            .story-experience { left: 0; bottom: 20px; }
-            .story-features { grid-template-columns: 1fr; }
+            .story-content-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .story-values { grid-template-columns: 1fr; }
         }
 
+        /* ===== BTS / BEHIND THE SCENES ===== */
+        .bts-section { background: var(--bg-deep); position: relative; overflow: hidden; }
+
+        .bts-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -30%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .bts-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .bts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .bts-item {
+            position: relative;
+            aspect-ratio: 9 / 16;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .bts-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-accent);
+            border-color: var(--accent);
+        }
+
+        .bts-item img,
+        .bts-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-smooth);
+        }
+
+        .bts-item:hover img,
+        .bts-item:hover video { transform: scale(1.08); }
+
+        .bts-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 5, 8, 0) 0%, rgba(3, 5, 8, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all var(--transition-smooth);
+        }
+
+        .bts-item:hover .bts-overlay { opacity: 1; }
+
+        .bts-play-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #030508;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: var(--shadow-accent);
+            transform: scale(0.8);
+            transition: all var(--transition-bounce);
+        }
+
+        .bts-item:hover .bts-play-btn { transform: scale(1); }
+
+        .bts-info {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.2rem 1rem 0.8rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(3, 5, 8, 0.95) 100%);
+        }
+
+        .bts-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bts-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .bts-meta i { color: var(--accent); }
+
+        @media (max-width: 1024px) {
+            .bts-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 576px) {
+            .bts-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+        }
+
+        /* ===== FOUNDERS - SLIDE ANIMATION ===== */
         .founders { background: var(--bg-deep); position: relative; overflow: hidden; }
 
         .founders-header {
@@ -959,6 +1134,23 @@
             border: 1px solid var(--border-subtle);
             box-shadow: var(--shadow-elevated);
             transition: all var(--transition-smooth);
+            opacity: 0;
+            transform: translateX(-60px);
+            animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .founder-row:nth-child(even) .founder-visual {
+            animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .founder-visual:hover {
@@ -973,6 +1165,15 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            opacity: 0;
+            transform: translateX(60px);
+            animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .founder-row:nth-child(even) .founder-info {
+            animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.2s;
         }
 
         .founder-name {
@@ -1021,12 +1222,14 @@
             max-width: 500px;
         }
 
-        @media (max-width: 1024x) {
+        @media (max-width: 1024px) {
             .founder-row { grid-template-columns: 1fr; gap: 3rem; }
             .founder-row, .founder-row:nth-child(even) { direction: ltr; }
-            .founder-visual { max-width: 500px; margin: 0 auto; }
+            .founder-visual { max-width: 500px; margin: 0 auto; animation: none; opacity: 1; transform: none; }
+            .founder-info { animation: none; opacity: 1; transform: none; }
         }
 
+        /* ===== CLIENTS MARQUEE ===== */
         .clients { background: var(--bg-deep); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
 
         .brand-marquee-container {
@@ -1081,10 +1284,11 @@
 
         .brand-item img { max-width: 180px; max-height: 70px; object-fit: contain; }
 
-        @media (max-width: 1024x) {
+        @media (max-width: 1024px) {
             .brand-marquee-container { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
+        /* ===== CTA BANNER ===== */
         .cta-section { background: var(--bg-deep); padding: 5rem var(--container-padding); }
 
         .cta-banner {
@@ -1136,6 +1340,7 @@
             .cta-actions { justify-content: center; }
         }
 
+        /* ===== INSTAGRAM FEED ===== */
         .instagram { background: var(--bg-deep); }
 
         .insta-grid {
@@ -1221,7 +1426,7 @@
 
         .insta-reel-info .reel-meta i { color: var(--accent); }
 
-        @media (max-width: 1024x) {
+        @media (max-width: 1024px) {
             .insta-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
@@ -1233,6 +1438,7 @@
             .insta-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
+        /* ===== FOOTER ===== */
         .footer {
             position: relative;
             background: #030303;
@@ -1374,7 +1580,7 @@
         .footer-bottom-links a { color: var(--text-dim); font-size: 0.8rem; transition: color var(--transition-fast); }
         .footer-bottom-links a:hover { color: var(--accent); }
 
-        @media (max-width: 1024x) {
+        @media (max-width: 1024px) {
             .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
         }
 
@@ -1389,6 +1595,7 @@
             .footer-bottom { flex-direction: column; text-align: center; }
         }
 
+        /* ===== BACK TO TOP ===== */
         .back-to-top {
             position: fixed;
             bottom: 2.5rem;
@@ -1531,40 +1738,87 @@
                 <h2 class="section-title">Where Vision Meets <span class="highlight">Cinematic Precision</span></h2>
                 <p class="section-subtitle">A dynamic media production company where creativity meets precision.</p>
             </div>
-            <div class="story-grid">
-                <div class="story-visual reveal reveal-left">
-                    <div class="story-main-image">
-                        <img src="img/3.png" alt="FlyLense Team at Work">
-                    </div>
-                    <div class="story-experience">
-                        <div class="years" data-count="8">0</div>
-                        <div class="text">Years of Excellence</div>
-                    </div>
+
+            <!-- Full-width hero image -->
+            <div class="story-full-image reveal reveal-up delay-1">
+                <img src="img/3.png" alt="FlyLense Team at Work - Behind the Scenes">
+                <div class="story-image-overlay">
+                    <span class="story-badge"><i class="fa-solid fa-clapperboard"></i> 8+ Years of Cinematic Excellence</span>
                 </div>
-                <div class="story-content reveal reveal-right">
+            </div>
+
+            <!-- Content grid -->
+            <div class="story-content-grid">
+                <div class="story-text-block reveal reveal-left">
                     <h3>Where Vision Meets Cinematic Precision</h3>
                     <p class="lead">At FlyLense, we are a dynamic media production company where creativity meets precision. From script to screen, our passionate team of directors, cinematographers, drone pilots, and editors works closely with you to bring your brand's vision to life.</p>
-                    <div class="story-features">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
-                            <div class="feature-text"><h4>Cinematic Production</h4><p>Broadcast-quality films with RED & ARRI cameras</p></div>
+                    <div class="story-values">
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fa-solid fa-camera-retro"></i></div>
+                            <div class="value-text"><h4>Cinematic Production</h4><p>Broadcast-quality films with RED & ARRI cameras</p></div>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                            <div class="feature-text"><h4>Social-First Content</h4><p>Reels, Shorts & TikToks optimized for engagement</p></div>
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                            <div class="value-text"><h4>Social-First Content</h4><p>Reels, Shorts & TikToks optimized for engagement</p></div>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-drone"></i></div>
-                            <div class="feature-text"><h4>Aerial Cinematography</h4><p>Licensed drone pilots for stunning aerial perspectives</p></div>
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fa-solid fa-drone"></i></div>
+                            <div class="value-text"><h4>Aerial Cinematography</h4><p>Licensed drone pilots for stunning aerial perspectives</p></div>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-clapperboard"></i></div>
-                            <div class="feature-text"><h4>Post-Production Excellence</h4><p>Color grading, VFX, sound design & motion graphics</p></div>
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fa-solid fa-clapperboard"></i></div>
+                            <div class="value-text"><h4>Post-Production Excellence</h4><p>Color grading, VFX, sound design & motion graphics</p></div>
                         </div>
                     </div>
                     <a href="contact.html" class="story-cta"><i class="fa-solid fa-arrow-right"></i> <span>Let's Collaborate</span></a>
                 </div>
+
+                <div class="story-team reveal reveal-right">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--white); margin-bottom: 1.5rem; position: relative;">
+                        Our Creative Collective
+                        <span style="position: absolute; bottom: -8px; left: 0; width: 40px; height: 2px; background: var(--accent-gradient);"></span>
+                    </h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">A diverse team of storytellers, technicians, and visionaries united by a passion for cinematic excellence.</p>
+                    <div class="team-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div class="team-member" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; transition: all var(--transition-smooth);">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-gradient); display: flex; align-items: center; justify-content: center; color: #030508; font-size: 1.2rem;"><i class="fa-solid fa-user-tie"></i></div>
+                                <div><h4 style="font-size: 1rem; font-weight: 600; color: var(--white);">Creative Directors</h4><p style="font-size: 0.85rem; color: var(--text-muted);">Vision & Storytelling</p></div>
+                            </div>
+                        </div>
+                        <div class="team-member" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; transition: all var(--transition-smooth);">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-gradient); display: flex; align-items: center; justify-content: center; color: #030508; font-size: 1.2rem;"><i class="fa-solid fa-camera"></i></div>
+                                <div><h4 style="font-size: 1rem; font-weight: 600; color: var(--white);">Cinematographers</h4><p style="font-size: 0.85rem; color: var(--text-muted);">Visual Mastery</p></div>
+                            </div>
+                        </div>
+                        <div class="team-member" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; transition: all var(--transition-smooth);">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-gradient); display: flex; align-items: center; justify-content: center; color: #030508; font-size: 1.2rem;"><i class="fa-solid fa-drone"></i></div>
+                                <div><h4 style="font-size: 1rem; font-weight: 600; color: var(--white);">Drone Pilots</h4><p style="font-size: 0.85rem; color: var(--text-muted);">Aerial Perspectives</p></div>
+                            </div>
+                        </div>
+                        <div class="team-member" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; transition: all var(--transition-smooth);">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-gradient); display: flex; align-items: center; justify-content: center; color: #030508; font-size: 1.2rem;"><i class="fa-solid fa-film"></i></div>
+                                <div><h4 style="font-size: 1rem; font-weight: 600; color: var(--white);">Editors & Colorists</h4><p style="font-size: 0.85rem; color: var(--text-muted);">Post-Production Magic</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== BTS / BEHIND THE SCENES ===== -->
+    <section class="section bts-section" id="bts">
+        <div class="section-inner">
+            <div class="bts-header reveal reveal-up">
+                <span class="section-tag">Behind The Scenes</span>
+                <h2 class="section-title">On Set with <span class="highlight">FlyLense</span></h2>
+                <p class="section-subtitle">Real moments from our productions — raw, unfiltered, and full of creative energy.</p>
+            </div>
+            <div class="bts-grid" id="btsGrid"></div>
         </div>
     </section>
 
@@ -1577,22 +1831,22 @@
                 <p class="section-subtitle">Visionary leaders driving cinematic excellence</p>
             </div>
             <div class="founder-row">
-                <div class="founder-visual reveal reveal-left">
+                <div class="founder-visual">
                     <img src="img/founder1.jpg" alt="Founder 1" onerror="this.src='img/placeholder-founder.jpg'">
                 </div>
-                <div class="founder-info reveal reveal-right">
+                <div class="founder-info">
                     <h3 class="founder-name">Founder Name <a href="#" class="linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></h3>
                     <p class="founder-role">Co-Founder & Creative Director</p>
                     <p class="founder-bio">Visionary creative director with 10+ years crafting award-winning brand films. Passionate about storytelling that connects emotionally and converts commercially.</p>
                 </div>
             </div>
             <div class="founder-row">
-                <div class="founder-info reveal reveal-left">
+                <div class="founder-info">
                     <h3 class="founder-name">Co-Founder Name <a href="#" class="linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></h3>
                     <p class="founder-role">Co-Founder & Operations Director</p>
                     <p class="founder-bio">Operations expert ensuring flawless execution from pre-production to delivery. Masters complex logistics while maintaining creative integrity and client satisfaction.</p>
                 </div>
-                <div class="founder-visual reveal reveal-right">
+                <div class="founder-visual">
                     <img src="img/founder2.jpg" alt="Co-Founder" onerror="this.src='img/placeholder-founder.jpg'">
                 </div>
             </div>
@@ -1768,7 +2022,7 @@
             });
 
             // Mobile dropdown
-            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
+            const mobileDropdownToggle = document.query('.mobile-dropdown-toggle');
             const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
             if (mobileDropdownToggle) {
                 mobileDropdownToggle.addEventListener('click', () => {
@@ -1812,18 +2066,23 @@
 
             // Client logos for marquee
             const clientLogos = [
-                { src: 'img/clients/client1.png', alt: 'Client 1' },
-                { src: 'img/clients/client2.png', alt: 'Client 2' },
-                { src: 'img/clients/client3.png', alt: 'Client 3' },
-                { src: 'img/clients/client4.png', alt: 'Client 4' },
-                { src: 'img/clients/client5.png', alt: 'Client 5' },
-                { src: 'img/clients/client6.png', alt: 'Client 6' },
-                { src: 'img/clients/client7.png', alt: 'Client 7' },
-                { src: 'img/clients/client8.png', alt: 'Client 8' },
-                { src: 'img/clients/client9.png', alt: 'Client 9' },
-                { src: 'img/clients/client10.png', alt: 'Client 10' },
-                { src: 'img/clients/client11.png', alt: 'Client 11' },
-                { src: 'img/clients/client12.png', alt: 'Client 12' },
+                { src: 'img/clients/1.png', alt: 'Code for India' },
+                { src: 'img/clients/2.png', alt: "VIP's International School" },
+                { src: 'img/clients/3.png', alt: 'Spring Fields School' },
+                { src: 'img/clients/4.png', alt: 'Success School' },
+                { src: 'img/clients/5.png', alt: 'Brightfield School' },
+                { src: 'img/clients/6.png', alt: 'AKSHRS Academy' },
+                { src: 'img/clients/7.png', alt: 'Hidiya School' },
+                { src: 'img/clients/8.png', alt: 'Focus School' },
+                { src: 'img/clients/9.png', alt: 'Unique Academy' },
+                { src: 'img/clients/10.png', alt: 'Vidvaniketan' },
+                { src: 'img/clients/11.png', alt: "St. Joseph's School" },
+                { src: 'img/clients/12.png', alt: 'Shuja Grammer School' },
+                { src: 'img/clients/13.png', alt: 'Rockwoods School' },
+                { src: 'img/clients/14.png', alt: 'Vikas High School' },
+                { src: 'img/clients/15.png', alt: 'Full Stack Academy' },
+                { src: 'img/clients/16.png', alt: 'Hyderabad International School' },
+                { src: 'img/clients/17.png', alt: 'Sarita School' },
             ];
 
             const track1 = document.getElementById('marqueeTrack1');
@@ -1843,6 +2102,45 @@
                     track1.appendChild(item.cloneNode(true));
                     track2.appendChild(item);
                 });
+            }
+
+            // BTS Grid data
+            const btsData = [
+                { img: 'assets/thumbnails/Code.in_Video_04.png', title: 'Code.in Brand Film Shoot', type: 'video' },
+                { img: 'assets/thumbnails/Full_Stack_Reel.png', title: 'Full Stack Academy Setup', type: 'video' },
+                { img: 'assets/thumbnails/Global.png', title: 'Global School Campus', type: 'video' },
+                { img: 'assets/thumbnails/Saritha Reel_06.png', title: 'Saritha School BTS', type: 'video' },
+                { img: 'assets/thumbnails/Silver Crest Reel 01.png', title: 'Silver Crest Reel Day', type: 'video' },
+                { img: 'assets/thumbnails/Success_Podcast_Reel_03.png', title: 'Success Podcast Recording', type: 'video' },
+                { img: 'assets/thumbnails/Unique Reel.png', title: 'Unique School Tour', type: 'video' },
+                { img: 'assets/thumbnails/Barbeque Spice Reel 01.png', title: 'Barbeque Spice Kitchen', type: 'video' },
+                { img: 'assets/thumbnails/Tandos_Grill_Reel_01.png', title: "Tando's Grill Sizzle", type: 'video' },
+                { img: 'assets/thumbnails/Iqbal_jewellers_Reel_03.png', title: 'Iqbal Jewellers Luxury', type: 'video' },
+                { img: 'assets/thumbnails/Nisar_Jewellery_Reel_09.png', title: 'Nisar Jewellery Craft', type: 'video' },
+                { img: 'assets/thumbnails/SNJ_Reel_03.png', title: 'SNJ Jewels Collection', type: 'video' },
+            ];
+
+            const btsGrid = document.getElementById('btsGrid');
+            if (btsGrid) {
+                btsData.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'bts-item reveal reveal-scale';
+                    div.style.transitionDelay = `${(index % 4) * 0.1}s`;
+                    div.innerHTML = `
+                        <img src="${item.img}" alt="${item.title}" loading="lazy">
+                        <div class="bts-overlay">
+                            <div class="bts-play-btn"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                        <div class="bts-info">
+                            <div class="bts-title">${item.title}</div>
+                            <div class="bts-meta"><i class="fa-solid fa-clapperboard"></i> Behind the Scenes</div>
+                        </div>
+                    `;
+                    btsGrid.appendChild(div);
+                });
+
+                // Observe BTS items
+                btsGrid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             }
 
             // Instagram feed placeholder
