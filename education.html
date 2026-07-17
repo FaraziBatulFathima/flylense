@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>About Us | FlyLense Media Partner</title>
-    <meta name="description" content="FlyLense Media Partner — Crafting cinematic stories that captivate audiences and elevate brands. 8+ years of cinematic excellence.">
+    <title>Education Portfolio | FlyLense Media Partner</title>
+    <meta name="description" content="Explore FlyLense Media Partner's educational video portfolio including promotional videos, concept ads, social media reels, and client work for schools and institutions.">
     <link rel="icon" type="image/png" sizes="50x50" href="img/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +31,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
@@ -134,6 +132,7 @@
             background: var(--accent-light);
         }
 
+        /* FLOATING SOCIAL */
         .floating-social {
             position: fixed;
             bottom: 30px;
@@ -156,14 +155,14 @@
             color: var(--white);
             font-size: 1.4rem;
             text-decoration: none;
-            transition: all var(--transition-bounce);
-            box-shadow: var(--shadow-card);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
             position: relative;
         }
 
         .floating-social a:hover {
             transform: scale(1.12) translateY(-4px);
-            box-shadow: var(--shadow-accent-strong);
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.35);
         }
 
         .floating-social a .tooltip {
@@ -171,13 +170,13 @@
             background: var(--bg-elevated);
             color: var(--white);
             padding: 6px 14px;
-            border-radius: var(--radius-sm);
+            border-radius: 8px;
             font-size: 0.7rem;
             font-weight: 500;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: all var(--transition-fast);
+            transition: all 0.2s ease;
             border: 1px solid var(--border-light);
         }
 
@@ -186,7 +185,7 @@
         .floating-social-right a .tooltip { right: 70px; top: 50%; transform: translateY(-50%); }
 
         .social-instagram {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
         }
 
         .social-whatsapp { background: #25D366; }
@@ -217,6 +216,7 @@
             .floating-social a .tooltip { display: none; }
         }
 
+        /* NAVBAR */
         .navbar {
             position: fixed;
             top: 0;
@@ -264,7 +264,7 @@
             text-decoration: none;
             z-index: 1001;
             flex-shrink: 0;
-            transition: transform var(--transition-bounce);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .nav-logo:hover { transform: scale(1.04); }
@@ -383,6 +383,7 @@
             box-shadow: var(--shadow-accent-strong);
         }
 
+        /* HAMBURGER */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -411,6 +412,7 @@
         .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-12px) scale(0.5); }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); width: 28px; }
 
+        /* MOBILE MENU */
         .menu-backdrop {
             position: fixed;
             top: 0; left: 0;
@@ -445,10 +447,6 @@
 
         .mobile-menu.active { right: 0; }
 
-        .mobile-menu::-webkit-scrollbar { width: 3px; }
-        .mobile-menu::-webkit-scrollbar-track { background: transparent; }
-        .mobile-menu::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-
         .mobile-menu a {
             text-decoration: none;
             color: var(--text-secondary);
@@ -470,60 +468,56 @@
 
         .mobile-menu a.active { color: var(--accent); font-weight: 600; background: rgba(6, 102, 204, 0.1); border-left-color: var(--accent); }
 
-        .mobile-dropdown { position: relative; }
+        .mobile-dropdown { margin: 0.5rem 0; }
         .mobile-dropdown-toggle {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             width: 100%;
-            text-decoration: none;
+            padding: 1rem 1.2rem;
+            background: transparent;
             color: var(--text-secondary);
             font-size: 1.1rem;
             font-weight: 500;
-            padding: 1rem 1.2rem;
             border-radius: var(--radius-md);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            text-align: left;
         }
-        .mobile-dropdown-toggle:hover { color: var(--accent); background: rgba(6, 102, 204, 0.08); }
-        .mobile-dropdown-toggle i { transition: transform 0.3s; }
-        .mobile-dropdown-toggle.active i { transform: rotate(180deg); }
+        .mobile-dropdown-toggle:hover {
+            color: var(--accent);
+            background: rgba(6, 102, 204, 0.08);
+            border-left-color: var(--accent);
+            transform: translateX(6px);
+        }
         .mobile-dropdown-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            display: none;
+            padding: 0.5rem 0 0.5rem 2.5rem;
         }
+        .mobile-dropdown.active .mobile-dropdown-menu { display: block; }
         .mobile-dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: var(--text-muted);
             font-size: 0.95rem;
-            padding: 0.75rem 1.5rem;
-            border-left: none;
-            margin-left: 1rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
         }
-        .mobile-dropdown-menu a:hover { border-left-color: var(--accent); padding-left: 1.5rem; }
-
-        .mobile-cta {
-            background: var(--accent-gradient);
-            color: #030508 !important;
-            font-weight: 600;
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius-full);
-            text-align: center;
-            margin-top: 1rem;
-            box-shadow: var(--shadow-accent);
+        .mobile-dropdown-menu a:hover {
+            color: var(--accent);
+            padding-left: 1.5rem;
         }
-        .mobile-cta:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-accent-strong); }
 
         .menu-divider { width: 50px; height: 2px; background: var(--accent-gradient); border-radius: 2px; margin: 0.5rem 0 1.5rem; transition: width var(--transition-smooth); }
         .mobile-menu.active .menu-divider { width: 80px; }
 
         .menu-footer { display: none; }
 
+        /* ===== HERO SECTION - MODIFIED ===== */
         .hero {
             position: relative;
             width: 100%;
-            min-height: 60vh;
+            min-height: 60vh; /* reduced by ~40% from 100vh */
             height: auto;
             padding: calc(var(--nav-height) + 2rem) 0 2rem;
             overflow: hidden;
@@ -605,10 +599,45 @@
             font-size: clamp(1.1rem, 2vw, 1.35rem);
             color: var(--text-secondary);
             line-height: 1.8;
-            max-width: 580px;
-            margin-bottom: 2.5rem;
+            max-width: 880px;
+            margin-bottom: 3.5rem;
+        }
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: ;
+            left: 47%;
+            /*transform: translateX(-50%);*/
+            z-index: 10;
+            animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both, bounce 2s ease-in-out 1.5s infinite;
         }
 
+        .hero-scroll-indicator a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color var(--transition-fast);
+        }
+
+        .hero-scroll-indicator a:hover { color: var(--accent); }
+
+        .hero-scroll-indicator i {
+            font-size: 1.3rem;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%,
+            100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ===== BUTTONS ===== */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -652,40 +681,22 @@
             color: var(--white);
             padding: 1rem 2.2rem;
             border-radius: var(--radius-full);
-            font-weight: 600;
+            font-weight: 500;
             font-size: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--border-light);
             transition: all var(--transition-smooth);
         }
 
         .btn-secondary:hover {
-            background: rgba(6, 102, 204, 0.1);
             border-color: var(--accent);
             color: var(--accent);
+            background: rgba(6, 102, 204, 0.08);
             transform: translateY(-2px);
-            gap: 14px;
         }
 
-        @media (max-width: 768px) {
-            :root { --nav-height: 64px; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .navbar.scrolled { height: 72px; }
-            .hero { min-height: 50vh; padding: calc(var(--nav-height) + 1.5rem) 0 1.5rem; }
-            .section { padding: 4rem 1.5rem; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-video-bg { position: absolute; top: -10%; left: 0; }
-            :root { --container-padding: 1.25rem; }
-            .hero-badge { display: none; }
-            .btn-primary, .btn-secondary { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
-            .nav-logo img { height: 32px; }
-            .nav-logo img.logo-title { height: 28px; }
-        }
-
+        /* SECTION COMMONS */
         .section {
-            padding: 7rem var(--container-padding);
+            padding: 6rem var(--container-padding);
             position: relative;
             overflow: hidden;
         }
@@ -697,7 +708,7 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-tag {
@@ -740,6 +751,7 @@
             line-height: 1.7;
         }
 
+        /* REVEAL ANIMATIONS */
         .reveal { opacity: 0; transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal.revealed { opacity: 1; }
         .reveal-up { transform: translateY(50px); }
@@ -759,283 +771,270 @@
         .delay-7 { transition-delay: 0.35s; }
         .delay-8 { transition-delay: 0.4s; }
 
-        .our-story { background: var(--bg-deep); position: relative; overflow: hidden; }
-
-        .our-story::before {
-            content: '';
-            position: absolute;
-            top: -50%; right: -30%;
-            width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(0, 102, 204, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: floatGlow 12s ease-in-out infinite;
-        }
-
-        @keyframes floatGlow {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-40px, 30px) scale(1.05); }
-        }
-
-        .story-grid {
+        /* VIDEO GRID SYSTEM */
+        .video-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
         }
 
-        .story-visual {
+        .video-card {
             position: relative;
-        }
-
-        .story-main-image {
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            aspect-ratio: 4 / 5;
+            cursor: pointer;
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-elevated);
             transition: all var(--transition-smooth);
         }
 
-        .story-main-image:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-accent-strong);
-            border-color: var(--accent);
+        .video-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 5, 8, 0.1) 0%, rgba(3, 5, 8, 0.75) 100%);
+            z-index: 1;
+            transition: all var(--transition-smooth);
+            pointer-events: none;
         }
 
-        .story-main-image img { width: 100%; height: 100%; object-fit: cover; }
+        .video-card:hover::after {
+            background: linear-gradient(180deg, rgba(0, 102, 204, 0.15) 0%, rgba(3, 5, 8, 0.9) 100%);
+        }
 
-        .story-experience {
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-accent-strong);
+            border-color: var(--accent);
+            z-index: 10;
+        }
+
+        .video-card video.video-bg {
             position: absolute;
-            bottom: 30px;
-            left: -30px;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            border-radius: var(--radius-lg);
+            background: var(--bg-card);
+        }
+
+        .video-card .video-play-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.3rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow-card);
+            pointer-events: auto;
+            cursor: pointer;
+            opacity: 0.95;
+        }
+
+        .video-card:hover .video-play-btn {
+            width: 72px;
+            height: 72px;
+            background: var(--accent-gradient);
+            color: #030508;
+            box-shadow: var(--shadow-accent);
+            opacity: 1;
+        }
+
+        .video-card .video-label {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 1.5rem;
+            z-index: 3;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.02em;
+            transition: all var(--transition-smooth);
+            pointer-events: none;
+            max-width: calc(100% - 100px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-card:hover .video-label { color: var(--accent); transform: translateY(-4px); }
+
+        .video-card .video-duration {
+            position: absolute;
+            bottom: 1.2rem;
+            right: 1.5rem;
+            z-index: 3;
+            background: rgba(3, 5, 8, 0.8);
+            color: var(--white);
+            padding: 0.3rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            transition: all var(--transition-smooth);
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .video-card:hover .video-duration {
+            background: var(--accent-gradient);
+            color: #030508;
+            border-color: transparent;
+        }
+
+        /* Portrait mode cards (9:16) */
+        .video-card.portrait { aspect-ratio: 9 / 16; }
+        .video-card.portrait video.video-bg { object-fit: cover; }
+
+        /* Landscape cinematic cards (21:9) */
+        .video-card.cinematic { aspect-ratio: 21 / 9; }
+        .video-card.cinematic video.video-bg { object-fit: cover; }
+
+        /* Grid spans */
+        .video-card.span-2-col { grid-column: span 2; }
+
+        /* VIDEO OVERLAY LIGHTBOX */
+        .video-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .video-overlay.active { display: flex; }
+
+        .overlay-content {
+            width: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .overlay-content video {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            display: block;
+            object-fit: contain;
+        }
+
+        .overlay-close-btn {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            z-index: 10001;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: var(--bg-card);
             border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: 2rem 2.5rem;
-            box-shadow: var(--shadow-elevated);
-            backdrop-filter: blur(20px);
-            animation: floatSlow 6s ease-in-out infinite;
+            border-radius: 50%;
         }
 
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .story-experience .years {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .story-experience .text {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .story-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .story-content h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-gradient);
-            border-radius: 3px;
-        }
-
-        .story-content .lead {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .story-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-smooth);
-        }
-
-        .feature-item:hover {
+        .overlay-close-btn:hover {
+            transform: rotate(90deg);
+            color: var(--accent);
             border-color: var(--accent);
-            background: var(--bg-card-hover);
-            transform: translateY(-3px);
+            background: rgba(6, 102, 204, 0.1);
         }
 
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-md);
-            background: var(--accent-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #030508;
-            font-size: 1.2rem;
-            flex-shrink: 0;
+        .overlay-info {
+            position: absolute;
+            bottom: -80px;
+            left: 0;
+            right: 0;
+            padding: 0 1.5rem;
+            text-align: center;
+            color: var(--text-secondary);
         }
 
-        .feature-text h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
-        .feature-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-
-        .story-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--accent-gradient);
-            color: #030508 !important;
-            padding: 1rem 2.2rem;
-            border-radius: var(--radius-full);
+        .overlay-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
             font-weight: 600;
-            box-shadow: var(--shadow-accent);
-            transition: all var(--transition-bounce);
+            color: var(--white);
+            margin-bottom: 0.25rem;
         }
-        .story-cta:hover { transform: translateY(-3px); box-shadow: var(--shadow-accent-strong); gap: 14px; }
+
+        .overlay-info .category { color: var(--accent); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
         @media (max-width: 1024px) {
-            .story-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .story-visual { max-width: 500px; margin: 0 auto; }
-            .story-experience { left: 0; bottom: 20px; }
-            .story-features { grid-template-columns: 1fr; }
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .video-card.span-2-col { grid-column: span 1; }
+            .video-card .video-play-btn { width: 56px; height: 56px; font-size: 1.1rem; }
+            .video-card:hover .video-play-btn { width: 62px; height: 62px; }
+            .video-card .video-label { font-size: 0.78rem; bottom: 1rem; left: 1rem; }
+            .video-card .video-duration { font-size: 0.65rem; bottom: 1rem; right: 1rem; }
+            .overlay-close-btn { top: -50px; right: 0; font-size: 2rem; width: 48px; height: 48px; }
+            .overlay-info { bottom: -60px; font-size: 0.85rem; }
+            .overlay-info h3 { font-size: 1.1rem; }
         }
 
-        .founders { background: var(--bg-deep); position: relative; overflow: hidden; }
-
-        .founders-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        @media (max-width: 768px) {
+            .hero-scroll-indicator { display: none; }
+            .video-tabs { gap: 0.5rem; }
+            .tab-btn { padding: 0.75rem 1.5rem; font-size: 0.8rem; }
+            .video-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 0.75rem; }
+            .video-card.span-2-col { grid-column: span 1; }
+            .video-card .video-play-btn { width: 52px; height: 52px; font-size: 1rem; }
+            .video-card:hover .video-play-btn { width: 58px; height: 58px; }
+            .video-card .video-label { font-size: 0.78rem; bottom: 1rem; left: 1rem; }
+            .video-card .video-duration { font-size: 0.65rem; bottom: 1rem; right: 1rem; }
+            .overlay-close-btn { top: -50px; right: 0; font-size: 2rem; width: 48px; height: 48px; }
+            .overlay-info { bottom: -60px; font-size: 0.85rem; }
+            .overlay-info h3 { font-size: 1.1rem; }
         }
 
-        .founder-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 5rem;
+        @media (max-width: 576px) {
+            .hero-scroll-indicator { display: none; }
+            .video-grid { grid-template-columns: repeat(2, 1fr) !important; grid-auto-rows: auto !important; gap: 0.75rem !important; }
+            .video-card.span-2-col { grid-column: span 1 !important; }
         }
 
-        .founder-row:last-child { margin-bottom: 0; }
-        .founder-row:nth-child(even) { direction: rtl; }
-        .founder-row > * { direction: ltr; }
-
-        .founder-visual {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            aspect-ratio: 4 / 3;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-elevated);
-            transition: all var(--transition-smooth);
-        }
-
-        .founder-visual:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-accent-strong);
-            border-color: var(--accent);
-        }
-
-        .founder-visual img { width: 100%; height: 100%; object-fit: cover; }
-
-        .founder-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .founder-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .founder-name .linkedin {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: #0077b5;
-            color: var(--white);
-            border-radius: var(--radius-sm);
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: all var(--transition-fast);
-        }
-
-        .founder-name .linkedin:hover {
-            transform: scale(1.1);
-            background: #006097;
-        }
-
-        .founder-role {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .founder-bio {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            max-width: 500px;
-        }
-
-        @media (max-width: 1024x) {
-            .founder-row { grid-template-columns: 1fr; gap: 3rem; }
-            .founder-row, .founder-row:nth-child(even) { direction: ltr; }
-            .founder-visual { max-width: 500px; margin: 0 auto; }
-        }
-
-        .clients { background: var(--bg-deep); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+        /* ===== CLIENT LOGOS - SINGLE CAROUSEL ===== */
+        .clients-section { background: var(--bg-deep); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 3rem 0; }
 
         .brand-marquee-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: 0;
         }
 
-        .brand-marquee { overflow: hidden; position: relative; }
+        .brand-marquee {
+            overflow: hidden;
+            position: relative;
+        }
 
         .brand-marquee::before,
         .brand-marquee::after {
@@ -1047,23 +1046,27 @@
             pointer-events: none;
         }
 
-        .brand-marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-deep) 0%, transparent 100%); }
-        .brand-marquee::after { right: 0; background: linear-gradient(270deg, var(--bg-deep) 0%, transparent 100%); }
+        .brand-marquee::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--bg-deep) 0%, transparent 100%);
+        }
 
-        .brand-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+        .brand-marquee::after {
+            right: 0;
+            background: linear-gradient(270deg, var(--bg-deep) 0%, transparent 100%);
+        }
+
+        .brand-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
 
         .brand-track:hover { animation-play-state: paused; }
 
         @keyframes marquee {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
-        }
-
-        .brand-track.reverse { animation: marquee-reverse 30s linear infinite; }
-
-        @keyframes marquee-reverse {
-            from { transform: translateX(-50%); }
-            to { transform: translateX(0); }
         }
 
         .brand-item {
@@ -1077,15 +1080,23 @@
             opacity: 0.8;
         }
 
-        .brand-item:hover { opacity: 1; transform: scale(1.08); }
-
-        .brand-item img { max-width: 180px; max-height: 70px; object-fit: contain; }
-
-        @media (max-width: 1024x) {
-            .brand-marquee-container { grid-template-columns: 1fr; gap: 1.5rem; }
+        .brand-item:hover {
+            opacity: 1;
+            transform: scale(1.08);
         }
 
-        .cta-section { background: var(--bg-deep); padding: 5rem var(--container-padding); }
+        .brand-item img {
+            max-width: 180px;
+            max-height: 70px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 1024px) {
+            .brand-marquee-container { gap: 0; }
+        }
+
+        /* CTA BANNER */
+        .cta-section { background: var(--bg-deep); padding: 4rem var(--container-padding); }
 
         .cta-banner {
             max-width: var(--max-width);
@@ -1136,103 +1147,7 @@
             .cta-actions { justify-content: center; }
         }
 
-        .instagram { background: var(--bg-deep); }
-
-        .insta-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-        }
-
-        .insta-item {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .insta-item img,
-        .insta-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform var(--transition-smooth);
-        }
-
-        .insta-item:hover img,
-        .insta-item:hover video { transform: scale(1.08); }
-
-        .insta-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(3, 5, 8, 0) 0%, rgba(3, 5, 8, 0.8) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: all var(--transition-smooth);
-        }
-
-        .insta-item:hover .insta-overlay { opacity: 1; }
-
-        .insta-overlay .insta-play-btn {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            color: #030508;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-accent);
-            transform: scale(0.8);
-            transition: all var(--transition-bounce);
-        }
-
-        .insta-item:hover .insta-overlay .insta-play-btn { transform: scale(1); }
-
-        .insta-reel-info {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 1.5rem 1.2rem 1rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(3, 5, 8, 0.95) 100%);
-        }
-
-        .insta-reel-info .reel-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 0.25rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .insta-reel-info .reel-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        .insta-reel-info .reel-meta i { color: var(--accent); }
-
-        @media (max-width: 1024x) {
-            .insta-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 768px) {
-            .insta-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        }
-
-        @media (max-width: 576px) {
-            .insta-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
+        /* FOOTER */
         .footer {
             position: relative;
             background: #030303;
@@ -1374,7 +1289,7 @@
         .footer-bottom-links a { color: var(--text-dim); font-size: 0.8rem; transition: color var(--transition-fast); }
         .footer-bottom-links a:hover { color: var(--accent); }
 
-        @media (max-width: 1024x) {
+        @media (max-width: 1024px) {
             .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
         }
 
@@ -1389,42 +1304,55 @@
             .footer-bottom { flex-direction: column; text-align: center; }
         }
 
-        .back-to-top {
-            position: fixed;
-            bottom: 2.5rem;
-            right: 2.5rem;
-            width: 52px;
-            height: 52px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            cursor: pointer;
-            z-index: 900;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all var(--transition-smooth);
+        /* RESPONSIVE NAVBAR */
+        @media (max-width: 768px) {
+            :root { --nav-height: 64px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .navbar.scrolled { height: 72px; }
+            .hero { min-height: 50vh; padding: calc(var(--nav-height) + 1.5rem) 0 1.5rem; }
+            .section { padding: 4rem 1.5rem; }
+            .stats-ribbon { margin-top: -2rem; }
+            .cta-banner { padding: 2rem; }
         }
 
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        @media (max-width: 480px) {
+            .hero-video-bg { position: absolute; top: -10%; left: 0; }
+            :root { --container-padding: 1.25rem; }
+            .hero-badge { display: none; }
+            .btn-primary, .btn-secondary { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
+            .nav-logo img { height: 32px; }
+            .nav-logo img.logo-title { height: 28px; }
+            .stat-number { font-size: 2rem; }
+            .about-experience .years { font-size: 2.5rem; }
+            .cta-content h2 { font-size: 1.5rem; }
         }
 
-        .back-to-top:hover {
-            background: var(--accent-gradient);
-            color: #050505;
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-accent);
+        @media (max-width: 576px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
+        /* UTILITY */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+        /* ===== SOCIAL MANAGEMENT - NO HOVER ===== */
+        .insta-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--bg-card);
+            transition: transform var(--transition-smooth);
+            aspect-ratio: 9 / 16;
+        }
+
+        .insta-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* No overlay, no hover effects */
     </style>
 </head>
 <body>
@@ -1452,7 +1380,7 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li class="dropdown">
                     <a href="portfolio.html" class="dropdown-toggle active">Portfolio</a>
                     <div class="dropdown-menu">
@@ -1476,8 +1404,8 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About</a>
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
         <div class="mobile-dropdown">
             <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
             <div class="mobile-dropdown-menu">
@@ -1496,134 +1424,110 @@
         </div>
     </div>
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- ===== HERO SECTION - MODIFIED ===== -->
     <section class="hero">
         <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/thumbnails/Global.png">
-            <source src="assets/Videos/Global.mp4" type="video/mp4">
+            <source src="assets/Videos/Education/Global .mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badge"><i class="fa-solid fa-award"></i> Award-Winning Media Production</div>
-            <h1>About <span class="highlight">FlyLense</span></h1>
-            <p class="lead">Premier media partner delivering cinematic brand films, commercial productions, reels & short-form content that stops the scroll and drives results.</p>
+            <div class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> Education Portfolio</div>
+            <h1><span class="hero-h1">Education Excellence</span></h1>
+            <p class="lead">From campus films to admission reels, we help institutions showcase their unique identity, academic rigor, and student success stories through cinematic storytelling.</p>
             <div class="hero-cta-group">
-                <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> <span>Start a Project</span></a>
-                <a href="portfolio.html" class="btn-secondary"><i class="fa-solid fa-film"></i> <span>View Work</span></a>
+                <a href="#reels" class="btn-secondary"><i class="fa-solid fa-clapperboard"></i> <span>View Reels</span></a>
+                <!-- <a href="#reels" class="btn-primary"><i class="fa-solid fa-clapperboard"></i> <span>View Reels</span></a> -->
+                <a href="#promotional" class="btn-secondary"><i class="fa-solid fa-film"></i> <span>Promotional Videos</span></a>
             </div>
+           
         </div>
+        
     </section>
-
-    <!-- ===== STATS RIBBON ===== -->
-    <div class="stats-ribbon">
-        <div class="stats-grid reveal reveal-up">
-            <div class="stat-item delay-1"><div class="stat-number" data-count="500">0</div><div class="stat-label">Projects Delivered</div></div>
-            <div class="stat-item delay-2"><div class="stat-number" data-count="150">0</div><div class="stat-label">Happy Clients</div></div>
-            <div class="stat-item delay-3"><div class="stat-number" data-count="12">0</div><div class="stat-label">Industry Awards</div></div>
-            <div class="stat-item delay-4"><div class="stat-number" data-count="8">0</div><div class="stat-label">Years Excellence</div></div>
+     <br><br><div class="hero-scroll-indicator">
+            <a href="#work"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
         </div>
-    </div>
 
-    <!-- ===== OUR STORY ===== -->
-    <section class="section our-story" id="story">
+    <!-- Promotional Video and Concept Ads Section -->
+    <section class="section" id="promotional">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
-                <span class="section-tag">Our Story</span>
-                <h2 class="section-title">Where Vision Meets <span class="highlight">Cinematic Precision</span></h2>
-                <p class="section-subtitle">A dynamic media production company where creativity meets precision.</p>
+                <span class="section-tag">Promotional Video & Concept Ads</span>
+                <h2 class="section-title">Promotional Video and Concept Ads</h2>
+                <p class="section-subtitle">Cinematic brand films and concept-driven advertisements that capture institutional essence</p>
             </div>
-            <div class="story-grid">
-                <div class="story-visual reveal reveal-left">
-                    <div class="story-main-image">
-                        <img src="img/3.png" alt="FlyLense Team at Work">
-                    </div>
-                    <div class="story-experience">
-                        <div class="years" data-count="8">0</div>
-                        <div class="text">Years of Excellence</div>
-                    </div>
-                </div>
-                <div class="story-content reveal reveal-right">
-                    <h3>Where Vision Meets Cinematic Precision</h3>
-                    <p class="lead">At FlyLense, we are a dynamic media production company where creativity meets precision. From script to screen, our passionate team of directors, cinematographers, drone pilots, and editors works closely with you to bring your brand's vision to life.</p>
-                    <div class="story-features">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
-                            <div class="feature-text"><h4>Cinematic Production</h4><p>Broadcast-quality films with RED & ARRI cameras</p></div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                            <div class="feature-text"><h4>Social-First Content</h4><p>Reels, Shorts & TikToks optimized for engagement</p></div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-drone"></i></div>
-                            <div class="feature-text"><h4>Aerial Cinematography</h4><p>Licensed drone pilots for stunning aerial perspectives</p></div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-clapperboard"></i></div>
-                            <div class="feature-text"><h4>Post-Production Excellence</h4><p>Color grading, VFX, sound design & motion graphics</p></div>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="story-cta"><i class="fa-solid fa-arrow-right"></i> <span>Let's Collaborate</span></a>
-                </div>
-            </div>
+
+            <div class="video-grid" id="promoGrid"></div>
         </div>
     </section>
 
-    <!-- ===== OUR FOUNDERS ===== -->
-    <section class="section founders">
-        <div class="section-inner">
-            <div class="founders-header reveal reveal-up">
-                <span class="section-tag">Leadership</span>
-                <h2 class="section-title">Meet Our <span class="highlight">Founders</span></h2>
-                <p class="section-subtitle">Visionary leaders driving cinematic excellence</p>
-            </div>
-            <div class="founder-row">
-                <div class="founder-visual reveal reveal-left">
-                    <img src="img/founder1.jpg" alt="Founder 1" onerror="this.src='img/placeholder-founder.jpg'">
-                </div>
-                <div class="founder-info reveal reveal-right">
-                    <h3 class="founder-name">Founder Name <a href="#" class="linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></h3>
-                    <p class="founder-role">Co-Founder & Creative Director</p>
-                    <p class="founder-bio">Visionary creative director with 10+ years crafting award-winning brand films. Passionate about storytelling that connects emotionally and converts commercially.</p>
-                </div>
-            </div>
-            <div class="founder-row">
-                <div class="founder-info reveal reveal-left">
-                    <h3 class="founder-name">Co-Founder Name <a href="#" class="linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></h3>
-                    <p class="founder-role">Co-Founder & Operations Director</p>
-                    <p class="founder-bio">Operations expert ensuring flawless execution from pre-production to delivery. Masters complex logistics while maintaining creative integrity and client satisfaction.</p>
-                </div>
-                <div class="founder-visual reveal reveal-right">
-                    <img src="img/founder2.jpg" alt="Co-Founder" onerror="this.src='img/placeholder-founder.jpg'">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CLIENT LOGOS ===== -->
-    <section class="clients" id="clients">
+    <!-- Reels for Social Media Section -->
+    <section class="section" id="reels">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
-                <span class="section-tag">Trusted Partners</span>
-                <h2 class="section-title">Brands That <span class="highlight">Trust Us</span></h2>
-                <p class="section-subtitle">150+ brands across education, jewellery, food, real estate & more</p>
+                <span class="section-tag">Reels for Social Media</span>
+                <h2 class="section-title">Reels for Social Media</h2>
+                <p class="section-subtitle">Short-form vertical content optimized for Instagram Reels, YouTube Shorts, and TikTok</p>
             </div>
+
+            <div class="video-grid" id="reelsSocialGrid"></div>
+        </div>
+    </section>
+
+    
+
+    <!-- ===== SOCIAL MEDIA MANAGEMENT - NO HOVER ===== -->
+    <section class="section" id="social-management">
+        <div class="section-inner">
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Social Media Management</span>
+                <h2 class="section-title">Professional Social Media Management</h2>
+                <p class="section-subtitle">Complete digital presence management for educational institutions</p>
+            </div>
+
+            <div class="reveal reveal-up delay-1" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
+                <div class="insta-item">
+                    <img src="img/icons/1.avif" alt="Code.in Social Media">
+                </div>
+                <div class="insta-item">
+                    <img src="img/icons/2.avif" alt="Full Stack Academy Social Media">
+                </div>
+                <div class="insta-item">
+                    <img src="img/icons/3.avif" alt="Global School Social Media">
+                </div>
+                <div class="insta-item">
+                    <img src="img/icons/4.avif" alt="Saritha School Social Media">
+                </div>
+            </div>
+
+            <div class="reveal reveal-up" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8;">
+                    We build a strong social media presence that enhances brand visibility, strengthens customer trust, and creates meaningful engagement. Through strategic brand positioning and audience-focused communication, we help businesses establish a credible and impactful digital identity.
+                </p>
+            </div>
+        </div>
+    </section>
+<!-- ===== CLIENTS SECTION - SINGLE CAROUSEL ===== -->
+    <section class="clients-section" id="clients">
+        <div class="section-inner">
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Our Happy Clients</span>
+                <h2 class="section-title">Trusted by Leading Educational Institutions</h2>
+                <p class="section-subtitle">50+ schools, colleges, and universities across India</p>
+            </div>
+
             <div class="brand-marquee-container">
                 <div class="brand-marquee">
                     <div class="brand-track" id="marqueeTrack1"></div>
                 </div>
-                <div class="brand-marquee">
-                    <div class="brand-track reverse" id="marqueeTrack2"></div>
-                </div>
             </div>
         </div>
     </section>
-
-    <!-- ===== CTA BANNER ===== -->
+    <!-- CTA Banner -->
     <section class="cta-section">
         <div class="cta-banner">
             <div class="cta-content reveal reveal-left">
-                <h2>Ready to Elevate Your <span>Brand's Story?</span></h2>
-                <p>Let's create compelling visual content that captivates your audience and drives real business results.</p>
+                <h2>Ready to Elevate Your <span>Institution's Story?</span></h2>
+                <p>Let's create compelling visual content that showcases your academic excellence and attracts the right students.</p><br>
                 <div class="cta-actions">
                     <a href="https://wa.me/919989571223" target="_blank" class="btn-primary"><i class="fa-brands fa-whatsapp"></i> <span>Discuss Project</span></a>
                     <a href="mailto:hello@flylense.com" class="btn-secondary"><i class="fa-solid fa-envelope"></i> <span>Email Us</span></a>
@@ -1632,38 +1536,26 @@
         </div>
     </section>
 
-    <!-- ===== INSTAGRAM FEED ===== -->
-    <section class="section instagram" id="instagram">
-        <div class="section-inner">
-            <div class="section-header reveal reveal-up">
-                <span class="section-tag">Social Proof</span>
-                <h2 class="section-title">From Our <span class="highlight">Instagram</span></h2>
-                <p class="section-subtitle">Behind-the-scenes, project highlights & creative process</p>
-            </div>
-            <div class="insta-grid" id="instaGrid">
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
                 <img src="img/logo.png" alt="FlyLense" class="logo">
                 <p>FlyLense Media Partner Pvt Ltd — Crafting cinematic stories that captivate audiences and elevate brands. From concept to final delivery, we transform ideas into impactful visual experiences.</p>
                 <div class="footer-social">
-                    <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/flylense-media-partner" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="https://www.youtube.com/@flylense" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" aria-label="Instagram" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/flylensemediapartner" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/flylense-media-partner" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/@flylensemediapartner" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     <a href="https://wa.me/919989571223" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
 
-            <div class="footer-nav">
+            <div>
                 <h4 class="footer-title">Quick Links</h4>
                 <div class="footer-links">
                     <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
+                    <a href="about.html">About Us</a>
                     <a href="portfolio.html">Portfolio</a>
                     <a href="industry.html">Industries</a>
                     <a href="blogs.html">Insights</a>
@@ -1671,208 +1563,313 @@
                 </div>
             </div>
 
-            <div class="footer-nav">
-                <h4 class="footer-title">Services</h4>
+            <div>
+                <h4 class="footer-title">Specialties</h4>
                 <div class="footer-links">
                     <a href="portfolio.html#brand-films">Brand Films</a>
-                    <a href="portfolio.html#commercials">Commercials</a>
-                    <a href="portfolio.html#reels">Social Reels</a>
-                    <a href="portfolio.html#corporate">Corporate Videos</a>
-                    <a href="portfolio.html#event">Event Coverage</a>
-                    <a href="portfolio.html#drone">Drone Cinematography</a>
+                    <a href="portfolio.html#commercials">Commercial Productions</a>
+                    <a href="portfolio.html#reels">Reels & Short-Form</a>
+                    <a href="portfolio.html#events">Event Coverage</a>
+                    <a href="portfolio.html#aerial">Aerial Cinematography</a>
+                    <a href="portfolio.html#post">Post Production</a>
                 </div>
             </div>
 
-            <div class="footer-contact">
+            <div>
                 <h4 class="footer-title">Contact Us</h4>
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Hyderabad, Telangana, India</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <a href="tel:+919989571223">+91 99895 71223</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <a href="mailto:hello@flylense.com">hello@flylense.com</a>
-                    </div>
+                    <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Hyderabad, Telangana, India</span></div>
+                    <div class="contact-item"><i class="fa-solid fa-phone"></i><span><a href="tel:+919989571223">+91 99895 71223</a><br><a href="tel:+919618951202">+91 96189 51202</a></span></div>
+                    <div class="contact-item"><i class="fa-solid fa-envelope"></i><span><a href="mailto:hello@flylense.com">hello@flylense.com</a></span></div>
+                    <div class="contact-item"><i class="fa-solid fa-clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM</span></div>
                 </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 FlyLense Media Partner. All rights reserved.</p>
+            <p>&copy; 2026 FlyLense Media Partner Pvt Ltd. All rights reserved.</p>
             <div class="footer-bottom-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fa-solid fa-chevron-up"></i>
-    </button>
+    <!-- Video Overlay Lightbox -->
+    <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-label="Video Player">
+        <div class="overlay-content">
+            <video id="overlayVideo" controls playsinline>
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+        <button class="overlay-close-btn" id="overlayClose" aria-label="Close video"><i class="fa-solid fa-times"></i></button>
+        <div class="overlay-info" id="overlayInfo">
+            <h3 id="overlayTitle"></h3>
+            <span class="category" id="overlayCategory"></span>
+        </div>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navbar scroll & load animation
-            const navbar = document.getElementById('navbar');
-            requestAnimationFrame(() => navbar.classList.add('loaded'));
+        // ==================== DATA ====================
+        const promoData = [
+            { id: 1, title: "Code.in Brand Film", video: "assets/Videos/Education/Code.in_Video_04.mp4", thumb: "assets/thumbnails/Code.in_Video_04.png", duration: "2:15", category: "Academy" },
+            { id: 2, title: "Global School Ad Film", video: "assets/Videos/Education/Global .mp4", thumb: "assets/thumbnails/Global.png", duration: "1:45", category: "School" },
+            { id: 3, title: "VIP's Concept Ad", video: "assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's   International School, we believe.mp4", thumb: "assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png", duration: "3:00", category: "School" },
+            { id: 4, title: "Success School Promo", video: "assets/Videos/Education/Success_Podcast_Reel_03.mp4", thumb: "assets/thumbnails/Success_Podcast_Reel_03.png", duration: "2:30", category: "School" }
+        ];
 
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 20) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
+        const reelsSocialData = [
+            { id: 1, title: "Code.in Reel", video: "assets/Videos/Education/Code.in_Video_04.mp4", thumb: "assets/thumbnails/Code.in_Video_04.png", duration: "0:30", category: "Academy" },
+            { id: 2, title: "Full Stack Academy Reel", video: "assets/Videos/Education/Full_Stack_Reel.mp4", thumb: "assets/thumbnails/Full_Stack_Reel.png", duration: "0:25", category: "Academy" },
+            { id: 3, title: "Global School Reel", video: "assets/Videos/Education/Global .mp4", thumb: "assets/thumbnails/Global.png", duration: "0:35", category: "School" },
+            { id: 4, title: "VIP's Muay Thai Reel", video: "assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's   International School, we believe.mp4", thumb: "assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png", duration: "0:28", category: "School" },
+            { id: 5, title: "Saritha Reel 06", video: "assets/Videos/Education/Saritha Reel_06.mp4", thumb: "assets/thumbnails/Saritha Reel_06.png", duration: "0:32", category: "School" },
+            { id: 6, title: "Silver Crest Reel", video: "assets/Videos/Education/Silver Crest Reel 01.mp4", thumb: "assets/thumbnails/Silver Crest Reel 01.png", duration: "0:27", category: "School" },
+            { id: 7, title: "Success Podcast Reel", video: "assets/Videos/Education/Success_Podcast_Reel_03.mp4", thumb: "assets/thumbnails/Success_Podcast_Reel_03.png", duration: "0:33", category: "School" },
+            { id: 8, title: "Unique Reel", video: "assets/Videos/Education/Unique Reel.mp4", thumb: "assets/thumbnails/Unique Reel.png", duration: "0:30", category: "School" }
+        ];
+
+        const educationClients = [
+            { name: "Code for India", logo: "img/clients/1.png" },
+            { name: "VIP's International School", logo: "img/clients/2.png" },
+            { name: "Spring Fields School", logo: "img/clients/3.png" },
+            { name: "Success School", logo: "img/clients/4.png" },
+            { name: "Brightfield School", logo: "img/clients/5.png" },
+            { name: "AKSHRS Academy", logo: "img/clients/6.png" },
+            { name: "Hidiya School", logo: "img/clients/7.png" },
+            { name: "Focus School", logo: "img/clients/8.png" },
+            { name: "Unique Academy", logo: "img/clients/9.png" },
+            { name: "Vidvaniketan", logo: "img/clients/10.png" },
+            { name: "St. Joseph's School", logo: "img/clients/11.png" },
+            { name: "Shuja Grammer School", logo: "img/clients/12.png" },
+            { name: "Rockwoods School", logo: "img/clients/13.png" },
+            { name: "Vikas High School", logo: "img/clients/14.png" },
+            { name: "Full Stack Academy", logo: "img/clients/15.png" },
+            { name: "Hyderabad International School", logo: "img/clients/16.png" },
+            { name: "Sarita School", logo: "img/clients/17.png" }
+        ];
+
+        // ==================== RENDER FUNCTIONS ====================
+        function renderPromoGrid() {
+            const grid = document.getElementById('promoGrid');
+            if (!grid) return;
+            grid.innerHTML = promoData.map((item, index) => {
+                const delayClass = `delay-${(index % 4) + 1}`;
+                return `
+                    <article class="video-card cinematic span-2-col reveal reveal-scale ${delayClass}" 
+                             data-video="${item.video}" 
+                             data-title="${item.title}" 
+                             data-category="${item.category}" 
+                             data-duration="${item.duration}">
+                        <video class="video-bg" preload="metadata" muted playsinline poster="${item.thumb}"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-label">${item.title}</div>
+                        <div class="video-duration">${item.duration}</div>
+                    </article>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('.video-card').forEach((card, index) => {
+                const video = card.querySelector('.video-bg');
+                const item = promoData[index];
+                if (video && item) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                video.src = item.video;
+                                video.load();
+                                observer.unobserve(card);
+                            }
+                        });
+                    }, { rootMargin: '200px' });
+                    observer.observe(card);
                 }
-
-                // Back to top
-                const backToTop = document.getElementById('backToTop');
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            }, { passive: true });
-
-            // Back to top click
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Mobile menu
+            grid.querySelectorAll('.reveal').forEach(el => {
+                if (el.classList.contains('revealed')) return;
+                revealObserver.observe(el);
+            });
+        }
+
+        function renderReelsSocialGrid() {
+            const grid = document.getElementById('reelsSocialGrid');
+            if (!grid) return;
+            grid.innerHTML = reelsSocialData.map((item, index) => {
+                const delayClass = `delay-${(index % 4) + 1}`;
+                return `
+                    <article class="video-card portrait reveal reveal-scale ${delayClass}" 
+                             data-video="${item.video}" 
+                             data-title="${item.title}" 
+                             data-category="${item.category}" 
+                             data-duration="${item.duration}">
+                        <video class="video-bg" preload="metadata" muted playsinline poster="${item.thumb}"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-label">${item.title}</div>
+                        <div class="video-duration">${item.duration}</div>
+                    </article>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('.video-card').forEach((card, index) => {
+                const video = card.querySelector('.video-bg');
+                const item = reelsSocialData[index];
+                if (video && item) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                video.src = item.video;
+                                video.load();
+                                observer.unobserve(card);
+                            }
+                        });
+                    }, { rootMargin: '200px' });
+                    observer.observe(card);
+                }
+            });
+
+            grid.querySelectorAll('.reveal').forEach(el => {
+                if (el.classList.contains('revealed')) return;
+                revealObserver.observe(el);
+            });
+        }
+
+        function renderMarquee() {
+            const track1 = document.getElementById('marqueeTrack1');
+            if (!track1) return;
+
+            const items = educationClients.map(client => `
+                <div class="brand-item">
+                    <img src="${client.logo}" alt="${client.name}" loading="lazy">
+                </div>
+            `).join('');
+
+            track1.innerHTML = items + items;
+        }
+
+        // ==================== INITIALIZATION ====================
+        (function() {
+            'use strict';
+
+            const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
-            const menuBackdrop = document.getElementById('menuBackdrop');
             const mobileMenu = document.getElementById('mobileMenu');
+            const menuBackdrop = document.getElementById('menuBackdrop');
+            const videoOverlay = document.getElementById('videoOverlay');
+            const overlayVideo = document.getElementById('overlayVideo');
+            const overlayClose = document.getElementById('overlayClose');
+            const overlayTitle = document.getElementById('overlayTitle');
+            const overlayCategory = document.getElementById('overlayCategory');
 
-            function toggleMenu() {
-                const isActive = hamburger.classList.toggle('active');
-                menuBackdrop.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                hamburger.setAttribute('aria-expanded', isActive);
-                document.body.style.overflow = isActive ? 'hidden' : '';
+            // NAVBAR SCROLL
+            function handleNavbar() {
+                const scrolled = window.scrollY > 50;
+                navbar.classList.toggle('scrolled', scrolled);
             }
+            window.addEventListener('scroll', handleNavbar, { passive: true });
+            handleNavbar();
+            setTimeout(() => navbar.classList.add('loaded'), 100);
 
+            // MOBILE MENU
+            function toggleMenu() {
+                const isOpen = mobileMenu.classList.toggle('active');
+                menuBackdrop.classList.toggle('active', isOpen);
+                hamburger.classList.toggle('active', isOpen);
+                hamburger.setAttribute('aria-expanded', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
             hamburger.addEventListener('click', toggleMenu);
             menuBackdrop.addEventListener('click', toggleMenu);
+            mobileMenu.querySelectorAll('a:not(.mobile-dropdown-menu a)').forEach(a => a.addEventListener('click', toggleMenu));
 
-            document.querySelectorAll('.mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!link.classList.contains('mobile-dropdown-toggle')) {
-                        toggleMenu();
-                    }
-                });
-            });
-
-            // Mobile dropdown
+            const mobileDropdown = document.querySelector('.mobile-dropdown');
             const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-            const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
             if (mobileDropdownToggle) {
-                mobileDropdownToggle.addEventListener('click', () => {
-                    const isOpen = mobileDropdownToggle.classList.toggle('active');
-                    mobileDropdownMenu.style.maxHeight = isOpen ? mobileDropdownMenu.scrollHeight + 'px' : '0';
+                mobileDropdownToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileDropdown.classList.toggle('active');
                 });
             }
 
-            // Reveal animations
-            const observer = new IntersectionObserver((entries) => {
+            // REVEAL ANIMATIONS
+            window.revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.reveal:not(.video-card)').forEach(el => revealObserver.observe(el));
 
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            // VIDEO OVERLAY
+            function openOverlay(src, title, category) {
+                const source = overlayVideo.querySelector('source');
+                if (source) {
+                    source.src = src;
+                    overlayVideo.load();
+                    overlayTitle.textContent = title;
+                    overlayCategory.textContent = category;
+                    videoOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    setTimeout(() => overlayVideo.play().catch(() => {}), 100);
+                }
+            }
 
-            // Counter animation
-            const counters = document.querySelectorAll('.stat-number, .years');
-            const counterObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const target = parseInt(el.dataset.count);
-                        const duration = 2000;
-                        const start = performance.now();
-                        function animate(now) {
-                            const progress = Math.min((now - start) / duration, 1);
-                            const eased = 1 - Math.pow(1 - progress, 3);
-                            el.textContent = Math.floor(target * eased).toLocaleString();
-                            if (progress < 1) requestAnimationFrame(animate);
+            function closeOverlay() {
+                videoOverlay.classList.remove('active');
+                overlayVideo.pause();
+                overlayVideo.currentTime = 0;
+                document.body.style.overflow = '';
+            }
+
+            overlayClose.addEventListener('click', closeOverlay);
+            videoOverlay.addEventListener('click', (e) => {
+                if (e.target === videoOverlay) closeOverlay();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && videoOverlay.classList.contains('active')) closeOverlay();
+            });
+
+            document.addEventListener('click', function(e) {
+                const card = e.target.closest('.video-card');
+                if (!card) return;
+                const src = card.dataset.video;
+                const title = card.dataset.title;
+                const category = card.dataset.category;
+                if (src) {
+                    document.querySelectorAll('.video-card video.video-bg').forEach(v => {
+                        if (!v.paused) {
+                            v.pause();
+                            const c = v.closest('.video-card');
+                            if (c) {
+                                c.classList.remove('playing');
+                                const icon = c.querySelector('.video-play-btn i');
+                                if (icon) icon.className = 'fa-solid fa-play';
+                            }
                         }
-                        requestAnimationFrame(animate);
-                        counterObserver.unobserve(el);
-                    }
-                });
-            }, { threshold: 0.5 });
-            counters.forEach(c => counterObserver.observe(c));
+                    });
+                    openOverlay(src, title, category);
+                }
+            });
 
-            // Client logos for marquee
-            const clientLogos = [
-                { src: 'img/clients/client1.png', alt: 'Client 1' },
-                { src: 'img/clients/client2.png', alt: 'Client 2' },
-                { src: 'img/clients/client3.png', alt: 'Client 3' },
-                { src: 'img/clients/client4.png', alt: 'Client 4' },
-                { src: 'img/clients/client5.png', alt: 'Client 5' },
-                { src: 'img/clients/client6.png', alt: 'Client 6' },
-                { src: 'img/clients/client7.png', alt: 'Client 7' },
-                { src: 'img/clients/client8.png', alt: 'Client 8' },
-                { src: 'img/clients/client9.png', alt: 'Client 9' },
-                { src: 'img/clients/client10.png', alt: 'Client 10' },
-                { src: 'img/clients/client11.png', alt: 'Client 11' },
-                { src: 'img/clients/client12.png', alt: 'Client 12' },
-            ];
-
-            const track1 = document.getElementById('marqueeTrack1');
-            const track2 = document.getElementById('marqueeTrack2');
-            if (track1 && track2) {
-                clientLogos.forEach(logo => {
-                    const item = document.createElement('div');
-                    item.className = 'brand-item';
-                    item.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy">`;
-                    track1.appendChild(item.cloneNode(true));
-                    track2.appendChild(item);
-                });
-                clientLogos.forEach(logo => {
-                    const item = document.createElement('div');
-                    item.className = 'brand-item';
-                    item.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy">`;
-                    track1.appendChild(item.cloneNode(true));
-                    track2.appendChild(item);
+            // HERO VIDEO PLAY
+            const heroVideo = document.querySelector('.hero-video-bg');
+            if (heroVideo) {
+                heroVideo.muted = true;
+                heroVideo.play().catch(() => {
+                    heroVideo.removeAttribute('autoplay');
                 });
             }
 
-            // Instagram feed placeholder
-            const instaGrid = document.getElementById('instaGrid');
-            const instaPosts = [
-                { img: 'assets/thumbnails/insta1.jpg', title: 'Brand Film BTS', type: 'video' },
-                { img: 'assets/thumbnails/insta2.jpg', title: 'Commercial Shoot', type: 'video' },
-                { img: 'assets/thumbnails/insta3.jpg', title: 'Reel for Client', type: 'video' },
-                { img: 'assets/thumbnails/insta4.jpg', title: 'Drone Day', type: 'video' },
-                { img: 'assets/thumbnails/insta5.jpg', title: 'Color Grading', type: 'image' },
-                { img: 'assets/thumbnails/insta6.jpg', title: 'Set Life', type: 'image' },
-            ];
-            if (instaGrid) {
-                instaPosts.forEach(post => {
-                    const div = document.createElement('div');
-                    div.className = 'insta-item';
-                    div.innerHTML = `
-                        <img src="${post.img}" alt="${post.title}" loading="lazy">
-                        <div class="insta-overlay">
-                            <div class="insta-play-btn"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                        <div class="insta-reel-info">
-                            <div class="reel-title">${post.title}</div>
-                            <div class="reel-meta"><i class="fa-solid fa-play"></i> ${post.type === 'video' ? '12.5K views' : 'Image'}</div>
-                        </div>
-                    `;
-                    instaGrid.appendChild(div);
-                });
-            }
-        });
+            document.addEventListener('DOMContentLoaded', function() {
+                renderPromoGrid();
+                renderReelsSocialGrid();
+                renderMarquee();
+            });
+
+        })();
     </script>
 </body>
 </html>
