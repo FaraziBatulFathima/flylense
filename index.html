@@ -1045,23 +1045,8 @@
             aspect-ratio: 16 / 9;
         }
 
-        .video-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(3, 5, 8, 0.1) 0%, rgba(3, 5, 8, 0.75) 100%);
-            z-index: 1;
-            transition: all var(--transition-smooth);
-            pointer-events: none;
-        }
-
-        .video-card:hover::after {
-            background: linear-gradient(180deg, rgba(0, 102, 204, 0.15) 0%, rgba(3, 5, 8, 0.9) 100%);
-        }
-
         .video-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-accent-strong);
             border-color: var(--accent);
             z-index: 10;
         }
@@ -1078,96 +1063,13 @@
             background: var(--bg-card);
         }
 
-        .video-card .video-play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 1.3rem;
-            transition: all var(--transition-bounce);
-            box-shadow: var(--shadow-card);
-            pointer-events: auto;
-            cursor: pointer;
-            opacity: 0.95;
-        }
-
-        .video-card:hover .video-play-btn {
-            width: 72px;
-            height: 72px;
-            background: var(--accent-gradient);
-            color: #030508;
-            box-shadow: var(--shadow-accent);
-            opacity: 1;
-        }
-
-        .video-card.playing .video-play-btn {
-            background: rgba(0, 0, 0, 0.6);
-            color: var(--white);
-            opacity: 0;
-            width: 64px;
-            height: 64px;
-        }
-
-        .video-card.playing:hover .video-play-btn {
-            opacity: 1;
-            width: 72px;
-            height: 72px;
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .video-card .video-label {
-            position: absolute;
-            bottom: 1.2rem;
-            left: 1.5rem;
-            z-index: 3;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--white);
-            letter-spacing: 0.02em;
-            transition: all var(--transition-smooth);
-            pointer-events: none;
-            max-width: calc(100% - 100px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .video-card:hover .video-label { color: var(--accent);
-            transform: translateY(-4px); }
-
-        .video-card .video-duration {
-            position: absolute;
-            bottom: 1.2rem;
-            right: 1.5rem;
-            z-index: 3;
-            background: rgba(3, 5, 8, 0.8);
-            color: var(--white);
-            padding: 0.3rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            transition: all var(--transition-smooth);
-            pointer-events: none;
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .video-card:hover .video-duration {
-            background: var(--accent-gradient);
-            color: #030508;
-            border-color: transparent;
-        }
+        .video-card video { width: 100%; height: 100%; object-fit: cover; transition: opacity var(--transition-smooth); }
+        .video-card:hover video { opacity: 1; }
+        .video-play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); opacity: 0; transition: all var(--transition-smooth); background: transparent; pointer-events: none; }
+        .video-card:hover .video-play-btn { opacity: 1; }
+        .video-card .video-play-btn i { filter: none; }
+        .video-label { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--white); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .video-duration { position: absolute; bottom: 1rem; right: 1rem; font-size: 0.75rem; font-weight: 500; color: var(--white); background: rgba(0, 0, 0, 0.7); padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); }
 
         /* Portrait mode cards */
         .video-card.portrait { aspect-ratio: 9 / 16; }
@@ -1182,79 +1084,50 @@
 
         /* ── VIDEO OVERLAY LIGHTBOX ── */
         .video-overlay {
-            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 2rem;
-        }
-
-        .video-overlay.active { display: flex; }
-
-        .overlay-content {
-            width: 100%;
-            max-width: 1200px;
-            max-height: 90vh;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            inset: 0;
+            background: rgba(3, 5, 8, 0.98);
+            z-index: 9999;
             display: flex;
-            justify-content: center;
             align-items: center;
-            position: relative;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
-        .overlay-content video {
-            width: 100%;
-            height: auto;
-            max-height: 90vh;
-            display: block;
-            object-fit: contain;
+        .video-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-
+        .video-overlay video {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-elevated);
+        }
         .overlay-close-btn {
             position: absolute;
-            top: -60px;
-            right: 0;
-            color: var(--white);
-            font-size: 2.5rem;
-            font-weight: 300;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            z-index: 10001;
+            top: 2rem;
+            right: 2rem;
             width: 56px;
             height: 56px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            z-index: 10000;
         }
-
         .overlay-close-btn:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
+            background: var(--accent-gradient);
             border-color: var(--accent);
-            background: rgba(6, 102, 204, 0.1);
-        }
-
-        .overlay-info {
-            position: absolute;
-            bottom: -80px;
-            left: 0;
-            right: 0;
-            padding: 0 1.5rem;
-            text-align: center;
-            color: var(--text-secondary);
+            color: #050505;
+            transform: rotate(90deg);
         }
 
         .overlay-info h3 {
@@ -1971,8 +1844,8 @@
                     <a href="portfolio.html" class="dropdown-toggle">Portfolio</a>
                     <div class="dropdown-menu">
                         <a href="education.html">Education</a>
-                        <a href="portfolio.html#jewellery">Jewellery</a>
-                        <a href="portfolio.html#food">Food & Restaurants</a>
+                        <a href="jewellery.html">Jewellery</a>
+                        <a href="food.html">Food & Restaurants</a>
                     </div>
                 </li>
                 <li><a href="industry.html">Industries</a></li>
@@ -1996,8 +1869,8 @@
             <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
             <div class="mobile-dropdown-menu">
                 <a href="education.html">Education</a>
-                <a href="portfolio.html#jewellery">Jewellery</a>
-                <a href="portfolio.html#food">Food & Restaurants</a>
+                <a href="jewellery.html">Jewellery</a>
+                <a href="food.html">Food & Restaurants</a>
             </div>
         </div>
         <a href="industry.html">Industries</a>
@@ -2112,11 +1985,11 @@
                 <!-- View Portfolio Dropdown Button -->
                 <div class="portfolio-dropdown-wrapper" style="grid-column: 1 / -1; margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
                     <div class="portfolio-dropdown">
-                        <button class="btn-secondary portfolio-dropdown-toggle" type="button"><i class="fa-solid fa-arrow-right"></i> View Portfolio <i class="fa-solid fa-chevron-down"></i></button>
+                        <button class="btn-secondary portfolio-dropdown-toggle" type="button"></i> View Portfolio </i></button>
                         <div class="portfolio-dropdown-menu">
-                            <a href="portfolio.html#education">Education</a>
-                            <a href="portfolio.html#jewellery">Jewellery</a>
-                            <a href="portfolio.html#food">Food & Restaurants</a>
+                            <a href="education.html">Education</a>
+                            <a href="jewellery.html">Jewellery</a>
+                            <a href="food.html">Food & Restaurants</a>
                         </div>
                     </div>
                 </div>
@@ -2337,23 +2210,17 @@
 
     <!-- ── VIDEO OVERLAY ── -->
     <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-label="Video Player">
-        <div class="overlay-content">
-            <video id="overlayVideo" controls playsinline>
-                <source src="" type="video/mp4">
-            </video>
-        </div>
+        <video id="overlayVideo" controls playsinline>
+            <source src="" type="video/mp4">
+        </video>
         <button class="overlay-close-btn" id="overlayClose" aria-label="Close video"><i class="fa-solid fa-times"></i></button>
-        <div class="overlay-info" id="overlayInfo">
-            <h3 id="overlayTitle"></h3>
-            <span class="category" id="overlayCategory"></span>
-        </div>
     </div>
 
     <script>
         (function() {
             'use strict';
 
-            // ── DOM ELEMENTS ──
+// ── DOM ELEMENTS ──
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -2361,8 +2228,6 @@
             const videoOverlay = document.getElementById('videoOverlay');
             const overlayVideo = document.getElementById('overlayVideo');
             const overlayClose = document.getElementById('overlayClose');
-            const overlayTitle = document.getElementById('overlayTitle');
-            const overlayCategory = document.getElementById('overlayCategory');
             const videoCards = document.querySelectorAll('.video-card');
             const portfolioVideos = document.querySelectorAll('.portfolio-main-video, .portfolio-side-item');
             const tabBtns = document.querySelectorAll('.tab-btn');
@@ -2480,17 +2345,12 @@
             });
 
             // ── VIDEO OVERLAY ──
-            function openOverlay(src, title, category) {
-                const source = overlayVideo.querySelector('source');
-                if (source) {
-                    source.src = src;
-                    overlayVideo.load();
-                    overlayTitle.textContent = title;
-                    overlayCategory.textContent = category;
-                    videoOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    setTimeout(() => overlayVideo.play().catch(() => {}), 100);
-                }
+            function openOverlay(src) {
+                overlayVideo.src = src;
+                overlayVideo.load();
+                videoOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => overlayVideo.play().catch(() => {}), 100);
             }
 
             function closeOverlay() {
@@ -2520,11 +2380,9 @@
                 card.addEventListener('click', e => {
                     if (e.target.closest('.video-play-btn')) return;
                     const src = card.dataset.video;
-                    const title = card.dataset.title;
-                    const category = card.dataset.category;
                     if (src) {
                         pauseAllInlineVideos();
-                        openOverlay(src, title, category);
+                        openOverlay(src);
                     }
                 });
                 const playBtn = card.querySelector('.video-play-btn');
@@ -2532,11 +2390,9 @@
                     playBtn.addEventListener('click', e => {
                         e.stopPropagation();
                         const src = card.dataset.video;
-                        const title = card.dataset.title;
-                        const category = card.dataset.category;
                         if (src) {
                             pauseAllInlineVideos();
-                            openOverlay(src, title, category);
+                            openOverlay(src);
                         }
                     });
                 }
@@ -2547,11 +2403,9 @@
                 item.addEventListener('click', e => {
                     if (e.target.closest('.play-overlay, .item-overlay')) return;
                     const src = item.dataset.video;
-                    const title = item.dataset.title;
-                    const category = item.dataset.category;
                     if (src) {
                         pauseAllInlineVideos();
-                        openOverlay(src, title, category);
+                        openOverlay(src);
                     }
                 });
                 const overlay = item.querySelector('.play-overlay, .item-overlay');
@@ -2559,11 +2413,9 @@
                     overlay.addEventListener('click', e => {
                         e.stopPropagation();
                         const src = item.dataset.video;
-                        const title = item.dataset.title;
-                        const category = item.dataset.category;
                         if (src) {
                             pauseAllInlineVideos();
-                            openOverlay(src, title, category);
+                            openOverlay(src);
                         }
                     });
                 }

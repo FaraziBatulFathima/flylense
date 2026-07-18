@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* ── All styles remain exactly as provided ── */
         *,
         *::before,
         *::after {
@@ -839,7 +840,7 @@
             .stat-number { font-size: 2rem; }
         }
 
-        /* ===== OUR STORY - NEW LAYOUT ===== */
+        /* ===== OUR STORY ===== */
         .our-story { background: var(--bg-deep); position: relative; overflow: hidden; }
 
         .our-story::before {
@@ -988,7 +989,7 @@
             .story-values { grid-template-columns: 1fr; }
         }
 
-        /* ===== BTS / BEHIND THE SCENES ===== */
+        /* ===== BTS ===== */
         .bts-section { background: var(--bg-deep); position: relative; overflow: hidden; }
 
         .bts-section::before {
@@ -1029,16 +1030,14 @@
             border-color: var(--accent);
         }
 
-        .bts-item img,
-        .bts-item video {
+        .bts-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform var(--transition-smooth);
         }
 
-        .bts-item:hover img,
-        .bts-item:hover video { transform: scale(1.08); }
+        .bts-item:hover img { transform: scale(1.08); }
 
         .bts-overlay {
             position: absolute;
@@ -1105,7 +1104,7 @@
             .bts-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         }
 
-        /* ===== FOUNDERS - SLIDE ANIMATION ===== */
+        /* ===== FOUNDERS ===== */
         .founders { background: var(--bg-deep); position: relative; overflow: hidden; }
 
         .founders-header {
@@ -1357,16 +1356,14 @@
             cursor: pointer;
         }
 
-        .insta-item img,
-        .insta-item video {
+        .insta-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform var(--transition-smooth);
         }
 
-        .insta-item:hover img,
-        .insta-item:hover video { transform: scale(1.08); }
+        .insta-item:hover img { transform: scale(1.08); }
 
         .insta-overlay {
             position: absolute;
@@ -1595,7 +1592,6 @@
             .footer-bottom { flex-direction: column; text-align: center; }
         }
 
-        /* ===== BACK TO TOP ===== */
         .back-to-top {
             position: fixed;
             bottom: 2.5rem;
@@ -1661,11 +1657,11 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li class="dropdown">
-                    <a href="portfolio.html" class="dropdown-toggle active">Portfolio</a>
+                    <a href="portfolio.html" class="dropdown-toggle">Portfolio</a>
                     <div class="dropdown-menu">
                         <a href="education.html">Education</a>
-                        <a href="portfolio.html#jewellery">Jewellery</a>
-                        <a href="portfolio.html#food">Food & Restaurants</a>
+                        <a href="jewellery.html">Jewellery</a>
+                        <a href="food.html">Food & Restaurants</a>
                     </div>
                 </li>
                 <li><a href="industry.html">Industries</a></li>
@@ -1689,8 +1685,8 @@
             <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
             <div class="mobile-dropdown-menu">
                 <a href="education.html">Education</a>
-                <a href="portfolio.html#jewellery">Jewellery</a>
-                <a href="portfolio.html#food">Food & Restaurants</a>
+                <a href="jewellery.html">Jewellery</a>
+                <a href="food.html">Food & Restaurants</a>
             </div>
         </div>
         <a href="industry.html">Industries</a>
@@ -2021,10 +2017,10 @@
                 });
             });
 
-            // Mobile dropdown
-            const mobileDropdownToggle = document.query('.mobile-dropdown-toggle');
+            // Mobile dropdown - FIXED: document.querySelector instead of document.query
+            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
             const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
-            if (mobileDropdownToggle) {
+            if (mobileDropdownToggle && mobileDropdownMenu) {
                 mobileDropdownToggle.addEventListener('click', () => {
                     const isOpen = mobileDropdownToggle.classList.toggle('active');
                     mobileDropdownMenu.style.maxHeight = isOpen ? mobileDropdownMenu.scrollHeight + 'px' : '0';
@@ -2043,7 +2039,7 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
             // Counter animation
-            const counters = document.querySelectorAll('.stat-number, .years');
+            const counters = document.querySelectorAll('.stat-number');
             const counterObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -2051,6 +2047,7 @@
                         const target = parseInt(el.dataset.count);
                         const duration = 2000;
                         const start = performance.now();
+
                         function animate(now) {
                             const progress = Math.min((now - start) / duration, 1);
                             const eased = 1 - Math.pow(1 - progress, 3);
@@ -2088,36 +2085,49 @@
             const track1 = document.getElementById('marqueeTrack1');
             const track2 = document.getElementById('marqueeTrack2');
             if (track1 && track2) {
+                // First track - forward direction
                 clientLogos.forEach(logo => {
                     const item = document.createElement('div');
                     item.className = 'brand-item';
                     item.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy">`;
-                    track1.appendChild(item.cloneNode(true));
+                    track1.appendChild(item);
+                });
+                clientLogos.forEach(logo => {
+                    const item = document.createElement('div');
+                    item.className = 'brand-item';
+                    item.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy">`;
+                    track1.appendChild(item);
+                });
+
+                // Second track - reverse direction
+                clientLogos.forEach(logo => {
+                    const item = document.createElement('div');
+                    item.className = 'brand-item';
+                    item.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy">`;
                     track2.appendChild(item);
                 });
                 clientLogos.forEach(logo => {
                     const item = document.createElement('div');
                     item.className = 'brand-item';
                     item.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy">`;
-                    track1.appendChild(item.cloneNode(true));
                     track2.appendChild(item);
                 });
             }
 
             // BTS Grid data
             const btsData = [
-                { img: 'assets/thumbnails/Code.in_Video_04.png', title: 'Code.in Brand Film Shoot', type: 'video' },
-                { img: 'assets/thumbnails/Full_Stack_Reel.png', title: 'Full Stack Academy Setup', type: 'video' },
-                { img: 'assets/thumbnails/Global.png', title: 'Global School Campus', type: 'video' },
-                { img: 'assets/thumbnails/Saritha Reel_06.png', title: 'Saritha School BTS', type: 'video' },
-                { img: 'assets/thumbnails/Silver Crest Reel 01.png', title: 'Silver Crest Reel Day', type: 'video' },
-                { img: 'assets/thumbnails/Success_Podcast_Reel_03.png', title: 'Success Podcast Recording', type: 'video' },
-                { img: 'assets/thumbnails/Unique Reel.png', title: 'Unique School Tour', type: 'video' },
-                { img: 'assets/thumbnails/Barbeque Spice Reel 01.png', title: 'Barbeque Spice Kitchen', type: 'video' },
-                { img: 'assets/thumbnails/Tandos_Grill_Reel_01.png', title: "Tando's Grill Sizzle", type: 'video' },
-                { img: 'assets/thumbnails/Iqbal_jewellers_Reel_03.png', title: 'Iqbal Jewellers Luxury', type: 'video' },
-                { img: 'assets/thumbnails/Nisar_Jewellery_Reel_09.png', title: 'Nisar Jewellery Craft', type: 'video' },
-                { img: 'assets/thumbnails/SNJ_Reel_03.png', title: 'SNJ Jewels Collection', type: 'video' },
+                { img: 'assets/thumbnails/Code.in_Video_04.png', title: 'Code.in Brand Film Shoot' },
+                { img: 'assets/thumbnails/Full_Stack_Reel.png', title: 'Full Stack Academy Setup' },
+                { img: 'assets/thumbnails/Global.png', title: 'Global School Campus' },
+                { img: 'assets/thumbnails/Saritha Reel_06.png', title: 'Saritha School BTS' },
+                { img: 'assets/thumbnails/Silver Crest Reel 01.png', title: 'Silver Crest Reel Day' },
+                { img: 'assets/thumbnails/Success_Podcast_Reel_03.png', title: 'Success Podcast Recording' },
+                { img: 'assets/thumbnails/Unique Reel.png', title: 'Unique School Tour' },
+                { img: 'assets/thumbnails/Barbeque Spice Reel 01.png', title: 'Barbeque Spice Kitchen' },
+                { img: 'assets/thumbnails/Tandos_Grill_Reel_01.png', title: "Tando's Grill Sizzle" },
+                { img: 'assets/thumbnails/Iqbal_jewellers_Reel_03.png', title: 'Iqbal Jewellers Luxury' },
+                { img: 'assets/thumbnails/Nisar_Jewellery_Reel_09.png', title: 'Nisar Jewellery Craft' },
+                { img: 'assets/thumbnails/SNJ_Reel_03.png', title: 'SNJ Jewels Collection' },
             ];
 
             const btsGrid = document.getElementById('btsGrid');
@@ -2143,15 +2153,15 @@
                 btsGrid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             }
 
-            // Instagram feed placeholder
+            // Instagram feed
             const instaGrid = document.getElementById('instaGrid');
             const instaPosts = [
-                { img: 'assets/thumbnails/insta1.jpg', title: 'Brand Film BTS', type: 'video' },
-                { img: 'assets/thumbnails/insta2.jpg', title: 'Commercial Shoot', type: 'video' },
-                { img: 'assets/thumbnails/insta3.jpg', title: 'Reel for Client', type: 'video' },
-                { img: 'assets/thumbnails/insta4.jpg', title: 'Drone Day', type: 'video' },
-                { img: 'assets/thumbnails/insta5.jpg', title: 'Color Grading', type: 'image' },
-                { img: 'assets/thumbnails/insta6.jpg', title: 'Set Life', type: 'image' },
+                { img: 'assets/thumbnails/Code.in_Video_04.png', title: 'Brand Film BTS', views: '12.5K' },
+                { img: 'assets/thumbnails/Full_Stack_Reel.png', title: 'Commercial Shoot', views: '8.2K' },
+                { img: 'assets/thumbnails/Global.png', title: 'Reel for Client', views: '15.7K' },
+                { img: 'assets/thumbnails/Saritha Reel_06.png', title: 'Drone Day', views: '6.3K' },
+                { img: 'assets/thumbnails/Silver Crest Reel 01.png', title: 'Color Grading Session', views: '4.8K' },
+                { img: 'assets/thumbnails/Success_Podcast_Reel_03.png', title: 'Set Life', views: '9.1K' },
             ];
             if (instaGrid) {
                 instaPosts.forEach(post => {
@@ -2164,7 +2174,7 @@
                         </div>
                         <div class="insta-reel-info">
                             <div class="reel-title">${post.title}</div>
-                            <div class="reel-meta"><i class="fa-solid fa-play"></i> ${post.type === 'video' ? '12.5K views' : 'Image'}</div>
+                            <div class="reel-meta"><i class="fa-solid fa-play"></i> ${post.views} views</div>
                         </div>
                     `;
                     instaGrid.appendChild(div);

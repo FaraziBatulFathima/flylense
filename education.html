@@ -571,6 +571,14 @@
             text-transform: uppercase;
             color: var(--accent);
             margin-bottom: 1.5rem;
+            animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .hero-badge i { animation: pulse-accent 2s ease-in-out infinite; }
+
+        @keyframes pulse-accent {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
         }
 
         .hero h1 {
@@ -580,6 +588,7 @@
             line-height: 1.1;
             color: var(--white);
             margin-bottom: 1.5rem;
+            animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
         }
 
         .hero h1 .highlight {
@@ -587,20 +596,27 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: accentShift 4s ease-in-out infinite;
         }
 
-        .hero-cta-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
+        @keyframes accentShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .hero .lead {
             font-size: clamp(1.1rem, 2vw, 1.35rem);
             color: var(--text-secondary);
             line-height: 1.8;
             max-width: 880px;
             margin-bottom: 3.5rem;
+            animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
         }
         .hero-scroll-indicator {
             position: absolute;
@@ -788,23 +804,8 @@
             transition: all var(--transition-smooth);
         }
 
-        .video-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(3, 5, 8, 0.1) 0%, rgba(3, 5, 8, 0.75) 100%);
-            z-index: 1;
-            transition: all var(--transition-smooth);
-            pointer-events: none;
-        }
-
-        .video-card:hover::after {
-            background: linear-gradient(180deg, rgba(0, 102, 204, 0.15) 0%, rgba(3, 5, 8, 0.9) 100%);
-        }
-
         .video-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-accent-strong);
             border-color: var(--accent);
             z-index: 10;
         }
@@ -819,79 +820,13 @@
             background: var(--bg-card);
         }
 
-        .video-card .video-play-btn {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 1.3rem;
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: var(--shadow-card);
-            pointer-events: auto;
-            cursor: pointer;
-            opacity: 0.95;
-        }
-
-        .video-card:hover .video-play-btn {
-            width: 72px;
-            height: 72px;
-            background: var(--accent-gradient);
-            color: #030508;
-            box-shadow: var(--shadow-accent);
-            opacity: 1;
-        }
-
-        .video-card .video-label {
-            position: absolute;
-            bottom: 1.2rem;
-            left: 1.5rem;
-            z-index: 3;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--white);
-            letter-spacing: 0.02em;
-            transition: all var(--transition-smooth);
-            pointer-events: none;
-            max-width: calc(100% - 100px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .video-card:hover .video-label { color: var(--accent); transform: translateY(-4px); }
-
-        .video-card .video-duration {
-            position: absolute;
-            bottom: 1.2rem;
-            right: 1.5rem;
-            z-index: 3;
-            background: rgba(3, 5, 8, 0.8);
-            color: var(--white);
-            padding: 0.3rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            transition: all var(--transition-smooth);
-            pointer-events: none;
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .video-card:hover .video-duration {
-            background: var(--accent-gradient);
-            color: #030508;
-            border-color: transparent;
-        }
+        .video-card video { width: 100%; height: 100%; object-fit: cover; transition: opacity var(--transition-smooth); }
+        .video-card:hover video { opacity: 1; }
+        .video-play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); opacity: 0; transition: all var(--transition-smooth); background: transparent; pointer-events: none; }
+        .video-card:hover .video-play-btn { opacity: 1; }
+        .video-card .video-play-btn i { filter: none; }
+        .video-label { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--white); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .video-duration { position: absolute; bottom: 1rem; right: 1rem; font-size: 0.75rem; font-weight: 500; color: var(--white); background: rgba(0, 0, 0, 0.7); padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); }
 
         /* Portrait mode cards (9:16) */
         .video-card.portrait { aspect-ratio: 9 / 16; }
@@ -906,88 +841,51 @@
 
         /* VIDEO OVERLAY LIGHTBOX */
         .video-overlay {
-            display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 2rem;
-        }
-
-        .video-overlay.active { display: flex; }
-
-        .overlay-content {
-            width: 100%;
-            max-width: 1200px;
-            max-height: 90vh;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            inset: 0;
+            background: rgba(3, 5, 8, 0.98);
+            z-index: 9999;
             display: flex;
-            justify-content: center;
             align-items: center;
-            position: relative;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
-        .overlay-content video {
-            width: 100%;
-            height: auto;
-            max-height: 90vh;
-            display: block;
-            object-fit: contain;
+        .video-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-
+        .video-overlay video {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-elevated);
+        }
         .overlay-close-btn {
             position: absolute;
-            top: -60px;
-            right: 0;
-            color: var(--white);
-            font-size: 2.5rem;
-            font-weight: 300;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            z-index: 10001;
+            top: 2rem;
+            right: 2rem;
             width: 56px;
             height: 56px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
-        }
-
-        .overlay-close-btn:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
-            border-color: var(--accent);
-            background: rgba(6, 102, 204, 0.1);
-        }
-
-        .overlay-info {
-            position: absolute;
-            bottom: -80px;
-            left: 0;
-            right: 0;
-            padding: 0 1.5rem;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        .overlay-info h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.5rem;
             color: var(--white);
-            margin-bottom: 0.25rem;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            z-index: 10000;
         }
-
-        .overlay-info .category { color: var(--accent); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+        .overlay-close-btn:hover {
+            background: var(--accent-gradient);
+            border-color: var(--accent);
+            color: #030508;
+            transform: rotate(90deg);
+        }
 
         @media (max-width: 1024px) {
             .video-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1331,7 +1229,7 @@
         @media (max-width: 576px) {
             .video-grid { grid-template-columns: repeat(2, 1fr); }
             /* Promotional videos: 1 per row on mobile */
-            .video-grid .video-card.cinematic.span-2-col { grid-column: auto; }
+            #promoGrid.video-grid { grid-template-columns: 1fr; }
             /* Social management: 2 per row on mobile */
             #social-management .reveal[style*="grid-template-columns"] { grid-template-columns: repeat(2, 1fr) !important; }
         }
@@ -1389,8 +1287,8 @@
                     <a href="portfolio.html" class="dropdown-toggle active">Portfolio</a>
                     <div class="dropdown-menu">
                         <a href="education.html">Education</a>
-                        <a href="portfolio.html#jewellery">Jewellery</a>
-                        <a href="portfolio.html#food">Food & Restaurants</a>
+                        <a href="jewellery.html">Jewellery</a>
+                        <a href="food.html">Food & Restaurants</a>
                     </div>
                 </li>
                 <li><a href="industry.html">Industries</a></li>
@@ -1414,8 +1312,8 @@
             <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
             <div class="mobile-dropdown-menu">
                 <a href="education.html">Education</a>
-                <a href="portfolio.html#jewellery">Jewellery</a>
-                <a href="portfolio.html#food">Food & Restaurants</a>
+                <a href="jewellery.html">Jewellery</a>
+                <a href="food.html">Food & Restaurants</a>
             </div>
         </div>
         <a href="industry.html">Industries</a>
@@ -1436,7 +1334,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> Education Portfolio</div>
-            <h1><span class="hero-h1">Education Excellence</span></h1>
+            <h1 class="hero-h1">Education <span class="highlight">Excellence</span></h1>
             <p class="lead">From campus films to admission reels, we help institutions showcase their unique identity, academic rigor, and student success stories through cinematic storytelling.</p>
             <div class="hero-cta-group">
                 <a href="#reels" class="btn-secondary"><i class="fa-solid fa-clapperboard"></i> <span>View Reels</span></a>
@@ -1608,16 +1506,10 @@
 
     <!-- Video Overlay Lightbox -->
     <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-label="Video Player">
-        <div class="overlay-content">
-            <video id="overlayVideo" controls playsinline>
-                <source src="" type="video/mp4">
-            </video>
-        </div>
+        <video id="overlayVideo" controls playsinline>
+            <source src="" type="video/mp4">
+        </video>
         <button class="overlay-close-btn" id="overlayClose" aria-label="Close video"><i class="fa-solid fa-times"></i></button>
-        <div class="overlay-info" id="overlayInfo">
-            <h3 id="overlayTitle"></h3>
-            <span class="category" id="overlayCategory"></span>
-        </div>
     </div>
 
     <script>
@@ -1769,8 +1661,6 @@
             const videoOverlay = document.getElementById('videoOverlay');
             const overlayVideo = document.getElementById('overlayVideo');
             const overlayClose = document.getElementById('overlayClose');
-            const overlayTitle = document.getElementById('overlayTitle');
-            const overlayCategory = document.getElementById('overlayCategory');
 
             // NAVBAR SCROLL
             function handleNavbar() {
@@ -1814,17 +1704,12 @@
             document.querySelectorAll('.reveal:not(.video-card)').forEach(el => revealObserver.observe(el));
 
             // VIDEO OVERLAY
-            function openOverlay(src, title, category) {
-                const source = overlayVideo.querySelector('source');
-                if (source) {
-                    source.src = src;
-                    overlayVideo.load();
-                    overlayTitle.textContent = title;
-                    overlayCategory.textContent = category;
-                    videoOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    setTimeout(() => overlayVideo.play().catch(() => {}), 100);
-                }
+            function openOverlay(src) {
+                overlayVideo.src = src;
+                overlayVideo.load();
+                videoOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => overlayVideo.play().catch(() => {}), 100);
             }
 
             function closeOverlay() {
@@ -1846,21 +1731,13 @@
                 const card = e.target.closest('.video-card');
                 if (!card) return;
                 const src = card.dataset.video;
-                const title = card.dataset.title;
-                const category = card.dataset.category;
                 if (src) {
                     document.querySelectorAll('.video-card video.video-bg').forEach(v => {
                         if (!v.paused) {
                             v.pause();
-                            const c = v.closest('.video-card');
-                            if (c) {
-                                c.classList.remove('playing');
-                                const icon = c.querySelector('.video-play-btn i');
-                                if (icon) icon.className = 'fa-solid fa-play';
-                            }
                         }
                     });
-                    openOverlay(src, title, category);
+                    openOverlay(src);
                 }
             });
 
