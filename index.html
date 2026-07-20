@@ -1368,39 +1368,69 @@
         }
 
         /* ── ABOUT ── */
-        .about-section { background: var(--bg-deep);
-            position: relative; }
+        .about-section { 
+            background: var(--bg-deep);
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('img/3.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .about-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(180deg, transparent 0%, rgba(3, 5, 8, 0.6) 30%, #030508 100%);
+            z-index: 1;
+        }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            grid-template-columns: 1fr;
+            min-height: 80vh;
+            align-items: end;
+            padding: 0;
+            position: relative;
+            z-index: 2;
         }
 
         .about-visual {
+            display: none;
+        }
+
+        .about-content {
             position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 100%;
+            padding: 3rem var(--container-padding) 4rem;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            backdrop-filter: none;
         }
 
-        .about-main-image {
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            aspect-ratio: 4 / 3;
-            background: var(--bg-card);
+        .about-content-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: rgba(3, 5, 8, 0.95);
             border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-elevated);
-            transition: all var(--transition-smooth);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(20px);
         }
-
-        .about-main-image:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-accent-strong);
-            border-color: var(--accent);
-        }
-
-        .about-main-image img { width: 100%;
-            height: 100%;
-            object-fit: cover; }
 
         .about-content h3 {
             font-family: 'Poppins', sans-serif;
@@ -1441,7 +1471,7 @@
             align-items: flex-start;
             gap: 1rem;
             padding: 1.5rem;
-            background: var(--bg-card);
+            background: rgba(8, 13, 20, 0.8);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
             transition: all var(--transition-smooth);
@@ -1449,7 +1479,7 @@
 
         .feature-item:hover {
             border-color: var(--accent);
-            background: var(--bg-card-hover);
+            background: rgba(8, 13, 20, 0.95);
             transform: translateY(-3px);
         }
 
@@ -1489,10 +1519,12 @@
             gap: 14px; }
 
         @media (max-width: 1024px) {
-            .about-grid { grid-template-columns: 1fr;
-                gap: 3rem; }
-            .about-visual { max-width: 500px;
-                margin: 0 auto; }
+            .about-section::after {
+                height: 50%;
+            }
+            .about-content-inner {
+                padding: 2rem;
+            }
             .about-features { grid-template-columns: 1fr; }
         }
 
@@ -1935,8 +1967,8 @@
                     </div>
                 </li>
                 <li><a href="industry.html">Industries</a></li>
-                <li><a href="blogs.html">Insights</a></li>
-                <li><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html" class="nav-cta">Let's Connect</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
@@ -1960,8 +1992,8 @@
             </div>
         </div>
         <a href="industry.html">Industries</a>
-        <a href="blogs.html">Insights</a>
-        <a href="contact.html" class="mobile-cta">Let's Talk</a>
+        <a href="events.html">Events</a>
+        <a href="contact.html" class="mobile-cta">Let's Connect</a>
         <div class="menu-divider"></div>
         <div class="menu-footer">
             <span>© 2026 FlyLense Media Partner</span>
@@ -1974,7 +2006,7 @@
         <div class="hero-slider" id="heroSlider">
             <!-- Slide 1: Strategic Content Creation -->
             <div class="hero-slide active">
-                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <div class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Strategic Content Creation & Scripting</div>
@@ -2004,7 +2036,7 @@
 
             <!-- Slide 3: Video Editing & Graphic Design -->
             <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1606744837600-7b4b8c9637e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <div class="hero-badge"><i class="fa-solid fa-film"></i> Professional Video Editing & Graphic Design</div>
@@ -2176,64 +2208,65 @@
     <section class="section about-section" id="about">
         <div class="section-inner">
             <div class="about-grid">
-                <div class="about-visual reveal reveal-left">
-                    <div class="about-main-image">
-                        <img src="img/3.png" alt="FlyLense Team at Work">
-                    </div>
-                </div>
-
+                <div class="about-visual reveal reveal-left"></div>
                 <div class="about-content reveal reveal-right">
-                    <h3>Where Vision Meets Cinematic Precision</h3>
-                    <p class="lead">At FlyLense, we are a dynamic media production company where creativity meets precision. From script to screen, our passionate team of directors, cinematographers, drone pilots, and editors works closely with you to bring your brand's vision to life.</p>
+                    <div class="about-content-inner">
+                        <h3>Where Vision Meets Cinematic Precision</h3>
+                        <p class="lead">FlyLense is a premium media production company where creativity meets precision. From script to screen, our passionate team of directors, cinematographers, drone pilots, and editors works closely with you to bring your brand's vision to life with cinematic excellence.</p>
 
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
-                            <div class="feature-text"><h4>Cinematic Production</h4></div>
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
+                                <div class="feature-text"><h4>Cinematic Production</h4><p>High-end films, commercials & brand stories</p></div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fa-solid fa-drone"></i></div>
+                                <div class="feature-text"><h4>Aerial Cinematography</h4><p>Stunning drone shots & FPV cinematography</p></div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fa-solid fa-film"></i></div>
+                                <div class="feature-text"><h4>Post Production</h4><p>Editing, color grading, VFX & motion graphics</p></div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                                <div class="feature-text"><h4>Social-First Content</h4><p>Reels, shorts & vertical videos for social</p></div>
+                            </div>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                            <div class="feature-text"><h4>Social-First Content</h4></div>
-                        </div>
+
+                        <a href="about.html" class="about-cta"><i class="fa-solid fa-arrow-right"></i> Discover Our Story</a>
                     </div>
-
-                    <a href="about.html" class="about-cta"><i class="fa-solid fa-arrow-right"></i> Discover Our Story</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── INSTAGRAM REELS ── -->
+<!-- ── INSTAGRAM REELS ── -->
     <section class="section instagram-section" id="instagram">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
                 <span class="section-tag">Social Feed</span>
                 <h2 class="section-title">Instagram Reels</h2>
-                <p class="section-subtitle">Add your Instagram Reel embed links below — they'll play right here.</p>
+                <p class="section-subtitle">Our latest work on Instagram — follow us for behind-the-scenes and project highlights.</p>
             </div>
             <div class="insta-reels-grid" id="instaReelsGrid">
                 <div class="insta-reel-card reveal reveal-scale delay-1">
-                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
-                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
-                        Add Instagram Reel embed link
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C0example1/" data-instgrm-version="14"></blockquote>
                     </div>
                 </div>
                 <div class="insta-reel-card reveal reveal-scale delay-2">
-                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
-                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
-                        Add Instagram Reel embed link
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C0example2/" data-instgrm-version="14"></blockquote>
                     </div>
                 </div>
                 <div class="insta-reel-card reveal reveal-scale delay-3">
-                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
-                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
-                        Add Instagram Reel embed link
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C0example3/" data-instgrm-version="14"></blockquote>
                     </div>
                 </div>
                 <div class="insta-reel-card reveal reveal-scale delay-4">
-                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
-                        <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
-                        Add Instagram Reel embed link
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C0example4/" data-instgrm-version="14"></blockquote>
                     </div>
                 </div>
             </div>
