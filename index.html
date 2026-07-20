@@ -552,17 +552,6 @@
             background: var(--bg-deep);
         }
 
-        .hero-video-bg {
-            position: absolute;
-            top: -3%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            opacity: 0.35;
-        }
-
         .hero-overlay {
             position: absolute;
             inset: 0;
@@ -613,7 +602,7 @@
 
         .hero h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+            font-size: clamp(2rem, 4.4vw, 3.6rem);
             font-weight: 800;
             line-height: 1.05;
             color: var(--white);
@@ -709,68 +698,6 @@
             transform: translateY(-2px);
         }
 
-        .portfolio-dropdown {
-            position: relative;
-            display: inline-block;
-            z-index: 10000;
-        }
-        .portfolio-dropdown-toggle {
-            position: relative;
-            padding-right: 3rem;
-        }
-        .portfolio-dropdown-toggle::after {
-            content: '';
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 6px solid currentColor;
-            transition: transform var(--transition-fast);
-        }
-        .portfolio-dropdown.active .portfolio-dropdown-toggle::after {
-            transform: translateY(-50%) rotate(180deg);
-        }
-        .portfolio-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -110px;
-            /* half of min-width 220px */
-            min-width: 220px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-elevated);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all var(--transition-smooth);
-            z-index: 10001;
-            padding: 0.5rem 0;
-            margin-top: 8px;
-        }
-        .portfolio-dropdown.active .portfolio-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .portfolio-dropdown-menu a {
-            display: block;
-            padding: 0.7rem 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.88rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: all var(--transition-fast);
-        }
-        .portfolio-dropdown-menu a:hover {
-            background: rgba(6, 102, 204, 0.08);
-            color: var(--accent);
-            padding-left: 1.8rem;
-        }
-
         @keyframes fadeUp {
             from { opacity: 0;
                 transform: translateY(40px); }
@@ -820,6 +747,157 @@
             .hero .lead { max-width: 100%; }
             .hero-cta-group { justify-content: center; }
             .hero-scroll-indicator { display: none; }
+            .hero-arrow { display: none; }
+        }
+
+        /* ── HERO SLIDER ── */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.8s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        /* Background image element */
+        .hero-slide-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            transform: scale(1.02) translateX(30px);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-slide.active .hero-slide-bg {
+            transform: scale(1) translateX(0);
+            opacity: 1;
+        }
+
+        .hero-slide.prev .hero-slide-bg {
+            transform: scale(1.02) translateX(100%);
+            opacity: 0;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 80% at 50% 30%, rgba(0, 102, 204, 0.1) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(3, 5, 8, 0.3) 0%, rgba(3, 5, 8, 0.6) 50%, #030508 100%);
+            z-index: 1;
+        }
+
+        .hero-slide .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .hero-slide .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition-delay: 0.2s;
+        }
+
+        .hero-slide.active .hero-content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .hero-slide.prev .hero-content {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition-delay: 0s;
+        }
+
+        .hero-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .hero-slider:hover .hero-arrow {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hero-arrow:hover {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
+            background: transparent;
+        }
+
+        .hero-arrow-prev { left: 2rem; }
+        .hero-arrow-next { right: 2rem; }
+
+        @media (max-width: 768px) {
+            .hero { min-height: 100vh; }
+            .hero-content { align-items: center; text-align: center; }
+            .hero .lead { max-width: 100%; }
+            .hero-cta-group { justify-content: center; }
+            .hero-arrow { opacity: 1; visibility: visible; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-arrow-prev { left: 1rem; }
+            .hero-arrow-next { right: 1rem; }
         }
 
         /* ── SECTION COMMONS ── */
@@ -974,232 +1052,233 @@
             margin-top: 0.5rem;
         }
 
-        /* ── VIDEO SHOWCASE - TWO MODES ── */
-        .video-showcase {
+        /* ── VIDEO SHOWCASE BAR (HORIZONTAL SCROLL) ── */
+        .video-showcase { background: var(--bg-deep); }
+
+        .video-bar-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 10px 0 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-deep);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .video-bar-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .video-bar-wrapper::-webkit-scrollbar-track {
             background: var(--bg-deep);
-            overflow: visible;
         }
 
-        .video-tabs {
+        .video-bar-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .video-bar-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+
+        .video-bar-track {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
+            gap: 1.5rem;
+            width: max-content;
+            padding: 0 2rem 1rem;
+            will-change: transform;
         }
 
-        .tab-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 1rem 2rem;
-            border-radius: var(--radius-full);
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            transition: all var(--transition-smooth);
-            cursor: pointer;
-        }
-
-        .tab-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(6, 102, 204, 0.08);
-        }
-
-        .tab-btn.active {
-            background: var(--accent-gradient);
-            color: #030508;
-            border-color: transparent;
-            box-shadow: var(--shadow-accent);
-        }
-
-        .tab-btn i { font-size: 1rem; }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-        }
-
-        /* Reels grid - portrait 9:16 aspect ratio needs taller rows */
-        #reelsGrid {}
-
-        /* Cinematic grid - landscape 21:9 needs wider columns */
-        #cinematicGrid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-        }
-
-        .video-card {
+        .video-bar-track .video-card {
+            flex: 0 0 auto;
             position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            cursor: pointer;
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
+            border-radius: 0;
+            overflow: hidden;
             transition: all var(--transition-smooth);
-            aspect-ratio: 16 / 9;
+            cursor: pointer;
         }
 
-        .video-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            z-index: 10;
+        .video-bar-track .video-card.portrait {
+            width: 240px;
+            aspect-ratio: 9 / 16;
         }
 
-        .video-card video.video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-bar-track .video-card.cinematic {
+            width: 630px;
+            aspect-ratio: 21 / 9;
+        }
+
+        .video-bar-track .video-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .video-bar-track .video-card video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 0;
-            border-radius: var(--radius-lg);
-            background: var(--bg-card);
+            display: block;
+            background: #000;
+            border-radius: 0;
         }
 
-        .video-card video { width: 100%; height: 100%; object-fit: cover; transition: opacity var(--transition-smooth); }
-        .video-card:hover video { opacity: 1; }
-        .video-play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); opacity: 0; transition: all var(--transition-smooth); background: transparent; pointer-events: none; }
-        .video-card:hover .video-play-btn { opacity: 1; }
-        .video-card .video-play-btn i { filter: none; }
-        .video-label { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--white); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .video-duration { position: absolute; bottom: 1rem; right: 1rem; font-size: 0.75rem; font-weight: 500; color: var(--white); background: rgba(0, 0, 0, 0.7); padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); }
+        /* Native fullscreen - maintain aspect ratio, don't stretch */
+        .video-bar-track .video-card video:-webkit-full-screen,
+        .video-bar-track .video-card video:fullscreen {
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important;
+            background: #000 !important;
+        }
 
-        /* Portrait mode cards */
-        .video-card.portrait { aspect-ratio: 9 / 16; }
-        .video-card.portrait video.video-bg { object-fit: cover; }
+        /* Center the video in fullscreen */
+        .video-bar-track .video-card video:-webkit-full-screen::backdrop,
+        .video-bar-track .video-card video::backdrop {
+            background: #000;
+        }
 
-        /* Landscape cinematic cards */
-        .video-card.cinematic { aspect-ratio: 21 / 9; }
-        .video-card.cinematic video.video-bg { object-fit: cover; }
-
-        /* Grid spans */
-        .video-card.span-2-col { grid-column: span 2; }
-
-        /* ── VIDEO OVERLAY LIGHTBOX ── */
-        .video-overlay {
-            position: fixed;
+        /* Play button overlay - no dark backdrop */
+        .video-bar-track .video-card .video-play-btn {
+            position: absolute;
             inset: 0;
-            background: rgba(3, 5, 8, 0.98);
-            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .video-overlay.active {
+            background: transparent;
+            z-index: 3;
+            pointer-events: auto;
+            cursor: pointer;
             opacity: 1;
             visibility: visible;
+            transition: opacity var(--transition-fast);
         }
-        .video-overlay video {
-            max-width: 90vw;
-            max-height: 80vh;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-elevated);
+
+        .video-bar-track .video-card .video-play-btn.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
-        .overlay-close-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            width: 56px;
-            height: 56px;
+
+        .video-bar-track .video-card .video-play-btn i {
+            font-size: 2.5rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
             border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--white);
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            z-index: 10000;
-        }
-        .overlay-close-btn:hover {
-            background: var(--accent-gradient);
-            border-color: var(--accent);
-            color: #050505;
-            transform: rotate(90deg);
+            padding: 14px 16px 14px 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: transform var(--transition-bounce), background var(--transition-fast);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .overlay-info h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
+        .video-bar-track .video-card:hover .video-play-btn i {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Video playing state - show native controls */
+        .video-bar-track .video-card.playing .video-play-btn {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .video-bar-track .video-card.playing video {
+            pointer-events: auto;
+        }
+
+        /* Video Label & Duration */
+        .video-bar-track .video-card .video-label {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            right: 0.75rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--white);
-            margin-bottom: 0.25rem;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            z-index: 2;
+            pointer-events: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .overlay-info .category { color: var(--accent);
-            font-size: 0.85rem;
+        .video-bar-track .video-card .video-duration {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em; }
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-sm);
+            z-index: 2;
+            pointer-events: none;
+        }
 
-        @media (max-width: 1024px) {
-            .video-grid { grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: auto; }
-            .video-card.span-2-col { grid-column: span 1; }
-            .video-card .video-play-btn { width: 56px;
-                height: 56px;
-                font-size: 1.1rem; }
-            .video-card:hover .video-play-btn { width: 62px;
-                height: 62px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(2) { border-right: none; }
-            .stat-item:last-child { border-right: 1px solid var(--border-subtle); }
-            .section { padding: 5rem var(--container-padding); }
+        /* Section Header */
+        .section-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-header-bar h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        .section-header-bar h3 span {
+            color: #d35400;
+            margin: 0 8px;
+            font-weight: 300;
+        }
+
+        .section-header-bar a {
+            color: #d35400;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .section-header-bar a:hover {
+            color: #e67e22;
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-            .video-tabs { gap: 0.5rem; }
-            .tab-btn { padding: 0.75rem 1.5rem;
-                font-size: 0.8rem; }
-            .video-grid { grid-template-columns: 1fr 1fr;
-                grid-auto-rows: auto;
-                gap: 0.75rem; }
-            .video-card.span-2-col { grid-column: span 1; }
-            .video-card .video-play-btn { width: 52px;
-                height: 52px;
-                font-size: 1rem; }
-            .video-card:hover .video-play-btn { width: 58px;
-                height: 58px; }
-            .video-card .video-label { font-size: 0.78rem;
-                bottom: 1rem;
-                left: 1rem; }
-            .video-card .video-duration { font-size: 0.65rem;
-                bottom: 1rem;
-                right: 1rem; }
-            .overlay-close-btn { top: -50px;
-                right: 0;
+            .video-bar-track .video-card.portrait {
+                width: 160px;
+            }
+            .video-bar-track .video-card.cinematic {
+                width: 280px;
+            }
+            .video-bar-track .video-card .video-play-btn i {
                 font-size: 2rem;
-                width: 48px;
-                height: 48px; }
-            .overlay-info { bottom: -60px;
-                font-size: 0.85rem; }
-            .overlay-info h3 { font-size: 1.1rem; }
+                padding: 10px 12px 10px 14px;
+            }
         }
 
-        @media (max-width: 576px) {
-            .video-grid { grid-template-columns: repeat(2, 1fr) !important;
-                grid-auto-rows: auto !important;
-                gap: 0.75rem !important; }
-            .video-card.span-2-col { grid-column: span 1 !important; }
-            .stats-grid { grid-template-columns: 1fr 1fr !important; }
-            .stat-item { padding: 1.5rem 1rem; }
-            .stat-item:nth-child(2) { border-right: 1px solid var(--border-subtle); }
-            .stat-item:last-child { border-right: none; }
-            .stat-number { font-size: 2.2rem; }
-            .tab-btn { padding: 0.6rem 1.2rem;
-                font-size: 0.75rem; }
+        @media (max-width: 480px) {
+            .video-bar-track .video-card.portrait {
+                width: 140px;
+            }
+            .video-bar-track .video-card.cinematic {
+                width: 240px;
+            }
         }
 
         /* ── CLIENT LOGOS ── */
@@ -1812,6 +1891,13 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border: 0; }
+
+        /* ── VIDEO OVERLAY (FULLSCREEN MODAL) ── */
+        .video-overlay { position: fixed; inset: 0; background: rgba(3, 5, 8, 0.98); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .video-overlay.active { opacity: 1; visibility: visible; }
+        .video-overlay video { max-width: 90vw; max-height: 80vh; border-radius: var(--radius-lg); box-shadow: var(--shadow-elevated); }
+        .overlay-close-btn { position: absolute; top: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1.25rem; cursor: pointer; transition: all var(--transition-smooth); z-index: 10000; }
+        .overlay-close-btn:hover { background: var(--accent-gradient); border-color: var(--accent); color: #030508; transform: rotate(90deg); }
     </style>
 </head>
 <body>
@@ -1883,23 +1969,77 @@
         </div>
     </div>
 
-    <!-- ── HERO ── -->
+    <!-- ── HERO SLIDER ── -->
     <section class="hero" id="home">
-        <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="assets/thumbnails/Oakridge_Promo_Video_01.png">
-            <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-badge"><i class="fa-solid fa-award"></i> Award-Winning Media Production</div>
-            <h1>We Capture Moments.<br><span class="highlight">Create Impact.</span></h1>
-            <p class="lead">Premier media partner delivering cinematic brand films, commercial productions, reels & short-form content that stops the scroll and drives results.</p>
-            <div class="hero-cta-group">
-                <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
-                <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+        <div class="hero-slider" id="heroSlider">
+            <!-- Slide 1: Strategic Content Creation -->
+            <div class="hero-slide active">
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Strategic Content Creation & Scripting</div>
+                    <h1>Strategic Content Creation <span class="highlight">& Scripting</span></h1>
+                    <p class="lead">From concept to final script, we craft compelling narratives that align with your brand voice and resonate with your target audience.</p>
+                    <div class="hero-cta-group">
+                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                    </div>
+                </div>
             </div>
+
+            <!-- Slide 2: Professional Cinematography -->
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e63?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fa-solid fa-camera"></i> Professional Cinematography</div>
+                    <h1>Professional Cinematography <span class="highlight">Ground & Drone</span></h1>
+                    <p class="lead">Ground cinematography with cinema cameras and aerial drone shots — we capture every angle with precision and cinematic flair.</p>
+                    <div class="hero-cta-group">
+                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Video Editing & Graphic Design -->
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fa-solid fa-film"></i> Professional Video Editing & Graphic Design</div>
+                    <h1>Professional Video Editing <span class="highlight">& Graphic Design</span></h1>
+                    <p class="lead">Expert editing, color grading, motion graphics, and visual effects — we transform raw footage into polished, engaging stories.</p>
+                    <div class="hero-cta-group">
+                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Social Media Management -->
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fa-solid fa-share-nodes"></i> Proper Social Media Management</div>
+                    <h1>Proper Social Media <span class="highlight">Management</span></h1>
+                    <p class="lead">End-to-end social media strategy, content creation, scheduling, community management, and analytics — we handle it all.</p>
+                    <div class="hero-cta-group">
+                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arrow Navigation -->
+            <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
+
+        <!-- Scroll Indicator -->
         <div class="hero-scroll-indicator">
-            <a href="#work"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
+            <a href="#portrait-videos"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
         </div>
     </section>
 
@@ -1913,117 +2053,103 @@
         </div>
     </div>
 
-    <!-- ── VIDEO SHOWCASE - TWO MODES ── -->
-    <section class="section video-showcase" id="work">
+    <!-- ── PORTRAIT VIDEOS BAR ── -->
+    <section class="section video-showcase" id="portrait-videos">
         <div class="section-inner">
-            <div class="section-header reveal reveal-up">
-                <span class="section-tag">Our Craft</span>
-                <h2 class="section-title">Watch Our Work in Action</h2>
-                <p class="section-subtitle">Two distinct storytelling modes — vertical reels that dominate social feeds, and cinematic landscapes built for the big screen.</p>
+            <div class="section-header-bar reveal reveal-up">
+                <h3>Our Latest Reels <span>|</span> <a href="portfolio.html">Watch All</a></h3>
             </div>
-
-            <div class="video-tabs reveal reveal-up delay-1">
-                <button class="tab-btn active" data-tab="reels"><i class="fa-solid fa-mobile-screen"></i> Reels & Shorts <span class="tab-count">(8)</span></button>
-                <button class="tab-btn" data-tab="cinematic"><i class="fa-solid fa-film"></i> Cinematic Films <span class="tab-count">(4)</span></button>
-            </div>
-
-            <!-- REELS GRID (Portrait 9:16) -->
-            <div class="video-grid" id="reelsGrid" data-mode="reels">
-                <!-- Education Reels (Portrait) -->
-                <div class="video-card portrait reveal reveal-scale delay-1" data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" data-title="Code.in — Educational Brand Film" data-duration="6:10" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Code.in Brand Film</span>
-                    <span class="video-duration">6:10</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-2" data-video="assets/Videos/Education/Full_Stack_Reel.mp4" data-poster="assets/thumbnails/Full_Stack_Reel.png" data-title="Full Stack Reel" data-duration="1:55" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Full_Stack_Reel.png"><source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Full Stack Reel</span>
-                    <span class="video-duration">1:55</span>
-                </div>
-                <!-- Food & Restaurant Reels -->
-                <div class="video-card portrait reveal reveal-scale delay-3" data-video="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" data-poster="assets/thumbnails/Barbeque Spice Reel 01.png" data-title="Barbeque Spice — Food Reel" data-duration="2:18" data-category="Food & Restaurant">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Barbeque Spice Reel 01.png"><source src="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Barbeque Spice</span>
-                    <span class="video-duration">2:18</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-4" data-video="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" data-poster="assets/thumbnails/Tandos_Grill_Reel_01.png" data-title="Tando's Grill Reel" data-duration="5:20" data-category="Food & Restaurant">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Tandos_Grill_Reel_01.png"><source src="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Tando's Grill</span>
-                    <span class="video-duration">5:20</span>
-                </div>
-                <!-- Jewellery Reels -->
-                <div class="video-card portrait reveal reveal-scale delay-5" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Reel" data-duration="2:45" data-category="Jewellery">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Iqbal Jewellers</span>
-                    <span class="video-duration">2:45</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-6" data-video="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" data-poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png" data-title="Nisar Jewellery Reel" data-duration="8:42" data-category="Jewellery">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png"><source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Nisar Jewellery</span>
-                    <span class="video-duration">8:42</span>
-                </div>
-                <!-- Events Reels -->
-                <div class="video-card portrait reveal reveal-scale delay-7" data-video="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" data-poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" data-title="VIP's Muay Thai Championship" data-duration="3:45" data-category="Events">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png"><source src="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">VIP's Muay Thai</span>
-                    <span class="video-duration">3:45</span>
-                </div>
-                <div class="video-card portrait reveal reveal-scale delay-8" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Sports Carnival</span>
-                    <span class="video-duration">5:20</span>
-                </div>
-
-                <!-- View Portfolio Dropdown Button -->
-                <div class="portfolio-dropdown-wrapper" style="grid-column: 1 / -1; margin-top: 2.5rem; display: flex; justify-content: center; width: 100%;">
-                    <div class="portfolio-dropdown">
-                        <button class="btn-secondary portfolio-dropdown-toggle" type="button"></i> View Portfolio </i></button>
-                        <div class="portfolio-dropdown-menu">
-                            <a href="education.html">Education</a>
-                            <a href="jewellery.html">Jewellery</a>
-                            <a href="food.html">Food & Restaurants</a>
-                        </div>
+            <div class="video-bar-wrapper reveal reveal-up delay-1">
+                <div class="video-bar-track" id="portraitTrack">
+                    <!-- Portrait Videos -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" data-title="Code.in Brand Film" data-duration="6:10" data-category="Education">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Code.in Brand Film</span>
+                        <span class="video-duration">6:10</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Full_Stack_Reel.mp4" data-poster="assets/thumbnails/Full_Stack_Reel.png" data-title="Full Stack Reel" data-duration="1:55" data-category="Education">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Full_Stack_Reel.png"><source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Full Stack Reel</span>
+                        <span class="video-duration">1:55</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" data-poster="assets/thumbnails/Barbeque Spice Reel 01.png" data-title="Barbeque Spice — Food Reel" data-duration="2:18" data-category="Food & Restaurant">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Barbeque Spice Reel 01.png"><source src="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Barbeque Spice</span>
+                        <span class="video-duration">2:18</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" data-poster="assets/thumbnails/Tandos_Grill_Reel_01.png" data-title="Tando's Grill Reel" data-duration="5:20" data-category="Food & Restaurant">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Tandos_Grill_Reel_01.png"><source src="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Tando's Grill</span>
+                        <span class="video-duration">5:20</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Reel" data-duration="2:45" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Iqbal Jewellers</span>
+                        <span class="video-duration">2:45</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" data-poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png" data-title="Nisar Jewellery Reel" data-duration="8:42" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png"><source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Nisar Jewellery</span>
+                        <span class="video-duration">8:42</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" data-poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" data-title="VIP's Muay Thai Championship" data-duration="3:45" data-category="Events">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png"><source src="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">VIP's Muay Thai</span>
+                        <span class="video-duration">3:45</span>
+                    </div>
+                    <div class="video-card portrait" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Sports Carnival</span>
+                        <span class="video-duration">5:20</span>
                     </div>
                 </div>
             </div>
-            <!-- END reelsGrid -->
+        </div>
+    </section>
 
-            <!-- CINEMATIC GRID (Landscape 21:9 / 16:9) — now a sibling of reelsGrid, not a child -->
-            <div class="video-grid" id="cinematicGrid" data-mode="cinematic" style="display: none;">
-                <div class="video-card cinematic reveal reveal-scale delay-1" data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge International School — Promo Film" data-duration="4:32" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Oakridge Promo</span>
-                    <span class="video-duration">4:32</span>
-                </div>
-                <div class="video-card cinematic reveal reveal-scale delay-2" data-video="assets/Videos/Landscape/Springfield_Trailer_01.mp4" data-poster="assets/thumbnails/Springfield_Trailer_01.png" data-title="Springfield Trailer" data-duration="3:15" data-category="Events">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Springfield_Trailer_01.png"><source src="assets/Videos/Landscape/Springfield_Trailer_01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Springfield Trailer</span>
-                    <span class="video-duration">3:15</span>
-                </div>
-                <div class="video-card cinematic reveal reveal-scale delay-3" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">Sports Carnival</span>
-                    <span class="video-duration">5:20</span>
-                </div>
-                <div class="video-card cinematic reveal reveal-scale delay-4" data-video="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" data-poster="assets/thumbnails/Vip's_Trailer_Video_02.png" data-title="VIP's International School — Trailer" data-duration="4:10" data-category="Education">
-                    <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Vip's_Trailer_Video_02.png"><source src="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" type="video/mp4"></video>
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                    <span class="video-label">VIP's Trailer</span>
-                    <span class="video-duration">4:10</span>
+    <!-- ── LANDSCAPE VIDEOS BAR ── -->
+    <section class="section video-showcase" id="landscape-videos">
+        <div class="section-inner">
+            <div class="section-header-bar reveal reveal-up">
+                <h3>Cinematic Films <span>|</span> <a href="portfolio.html">Watch All</a></h3>
+            </div>
+            <div class="video-bar-wrapper reveal reveal-up delay-1">
+                <div class="video-bar-track" id="landscapeTrack">
+                    <!-- Landscape Videos -->
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge Promo Video" data-duration="4:30" data-category="Education">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Oakridge Promo</span>
+                        <span class="video-duration">4:30</span>
+                    </div>
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Springfield_Trailer_01.mp4" data-poster="assets/thumbnails/Springfield_Trailer_01.png" data-title="Springfield Trailer" data-duration="3:15" data-category="Events">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Springfield_Trailer_01.png"><source src="assets/Videos/Landscape/Springfield_Trailer_01.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Springfield Trailer</span>
+                        <span class="video-duration">3:15</span>
+                    </div>
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">Sports Carnival</span>
+                        <span class="video-duration">5:20</span>
+                    </div>
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" data-poster="assets/thumbnails/Vip's_Trailer_Video_02.png" data-title="VIP's International School — Trailer" data-duration="4:10" data-category="Education">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Vip's_Trailer_Video_02.png"><source src="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" type="video/mp4"></video>
+                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <span class="video-label">VIP's Trailer</span>
+                        <span class="video-duration">4:10</span>
+                    </div>
                 </div>
             </div>
-            <!-- END cinematicGrid -->
         </div>
     </section>
 
@@ -2036,15 +2162,9 @@
                 <p class="section-subtitle">From emerging startups to established enterprises, we've helped 150+ brands tell their story.</p>
             </div>
             <div class="brand-marquee-container">
-                <!-- Carousel 1: Left to Right -->
+                <!-- Single Carousel: Left to Right -->
                 <div class="brand-marquee reveal reveal-up delay-1">
                     <div class="brand-track" id="brandTrack1">
-                        <!-- Populated via JS from img/clients/ -->
-                    </div>
-                </div>
-                <!-- Carousel 2: Right to Left -->
-                <div class="brand-marquee reveal reveal-up delay-1">
-                    <div class="brand-track reverse" id="brandTrack2">
                         <!-- Populated via JS from img/clients/ -->
                     </div>
                 </div>
@@ -2083,20 +2203,6 @@
         </div>
     </section>
 
-    <!-- ── CTA BANNER ── -->
-    <section class="cta-section" id="contact">
-        <div class="cta-banner">
-            <div class="cta-content">
-                <h2>Ready to Create <span>Something Extraordinary?</span></h2>
-                <p>Let's discuss your next project. From concept to delivery, we handle it all.</p>
-            </div>
-            <div class="cta-actions">
-                <a href="contact.html" class="btn-primary"><span>Start Your Project</span><i class="fa-solid fa-paper-plane"></i></a>
-                <a href="https://wa.me/919989571223" target="_blank" class="btn-secondary"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
-            </div>
-        </div>
-    </section>
-
     <!-- ── INSTAGRAM REELS ── -->
     <section class="section instagram-section" id="instagram">
         <div class="section-inner">
@@ -2106,17 +2212,6 @@
                 <p class="section-subtitle">Add your Instagram Reel embed links below — they'll play right here.</p>
             </div>
             <div class="insta-reels-grid" id="instaReelsGrid">
-                <!-- Add your Instagram Reel embed codes here -->
-                <!-- Example format:
-                <div class="insta-reel-card reveal reveal-scale delay-1">
-                    <iframe src="https://www.instagram.com/reel/YOUR_REEL_CODE/embed/" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen="true"></iframe>
-                    <div class="insta-reel-overlay"><i class="fa-solid fa-play insta-play-btn"></i></div>
-                    <div class="insta-reel-info">
-                        <div class="reel-title">Your Reel Title</div>
-                        <div class="reel-meta"><i class="fa-brands fa-instagram"></i> Instagram</div>
-                    </div>
-                </div>
-                -->
                 <div class="insta-reel-card reveal reveal-scale delay-1">
                     <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(6,102,204,0.1),rgba(0,82,163,0.05));color:var(--text-muted);font-size:0.85rem;text-align:center;padding:2rem;">
                         <i class="fa-brands fa-instagram" style="font-size:2rem;color:var(--accent);margin-bottom:0.5rem;display:block;"></i>
@@ -2208,31 +2303,17 @@
         </div>
     </footer>
 
-    <!-- ── VIDEO OVERLAY ── -->
-    <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-label="Video Player">
-        <video id="overlayVideo" controls playsinline>
-            <source src="" type="video/mp4">
-        </video>
-        <button class="overlay-close-btn" id="overlayClose" aria-label="Close video"><i class="fa-solid fa-times"></i></button>
-    </div>
-
-    <script>
+<script>
         (function() {
             'use strict';
 
-// ── DOM ELEMENTS ──
+            // ── DOM ELEMENTS ──
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const menuBackdrop = document.getElementById('menuBackdrop');
-            const videoOverlay = document.getElementById('videoOverlay');
-            const overlayVideo = document.getElementById('overlayVideo');
-            const overlayClose = document.getElementById('overlayClose');
             const videoCards = document.querySelectorAll('.video-card');
             const portfolioVideos = document.querySelectorAll('.portfolio-main-video, .portfolio-side-item');
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const reelsGrid = document.getElementById('reelsGrid');
-            const cinematicGrid = document.getElementById('cinematicGrid');
             const statNumbers = document.querySelectorAll('.stat-number[data-count]');
             const aboutYears = document.querySelector('.about-experience .years[data-count]');
             const brandTrack1 = document.getElementById('brandTrack1');
@@ -2273,19 +2354,6 @@
                 });
             }
 
-            // Portfolio dropdown (Our Craft section) - specifically the one in reelsGrid
-            const craftPortfolioDropdown = document.querySelector('#reelsGrid .portfolio-dropdown');
-            const craftPortfolioDropdownToggle = document.querySelector('#reelsGrid .portfolio-dropdown-toggle');
-            if (craftPortfolioDropdownToggle) {
-                craftPortfolioDropdownToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (craftPortfolioDropdown) craftPortfolioDropdown.classList.toggle('active');
-                });
-            }
-            document.addEventListener('click', () => {
-                if (craftPortfolioDropdown) craftPortfolioDropdown.classList.remove('active');
-            });
-
             // ── STAT COUNTERS ──
             function animateCounter(el, target) {
                 const duration = 2000;
@@ -2324,112 +2392,87 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-            // ── VIDEO TABS ──
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const tab = btn.dataset.tab;
-                    reelsGrid.style.display = tab === 'reels' ? 'grid' : 'none';
-                    cinematicGrid.style.display = tab === 'cinematic' ? 'grid' : 'none';
-                    // Close portfolio dropdown when switching tabs
-                    const craftPortfolioDropdown = document.querySelector('#reelsGrid .portfolio-dropdown');
-                    if (craftPortfolioDropdown) craftPortfolioDropdown.classList.remove('active');
-                    // Re-observe reveals for newly shown grid
-                    const gridId = tab === 'reels' ? 'reelsGrid' : 'cinematicGrid';
-                    document.querySelectorAll(`#${gridId} .reveal`).forEach(el => {
-                        el.classList.remove('revealed');
-                        revealObserver.observe(el);
-                    });
-                });
-            });
-
-            // ── VIDEO OVERLAY ──
-            function openOverlay(src) {
-                overlayVideo.src = src;
-                overlayVideo.load();
-                videoOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                setTimeout(() => overlayVideo.play().catch(() => {}), 100);
-            }
-
-            function closeOverlay() {
-                videoOverlay.classList.remove('active');
-                overlayVideo.pause();
-                overlayVideo.currentTime = 0;
-                document.body.style.overflow = '';
-            }
-
             function pauseAllInlineVideos() {
                 document.querySelectorAll('.video-card video.video-bg, .portfolio-main-video video, .portfolio-side-item video')
                     .forEach(v => {
                         if (!v.paused) {
                             v.pause();
+                            v.removeAttribute('controls');
+                            v.muted = true;
                             const card = v.closest('.video-card');
                             if (card) {
-                                card.classList.remove('playing');
-                                const icon = card.querySelector('.video-play-btn i');
-                                if (icon) icon.className = 'fa-solid fa-play';
+                                const playBtn = card.querySelector('.video-play-btn');
+                                if (playBtn) playBtn.classList.remove('hidden');
                             }
                         }
                     });
             }
 
-            // Video cards click
-            videoCards.forEach(card => {
-                card.addEventListener('click', e => {
-                    if (e.target.closest('.video-play-btn')) return;
-                    const src = card.dataset.video;
-                    if (src) {
-                        pauseAllInlineVideos();
-                        openOverlay(src);
-                    }
-                });
-                const playBtn = card.querySelector('.video-play-btn');
-                if (playBtn) {
-                    playBtn.addEventListener('click', e => {
-                        e.stopPropagation();
-                        const src = card.dataset.video;
-                        if (src) {
-                            pauseAllInlineVideos();
-                            openOverlay(src);
-                        }
+            // Video element click -> toggle play/pause inline
+            document.addEventListener('click', function(e) {
+                const video = e.target.closest('.video-card video.video-bg');
+                if (!video) return;
+
+                const card = video.closest('.video-card');
+                const playBtn = card ? card.querySelector('.video-play-btn') : null;
+
+                if (video.paused) {
+                    // Play: hide play button, show controls, unmute
+                    pauseAllInlineVideos();
+                    if (playBtn) playBtn.classList.add('hidden');
+                    video.setAttribute('controls', '');
+                    video.muted = false;
+                    card.classList.add('playing');
+                    video.play().catch(() => {
+                        if (playBtn) playBtn.classList.remove('hidden');
+                        video.removeAttribute('controls');
+                        video.muted = true;
+                        card.classList.remove('playing');
                     });
+                } else {
+                    // Pause: show play button, hide controls, mute
+                    video.pause();
+                    video.removeAttribute('controls');
+                    video.muted = true;
+                    card.classList.remove('playing');
+                    if (playBtn) playBtn.classList.remove('hidden');
                 }
             });
 
-            // Portfolio videos click
+            // Play button click -> play inline with controls
+            document.addEventListener('click', function(e) {
+                const playBtn = e.target.closest('.video-play-btn');
+                if (!playBtn) return;
+
+                e.stopPropagation();
+                const card = playBtn.closest('.video-card');
+                if (!card) return;
+
+                const video = card.querySelector('video.video-bg');
+                if (!video) return;
+
+                pauseAllInlineVideos();
+
+                // Hide play button, show controls, play inline
+                playBtn.classList.add('hidden');
+                video.setAttribute('controls', '');
+                video.muted = false;
+                card.classList.add('playing');
+                video.play().catch(() => {
+                    playBtn.classList.remove('hidden');
+                    card.classList.remove('playing');
+                });
+            });
             portfolioVideos.forEach(item => {
                 item.addEventListener('click', e => {
                     if (e.target.closest('.play-overlay, .item-overlay')) return;
-                    const src = item.dataset.video;
-                    if (src) {
-                        pauseAllInlineVideos();
-                        openOverlay(src);
-                    }
                 });
                 const overlay = item.querySelector('.play-overlay, .item-overlay');
                 if (overlay) {
                     overlay.addEventListener('click', e => {
                         e.stopPropagation();
-                        const src = item.dataset.video;
-                        if (src) {
-                            pauseAllInlineVideos();
-                            openOverlay(src);
-                        }
                     });
                 }
-            });
-
-            overlayClose.addEventListener('click', e => {
-                e.stopPropagation();
-                closeOverlay();
-            });
-            videoOverlay.addEventListener('click', e => {
-                if (e.target === videoOverlay) closeOverlay();
-            });
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape' && videoOverlay.classList.contains('active')) closeOverlay();
             });
 
             // ── BRAND MARQUEE ──
@@ -2449,15 +2492,104 @@
                 }
             }
             populateBrandTrack(brandTrack1);
-            populateBrandTrack(brandTrack2);
 
-            // ── HERO VIDEO PLAY POLICY ──
-            const heroVideo = document.querySelector('.hero-video-bg');
-            if (heroVideo) {
-                heroVideo.muted = true;
-                heroVideo.play().catch(() => {
-                    heroVideo.removeAttribute('autoplay');
+            // ── HERO SLIDER ──
+            const heroSlider = document.getElementById('heroSlider');
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            const heroPrev = document.getElementById('heroPrev');
+            const heroNext = document.getElementById('heroNext');
+
+            if (heroSlider && heroSlides.length > 0) {
+                let currentSlide = 0;
+                const slideCount = heroSlides.length;
+                let slideInterval;
+                let isTransitioning = false;
+
+                function showSlide(index) {
+                    if (isTransitioning || index === currentSlide) return;
+                    isTransitioning = true;
+
+                    const outgoingSlide = heroSlides[currentSlide];
+                    const incomingSlide = heroSlides[index];
+
+                    // Mark outgoing as exiting
+                    outgoingSlide.classList.add('exiting');
+                    outgoingSlide.classList.remove('active');
+
+                    // Prepare incoming as entering
+                    incomingSlide.classList.add('entering');
+
+                    // After transition starts, mark incoming as active
+                    requestAnimationFrame(() => {
+                        incomingSlide.classList.add('active');
+                        incomingSlide.classList.remove('entering');
+                    });
+
+                    // Clean up after transition
+                    setTimeout(() => {
+                        outgoingSlide.classList.remove('exiting');
+                        isTransitioning = false;
+                    }, 1200);
+
+                    currentSlide = index;
+                }
+
+                function nextSlide() {
+                    const next = (currentSlide + 1) % heroSlides.length;
+                    showSlide(next);
+                }
+
+                function prevSlide() {
+                    const prev = (currentSlide - 1 + heroSlides.length) % heroSlides.length;
+                    showSlide(prev);
+                }
+
+                function startAutoSlide() {
+                    slideInterval = setInterval(nextSlide, 5000);
+                }
+
+                function stopAutoSlide() {
+                    clearInterval(slideInterval);
+                }
+
+                // Arrow navigation
+                if (heroPrev) {
+                    heroPrev.addEventListener('click', () => {
+                        stopAutoSlide();
+                        prevSlide();
+                        startAutoSlide();
+                    });
+                }
+                if (heroNext) {
+                    heroNext.addEventListener('click', () => {
+                        stopAutoSlide();
+                        nextSlide();
+                        startAutoSlide();
+                    });
+                }
+
+                // Pause on hover
+                const heroSliderEl = document.getElementById('heroSlider');
+                if (heroSliderEl) {
+                    heroSliderEl.addEventListener('mouseenter', stopAutoSlide);
+                    heroSliderEl.addEventListener('mouseleave', startAutoSlide);
+                }
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        stopAutoSlide();
+                        prevSlide();
+                        startAutoSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        stopAutoSlide();
+                        nextSlide();
+                        startAutoSlide();
+                    }
                 });
+
+                // Start auto slide
+                startAutoSlide();
             }
 
             // ── LAZY LOAD VIDEO POSTERS ──
