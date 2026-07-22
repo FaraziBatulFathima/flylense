@@ -1073,12 +1073,6 @@
             color: var(--text-muted);
             margin-top: 0.5rem;
         }
-        @media(max-width: 576px){
-            .stat-item{
-                 grid-template-columns: 4;
-
-            }
-        }
 
         /* ── VIDEO SHOWCASE BAR ── */
         .video-showcase {
@@ -2151,70 +2145,75 @@
 
     <!-- ── HERO SLIDER ── -->
     <section class="hero" id="home">
-        <div class="hero-slider" id="heroSlider">
-            <!-- Slide 1 -->
-            <div class="hero-slide active">
-                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Strategic Content Creation & Scripting</div>
-                    <h1>Strategic Content Creation <span class="highlight">&amp; Scripting</span></h1>
-                    <p class="lead">From concept to final script, we craft compelling narratives that align with your brand voice and resonate with your target audience.</p>
-                    <div class="hero-cta-group">
-                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
-                    </div>
+    <div class="hero-slider" id="heroSlider">
+        <!-- Slide 1: Strategic Content Creation & Scripting -->
+        <div class="hero-slide active">
+            <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fa-solid fa-camera"></i> Professional Cinematography</div>
+                <h1>Professional Cinematography <span class="highlight">Ground &amp; Drone Shoots</span></h1>
+                <p class="lead">Ground cinematography with cinema cameras and aerial drone shots — we capture every angle with precision and cinematic flair.</p>
+                <div class="hero-cta-group">
+                    <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
                 </div>
             </div>
-            <!-- Slide 2 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e63?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-badge"><i class="fa-solid fa-camera"></i> Professional Cinematography</div>
-                    <h1>Professional Cinematography <span class="highlight">Ground &amp; Drone</span></h1>
-                    <p class="lead">Ground cinematography with cinema cameras and aerial drone shots — we capture every angle with precision and cinematic flair.</p>
-                    <div class="hero-cta-group">
-                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1606744837600-7b4b8c9637e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-badge"><i class="fa-solid fa-film"></i> Professional Video Editing &amp; Graphic Design</div>
-                    <h1>Professional Video Editing <span class="highlight">&amp; Graphic Design</span></h1>
-                    <p class="lead">Expert editing, color grading, motion graphics, and visual effects — we transform raw footage into polished, engaging stories.</p>
-                    <div class="hero-cta-group">
-                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 4 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-badge"><i class="fa-solid fa-share-nodes"></i> Proper Social Media Management</div>
-                    <h1>Proper Social Media <span class="highlight">Management</span></h1>
-                    <p class="lead">End-to-end social media strategy, content creation, scheduling, community management, and analytics — we handle it all.</p>
-                    <div class="hero-cta-group">
-                        <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
-                    </div>
-                </div>
-            </div>
-            <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-        <div class="hero-scroll-indicator">
-            <a href="#portrait-videos"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
+
+        <!-- Slide 2: Professional Cinematography -->
+        <div class="hero-slide">
+            
+            <div class="hero-slide-bg" style="background-image: url('img/slider/new2.jpg');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Strategic Content Creation & Scripting</div>
+                <h1>Strategic Content Creation <span class="highlight">&amp; Scripting</span></h1>
+                <p class="lead">From concept to final script, we craft compelling narratives that align with your brand voice and resonate with your target audience.</p>
+                <div class="hero-cta-group">
+                    <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <!-- Slide 3: Professional Video Editing & Graphic Design -->
+        <div class="hero-slide">
+            <div class="hero-slide-bg" style="background-image: url('img/slider/new3.jpeg');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fa-solid fa-film"></i> Professional Video Editing &amp; Graphic Design</div>
+                <h1>Professional Video Editing <span class="highlight">&amp; Graphic Design</span></h1>
+                <p class="lead">Expert editing, color grading, motion graphics, and visual effects — we transform raw footage into polished, engaging stories.</p>
+                <div class="hero-cta-group">
+                    <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Proper Social Media Management -->
+        <div class="hero-slide">
+            <div class="hero-slide-bg" style="background-image: url('img/slider/3.png');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fa-solid fa-share-nodes"></i> Proper Social Media Management</div>
+                <h1>Proper Social Media <span class="highlight">Management</span></h1>
+                <p class="lead">End-to-end social media strategy, content creation, scheduling, community management, and analytics — we handle it all.</p>
+                <div class="hero-cta-group">
+                    <a href="portfolio.html" class="btn-primary"><span>View Our Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-headset"></i> Start a Project</a>
+                </div>
+            </div>
+        </div>
+
+        <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="hero-scroll-indicator">
+        <a href="#portrait-videos"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
+    </div>
+</section>
 
     <!-- ── STATS RIBBON ── -->
     <div class="stats-ribbon">
