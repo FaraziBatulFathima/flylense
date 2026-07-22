@@ -360,6 +360,57 @@
     </style>
 </head>
 <body>
+    <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+        <a href="index.html" class="nav-logo">
+            <img src="img/logo.png" alt="FlyLense Logo" class="logo-icon">
+            <img src="img/title.png" alt="FlyLense" class="logo-title">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" data-page="index">Home</a></li>
+            <li><a href="about.html" data-page="about">About</a></li>
+            <li class="dropdown">
+                <a href="portfolio.html" class="dropdown-toggle" data-page="portfolio">Portfolio</a>
+                <div class="dropdown-menu">
+                    <a href="education.html" data-page="education">Education</a>
+                    <a href="jewellery.html" data-page="jewellery">Jewellery</a>
+                    <a href="food.html" data-page="food">Food & Restaurants</a>
+                </div>
+            </li>
+            <li><a href="industry.html" data-page="industry">Industries</a></li>
+            <li><a href="events.html" data-page="events">Events</a></li>
+            <li><a href="contact.html" data-page="contact">Let's Connect</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Menu Backdrop -->
+<div class="menu-backdrop" id="menuBackdrop"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="index">Home</a>
+    <a href="about.html" data-page="about">About</a>
+    <div class="mobile-dropdown">
+        <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-menu">
+            <a href="education.html" data-page="education">Education</a>
+            <a href="jewellery.html" data-page="jewellery">Jewellery</a>
+            <a href="food.html" data-page="food">Food & Restaurants</a>
+        </div>
+    </div>
+    <a href="industry.html" data-page="industry">Industries</a>
+    <a href="events.html" data-page="events">Events</a>
+    <a href="contact.html" class="mobile-cta" data-page="contact">Let's Connect</a>
+    <div class="menu-divider"></div>
+    <div class="menu-footer">
+        <span>&copy; 2026 FlyLense Media Partner</span>
+        <span>Crafting Cinematic Stories</span>
+    </div>
+</div>
     <!-- Floating Social -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Follow us on Instagram">
@@ -372,59 +423,6 @@
             <i class="fa-brands fa-whatsapp"></i>
             <span class="tooltip">Chat on WhatsApp</span>
         </a>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="nav-logo">
-                <img src="img/logo.png" alt="FlyLense Logo" class="logo-icon">
-                <img src="img/title.png" alt="FlyLense" class="logo-title">
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li class="dropdown">
-                    <a href="portfolio.html" class="dropdown-toggle">Portfolio</a>
-                    <div class="dropdown-menu">
-                        <a href="education.html">Education</a>
-                        <a href="jewellery.html">Jewellery</a>
-                        <a href="food.html">Food & Restaurants</a>
-                    </div>
-                </li>
-                <li><a href="industry.html" class="active">Industries</a></li>
-                <li><a href="blogs.html">Insights</a></li>
-                <li><a href="contact.html" class="nav-cta">Let's Talk</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Menu Backdrop -->
-    <div class="menu-backdrop" id="menuBackdrop"></div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <div class="mobile-dropdown">
-            <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="mobile-dropdown-menu">
-                <a href="education.html">Education</a>
-                <a href="jewellery.html">Jewellery</a>
-                <a href="food.html">Food & Restaurants</a>
-            </div>
-        </div>
-        <a href="industry.html" class="active">Industries</a>
-        <a href="blogs.html">Insights</a>
-        <a href="contact.html" class="mobile-cta">Let's Talk</a>
-        <div class="menu-divider"></div>
-        <div class="menu-footer">
-            <span>&copy; 2026 FlyLense Media Partner</span>
-            <span>Crafting Cinematic Stories</span>
-        </div>
     </div>
 
     <!-- ===== HERO SECTION ===== -->
@@ -666,69 +664,7 @@
     </section>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <img src="img/logo.png" alt="FlyLense" class="logo">
-                <p>FlyLense Media Partner Pvt Ltd — Crafting cinematic stories that captivate audiences and elevate brands. From concept to final delivery, we transform ideas into impactful visual experiences.</p>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/flylense-media-partner" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="https://www.youtube.com/@flylense" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://wa.me/919989571223" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="footer-title">Quick Links</h4>
-                <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="portfolio.html">Portfolio</a>
-                    <a href="industry.html">Industries</a>
-                    <a href="blogs.html">Insights</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="footer-title">Specialties</h4>
-                <div class="footer-links">
-                    <a href="portfolio.html#brand-films">Brand Films</a>
-                    <a href="portfolio.html#commercials">Commercials</a>
-                    <a href="portfolio.html#reels">Social Reels</a>
-                    <a href="portfolio.html#events">Event Coverage</a>
-                    <a href="portfolio.html#aerial">Drone Cinematography</a>
-                    <a href="portfolio.html#post">Post Production</a>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="footer-title">Contact Us</h4>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Hyderabad, Telangana, India</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <a href="tel:+919989571223">+91 99895 71223</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <a href="mailto:hello@flylense.com">hello@flylense.com</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 FlyLense Media Partner. All rights reserved.</            <div class="footer-bottom-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
+    
 
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -811,6 +747,26 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
+    
+    
+<script src="header-include.js">
+    <script src="header-include.js">
+    <script src="footer-include.js">
+</html>
+    <div id="footer-placeholder"></div>
+    <script src="header-include.js"></script>
+        });
     </script>
+        });
+    </script>
+        });
+    </script>
+        });
+    </script>
+        });
+    </script>
+    <div id="footer-placeholder"></div>
+    <script src="header-include.js"></script>
+    <script src="footer-include.js"></script>
 </body>
 </html>

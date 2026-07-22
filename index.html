@@ -358,8 +358,6 @@
             top: 100%;
             left: 0;
             min-width: 220px;
-            background: transparent;
-            border: none;
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-elevated);
             opacity: 0;
@@ -369,6 +367,8 @@
             z-index: 1001;
             padding: 0.5rem 0;
             margin-top: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
         }
         .nav-links li.dropdown:hover .dropdown-menu {
             opacity: 1;
@@ -2076,7 +2076,7 @@
     </style>
 </head>
 <body>
-    <!-- ── FLOATING SOCIAL ── -->
+    <div id="header-placeholder"></div>
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Follow us on Instagram">
             <i class="fa-brands fa-instagram"></i>
@@ -2090,59 +2090,7 @@
         </a>
     </div>
 
-    <!-- ── NAVBAR ── -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="nav-logo">
-                <img src="img/logo.png" alt="FlyLense Logo" class="logo-icon">
-                <img src="img/title.png" alt="FlyLense" class="logo-title">
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li class="dropdown">
-                    <a href="portfolio.html" class="dropdown-toggle">Portfolio</a>
-                    <div class="dropdown-menu">
-                        <a href="education.html">Education</a>
-                        <a href="jewellery.html">Jewellery</a>
-                        <a href="food.html">Food & Restaurants</a>
-                    </div>
-                </li>
-                <li><a href="industry.html">Industries</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="contact.html" class="nav-cta">Let's Connect</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Menu Backdrop -->
-    <div class="menu-backdrop" id="menuBackdrop"></div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <div class="mobile-dropdown">
-            <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="mobile-dropdown-menu">
-                <a href="education.html">Education</a>
-                <a href="jewellery.html">Jewellery</a>
-                <a href="food.html">Food & Restaurants</a>
-            </div>
-        </div>
-        <a href="industry.html">Industries</a>
-        <a href="events.html">Events</a>
-        <a href="contact.html" class="mobile-cta">Let's Connect</a>
-        <div class="menu-divider"></div>
-        <div class="menu-footer">
-            <span>© 2026 FlyLense Media Partner</span>
-            <span>Crafting Cinematic Stories</span>
-        </div>
-    </div>
-
+    <!-- Header loaded via header.html -->
     <!-- ── HERO SLIDER ── -->
     <section class="hero" id="home">
     <div class="hero-slider" id="heroSlider">
@@ -2355,7 +2303,7 @@
                     </div>
                     <div class="about-features-grid">
                         <div class="feat"><i class="fa-solid fa-camera-retro"></i><span>Cinematic Production</span></div>
-                        <div class="feat"><i class="fa-solid fa-drone"></i><span>Aerial Cinematography</span></div>
+                        <div class="feat"><i class="fa-solid fa-camera"></i><span>Aerial Cinematography</span></div>
                         <div class="feat"><i class="fa-solid fa-film"></i><span>Post Production</span></div>
                         <div class="feat"><i class="fa-solid fa-mobile-screen-button"></i><span>Social-First Content</span></div>
                     </div>
@@ -2450,56 +2398,16 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 FlyLense Media Partner Pvt Ltd. All rights reserved.</p>
-            <div class="footer-bottom-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
-            </div>
-        </div>
-    </footer>
-
+    
+    
+    
     <script>
         (function() {
             'use strict';
 
             // ── DOM REFS ──
-            const navbar = document.getElementById('navbar');
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuBackdrop = document.getElementById('menuBackdrop');
             const statNumbers = document.querySelectorAll('.stat-number[data-count]');
             const brandTrack1 = document.getElementById('brandTrack1');
-
-            // ── NAVBAR ──
-            function handleNavbar() {
-                navbar.classList.toggle('scrolled', window.scrollY > 50);
-            }
-            window.addEventListener('scroll', handleNavbar, { passive: true });
-            handleNavbar();
-            setTimeout(() => navbar.classList.add('loaded'), 100);
-
-            // ── MOBILE MENU ──
-            function toggleMenu() {
-                const isOpen = mobileMenu.classList.toggle('active');
-                menuBackdrop.classList.toggle('active', isOpen);
-                hamburger.classList.toggle('active', isOpen);
-                hamburger.setAttribute('aria-expanded', isOpen);
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            }
-            hamburger.addEventListener('click', toggleMenu);
-            menuBackdrop.addEventListener('click', toggleMenu);
-            mobileMenu.querySelectorAll('a:not(.mobile-dropdown-menu a)').forEach(a => a.addEventListener('click', toggleMenu));
-
-            const mobileDropdown = document.querySelector('.mobile-dropdown');
-            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-            if (mobileDropdownToggle) {
-                mobileDropdownToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    mobileDropdown.classList.toggle('active');
-                });
-            }
 
             // ── STAT COUNTERS ──
             function animateCounter(el, target) {
@@ -2691,6 +2599,26 @@
             document.querySelectorAll('video[data-src]').forEach(v => lazyObserver.observe(v));
 
         })();
+    
+    <script src="header-include.js">
+    <script src="footer-include.js">
+    <script src="header-include.js">
+    <script src="footer-include.js">
+</html>
+    <div id="footer-placeholder"></div>
+    <script src="header-include.js"></script>
+        });
     </script>
+        });
+    </script>
+        });
+    </script>
+        });
+    </script>
+        });
+    </script>
+    <div id="footer-placeholder"></div>
+    <script src="header-include.js"></script>
+    <script src="footer-include.js"></script>
 </body>
 </html>

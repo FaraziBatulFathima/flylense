@@ -1530,6 +1530,57 @@
     </style>
 </head>
 <body>
+    <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+        <a href="index.html" class="nav-logo">
+            <img src="img/logo.png" alt="FlyLense Logo" class="logo-icon">
+            <img src="img/title.png" alt="FlyLense" class="logo-title">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" data-page="index">Home</a></li>
+            <li><a href="about.html" data-page="about">About</a></li>
+            <li class="dropdown">
+                <a href="portfolio.html" class="dropdown-toggle" data-page="portfolio">Portfolio</a>
+                <div class="dropdown-menu">
+                    <a href="education.html" data-page="education">Education</a>
+                    <a href="jewellery.html" data-page="jewellery">Jewellery</a>
+                    <a href="food.html" data-page="food">Food & Restaurants</a>
+                </div>
+            </li>
+            <li><a href="industry.html" data-page="industry">Industries</a></li>
+            <li><a href="events.html" data-page="events">Events</a></li>
+            <li><a href="contact.html" data-page="contact">Let's Connect</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Menu Backdrop -->
+<div class="menu-backdrop" id="menuBackdrop"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="index">Home</a>
+    <a href="about.html" data-page="about">About</a>
+    <div class="mobile-dropdown">
+        <button class="mobile-dropdown-toggle">Portfolio <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-menu">
+            <a href="education.html" data-page="education">Education</a>
+            <a href="jewellery.html" data-page="jewellery">Jewellery</a>
+            <a href="food.html" data-page="food">Food & Restaurants</a>
+        </div>
+    </div>
+    <a href="industry.html" data-page="industry">Industries</a>
+    <a href="events.html" data-page="events">Events</a>
+    <a href="contact.html" class="mobile-cta" data-page="contact">Let's Connect</a>
+    <div class="menu-divider"></div>
+    <div class="menu-footer">
+        <span>&copy; 2026 FlyLense Media Partner</span>
+        <span>Crafting Cinematic Stories</span>
+    </div>
+</div>
 
     <!-- ── FLOATING SOCIAL ICONS ── -->
     <div class="floating-social floating-social-left">
@@ -1544,48 +1595,6 @@
             <span class="tooltip">Chat on WhatsApp</span>
         </a>
     </div>
-
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="nav-logo">
-                <img class="logo-icon" src="img/logo.png" alt="FlyLense Logo" />
-                <img class="logo-title" src="img/title.png" alt="FlyLense" />
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="service.html">Services</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                <li><a href="industry.html">Industries</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Menu Backdrop -->
-    <div class="menu-backdrop" id="menuBackdrop"></div>
-
-    <!-- ===== MOBILE MENU ===== -->
-    <div class="mobile-menu" id="mobileMenu"><br><br>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="service.html">Services</a>
-        <a href="portfolio.html" class="active">Portfolio</a>
-        <a href="industry.html">Industries</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="contact.html" class="mobile-cta">Let's Talk</a>
-        <div class="menu-footer-text">
-            <span>© 2026 FlyLense</span>
-        </div>
-    </div>
-
     <!-- ===== HERO ===== -->
     <section class="portfolio-hero">
         <span class="slide-tag">Our Work</span>
@@ -1634,27 +1643,7 @@
     <br /><br />
 
     <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">FlyLense</div>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="service.html">Services</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="industry.html">Industries</a>
-                <a href="blogs.html">Blogs</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.instagram.com/wix"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.youtube.com/user/Wix"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.facebook.com/wix"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo"><i class="fa-brands fa-linkedin-in"></i></a>
-            </div>
-            <div class="footer-copy">&copy; 2026 FlyLense. All rights reserved.</div>
-        </div>
-    </footer>
+    
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
@@ -1961,6 +1950,26 @@
             observeRevealItems();
 
         });
+    
+    
+<script src="header-include.js">
+    <script src="header-include.js">
+    <script src="footer-include.js">
+</html>
+    <div id="footer-placeholder"></div>
+    <script src="header-include.js"></script>
+        });
     </script>
+        });
+    </script>
+        });
+    </script>
+        });
+    </script>
+        });
+    </script>
+    <div id="footer-placeholder"></div>
+    <script src="header-include.js"></script>
+    <script src="footer-include.js"></script>
 </body>
 </html>
