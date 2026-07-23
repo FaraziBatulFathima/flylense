@@ -54,16 +54,16 @@
             --bg-tertiary: #eef3fa;
             --bg-card: #ffffff;
             --bg-card-hover: #f5f9ff;
-            --blue: #0074f6;
-            --blue-light: #3391ff;
-            --blue-dark: #0056c4;
-            --accent: #4da3ff;
+            --blue: #0066cc;
+            --blue-light: #0080ff;
+            --blue-dark: #004d99;
+            --accent: #0066cc;
             --text-primary: #111827;
             --text-secondary: #374151;
             --text-muted: #6b7280;
             --border: #e5e7eb;
             --border-light: #d1d5db;
-            --gradient-blue: linear-gradient(135deg, #0074f6, #3391ff, #0056c4);
+            --gradient-blue: linear-gradient(135deg, #0066cc, #0080ff, #004d99);
             --shadow-blue: 0 10px 30px rgba(0, 116, 246, .15);
             --shadow-card: 0 10px 25px rgba(0, 0, 0, .06);
             --shadow-elevated: 0 20px 45px rgba(0, 0, 0, .10);
@@ -835,7 +835,7 @@
         .cta-banner {
             max-width: var(--max-width);
             margin: 0 auto;
-            background: linear-gradient(135deg, #0074f6, #0040c1);
+            background: linear-gradient(135deg, #0066cc, #0040c1);
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 116, 246, 0.35);
             display: flex;
@@ -860,7 +860,7 @@
         }
         .cta-banner .btn-cta-white {
             background: #fff;
-            color: #0074f6;
+            color: #0066cc;
             border: none;
             padding: 18px 32px;
             font-weight: 700;
@@ -1926,8 +1926,29 @@
     
     
 
-    <script src="header-include.js"></script>
-    <script src="footer-include.js"></script>
+    <script>
+        fetch("header.html").then(r => r.text()).then(html => {
+            const placeholder = document.getElementById("header-placeholder");
+            if (placeholder) {
+                placeholder.outerHTML = html;
+                const container = document.createElement("div");
+                container.innerHTML = html;
+                const scripts = container.querySelectorAll("script");
+                scripts.forEach(s => {
+                    const ns = document.createElement("script");
+                    if (s.src) ns.src = s.src;
+                    else ns.textContent = s.textContent;
+                    document.head.appendChild(ns);
+                });
+            }
+        });
+    </script>
+    <script>fetch("footer.html").then(r => r.text()).then(html => { document.getElementById("footer-placeholder").outerHTML = html; });</script>
 </body>
 </html>
+
+
+
+
+
 

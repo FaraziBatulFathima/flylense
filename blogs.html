@@ -82,10 +82,10 @@
             --border-subtle: #1a2230;
             --border-light: #223044;
             --border-accent: #2a3a52;
-            --accent: #00a859;
+            --accent: #0066cc;
             --accent-light: #00cc6a;
             --accent-dark: #008747;
-            --accent-gradient: linear-gradient(135deg, #007a44 0%, #00a859 50%, #00cc6a 100%);
+            --accent-gradient: linear-gradient(135deg, #007a44 0%, #0066cc 50%, #00cc6a 100%);
             --accent-gradient-soft: linear-gradient(135deg, rgba(0, 122, 73, 0.15) 0%, rgba(0, 204, 106, 0.08) 100%);
             --text-primary: #ffffff;
             --text-secondary: #d4dbe5;
@@ -1424,7 +1424,28 @@
         });
     </script>
     <div id="footer-placeholder"></div>
-    <script src="header-include.js"></script>
-    <script src="footer-include.js"></script>
+    <script>
+        fetch("header.html").then(r => r.text()).then(html => {
+            const placeholder = document.getElementById("header-placeholder");
+            if (placeholder) {
+                placeholder.outerHTML = html;
+                const container = document.createElement("div");
+                container.innerHTML = html;
+                const scripts = container.querySelectorAll("script");
+                scripts.forEach(s => {
+                    const ns = document.createElement("script");
+                    if (s.src) ns.src = s.src;
+                    else ns.textContent = s.textContent;
+                    document.head.appendChild(ns);
+                });
+            }
+        });
+    </script>
+    <script>fetch("footer.html").then(r => r.text()).then(html => { document.getElementById("footer-placeholder").outerHTML = html; });</script>
 </body>
 </html>
+
+
+
+
+
