@@ -604,13 +604,21 @@
 
         const dropdown = document.querySelector('.dropdown');
         if (dropdown) {
+            let hideTimeout;
+            
             dropdown.addEventListener('mouseleave', () => {
-                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-                if (dropdownMenu) {
-                    dropdownMenu.style.opacity = '0';
-                    dropdownMenu.style.visibility = 'hidden';
-                    dropdownMenu.style.transform = 'translateY(10px)';
-                }
+                hideTimeout = setTimeout(() => {
+                    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                    if (dropdownMenu) {
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.visibility = 'hidden';
+                        dropdownMenu.style.transform = 'translateY(10px)';
+                    }
+                }, 150);
+            });
+            
+            dropdown.addEventListener('mouseenter', () => {
+                clearTimeout(hideTimeout);
             });
         }
     }

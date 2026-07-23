@@ -606,7 +606,7 @@
             font-size: clamp(1.1rem, 2vw, 1.35rem);
             color: var(--text-secondary);
             line-height: 1.8;
-            max-width: 580px;
+            max-width: 880px;
             margin-bottom: 2.5rem;
         }
 
@@ -764,8 +764,7 @@
         .stats-ribbon {
             position: relative;
             z-index: 3;
-            margin-top: -4rem;
-            padding: 0 var(--container-padding);
+            /*padding: 0 var(--container-padding);*/
         }
 
         .stats-grid {
@@ -1630,16 +1629,7 @@
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     </style>
 </head>
-<body>\n    <div id="header-placeholder"></div>
-    <a href="industry.html" data-page="industry">Industries</a>
-    <a href="events.html" data-page="events">Events</a>
-    <a href="contact.html" class="mobile-cta" data-page="contact">Let's Connect</a>
-    <div class="menu-divider"></div>
-    <div class="menu-footer">
-        <span>&copy; 2026 FlyLense Media Partner</span>
-        <span>Crafting Cinematic Stories</span>
-    </div>
-</div>
+<body>
     <!-- Floating Social -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Follow us on Instagram">
@@ -1857,70 +1847,11 @@
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fa-solid fa-chevron-up"></i>
-    </button>
+</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Navbar scroll & load animation
-            const navbar = document.getElementById('navbar');
-            requestAnimationFrame(() => navbar.classList.add('loaded'));
-
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 20) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-
-                // Back to top
-                const backToTop = document.getElementById('backToTop');
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            }, { passive: true });
-
-            // Back to top click
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Mobile menu
-            const hamburger = document.getElementById('hamburger');
-            const menuBackdrop = document.getElementById('menuBackdrop');
-            const mobileMenu = document.getElementById('mobileMenu');
-
-            function toggleMenu() {
-                const isActive = hamburger.classList.toggle('active');
-                menuBackdrop.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                hamburger.setAttribute('aria-expanded', isActive);
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            }
-
-            hamburger.addEventListener('click', toggleMenu);
-            menuBackdrop.addEventListener('click', toggleMenu);
-
-            document.querySelectorAll('.mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!link.classList.contains('mobile-dropdown-toggle')) {
-                        toggleMenu();
-                    }
-                });
-            });
-
-            // Mobile dropdown - FIXED: document.querySelector instead of document.query
-            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-            const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
-            if (mobileDropdownToggle && mobileDropdownMenu) {
-                mobileDropdownToggle.addEventListener('click', () => {
-                    const isOpen = mobileDropdownToggle.classList.toggle('active');
-                    mobileDropdownMenu.style.maxHeight = isOpen ? mobileDropdownMenu.scrollHeight + 'px' : '0';
-                });
-            }
-
-            // Reveal animations
+            // Page-specific: Reveal animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1931,7 +1862,7 @@
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // Counter animation
+            // Page-specific: Counter animation
             const counters = document.querySelectorAll('.stat-number');
             const counterObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1954,7 +1885,7 @@
             }, { threshold: 0.5 });
             counters.forEach(c => counterObserver.observe(c));
 
-            // Client logos for marquee
+            // Page-specific: Client logos for marquee
             const clientLogos = [
                 { src: 'img/clients/1.png', alt: 'Code for India' },
                 { src: 'img/clients/2.png', alt: "VIP's International School" },
@@ -2007,7 +1938,7 @@
                 });
             }
 
-            // BTS Grid data
+            // Page-specific: BTS Grid data
             const btsData = [
                 { img: 'assets/thumbnails/Code.in_Video_04.png', title: 'Code.in Brand Film Shoot' },
                 { img: 'assets/thumbnails/Full_Stack_Reel.png', title: 'Full Stack Academy Setup' },
@@ -2073,10 +2004,6 @@
                     instaGrid.appendChild(div);
                 });
             }
-        });
-    
-    
-
         });
     </script>
         });
