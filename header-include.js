@@ -211,7 +211,7 @@
             transition: all var(--transition-smooth);
             z-index: 1001;
             padding: 0.5rem 0;
-            margin-top: 8px;
+            margin-top: 0;
             background: var(--bg-card);
             border: 1px solid var(--border-light);
         }
@@ -604,23 +604,21 @@
 
         const dropdown = document.querySelector('.dropdown');
         if (dropdown) {
-            let hideTimeout;
-            
-            dropdown.addEventListener('mouseleave', () => {
-                hideTimeout = setTimeout(() => {
-                    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-                    if (dropdownMenu) {
-                        dropdownMenu.style.opacity = '0';
-                        dropdownMenu.style.visibility = 'hidden';
-                        dropdownMenu.style.transform = 'translateY(10px)';
-                    }
-                }, 150);
-            });
-            
-            dropdown.addEventListener('mouseenter', () => {
-                clearTimeout(hideTimeout);
-            });
+            // CSS :hover handles dropdown display, no JS needed
         }
+
+        // ── REVEAL OBSERVER (for .reveal animations) ──
+        window.revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        // Observe all .reveal elements after header loads
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     }
 
     if (document.readyState === 'loading') {

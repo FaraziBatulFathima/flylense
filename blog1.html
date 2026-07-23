@@ -1544,107 +1544,23 @@
     <!-- ===== FOOTER ===== -->
     
 
-    <button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
+<button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-            // ── Navbar intro ──
-            setTimeout(function() {
-                document.getElementById('navbar').classList.add('loaded');
-            }, 100);
-
-            const navbar = document.getElementById('navbar');
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuBackdrop = document.getElementById('menuBackdrop');
             const backToTop = document.getElementById('backToTop');
 
-            // ── Scroll ──
+            // Back to top
             window.addEventListener('scroll', function() {
-                const scrollY = window.scrollY;
-                navbar.classList.toggle('scrolled', scrollY > 60);
-                backToTop.classList.toggle('visible', scrollY > 600);
+                backToTop.classList.toggle('visible', window.scrollY > 600);
             });
 
-            // ── Mobile Menu ──
-            function toggleMenu(forceState) {
-                const isOpen = typeof forceState === 'boolean' ? forceState : !mobileMenu.classList.contains('active');
-                if (isOpen) {
-                    mobileMenu.classList.add('active');
-                    menuBackdrop.classList.add('active');
-                    hamburger.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    mobileMenu.classList.remove('active');
-                    menuBackdrop.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            if (hamburger && mobileMenu) {
-                hamburger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    toggleMenu();
-                });
-                menuBackdrop.addEventListener('click', function() {
-                    toggleMenu(false);
-                });
-                mobileMenu.querySelectorAll('a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        toggleMenu(false);
-                    });
-                });
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                        toggleMenu(false);
-                    }
-                });
-                document.addEventListener('touchmove', function(e) {
-                    if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target)) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-            }
-
-            // ── Back to top ──
             backToTop.addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-
-            // ── Reveal ──
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-
-            document.querySelectorAll('.reveal').forEach(function(el) {
-                observer.observe(el);
-            });
-
-        });
-    
-    
-
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
         });
     </script>
     <div id="footer-placeholder"></div>
-    
-    
-
     <script src="header-include.js"></script>
     <script src="footer-include.js"></script>
 </body>

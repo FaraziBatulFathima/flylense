@@ -1257,16 +1257,8 @@
         /* No overlay, no hover effects */
     </style>
 </head>
-<body>\n    <div id="header-placeholder"></div>
-    <a href="industry.html" data-page="industry">Industries</a>
-    <a href="events.html" data-page="events">Events</a>
-    <a href="contact.html" class="mobile-cta" data-page="contact">Let's Connect</a>
-    <div class="menu-divider"></div>
-    <div class="menu-footer">
-        <span>&copy; 2026 FlyLense Media Partner</span>
-        <span>Crafting Cinematic Stories</span>
-    </div>
-</div>
+<body>
+    <div id="header-placeholder"></div>
     <!-- Floating Social -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Follow us on Instagram">
@@ -1549,59 +1541,14 @@
         }
 
         // ==================== INITIALIZATION ====================
-        (function() {
+(function() {
             'use strict';
 
-            const navbar = document.getElementById('navbar');
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuBackdrop = document.getElementById('menuBackdrop');
+            // VIDEO OVERLAY
             const videoOverlay = document.getElementById('videoOverlay');
             const overlayVideo = document.getElementById('overlayVideo');
             const overlayClose = document.getElementById('overlayClose');
 
-            // NAVBAR SCROLL
-            function handleNavbar() {
-                const scrolled = window.scrollY > 50;
-                navbar.classList.toggle('scrolled', scrolled);
-            }
-            window.addEventListener('scroll', handleNavbar, { passive: true });
-            handleNavbar();
-            setTimeout(() => navbar.classList.add('loaded'), 100);
-
-            // MOBILE MENU
-            function toggleMenu() {
-                const isOpen = mobileMenu.classList.toggle('active');
-                menuBackdrop.classList.toggle('active', isOpen);
-                hamburger.classList.toggle('active', isOpen);
-                hamburger.setAttribute('aria-expanded', isOpen);
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            }
-            hamburger.addEventListener('click', toggleMenu);
-            menuBackdrop.addEventListener('click', toggleMenu);
-            mobileMenu.querySelectorAll('a:not(.mobile-dropdown-menu a)').forEach(a => a.addEventListener('click', toggleMenu));
-
-            const mobileDropdown = document.querySelector('.mobile-dropdown');
-            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-            if (mobileDropdownToggle) {
-                mobileDropdownToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    mobileDropdown.classList.toggle('active');
-                });
-            }
-
-            // REVEAL ANIMATIONS
-            window.revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-            document.querySelectorAll('.reveal:not(.video-card)').forEach(el => revealObserver.observe(el));
-
-            // VIDEO OVERLAY
             function openOverlay(src) {
                 overlayVideo.src = src;
                 overlayVideo.load();
@@ -1625,6 +1572,7 @@
                 if (e.key === 'Escape' && videoOverlay.classList.contains('active')) closeOverlay();
             });
 
+            // VIDEO CARD CLICK -> OPEN OVERLAY
             document.addEventListener('click', function(e) {
                 const card = e.target.closest('.video-card');
                 if (!card) return;
@@ -1648,6 +1596,7 @@
                 });
             }
 
+            // Page-specific initialization
             document.addEventListener('DOMContentLoaded', function() {
                 renderPromoGrid();
                 renderReelsSocialGrid();
@@ -1655,24 +1604,10 @@
             });
 
         })();
-    
-    
-
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-        });
     </script>
     <div id="footer-placeholder"></div>
-    
-    
-
     <script src="header-include.js"></script>
     <script src="footer-include.js"></script>
 </body>
 </html>
+

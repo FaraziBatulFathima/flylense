@@ -1342,17 +1342,6 @@
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize reveal observer FIRST
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
             // Counter animation for stats
             const counters = document.querySelectorAll('.stat-number[data-count]');
@@ -1395,46 +1384,8 @@
                 }
             }, { passive: true });
 
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Mobile menu
-            const hamburger = document.getElementById('hamburger');
-            const menuBackdrop = document.getElementById('menuBackdrop');
-            const mobileMenu = document.getElementById('mobileMenu');
-
-            function toggleMenu() {
-                const isActive = hamburger.classList.toggle('active');
-                menuBackdrop.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                hamburger.setAttribute('aria-expanded', isActive);
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            }
-
-            hamburger.addEventListener('click', toggleMenu);
-            menuBackdrop.addEventListener('click', toggleMenu);
-
-            document.querySelectorAll('.mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!link.classList.contains('mobile-dropdown-toggle')) {
-                        toggleMenu();
-                    }
-                });
-            });
-
-            // Mobile dropdown
-            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-            const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
-            if (mobileDropdownToggle) {
-                mobileDropdownToggle.addEventListener('click', () => {
-                    const isOpen = mobileDropdownToggle.classList.toggle('active');
-                    mobileDropdownMenu.style.maxHeight = isOpen ? mobileDropdownMenu.scrollHeight + 'px' : '0';
-                });
-            }
-
-            // Render blog grid
-            const blogGrid = document.getElementById('blogGrid');
+            // Counter animation for stats
+            const counters = document.querySelectorAll('.stat-number[data-count]');
             if (blogGrid) {
                 blogGrid.innerHTML = blogPosts.map((post, index) => {
                     const delayClass = `delay-${(index % 4) + 1}`;
@@ -1457,7 +1408,7 @@
                     `;
                 }).join('');
 
-                blogGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+                blogGrid.querySelectorAll('.reveal').forEach(el => {});
             }
 
             // Newsletter form
@@ -1471,23 +1422,8 @@
                 });
             }
         });
-    
-    
-
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-        });
     </script>
     <div id="footer-placeholder"></div>
-    
-    
-
     <script src="header-include.js"></script>
     <script src="footer-include.js"></script>
 </body>

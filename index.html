@@ -2385,17 +2385,6 @@
             }, { threshold: 0.5 });
             statNumbers.forEach(el => counterObserver.observe(el));
 
-            // ── REVEAL ──
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
             // ── BRAND MARQUEE — CIRCLE CROP LOGOS ──
             const clientLogos = [
                 '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png',
