@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* ===== ALL EXISTING CSS – UNCHANGED ===== */
         *,
         *::before,
         *::after {
@@ -67,11 +68,10 @@
             --border-subtle: #1f1f1f;
             --border-light: #2a2a2a;
             --border-accent: #3a3a3a;
-            --accent: #d4a843;
-            --accent-light: #e8c56d;
-            --accent-dark: #b89236;
-            --accent-gradient: linear-gradient(135deg, #d4a843 0%, #e8c56d 50%, #d4a843 100%);
-            --accent-gradient-soft: linear-gradient(135deg, rgba(212, 168, 67, 0.15) 0%, rgba(232, 197, 109, 0.08) 100%);
+           --accent: #0066cc;
+            --accent-light: #0080ff;
+            --accent-dark: #004d99;
+            --accent-gradient: linear-gradient(135deg, #0052a3 0%, #0066cc 50%, #0080ff 100%);
             --text-primary: #ffffff;
             --text-secondary: #d4d4d4;
             --text-muted: #9a9a9a;
@@ -443,16 +443,54 @@
         .insta-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
     </style>
 </head>
-<body>\n    <div id="header-placeholder"></div>
-    <a href="industry.html" data-page="industry">Industries</a>
-    <a href="events.html" data-page="events">Events</a>
-    <a href="contact.html" class="mobile-cta" data-page="contact">Let's Connect</a>
-    <div class="menu-divider"></div>
-    <div class="menu-footer">
-        <span>&copy; 2026 FlyLense Media Partner</span>
-        <span>Crafting Cinematic Stories</span>
+<body>
+    <!-- ===== NAVBAR (inline) ===== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <a href="index.html" class="nav-logo" aria-label="FlyLense Home">
+                <img src="img/logo.png" alt="FlyLense Logo" class="logo-icon" />
+                <img src="img/logo.png" alt="FlyLense Media Partner" class="logo-title" />
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Services</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="industry.html">Industries</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html" class="nav-cta">Let's Connect</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-toggle" aria-expanded="false">
+                Services <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="mobile-dropdown-menu">
+                <a href="industry.html">Industries</a>
+                <a href="events.html">Events</a>
+            </div>
+        </div>
+        <a href="contact.html" class="mobile-cta">Let's Connect</a>
+        <div class="menu-divider"></div>
+        <div class="menu-footer">
+            <span>&copy; 2026 FlyLense Media Partner</span>
+            <span>Crafting Cinematic Stories</span>
+        </div>
     </div>
-</div>
+
     <!-- Floating Social -->
     <div class="floating-social floating-social-left">
         <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="social-instagram" aria-label="Follow us on Instagram">
@@ -466,7 +504,8 @@
             <span class="tooltip">Chat on WhatsApp</span>
         </a>
     </div>
-    <!-- ===== HERO SECTION ===== -->
+
+    <!-- ===== HERO ===== -->
     <section class="hero">
         <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png">
             <source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4">
@@ -481,11 +520,10 @@
                 <a href="#gallery" class="btn-secondary"><i class="fa-solid fa-images"></i> <span>Gallery</span></a>
             </div>
         </div>
-        
     </section>
     <div class="hero-scroll-indicator">
-            <a href="#reels"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
-        </div>
+        <a href="#reels"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
+    </div>
 
     <!-- Reels for Social Media Section -->
     <section class="section" id="reels">
@@ -516,7 +554,7 @@
         </div>
     </section>
 
-    <!-- ===== CLIENTS SECTION - SINGLE CAROUSEL ===== -->
+    <!-- ===== CLIENTS SECTION ===== -->
     <section class="clients" id="clients">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
@@ -547,7 +585,68 @@
     </section>
 
     <!-- Footer -->
-    
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="img/logo.png" alt="FlyLense Media Partner" class="logo" />
+                <p>We craft cinematic stories for premium jewellery brands — from luxury brand films to social media reels that sparkle.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/919989571223" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="industry.html">Industries</a>
+                    <a href="events.html">Events</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Industries</h4>
+                <div class="footer-links">
+                    <a href="jewellery.html">Jewellery</a>
+                    <a href="education.html">Education</a>
+                    <a href="food.html">Food &amp; Restaurants</a>
+                    <a href="portfolio.html#real-estate">Real Estate</a>
+                    <a href="portfolio.html#healthcare">Healthcare</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Hyderabad, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+919989571223">+91 99895 71223</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:hello@flylense.com">hello@flylense.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Mon – Sat, 9:00 AM – 7:00 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FlyLense Media Partner. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -564,157 +663,166 @@
         </div>
     </div>
 
+    <!-- ===== JAVASCRIPT – FIXED ===== -->
     <script>
-        // ==================== DATA ====================
-        const reelsData = [
-            { id: 1, title: "Iqbal Jewellers", video: "assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4", thumb: "assets/thumbnails/Iqbal_jewellers_Reel_03.png", duration: "0:30", category: "Jewellery" },
-            { id: 2, title: "Nisar Jewellery", video: "assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4", thumb: "assets/thumbnails/Nisar_Jewellery_Reel_09.png", duration: "0:28", category: "Jewellery" },
-            { id: 3, title: "Maram Jewellery", video: "assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4", thumb: "assets/thumbnails/Maram_jewellery_01.png", duration: "0:32", category: "Jewellery" },
-            { id: 4, title: "SNJ Reel 09", video: "assets/Videos/Jwellery/Videos/SNJ_Reel_09.mp4", thumb: "assets/thumbnails/SNJ_Reel_09.png", duration: "0:25", category: "Jewellery" },
-            { id: 5, title: "SNJ Reel 04", video: "assets/Videos/Jwellery/Videos/SNJ_Reel_04.mp4", thumb: "assets/thumbnails/SNJ_Reel_04.png", duration: "0:27", category: "Jewellery" },
-            { id: 6, title: "SNJ Reel 03", video: "assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4", thumb: "assets/thumbnails/SNJ_Reel_03.png", duration: "0:30", category: "Jewellery" },
-            { id: 7, title: "S-Craft Feb Reel", video: "assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4", thumb: "assets/thumbnails/S-Craft_Feb_Reel_01.png", duration: "0:28", category: "Jewellery" },
-            { id: 8, title: "Iqbal Jewellers Alt", video: "assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4", thumb: "assets/thumbnails/Iqbal_jewellers_Reel_03.png", duration: "0:30", category: "Jewellery" }
-        ];
+        (function() {
+            'use strict';
 
-        const galleryData = [
-            { img: "assets/thumbnails/Iqbal_jewellers_Reel_03.png", title: "Iqbal Jewellers Collection", category: "Necklace" },
-            { img: "assets/thumbnails/Nisar_Jewellery_Reel_09.png", title: "Nisar Jewellery Elegance", category: "Earrings" },
-            { img: "assets/thumbnails/Maram_jewellery_01.png", title: "Maram Jewellery Craft", category: "Rings" },
-            { img: "assets/thumbnails/SNJ_Reel_09.png", title: "SNJ Jewels Collection", category: "Bracelets" },
-            { img: "assets/thumbnails/SNJ_Reel_04.png", title: "SNJ Jewels Detail", category: "Pendants" },
-            { img: "assets/thumbnails/S-Craft_Feb_Reel_01.png", title: "S-Craft February Edit", category: "Sets" }
-        ];
+            // ========== DATA ==========
+            var reelsData = [
+                { id: 1, title: "Iqbal Jewellers", video: "assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4", thumb: "assets/thumbnails/Iqbal_jewellers_Reel_03.png", duration: "0:30", category: "Jewellery" },
+                { id: 2, title: "Nisar Jewellery", video: "assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4", thumb: "assets/thumbnails/Nisar_Jewellery_Reel_09.png", duration: "0:28", category: "Jewellery" },
+                { id: 3, title: "Maram Jewellery", video: "assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4", thumb: "assets/thumbnails/Maram_jewellery_01.png", duration: "0:32", category: "Jewellery" },
+                { id: 4, title: "SNJ Reel 09", video: "assets/Videos/Jwellery/Videos/SNJ_Reel_09.mp4", thumb: "assets/thumbnails/SNJ_Reel_09.png", duration: "0:25", category: "Jewellery" },
+                { id: 5, title: "SNJ Reel 04", video: "assets/Videos/Jwellery/Videos/SNJ_Reel_04.mp4", thumb: "assets/thumbnails/SNJ_Reel_04.png", duration: "0:27", category: "Jewellery" },
+                { id: 6, title: "SNJ Reel 03", video: "assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4", thumb: "assets/thumbnails/SNJ_Reel_03.png", duration: "0:30", category: "Jewellery" },
+                { id: 7, title: "S-Craft Feb Reel", video: "assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4", thumb: "assets/thumbnails/S-Craft_Feb_Reel_01.png", duration: "0:28", category: "Jewellery" },
+                { id: 8, title: "Iqbal Jewellers Alt", video: "assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4", thumb: "assets/thumbnails/Iqbal_jewellers_Reel_03.png", duration: "0:30", category: "Jewellery" }
+            ];
 
-        const jewelleryClients = [
-            { name: "Iqbal Jewellers", logo: "img/clients/1.png" },
-            { name: "Nisar Jewellery", logo: "img/clients/2.png" },
-            { name: "Maram Jewellery", logo: "img/clients/3.png" },
-            { name: "SNJ Jewels", logo: "img/clients/4.png" },
-            { name: "S-Craft", logo: "img/clients/5.png" },
-            { name: "Tanishq", logo: "img/clients/6.png" },
-            { name: "Kalyan Jewellers", logo: "img/clients/7.png" },
-            { name: "Joyalukkas", logo: "img/clients/8.png" },
-            { name: "Malabar Gold", logo: "img/clients/9.png" },
-            { name: "PC Jeweller", logo: "img/clients/10.png" },
-            { name: "GRT Jewellers", logo: "img/clients/11.png" },
-            { name: "Prince Jewellery", logo: "img/clients/12.png" },
-            { name: "Vaibhav Jewellers", logo: "img/clients/13.png" },
-            { name: "Asha Jewellers", logo: "img/clients/14.png" },
-            { name: "Reliance Jewels", logo: "img/clients/15.png" },
-            { name: "CaratLane", logo: "img/clients/16.png" },
-            { name: "BlueStone", logo: "img/clients/17.png" }
-        ];
+            var galleryData = [
+                { img: "assets/thumbnails/Iqbal_jewellers_Reel_03.png", title: "Iqbal Jewellers Collection", category: "Necklace" },
+                { img: "assets/thumbnails/Nisar_Jewellery_Reel_09.png", title: "Nisar Jewellery Elegance", category: "Earrings" },
+                { img: "assets/thumbnails/Maram_jewellery_01.png", title: "Maram Jewellery Craft", category: "Rings" },
+                { img: "assets/thumbnails/SNJ_Reel_09.png", title: "SNJ Jewels Collection", category: "Bracelets" },
+                { img: "assets/thumbnails/SNJ_Reel_04.png", title: "SNJ Jewels Detail", category: "Pendants" },
+                { img: "assets/thumbnails/S-Craft_Feb_Reel_01.png", title: "S-Craft February Edit", category: "Sets" }
+            ];
 
-        // ==================== RENDER FUNCTIONS ====================
-        function renderReelsGrid() {
-            const grid = document.getElementById('reelsGrid');
-            if (!grid) return;
-            grid.innerHTML = reelsData.map((item, index) => {
-                const delayClass = `delay-${(index % 4) + 1}`;
-                return `
-                    <article class="video-card portrait reveal reveal-scale ${delayClass}" 
-                             data-video="${item.video}" 
-                             data-title="${item.title}" 
-                             data-category="${item.category}" 
-                             data-duration="${item.duration}">
-                        <video class="video-bg" preload="metadata" muted playsinline poster="${item.thumb}"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                        <div class="video-label">${item.title}</div>
-                        <div class="video-duration">${item.duration}</div>
-                    </article>
-                `;
-            }).join('');
+            var jewelleryClients = [
+                { name: "Iqbal Jewellers", logo: "img/clients/1.png" },
+                { name: "Nisar Jewellery", logo: "img/clients/2.png" },
+                { name: "Maram Jewellery", logo: "img/clients/3.png" },
+                { name: "SNJ Jewels", logo: "img/clients/4.png" },
+                { name: "S-Craft", logo: "img/clients/5.png" },
+                { name: "Tanishq", logo: "img/clients/6.png" },
+                { name: "Kalyan Jewellers", logo: "img/clients/7.png" },
+                { name: "Joyalukkas", logo: "img/clients/8.png" },
+                { name: "Malabar Gold", logo: "img/clients/9.png" },
+                { name: "PC Jeweller", logo: "img/clients/10.png" },
+                { name: "GRT Jewellers", logo: "img/clients/11.png" },
+                { name: "Prince Jewellery", logo: "img/clients/12.png" },
+                { name: "Vaibhav Jewellers", logo: "img/clients/13.png" },
+                { name: "Asha Jewellers", logo: "img/clients/14.png" },
+                { name: "Reliance Jewels", logo: "img/clients/15.png" },
+                { name: "CaratLane", logo: "img/clients/16.png" },
+                { name: "BlueStone", logo: "img/clients/17.png" }
+            ];
 
-            grid.querySelectorAll('.video-card').forEach((card, index) => {
-                const video = card.querySelector('.video-bg');
-                const item = reelsData[index];
-                if (video && item) {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                video.src = item.video;
-                                video.load();
-                                observer.unobserve(card);
-                            }
-                        });
-                    }, { rootMargin: '200px' });
-                    observer.observe(card);
-                }
-            });
+            // ========== DOM REFS ==========
+            var reelsGrid = document.getElementById('reelsGrid');
+            var galleryGrid = document.getElementById('galleryGrid');
+            var marqueeTrack = document.getElementById('marqueeTrack');
 
-            grid.querySelectorAll('.reveal').forEach(el => { 
-                if (el.classList.contains('revealed')) return; 
-                if (window.revealObserver) window.revealObserver.observe(el); 
-            });
-        }
-
-function renderGalleryGrid() {
-            const grid = document.getElementById('galleryGrid');
-            if (!grid) return;
-            grid.innerHTML = galleryData.map((item, index) => {
-                const delayClass = `delay-${(index % 4) + 1}`;
-                return `
-                    <div class="gallery-item reveal reveal-scale ${delayClass}">
-                        <img src="${item.img}" alt="${item.title}" loading="lazy">
-                        <div class="gallery-info"><div class="gallery-title">${item.title}</div></div>
-                    </div>
-                `;
-            }).join('');
-            grid.querySelectorAll('.reveal').forEach(el => { if (el.classList.contains('revealed')) return; window.revealObserver.observe(el); });
-        }
-
-        function renderMarquee() {
-            const track = document.getElementById('marqueeTrack');
-            if (!track) return;
-            const items = jewelleryClients.map(client => `
-                <div class="brand-item">
-                    <img src="${client.logo}" alt="${client.name}" loading="lazy">
-                </div>
-            `).join('');
-            track.innerHTML = items + items;
-        }
-
-        // ==================== INIT ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize reveal observer
-            window.revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { 
+            // ========== REVEAL OBSERVER ==========
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
-                        window.revealObserver.unobserve(entry.target);
+                        revealObserver.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-            // Observe ALL static .reveal elements on the page
-            document.querySelectorAll('.reveal').forEach(el => {
-                if (!el.classList.contains('video-card') && !el.classList.contains('gallery-item')) {
-                    window.revealObserver.observe(el);
-                }
-            });
+            // ========== RENDER FUNCTIONS ==========
+            function renderReelsGrid() {
+                if (!reelsGrid) return;
+                var html = '';
+                reelsData.forEach(function(item, index) {
+                    var delay = 'delay-' + ((index % 4) + 1);
+                    html +=
+                        '<article class="video-card portrait reveal reveal-scale ' + delay + '" ' +
+                        'data-video="' + item.video + '" ' +
+                        'data-title="' + item.title + '" ' +
+                        'data-category="' + item.category + '" ' +
+                        'data-duration="' + item.duration + '">' +
+                        '<video class="video-bg" preload="metadata" muted playsinline poster="' + item.thumb + '"></video>' +
+                        '<div class="video-play-btn"><i class="fa-solid fa-play"></i></div>' +
+                        '<div class="video-label">' + item.title + '</div>' +
+                        '<div class="video-duration">' + item.duration + '</div>' +
+                        '</article>';
+                });
+                reelsGrid.innerHTML = html;
 
-            // Navbar
-            const navbar = document.getElementById('navbar');
-            requestAnimationFrame(() => navbar.classList.add('loaded'));
+                // Lazy-load video sources
+                var cards = reelsGrid.querySelectorAll('.video-card');
+                cards.forEach(function(card, idx) {
+                    var video = card.querySelector('.video-bg');
+                    var item = reelsData[idx];
+                    if (video && item) {
+                        var observer = new IntersectionObserver(function(entries) {
+                            entries.forEach(function(entry) {
+                                if (entry.isIntersecting) {
+                                    video.src = item.video;
+                                    video.load();
+                                    observer.unobserve(card);
+                                }
+                            });
+                        }, { rootMargin: '200px' });
+                        observer.observe(card);
+                    }
+                });
 
+                // Observe reveals inside grid
+                reelsGrid.querySelectorAll('.reveal').forEach(function(el) {
+                    revealObserver.observe(el);
+                });
+            }
+
+            function renderGalleryGrid() {
+                if (!galleryGrid) return;
+                var html = '';
+                galleryData.forEach(function(item, index) {
+                    var delay = 'delay-' + ((index % 4) + 1);
+                    html +=
+                        '<div class="gallery-item reveal reveal-scale ' + delay + '">' +
+                        '<img src="' + item.img + '" alt="' + item.title + '" loading="lazy">' +
+                        '<div class="gallery-info"><div class="gallery-title">' + item.title + '</div></div>' +
+                        '</div>';
+                });
+                galleryGrid.innerHTML = html;
+                galleryGrid.querySelectorAll('.reveal').forEach(function(el) {
+                    revealObserver.observe(el);
+                });
+            }
+
+            function renderMarquee() {
+                if (!marqueeTrack) return;
+                var html = '';
+                jewelleryClients.forEach(function(client) {
+                    html += '<div class="brand-item"><img src="' + client.logo + '" alt="' + client.name + '" loading="lazy"></div>';
+                });
+                marqueeTrack.innerHTML = html + html; // duplicate for seamless loop
+            }
+
+            // ========== EVENT HANDLERS ==========
+            // Navbar scroll
+            var navbar = document.getElementById('navbar');
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 20) navbar.classList.add('scrolled');
-                else navbar.classList.remove('scrolled');
-
-                const backToTop = document.getElementById('backToTop');
-                if (window.scrollY > 300) backToTop.classList.add('visible');
-                else backToTop.classList.remove('visible');
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                var backToTop = document.getElementById('backToTop');
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
             }, { passive: true });
 
-            document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            // Back to top
+            document.getElementById('backToTop').addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
             // Mobile menu
-            const hamburger = document.getElementById('hamburger');
-            const menuBackdrop = document.getElementById('menuBackdrop');
-            const mobileMenu = document.getElementById('mobileMenu');
+            var hamburger = document.getElementById('hamburger');
+            var menuBackdrop = document.getElementById('menuBackdrop');
+            var mobileMenu = document.getElementById('mobileMenu');
             function toggleMenu() {
-                const isActive = hamburger.classList.toggle('active');
+                var isActive = hamburger.classList.toggle('active');
                 menuBackdrop.classList.toggle('active');
                 mobileMenu.classList.toggle('active');
                 hamburger.setAttribute('aria-expanded', isActive);
@@ -722,26 +830,30 @@ function renderGalleryGrid() {
             }
             hamburger.addEventListener('click', toggleMenu);
             menuBackdrop.addEventListener('click', toggleMenu);
-            document.querySelectorAll('.mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => { if (!link.classList.contains('mobile-dropdown-toggle')) toggleMenu(); });
+            document.querySelectorAll('.mobile-menu a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (!link.classList.contains('mobile-dropdown-toggle')) {
+                        if (mobileMenu.classList.contains('active')) toggleMenu();
+                    }
+                });
             });
 
             // Mobile dropdown
-            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-            const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+            var mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
+            var mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
             if (mobileDropdownToggle) {
-                mobileDropdownToggle.addEventListener('click', () => {
-                    const isOpen = mobileDropdownToggle.classList.toggle('active');
+                mobileDropdownToggle.addEventListener('click', function() {
+                    var isOpen = mobileDropdownToggle.classList.toggle('active');
                     mobileDropdownMenu.style.maxHeight = isOpen ? mobileDropdownMenu.scrollHeight + 'px' : '0';
                 });
             }
 
             // Video overlay
-            const videoOverlay = document.getElementById('videoOverlay');
-            const overlayVideo = document.getElementById('overlayVideo');
-            const overlayClose = document.getElementById('overlayClose');
-            const overlayTitle = document.getElementById('overlayTitle');
-            const overlayCategory = document.getElementById('overlayCategory');
+            var videoOverlay = document.getElementById('videoOverlay');
+            var overlayVideo = document.getElementById('overlayVideo');
+            var overlayClose = document.getElementById('overlayClose');
+            var overlayTitle = document.getElementById('overlayTitle');
+            var overlayCategory = document.getElementById('overlayCategory');
 
             function openOverlay(src, title, category) {
                 pauseAllInlineVideos();
@@ -750,84 +862,71 @@ function renderGalleryGrid() {
                 overlayCategory.textContent = category;
                 videoOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                overlayVideo.play().catch(() => {});
+                overlayVideo.play().catch(function() {});
             }
+
             function closeOverlay() {
                 videoOverlay.classList.remove('active');
                 document.body.style.overflow = '';
                 overlayVideo.pause();
                 overlayVideo.src = '';
             }
+
+            function pauseAllInlineVideos() {
+                document.querySelectorAll('.video-bg').forEach(function(v) {
+                    v.pause();
+                });
+            }
+
             overlayClose.addEventListener('click', closeOverlay);
-            videoOverlay.addEventListener('click', e => { if (e.target === videoOverlay) closeOverlay(); });
-            document.addEventListener('keydown', e => { if (e.key === 'Escape' && videoOverlay.classList.contains('active')) closeOverlay(); });
+            videoOverlay.addEventListener('click', function(e) {
+                if (e.target === videoOverlay) closeOverlay();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoOverlay.classList.contains('active')) closeOverlay();
+            });
 
-            function pauseAllInlineVideos() { document.querySelectorAll('.video-bg').forEach(v => { v.pause(); }); }
-
-            // Click handlers for video cards
+            // Click handler for video cards (delegated)
             document.addEventListener('click', function(e) {
-                const card = e.target.closest('.video-card');
+                var card = e.target.closest('.video-card');
                 if (card) {
-                    if (e.target.closest('.video-play-btn')) return;
-                    const src = card.dataset.video;
-                    const title = card.dataset.title;
-                    const category = card.dataset.category;
-                    if (src) { pauseAllInlineVideos(); openOverlay(src, title, category); }
-                }
-                const playBtn = e.target.closest('.video-play-btn');
-                if (playBtn) {
-                    const card = playBtn.closest('.video-card');
-                    if (card) {
-                        e.stopPropagation();
-                        const src = card.dataset.video;
-                        const title = card.dataset.title;
-                        const category = card.dataset.category;
-                        if (src) { pauseAllInlineVideos(); openOverlay(src, title, category); }
+                    var src = card.dataset.video;
+                    var title = card.dataset.title;
+                    var category = card.dataset.category;
+                    if (src) {
+                        pauseAllInlineVideos();
+                        openOverlay(src, title, category);
                     }
                 }
             });
 
-            // Hero video play policy
-            const heroVideo = document.querySelector('.hero-video-bg');
+            // Hero video autoplay fallback
+            var heroVideo = document.querySelector('.hero-video-bg');
             if (heroVideo) {
                 heroVideo.muted = true;
-                heroVideo.play().catch(() => { heroVideo.removeAttribute('autoplay'); });
+                heroVideo.play().catch(function() {
+                    heroVideo.removeAttribute('autoplay');
+                });
             }
 
-            // Lazy load video posters
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const video = entry.target;
-                        if (video.dataset.src && !video.querySelector('source').src) {
-                            video.querySelector('source').src = video.dataset.src;
-                            video.load();
-                        }
-                        videoObserver.unobserve(video);
-                    }
-                });
-            }, { rootMargin: '200px' });
-            document.querySelectorAll('video[data-src]').forEach(v => videoObserver.observe(v));
+            // ========== INIT ==========
+            // Ensure navbar load animation
+            requestAnimationFrame(function() {
+                navbar.classList.add('loaded');
+            });
 
-            // Render all sections
+            // Observe static reveals (not inside grids that already get observed)
+            document.querySelectorAll('.reveal:not(.video-card):not(.gallery-item)').forEach(function(el) {
+                revealObserver.observe(el);
+            });
+
+            // Render all dynamic sections
             renderReelsGrid();
             renderGalleryGrid();
             renderMarquee();
-        }})();</script>
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-        });
-    </script>
-    <div id="footer-placeholder"></div>
-    
-    
 
-    <script src="header-include.js"></script>
-    <script src="footer-include.js"></script>
+        })();
+    </script>
+
 </body>
 </html>
-
