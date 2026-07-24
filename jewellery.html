@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
-        /* ===== ALL EXISTING CSS – UNCHANGED ===== */
+        /* ===== RESET & BASE ===== */
         *,
         *::before,
         *::after {
@@ -131,6 +131,7 @@
             background: var(--accent-light);
         }
 
+        /* ── FLOATING SOCIAL ── */
         .floating-social {
             position: fixed;
             bottom: 30px;
@@ -243,6 +244,7 @@
             }
         }
 
+        /* ── NAVBAR ── */
         .navbar {
             position: fixed;
             top: 0;
@@ -604,6 +606,7 @@
             display: none;
         }
 
+        /* ── HERO ── */
         .hero {
             position: relative;
             width: 100%;
@@ -917,7 +920,7 @@
         }
 
         .section {
-            padding: 7rem var(--container-padding);
+            padding: 4rem var(--container-padding);
             position: relative;
             overflow: hidden;
         }
@@ -1022,90 +1025,168 @@
             transition-delay: 0.4s;
         }
 
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+        /* ── VIDEO SHOWCASE BAR (Horizontal Scroll) ── */
+        .video-showcase {
+            background: var(--bg-deep);
         }
-        .video-card {
+        .video-bar-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 10px 0 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-deep);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .video-bar-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+        .video-bar-wrapper::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+        .video-bar-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+        .video-bar-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+        .video-bar-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            padding: 0 2rem 1rem;
+            will-change: transform;
+        }
+        .video-bar-track .video-card {
+            flex: 0 0 auto;
             position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
+            /*border-radius: var(--radius-lg);*/
+            overflow: hidden;
             transition: all var(--transition-smooth);
             cursor: pointer;
         }
-        .video-card.portrait {
+        .video-bar-track .video-card.portrait {
+            width: 240px;
             aspect-ratio: 9 / 16;
         }
-        .video-card.cinematic {
+        .video-bar-track .video-card.cinematic {
+            width: 630px;
             aspect-ratio: 21 / 9;
         }
-        .video-card.span-2-col {
-            grid-column: span 2;
-        }
-        .video-card:hover {
+        .video-bar-track .video-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-accent);
             border-color: var(--accent);
         }
-        .video-card video {
+        .video-bar-track .video-card video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all var(--transition-smooth);
+            display: block;
+            background: #000;
         }
-        .video-card:hover video {
-            opacity: 1;
-        }
-        .video-play-btn {
+        .video-bar-track .video-card .video-play-btn {
             position: absolute;
             inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: var(--white);
+            background: transparent;
+            z-index: 3;
+            pointer-events: auto;
+            cursor: pointer;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity var(--transition-fast);
+        }
+        .video-bar-track .video-card .video-play-btn.hidden {
             opacity: 0;
-            transition: all var(--transition-smooth);
-            background: linear-gradient(180deg, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 0.7) 100%);
+            visibility: hidden;
             pointer-events: none;
         }
-        .video-card:hover .video-play-btn {
-            opacity: 1;
+        .video-bar-track .video-card .video-play-btn i {
+            font-size: 2.5rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            border-radius: 50%;
+            padding: 14px 16px 14px 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: transform var(--transition-bounce), background var(--transition-fast);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .video-card .video-play-btn i {
-            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+        .video-bar-track .video-card:hover .video-play-btn i {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
         }
-        .video-label {
+        .video-bar-track .video-card.playing .video-play-btn {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .video-bar-track .video-card.playing video {
+            pointer-events: auto;
+        }
+        .video-bar-track .video-card .video-label {
             position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            right: 1rem;
-            font-size: 0.9rem;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            right: 0.75rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--white);
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            z-index: 2;
+            pointer-events: none;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .video-duration {
+        .video-bar-track .video-card .video-duration {
             position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            font-size: 0.75rem;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            color: var(--white);
+            color: #fff;
             background: rgba(0, 0, 0, 0.7);
-            padding: 0.25rem 0.75rem;
+            padding: 0.15rem 0.5rem;
             border-radius: var(--radius-sm);
+            z-index: 2;
+            pointer-events: none;
         }
-
-        .reel-cta {
-            text-align: center;
-            margin-top: 2.5rem;
+        .section-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .section-header-bar h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+        .section-header-bar h3 span {
+            color: var(--accent);
+            margin: 0 8px;
+            font-weight: 300;
+        }
+        .section-header-bar a {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+        .section-header-bar a:hover {
+            color: var(--accent-light);
+            text-decoration: underline;
         }
 
         .gallery-grid {
@@ -1116,7 +1197,6 @@
         .gallery-item {
             position: relative;
             aspect-ratio: 1 / 1;
-            border-radius: var(--radius-lg);
             overflow: hidden;
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
@@ -1135,7 +1215,7 @@
             transition: transform var(--transition-smooth);
         }
         .gallery-item:hover img {
-            transform: scale(1.05);
+            /*transform: scale(1.05);*/
         }
         .gallery-info {
             position: absolute;
@@ -1157,26 +1237,45 @@
         }
 
         @media (max-width: 1024px) {
-            .video-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .video-bar-track .video-card.portrait {
+                width: 200px;
+            }
+            .video-bar-track .video-card.cinematic {
+                width: 500px;
             }
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .video-card.span-2-col {
-                grid-column: auto;
+        }
+        @media (max-width: 768px) {
+            .video-bar-track .video-card.portrait {
+                width: 180px;
+            }
+            .video-bar-track .video-card.cinematic {
+                width: calc(630px * 1.3);
+                max-width: 90vw;
+            }
+            .video-bar-track .video-card .video-play-btn i {
+                font-size: 2rem;
+                padding: 10px 12px 10px 14px;
             }
         }
         @media (max-width: 576px) {
-            .video-grid {
-                grid-template-columns: 1fr;
+            .video-bar-track .video-card.portrait {
+                width: 140px;
+            }
+            .video-bar-track .video-card.cinematic {
+                width: calc(630px * 1.3);
+                max-width: 92vw;
             }
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
         }
 
+        /* ── CLIENT LOGOS — CIRCLE CROP (matching index.html) ── */
         .clients {
+            padding: 60px;
             background: var(--bg-deep);
             border-top: 1px solid var(--border-subtle);
             border-bottom: 1px solid var(--border-subtle);
@@ -1211,7 +1310,9 @@
         .brand-track {
             display: flex;
             width: max-content;
-            animation: marquee 30s linear infinite;
+            animation: marquee 40s linear infinite;
+            gap: 2rem;
+            padding: 1rem 0;
         }
         .brand-track:hover {
             animation-play-state: paused;
@@ -1226,24 +1327,57 @@
         }
         .brand-item {
             flex: 0 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 2.5rem;
-            min-width: 180px;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
             transition: all var(--transition-smooth);
-            opacity: 0.8;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
         }
         .brand-item:hover {
-            opacity: 1;
             transform: scale(1.08);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-accent);
         }
         .brand-item img {
-            max-width: 180px;
-            max-height: 70px;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-smooth), filter var(--transition-smooth);
+            filter: brightness(0.85) saturate(0.8);
+        }
+        .brand-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1) saturate(1);
         }
 
+        @media (max-width: 768px) {
+            .brand-item {
+                width: 90px;
+                height: 90px;
+            }
+            .brand-marquee::before,
+            .brand-marquee::after {
+                width: 60px;
+            }
+            .brand-track {
+                gap: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .brand-item {
+                width: 72px;
+                height: 72px;
+            }
+            .brand-track {
+                gap: 1rem;
+            }
+        }
+
+        /* ── CTA BANNER ── */
         .cta-section {
             background: var(--bg-deep);
             padding: 5rem var(--container-padding);
@@ -1329,6 +1463,7 @@
             }
         }
 
+        /* ── FOOTER ── */
         .footer {
             position: relative;
             background: #030303;
@@ -1634,21 +1769,6 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
-
-        .insta-item {
-            position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: var(--bg-card);
-            transition: transform var(--transition-smooth);
-            aspect-ratio: 9 / 16;
-        }
-        .insta-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -1688,19 +1808,16 @@
         <a href="#reels"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
     </div>
 
-    <!-- Reels for Social Media Section -->
-    <section class="section" id="reels">
+    <!-- ── REELS FOR SOCIAL MEDIA (Horizontal Scroll Bar) ── -->
+    <section class="section video-showcase" id="reels">
         <div class="section-inner">
-            <div class="section-header reveal reveal-up">
-                <span class="section-tag">Reels for Social Media</span>
-                <h2 class="section-title">Reels for Social Media</h2>
-                <p class="section-subtitle">Short-form vertical content optimized for Instagram Reels, YouTube Shorts, and TikTok</p>
+            <div class="section-header-bar reveal reveal-up">
+                <h3>Reels for Social Media <span>|</span> <a href="https://www.instagram.com/flylensemediapartner/" target="_blank">View All</a></h3>
             </div>
-            <div class="video-grid" id="reelsGrid"></div>
-            <div class="reel-cta">
-                <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="btn-primary">
-                    <i class="fa-brands fa-instagram"></i> <span>View More on Instagram</span>
-                </a>
+            <div class="video-bar-wrapper reveal reveal-up delay-1">
+                <div class="video-bar-track" id="reelsTrack">
+                    <!-- Dynamically generated by JavaScript -->
+                </div>
             </div>
         </div>
     </section>
@@ -1709,8 +1826,8 @@
     <section class="section" id="gallery">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
-                <span class="section-tag">Gallery</span>
-                <h2 class="section-title">Jewellery Gallery</h2>
+                <span class="section-tag">Jewellery</span>
+                <h2 class="section-title">Gallery</h2>
                 <p class="section-subtitle">Curated stills showcasing the artistry and detail of fine jewellery</p>
             </div>
             <div class="gallery-grid" id="galleryGrid"></div>
@@ -1753,7 +1870,7 @@
         <i class="fa-solid fa-chevron-up"></i>
     </button>
 
-    <!-- Video Overlay -->
+    <!-- Video Overlay (kept for potential future use, but not triggered by video cards) -->
     <div class="video-overlay" id="videoOverlay">
         <video id="overlayVideo" controls playsinline></video>
         <button class="overlay-close-btn" id="overlayClose" aria-label="Close video"><i class="fa-solid fa-times"></i></button>
@@ -1764,7 +1881,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- JAVASCRIPT – FULLY FIXED: content now renders and is visible -->
+    <!-- JAVASCRIPT – FULLY FIXED (matches index.html behavior)       -->
     <!-- ============================================================ -->
     <script>
         (function() {
@@ -1812,12 +1929,12 @@
             ];
 
             // ===================== DOM REFS =====================
-            var reelsGrid = document.getElementById('reelsGrid');
+            var reelsTrack = document.getElementById('reelsTrack');
             var galleryGrid = document.getElementById('galleryGrid');
             var marqueeTrack = document.getElementById('marqueeTrack');
 
-            // ===================== REVEAL OBSERVER (with fallback) =====================
-            var revealObserver = window.revealObserver || new IntersectionObserver(function(entries) {
+            // ===================== REVEAL OBSERVER =====================
+            var revealObserver = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
@@ -1828,48 +1945,26 @@
             window.revealObserver = revealObserver;
 
             // ===================== RENDER FUNCTIONS =====================
-            function renderReelsGrid() {
-                if (!reelsGrid) return;
+
+            // Render Reels into horizontal track
+            function renderReelsTrack() {
+                if (!reelsTrack) return;
                 var html = '';
-                reelsData.forEach(function(item, index) {
-                    var delay = 'delay-' + ((index % 4) + 1);
+                reelsData.forEach(function(item) {
                     html +=
-                        '<article class="video-card portrait reveal reveal-scale ' + delay + '" ' +
-                        'data-video="' + item.video + '" ' +
+                        '<div class="video-card portrait" data-video="' + item.video + '" ' +
                         'data-title="' + item.title + '" ' +
                         'data-category="' + item.category + '" ' +
                         'data-duration="' + item.duration + '">' +
-                        '<video class="video-bg" preload="metadata" muted playsinline poster="' + item.thumb + '"></video>' +
+                        '<video class="video-bg" playsinline preload="metadata" loop muted poster="' + item.thumb + '">' +
+                        '<source src="' + item.video + '" type="video/mp4">' +
+                        '</video>' +
                         '<div class="video-play-btn"><i class="fa-solid fa-play"></i></div>' +
-                        '<div class="video-label">' + item.title + '</div>' +
-                        '<div class="video-duration">' + item.duration + '</div>' +
-                        '</article>';
+                        '<span class="video-label">' + item.title + '</span>' +
+                        '<span class="video-duration">' + item.duration + '</span>' +
+                        '</div>';
                 });
-                reelsGrid.innerHTML = html;
-
-                // Lazy-load video sources when cards become visible
-                var cards = reelsGrid.querySelectorAll('.video-card');
-                cards.forEach(function(card, idx) {
-                    var video = card.querySelector('.video-bg');
-                    var item = reelsData[idx];
-                    if (video && item) {
-                        var observer = new IntersectionObserver(function(entries) {
-                            entries.forEach(function(entry) {
-                                if (entry.isIntersecting) {
-                                    video.src = item.video;
-                                    video.load();
-                                    observer.unobserve(card);
-                                }
-                            });
-                        }, { rootMargin: '200px' });
-                        observer.observe(card);
-                    }
-                });
-
-                // Observe reveal elements inside grid
-                reelsGrid.querySelectorAll('.reveal').forEach(function(el) {
-                    revealObserver.observe(el);
-                });
+                reelsTrack.innerHTML = html;
             }
 
             function renderGalleryGrid() {
@@ -1895,21 +1990,19 @@
                 jewelleryClients.forEach(function(client) {
                     html += '<div class="brand-item"><img src="' + client.logo + '" alt="' + client.name + '" loading="lazy"></div>';
                 });
-                marqueeTrack.innerHTML = html + html; // duplicate for seamless loop
+                marqueeTrack.innerHTML = html + html;
             }
 
-            // ===================== FALLBACK: ensure content becomes visible =====================
-            // In case IntersectionObserver fails or is slow, force-reveal after a short delay
+            // ===================== FORCE REVEAL FALLBACK =====================
             function forceRevealFallback() {
                 document.querySelectorAll('.reveal:not(.revealed)').forEach(function(el) {
                     el.classList.add('revealed');
                 });
             }
 
-            // ===================== NAVBAR SAFE HANDLING =====================
+            // ===================== NAVBAR =====================
             var navbar = document.getElementById('navbar');
 
-            // Scroll handler – safe even if navbar is missing
             window.addEventListener('scroll', function() {
                 var backToTop = document.getElementById('backToTop');
                 if (backToTop) {
@@ -1974,64 +2067,67 @@
                 });
             }
 
-            // ===================== VIDEO OVERLAY =====================
-            var videoOverlay = document.getElementById('videoOverlay');
-            var overlayVideo = document.getElementById('overlayVideo');
-            var overlayClose = document.getElementById('overlayClose');
-            var overlayTitle = document.getElementById('overlayTitle');
-            var overlayCategory = document.getElementById('overlayCategory');
-
-            function openOverlay(src, title, category) {
-                if (!videoOverlay || !overlayVideo) return;
-                pauseAllInlineVideos();
-                overlayVideo.src = src;
-                if (overlayTitle) overlayTitle.textContent = title || '';
-                if (overlayCategory) overlayCategory.textContent = category || '';
-                videoOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                overlayVideo.play().catch(function() {});
-            }
-
-            function closeOverlay() {
-                if (!videoOverlay || !overlayVideo) return;
-                videoOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-                overlayVideo.pause();
-                overlayVideo.src = '';
-            }
-
+            // ===================== VIDEO PLAY / PAUSE (inline - matches index.html) =====================
             function pauseAllInlineVideos() {
                 document.querySelectorAll('.video-bg').forEach(function(v) {
-                    v.pause();
+                    if (!v.paused) {
+                        v.pause();
+                        v.removeAttribute('controls');
+                        v.muted = true;
+                        var card = v.closest('.video-card');
+                        var btn = card ? card.querySelector('.video-play-btn') : null;
+                        if (btn) btn.classList.remove('hidden');
+                        if (card) card.classList.remove('playing');
+                    }
                 });
             }
 
-            if (overlayClose) {
-                overlayClose.addEventListener('click', closeOverlay);
-            }
-            if (videoOverlay) {
-                videoOverlay.addEventListener('click', function(e) {
-                    if (e.target === videoOverlay) closeOverlay();
-                });
-            }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && videoOverlay && videoOverlay.classList.contains('active')) {
-                    closeOverlay();
+            // Click on video card (toggles play/pause)
+            document.addEventListener('click', function(e) {
+                var video = e.target.closest('.video-card video.video-bg');
+                if (!video) return;
+                var card = video.closest('.video-card');
+                var btn = card ? card.querySelector('.video-play-btn') : null;
+
+                if (video.paused) {
+                    pauseAllInlineVideos();
+                    if (btn) btn.classList.add('hidden');
+                    video.setAttribute('controls', '');
+                    video.muted = false;
+                    if (card) card.classList.add('playing');
+                    video.play().catch(function() {
+                        if (btn) btn.classList.remove('hidden');
+                        video.removeAttribute('controls');
+                        video.muted = true;
+                        if (card) card.classList.remove('playing');
+                    });
+                } else {
+                    video.pause();
+                    video.removeAttribute('controls');
+                    video.muted = true;
+                    if (card) card.classList.remove('playing');
+                    if (btn) btn.classList.remove('hidden');
                 }
             });
 
-            // Click handler for video cards (delegated)
+            // Click on play button (starts playback)
             document.addEventListener('click', function(e) {
-                var card = e.target.closest('.video-card');
-                if (card) {
-                    var src = card.dataset.video;
-                    var title = card.dataset.title;
-                    var category = card.dataset.category;
-                    if (src) {
-                        pauseAllInlineVideos();
-                        openOverlay(src, title, category);
-                    }
-                }
+                var btn = e.target.closest('.video-play-btn');
+                if (!btn) return;
+                e.stopPropagation();
+                var card = btn.closest('.video-card');
+                if (!card) return;
+                var video = card.querySelector('video.video-bg');
+                if (!video) return;
+                pauseAllInlineVideos();
+                btn.classList.add('hidden');
+                video.setAttribute('controls', '');
+                video.muted = false;
+                card.classList.add('playing');
+                video.play().catch(function() {
+                    btn.classList.remove('hidden');
+                    card.classList.remove('playing');
+                });
             });
 
             // ===================== HERO VIDEO AUTOPLAY =====================
@@ -2043,19 +2139,15 @@
                 });
             }
 
-            // ===================== NAVBAR LOAD ANIMATION (safe) =====================
-            // If navbar exists, add 'loaded' class; otherwise wait for it via MutationObserver
+            // ===================== NAVBAR LOAD ANIMATION =====================
             function initNavbarLoaded() {
                 var nav = document.getElementById('navbar');
                 if (nav) {
                     nav.classList.add('loaded');
                 }
             }
-
-            // Try immediately
             initNavbarLoaded();
 
-            // Also watch for dynamically injected navbar (from header.html)
             if (window.MutationObserver) {
                 var observer = new MutationObserver(function() {
                     var nav = document.getElementById('navbar');
@@ -2065,42 +2157,35 @@
                     }
                 });
                 observer.observe(document.body, { childList: true, subtree: true });
-                // Disconnect after 5s to avoid memory leaks
                 setTimeout(function() { observer.disconnect(); }, 5000);
             }
 
             // ===================== OBSERVE STATIC REVEALS =====================
-            document.querySelectorAll('.reveal:not(.video-card):not(.gallery-item)').forEach(function(el) {
+            document.querySelectorAll('.reveal:not(.gallery-item)').forEach(function(el) {
                 revealObserver.observe(el);
             });
 
-            // ===================== RENDER ALL DYNAMIC SECTIONS =====================
-            renderReelsGrid();
+            // ===================== RENDER ALL =====================
+            renderReelsTrack();
             renderGalleryGrid();
             renderMarquee();
 
-            // ===================== FALLBACK: ensure content becomes visible =====================
-            // If after 1.5s any .reveal elements are still hidden, force them visible
+            // ===================== FALLBACKS =====================
             setTimeout(forceRevealFallback, 1500);
-
-            // Also re-check on window load (in case of slow assets)
             window.addEventListener('load', function() {
                 setTimeout(forceRevealFallback, 300);
             });
 
-            // ===================== RE-RENDER IF SECTIONS ARE EMPTY (defensive) =====================
-            // Some browsers / network conditions may cause the initial render to fail silently.
-            // Re-run if needed.
+            // Re-render if any section is empty
             setTimeout(function() {
                 var needsRender = false;
-                if (reelsGrid && reelsGrid.children.length === 0) needsRender = true;
+                if (reelsTrack && reelsTrack.children.length === 0) needsRender = true;
                 if (galleryGrid && galleryGrid.children.length === 0) needsRender = true;
                 if (marqueeTrack && marqueeTrack.children.length === 0) needsRender = true;
                 if (needsRender) {
-                    renderReelsGrid();
+                    renderReelsTrack();
                     renderGalleryGrid();
                     renderMarquee();
-                    // Force reveal again after re-render
                     setTimeout(forceRevealFallback, 200);
                 }
             }, 800);
@@ -2111,26 +2196,23 @@
 
     <!-- ===== HEADER & FOOTER LOADER ===== -->
     <script>
-        // Load header
         fetch("header.html")
             .then(function(r) { return r.text(); })
             .then(function(html) {
                 var placeholder = document.getElementById("header-placeholder");
                 if (placeholder) {
                     placeholder.outerHTML = html;
-                    // Re-run navbar init after header is injected
                     var nav = document.getElementById('navbar');
                     if (nav && !nav.classList.contains('loaded')) {
                         nav.classList.add('loaded');
                     }
-                    // Re-run mobile menu bindings if needed (they are already set up)
                 }
             })
-            .catch(function() {
-                // Silent fail – header may not exist
-            });
+            .catch(function() {});
+    </script>
 
-        // Load footer
+    <div id="footer-placeholder"></div>
+    <script>
         fetch("footer.html")
             .then(function(r) { return r.text(); })
             .then(function(html) {
@@ -2139,11 +2221,7 @@
                     placeholder.outerHTML = html;
                 }
             })
-            .catch(function() {
-                // Silent fail – footer may not exist
-            });
+            .catch(function() {});
     </script>
-
-    <div id="footer-placeholder"></div>
 </body>
 </html>
