@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
     <style>
         /* ── RESET & BASE ── */
         *,
@@ -1085,8 +1086,8 @@
             padding: 10px 0 20px;
             scrollbar-width: thin;
             scrollbar-color: var(--accent) var(--bg-deep);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 95%, transparent);
         }
         .video-bar-wrapper::-webkit-scrollbar {
             height: 6px;
@@ -1170,19 +1171,19 @@
             pointer-events: none;
         }
         .video-bar-track .video-card .video-play-btn i {
-            font-size: 2.5rem;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(4px);
-            border-radius: 50%;
+            font-size: 3.5rem;
+            color: whitesmoke;
+            /*background: rgba(255, 255, 255, 0.15);*/
+            /*backdrop-filter: blur(4px);*/
+            /*border-radius: 50%;*/
             padding: 14px 16px 14px 18px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);*/
             transition: transform var(--transition-bounce), background var(--transition-fast);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            /*border: 1px solid rgba(255, 255, 255, 0.3);*/
         }
         .video-bar-track .video-card:hover .video-play-btn i {
             transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.25);
+            /*background: rgba(255, 255, 255, 0.25);*/
         }
         .video-bar-track .video-card.playing .video-play-btn {
             opacity: 0;
@@ -2225,49 +2226,49 @@
                 <div class="video-bar-track" id="portraitTrack">
                     <div class="video-card portrait" data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" data-title="Code.in Brand Film" data-duration="6:10" data-category="Education">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Code.in Brand Film</span>
                         <span class="video-duration">6:10</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Education/Full_Stack_Reel.mp4" data-poster="assets/thumbnails/Full_Stack_Reel.png" data-title="Full Stack Reel" data-duration="1:55" data-category="Education">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Full_Stack_Reel.png"><source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Full Stack Reel</span>
                         <span class="video-duration">1:55</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" data-poster="assets/thumbnails/Barbeque Spice Reel 01.png" data-title="Barbeque Spice — Food Reel" data-duration="2:18" data-category="Food & Restaurant">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Barbeque Spice Reel 01.png"><source src="assets/Videos/Food & Restaurent/Videos/Barbeque Spice Reel 01.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Barbeque Spice</span>
                         <span class="video-duration">2:18</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" data-poster="assets/thumbnails/Tandos_Grill_Reel_01.png" data-title="Tando's Grill Reel" data-duration="5:20" data-category="Food & Restaurant">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Tandos_Grill_Reel_01.png"><source src="assets/Videos/Food & Restaurent/Videos/Tandos_Grill_Reel_01.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Tando's Grill</span>
                         <span class="video-duration">5:20</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Reel" data-duration="2:45" data-category="Jewellery">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png"><source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Iqbal Jewellers</span>
                         <span class="video-duration">2:45</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" data-poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png" data-title="Nisar Jewellery Reel" data-duration="8:42" data-category="Jewellery">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png"><source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Nisar Jewellery</span>
                         <span class="video-duration">8:42</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" data-poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" data-title="VIP's Muay Thai Championship" data-duration="3:45" data-category="Events">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png"><source src="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's International School, we believe.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">VIP's Muay Thai</span>
                         <span class="video-duration">3:45</span>
                     </div>
                     <div class="video-card portrait" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Sports Carnival</span>
                         <span class="video-duration">5:20</span>
                     </div>
@@ -2286,25 +2287,25 @@
                 <div class="video-bar-track" id="landscapeTrack">
                     <div class="video-card cinematic" data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge Promo Video" data-duration="4:30" data-category="Education">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Oakridge Promo</span>
                         <span class="video-duration">4:30</span>
                     </div>
                     <div class="video-card cinematic" data-video="assets/Videos/Landscape/Springfield_Trailer_01.mp4" data-poster="assets/thumbnails/Springfield_Trailer_01.png" data-title="Springfield Trailer" data-duration="3:15" data-category="Events">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Springfield_Trailer_01.png"><source src="assets/Videos/Landscape/Springfield_Trailer_01.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Springfield Trailer</span>
                         <span class="video-duration">3:15</span>
                     </div>
                     <div class="video-card cinematic" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="5:20" data-category="Events">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png"><source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">Sports Carnival</span>
                         <span class="video-duration">5:20</span>
                     </div>
                     <div class="video-card cinematic" data-video="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" data-poster="assets/thumbnails/Vip's_Trailer_Video_02.png" data-title="VIP's International School — Trailer" data-duration="4:10" data-category="Education">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Vip's_Trailer_Video_02.png"><source src="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" type="video/mp4"></video>
-                        <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
                         <span class="video-label">VIP's Trailer</span>
                         <span class="video-duration">4:10</span>
                     </div>
