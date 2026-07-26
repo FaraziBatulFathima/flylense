@@ -1600,6 +1600,42 @@
         @media (max-width: 576px) {
             .insta-grid { grid-template-columns: repeat(2, 1fr); }
         }
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both, bounce 2s ease-in-out 1.5s infinite;
+        }
+        .hero-scroll-indicator a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color var(--transition-fast);
+        }
+        .hero-scroll-indicator a:hover {
+            color: var(--accent);
+        }
+        .hero-scroll-indicator i {
+            font-size: 1.3rem;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
 
         /* ===== FOOTER ===== */
         .footer {
@@ -1828,7 +1864,11 @@
                 <a href="portfolio.html" class="btn-secondary"><i class="fa-solid fa-film"></i> <span>View Work</span></a>
             </div>
         </div>
+        
     </section>
+    <div class="hero-scroll-indicator">
+            <a href="#story"><i class="fa-solid fa-chevron-down"></i><span>Explore</span></a>
+        </div><br>
 
     <!-- ===== STATS RIBBON ===== -->
     <!-- <div class="stats-ribbon">
@@ -1921,7 +1961,7 @@
     </section>
 
     <!-- ===== INSTAGRAM REELS ===== -->
-    <section class="section instagram-section" id="instagram">
+    <section class="instagram-section" id="instagram">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
                 <span class="section-tag">Social Feed</span>
@@ -1966,7 +2006,7 @@
             </div>
             <div class="founder-row">
                 <div class="founder-visual">
-                    <img src="img/4.png" alt="Founder 1" onerror="this.src='img/placeholder-founder.jpg'">
+                    <img src="img/10.png" alt="Founder 1" onerror="this.src='img/placeholder-founder.jpg'">
                 </div>
                 <div class="founder-info">
                     <h3 class="founder-name">Founder Name <a href="#" class="linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></h3>
@@ -1981,19 +2021,19 @@
                     <p class="founder-bio">Operations expert ensuring flawless execution from pre-production to delivery. Masters complex logistics while maintaining creative integrity and client satisfaction.</p>
                 </div>
                 <div class="founder-visual">
-                    <img src="img/10.png" alt="Co-Founder" onerror="this.src='img/placeholder-founder.jpg'">
+                    <img src="img/4.png" alt="Co-Founder" onerror="this.src='img/placeholder-founder.jpg'">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CLIENT LOGOS — CIRCLE CROP (from homepage) ===== -->
-    <section class="clients-section" id="clients">
+    <!-- ===== CLIENT LOGOS — CIRCLE CROP (copied from homepage) ===== -->
+    <section class="section clients-section" id="clients">
         <div class="section-inner">
             <div class="section-header reveal reveal-up">
-                <span class="section-tag">Trusted Partners</span>
-                <h2 class="section-title">Brands That <span class="highlight">Trust Us</span></h2>
-                <p class="section-subtitle">150+ brands across education, jewellery, food, real estate & more</p>
+                <span class="section-tag">Trusted By</span>
+                <h2 class="section-title">Brands We've Partnered With</h2>
+                <p class="section-subtitle">From emerging startups to established enterprises, we've helped 150+ brands tell their story.</p>
             </div>
             <div class="brand-marquee-container">
                 <div class="brand-marquee reveal reveal-up delay-1">
@@ -2095,8 +2135,7 @@
 
             // Instagram Reels are embedded via blockquote - no JS needed
                 });
-            }
-        });
+    
     </script>
     <div id="footer-placeholder"></div>
     

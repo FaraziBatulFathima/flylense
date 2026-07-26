@@ -972,54 +972,6 @@
             text-decoration: underline;
         }
 
-        /* ── VIDEO OVERLAY LIGHTBOX ── */
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(3, 5, 8, 0.98);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .video-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .video-overlay video {
-            max-width: 90vw;
-            max-height: 80vh;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-elevated);
-        }
-        .overlay-close-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--white);
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            z-index: 10000;
-        }
-        .overlay-close-btn:hover {
-            background: var(--accent-gradient);
-            border-color: var(--accent);
-            color: #030508;
-            transform: rotate(90deg);
-        }
-
         /* ===== CLIENT LOGOS - CIRCLE CROP ===== */
         .clients-section {
             background: var(--bg-deep);
@@ -1511,14 +1463,6 @@
         </div>
     </section>
 
-    <!-- Video Overlay Lightbox -->
-    <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-label="Video Player">
-        <video id="overlayVideo" controls playsinline>
-            <source src="" type="video/mp4">
-        </video>
-        <button class="overlay-close-btn" id="overlayClose" aria-label="Close video"><i class="fa-solid fa-times"></i></button>
-    </div>
-
     <div id="footer-placeholder"></div>
 
     <!-- ============================================================ -->
@@ -1527,6 +1471,17 @@
     <script>
         (function() {
             'use strict';
+
+            // ===================== REVEAL OBSERVER =====================
+            var revealObserver = window.revealObserver || new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            window.revealObserver = revealObserver;
 
             // ===================== DATA =====================
             var cinematicData = [
@@ -1589,12 +1544,10 @@
             function renderReelsTrack() {
                 if (!reelsTrack) return;
                 var html = '';
-                reelsData.forEach(function(item) {
+                reelsData.forEach(function(item, index) {
                     html +=
-                        '<div class="video-card portrait" data-video="' + item.video + '" ' +
-                        'data-title="' + item.title + '" ' +
-                        'data-category="' + item.category + '" ' +
-                        'data-duration="' + item.duration + '">' +
+                        '<div class="video-card portrait reveal reveal-up delay-' + ((index % 4) + 1) + '" data-video="' + item.video + '" ' +
+                        'data-poster="' + item.thumb + '" data-title="' + item.title + '" data-duration="' + item.duration + '" data-category="' + item.category + '">' +
                         '<video class="video-bg" playsinline preload="metadata" loop muted poster="' + item.thumb + '">' +
                         '<source src="' + item.video + '" type="video/mp4">' +
                         '</video>' +
@@ -1604,18 +1557,17 @@
                         '</div>';
                 });
                 reelsTrack.innerHTML = html;
+                reelsTrack.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
             }
 
             // Render Cinematic Films (horizontal track)
             function renderCinematicTrack() {
                 if (!cinematicTrack) return;
                 var html = '';
-                cinematicData.forEach(function(item) {
+                cinematicData.forEach(function(item, index) {
                     html +=
-                        '<div class="video-card cinematic" data-video="' + item.video + '" ' +
-                        'data-title="' + item.title + '" ' +
-                        'data-category="' + item.category + '" ' +
-                        'data-duration="' + item.duration + '">' +
+                        '<div class="video-card cinematic reveal reveal-up delay-' + ((index % 4) + 1) + '" data-video="' + item.video + '" ' +
+                        'data-poster="' + item.thumb + '" data-title="' + item.title + '" data-duration="' + item.duration + '" data-category="' + item.category + '">' +
                         '<video class="video-bg" playsinline preload="metadata" loop muted poster="' + item.thumb + '">' +
                         '<source src="' + item.video + '" type="video/mp4">' +
                         '</video>' +
@@ -1625,6 +1577,7 @@
                         '</div>';
                 });
                 cinematicTrack.innerHTML = html;
+                cinematicTrack.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
             }
 
             // Render Marquee
@@ -1644,51 +1597,85 @@
                 });
             }
 
-            // ===================== VIDEO OVERLAY =====================
-            var videoOverlay = document.getElementById('videoOverlay');
-            var overlayVideo = document.getElementById('overlayVideo');
-            var overlayClose = document.getElementById('overlayClose');
-
-            function openOverlay(src) {
-                overlayVideo.src = src;
-                overlayVideo.load();
-                videoOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                setTimeout(function() {
-                    overlayVideo.play().catch(function() {});
-                }, 100);
-            }
-
-            function closeOverlay() {
-                videoOverlay.classList.remove('active');
-                overlayVideo.pause();
-                overlayVideo.currentTime = 0;
-                document.body.style.overflow = '';
-            }
-
-            if (overlayClose) {
-                overlayClose.addEventListener('click', closeOverlay);
-            }
-            if (videoOverlay) {
-                videoOverlay.addEventListener('click', function(e) {
-                    if (e.target === videoOverlay) closeOverlay();
+            // ===================== VIDEO PLAY / PAUSE (inline, matches index.html) =====================
+            function pauseAllInlineVideos() {
+                document.querySelectorAll('.video-card video.video-bg').forEach(v => {
+                    if (!v.paused) {
+                        v.pause();
+                        v.removeAttribute('controls');
+                        v.muted = true;
+                        var card = v.closest('.video-card');
+                        var btn = card ? card.querySelector('.video-play-btn') : null;
+                        if (btn) btn.classList.remove('hidden');
+                        if (card) card.classList.remove('playing');
+                    }
                 });
             }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && videoOverlay.classList.contains('active')) {
-                    closeOverlay();
+
+            document.addEventListener('click', function(e) {
+                var video = e.target.closest('.video-card video.video-bg');
+                if (!video) return;
+                var card = video.closest('.video-card');
+                var btn = card ? card.querySelector('.video-play-btn') : null;
+
+                if (video.paused) {
+                    pauseAllInlineVideos();
+                    if (btn) btn.classList.add('hidden');
+                    video.setAttribute('controls', '');
+                    video.muted = false;
+                    if (card) card.classList.add('playing');
+                    video.play().catch(() => {
+                        if (btn) btn.classList.remove('hidden');
+                        video.removeAttribute('controls');
+                        video.muted = true;
+                        if (card) card.classList.remove('playing');
+                    });
+                } else {
+                    video.pause();
+                    video.removeAttribute('controls');
+                    video.muted = true;
+                    if (card) card.classList.remove('playing');
+                    if (btn) btn.classList.remove('hidden');
                 }
             });
 
-            // Video card click -> open overlay (matches index.html behavior)
             document.addEventListener('click', function(e) {
-                var card = e.target.closest('.video-card');
+                var btn = e.target.closest('.video-play-btn');
+                if (!btn) return;
+                e.stopPropagation();
+                var card = btn.closest('.video-card');
                 if (!card) return;
-                var src = card.dataset.video;
-                if (src) {
-                    openOverlay(src);
-                }
+                var video = card.querySelector('video.video-bg');
+                if (!video) return;
+                pauseAllInlineVideos();
+                btn.classList.add('hidden');
+                video.setAttribute('controls', '');
+                video.muted = false;
+                card.classList.add('playing');
+                video.play().catch(() => {
+                    btn.classList.remove('hidden');
+                    card.classList.remove('playing');
+                });
             });
+
+            // ===================== LAZY LOAD VIDEO POSTERS =====================
+            var lazyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        var video = entry.target;
+                        var src = video.dataset.src;
+                        if (src) {
+                            var source = video.querySelector('source');
+                            if (source && !source.src) {
+                                source.src = src;
+                                video.load();
+                            }
+                        }
+                        lazyObserver.unobserve(video);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            document.querySelectorAll('video[data-src]').forEach(v => lazyObserver.observe(v));
 
             // ===================== HERO VIDEO AUTOPLAY =====================
             var heroVideo = document.querySelector('.hero-video-bg');
