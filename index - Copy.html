@@ -870,7 +870,7 @@
             height: 56px;
             border-radius: 50%;
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -879,6 +879,10 @@
             cursor: pointer;
             transition: all var(--transition-smooth);
             z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .hero-slider:hover .hero-arrow {
             opacity: 1;
             visibility: visible;
         }
@@ -886,7 +890,6 @@
             color: var(--accent);
             transform: translateY(-50%) scale(1.2);
             background: transparent;
-            border-color: var(--accent);
         }
         .hero-arrow-prev {
             left: 2rem;
@@ -1078,107 +1081,33 @@
         }
         .video-bar-wrapper {
             width: 100%;
-            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
             padding: 10px 0 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-deep);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 95%, transparent);
         }
-        .video-bar-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #fff;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            z-index: 10;
-            opacity: 0;
-            visibility: hidden;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        .video-bar-wrapper::-webkit-scrollbar {
+            height: 6px;
         }
-        .video-bar-nav:hover {
-            color: var(--accent);
-            transform: translateY(-50%) scale(1.2);
+        .video-bar-wrapper::-webkit-scrollbar-track {
+            background: var(--bg-deep);
         }
-        .video-bar-nav.prev {
-            left: 1rem;
+        .video-bar-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
         }
-        .video-bar-nav.next {
-            right: 1rem;
+        .video-bar-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
         }
-        @media (max-width: 768px) {
-            .video-bar-nav {
-                font-size: 2rem;
-            }
-        }
-        
-        /* Shadow hover zones - arrows appear based on scroll position */
-        .video-bar-track-container::before,
-        .video-bar-track-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 15%;
-            z-index: 5;
-            pointer-events: none;
-        }
-        .video-bar-track-container::before {
-            left: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
-        }
-        .video-bar-track-container::after {
-            right: 0;
-            background: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
-        }
-        
-        /* Show left arrow when scrolled right, right arrow when not at end */
-        .video-bar-track-container.scrolled-right .video-bar-nav.prev,
-        .video-bar-track-container:hover .video-bar-nav.prev {
-            opacity: 1;
-            visibility: visible;
-        }
-        .video-bar-track-container:not(.at-end) .video-bar-nav.next,
-        .video-bar-track-container:hover .video-bar-nav.next {
-            opacity: 1;
-            visibility: visible;
-        }
-        .video-bar-nav:hover {
-            color: var(--accent);
-            transform: translateY(-50%) scale(1.2);
-        }
-        .video-bar-nav.prev {
-            left: 1rem;
-        }
-        .video-bar-nav.next {
-            right: 1rem;
-        }
-        @media (max-width: 768px) {
-            .video-bar-nav {
-                font-size: 2rem;
-            }
-        }
-        
         .video-bar-track {
             display: flex;
             gap: 1.5rem;
             width: max-content;
             padding: 0 2rem 1rem;
             will-change: transform;
-        }
-        .video-bar-track-container {
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-        }
-        .video-bar-track-container::-webkit-scrollbar {
-            display: none;
         }
         .video-bar-track .video-card {
             flex: 0 0 auto;
@@ -1195,8 +1124,8 @@
             aspect-ratio: 9 / 16;
         }
         .video-bar-track .video-card.cinematic {
-            width: 930px;
-            aspect-ratio: 1920 / 1080;
+            width: 830px;
+            aspect-ratio: 16 / 9;
         }
         .video-bar-track .video-card:hover {
             transform: translateY(-4px);
@@ -2196,154 +2125,7 @@
             color: #030508;
             transform: rotate(90deg);
         }
-       /* ── SERVICES ── */
-.services-section {
-    background: #000;
-    padding: 90px 0;
-}
-
-.services-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 4%;
-}
-
-/* Card */
-.service-card {
-    background: #242424;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.05);
-    display: flex;
-    flex-direction: column;
-    transition: 0.35s;
-}
-
-.service-card:hover {
-    transform: translateY(-8px);
-}
-
-/* Image container – rounded top corners */
-.service-image {
-    position: relative;
-    height: 260px;
-    overflow: hidden;
-    margin: 18px;
-    border-radius: 20px;
-    background: #1a1a1a;
-}
-
-.service-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Left slant overlay – rounded corners via parent border-radius */
-.service-image .service-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.65);
-    clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 24px;
-    pointer-events: none;
-    border-radius: 20px 0 0 20px; /* matches parent's left side */
-}
-
-/* Since clip-path overrides border-radius, we add a fake radius using a blurred overlay? 
-   We'll instead use a pseudo-element with a mask to achieve rounded slant. 
-   But for simplicity, we rely on the parent border-radius giving the outer corners a round look. 
-   The inner slant diagonal remains sharp, but the container corners are rounded.
-   To get rounded diagonal edge, we can use an SVG mask – but that adds complexity.
-   For now, we'll keep it as is – rounded corners on the container, diagonal edge sharp.
-*/
-
-.service-overlay h3 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.1;
-    color: #fff;
-    margin: 0;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-}
-
-/* Content below image */
-.service-content {
-    padding: 0 26px 26px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.service-content p {
-    color: #ababab;
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: auto;
-}
-
-.service-btn {
-    align-self: flex-end;
-    margin-top: 28px;
-    background: #3a3a3a;
-    color: #fff;
-    padding: 14px 24px;
-    border-radius: 14px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-}
-
-.service-btn span {
-    transition: 0.3s;
-    display: inline-block;
-}
-
-.service-btn:hover {
-    background: #fff;
-    color: #000;
-}
-
-.service-btn:hover span {
-    transform: translate(4px, -4px);
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-    .services-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .services-container {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-    .service-image {
-        height: 220px;
-    }
-    .service-overlay h3 {
-        font-size: 1.5rem;
-    }
-    .service-content p {
-        font-size: 0.95rem;
-    }
-}
+        
     </style>
 </head>
 <body>
@@ -2451,10 +2233,7 @@
                 <h3>Our Latest Reels <span>|</span> <a href="portfolio.html">Watch All</a></h3>
             </div>
             <div class="video-bar-wrapper reveal reveal-up delay-1">
-                <button class="video-bar-nav prev" id="portraitPrev" aria-label="Previous reel"><i class="bi bi-chevron-compact-left"></i></button>
-                <button class="video-bar-nav next" id="portraitNext" aria-label="Next reel"><i class="bi bi-chevron-compact-right"></i></button>
-                <div class="video-bar-track-container">
-                    <div class="video-bar-track" id="portraitTrack">
+                <div class="video-bar-track" id="portraitTrack">
                     <div class="video-card portrait" data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" data-title="Code.in Brand Film" data-duration="6:10" data-category="Education">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png"><source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4"></video>
                         <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
@@ -2504,7 +2283,6 @@
                         <span class="video-duration">5:20</span>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
     </section>
@@ -2516,10 +2294,7 @@
                 <h3>Cinematic Films <span>|</span> <a href="portfolio.html">Watch All</a></h3>
             </div>
             <div class="video-bar-wrapper reveal reveal-up delay-1">
-                <button class="video-bar-nav prev" id="landscapePrev" aria-label="Previous film"><i class="bi bi-chevron-compact-left"></i></button>
-                <button class="video-bar-nav next" id="landscapeNext" aria-label="Next film"><i class="bi bi-chevron-compact-right"></i></button>
-                <div class="video-bar-track-container">
-                    <div class="video-bar-track" id="landscapeTrack">
+                <div class="video-bar-track" id="landscapeTrack">
                     <div class="video-card cinematic" data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge Promo Video" data-duration="4:30" data-category="Education">
                         <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png"><source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4"></video>
                         <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
@@ -2544,7 +2319,6 @@
                         <span class="video-label">VIP's Trailer</span>
                         <span class="video-duration">4:10</span>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -2595,101 +2369,40 @@
         </div>
     </section>
 
-    <!-- ── SERVICES SECTION ── -->
-<section class="section" id="services">
-    <div class="section">
-        <div class="section-header reveal reveal-up">
-            <span class="section-tag">What We Do</span>
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">From concept to screen — we deliver end-to-end media solutions that elevate your brand.</p>
-        </div>
-
-        <div class="services-container">
-            <!-- Card 1: Commercial Ad Films -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="img/slider/1.png" alt="Commercial Ad Films">
-                    <div class="service-overlay">
-                        <h3>Commercial<br>Ad Films</h3>
+    <!-- ── INSTAGRAM REELS ── -->
+    <section class="section instagram-section" id="instagram">
+        <div class="section-inner">
+            <div class="section-header reveal reveal-up">
+                <span class="section-tag">Social Feed</span>
+                <h2 class="section-title">Instagram Reels</h2>
+                <p class="section-subtitle">Our latest work on Instagram — follow us for behind-the-scenes and project highlights.</p>
+            </div>
+            <div class="insta-reels-grid" id="instaReelsGrid">
+                <div class="insta-reel-card reveal reveal-scale delay-1">
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DKzh4UFPbHT/" data-instgrm-version="14"></blockquote>
                     </div>
                 </div>
-                <div class="service-content">
-                    <p>High-impact ad films designed to tell your brand story and grab attention across TV, web, and social platforms.</p>
-                    <a href="#" class="service-btn">Learn More <span>↗</span></a>
+                <div class="insta-reel-card reveal reveal-scale delay-2">
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DH6F38JPSzD/" data-instgrm-version="14"></blockquote>
+                    </div>
+                </div>
+                <div class="insta-reel-card reveal reveal-scale delay-3">
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DKzjc5ZvcIS/" data-instgrm-version="14"></blockquote>
+                    </div>
+                </div>
+                <div class="insta-reel-card reveal reveal-scale delay-4">
+                    <div class="insta-embed">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DGuosCLPRFt/" data-instgrm-version="14"></blockquote>
+                    </div>
                 </div>
             </div>
-
-            <!-- Card 2: Professional Photography -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="img/slider/4.png" alt="Professional Photography">
-                    <div class="service-overlay">
-                        <h3>Professional<br>Photography</h3>
-                    </div>
-                </div>
-                <div class="service-content">
-                    <p>Creative, high-resolution photography for events, campaigns, and product shoots that capture moments with precision and flair.</p>
-                    <a href="#" class="service-btn">Learn More <span>↗</span></a>
-                </div>
-            </div>
-
-            <!-- Card 3: Aerial Drone Footage -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="img/slider/5.jpg" alt="Aerial Drone Footage">
-                    <div class="service-overlay">
-                        <h3>Aerial Drone<br>Footage</h3>
-                    </div>
-                </div>
-                <div class="service-content">
-                    <p>Stunning aerial shots and cinematic drone videos that elevate your visual storytelling from a whole new perspective.</p>
-                    <a href="#" class="service-btn">Learn More <span>↗</span></a>
-                </div>
-            </div>
-
-            <!-- Card 4: Corporate Videos -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="img/slider/5.png" alt="Corporate Videos">
-                    <div class="service-overlay">
-                        <h3>Corporate<br>Videos</h3>
-                    </div>
-                </div>
-                <div class="service-content">
-                    <p>Engaging and informative videos that reflect your company's values, culture, and professionalism.</p>
-                    <a href="#" class="service-btn">Learn More <span>↗</span></a>
-                </div>
-            </div>
-
-            <!-- Card 5: Social Media Content -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="img/slider/new3.jpeg" alt="Social Media Content">
-                    <div class="service-overlay">
-                        <h3>Social Media<br>Content</h3>
-                    </div>
-                </div>
-                <div class="service-content">
-                    <p>Short-form videos and reels tailored for Instagram and YouTube to boost brand presence and engagement.</p>
-                    <a href="#" class="service-btn">Learn More <span>↗</span></a>
-                </div>
-            </div>
-
-            <!-- Card 6: Digital Marketing -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="img/slider/6.png" alt="Digital Marketing">
-                    <div class="service-overlay">
-                        <h3>Digital<br>Marketing</h3>
-                    </div>
-                </div>
-                <div class="service-content">
-                    <p>Result-driven strategies and ad campaigns to amplify your brand reach and connect with the right audience online.</p>
-                    <a href="#" class="service-btn">Learn More <span>↗</span></a>
-                </div>
+            <div style="text-align: center; margin-top: 2.5rem;">
+                <a href="https://www.instagram.com/flylensemediapartner/" target="_blank" class="btn-secondary"><i class="fa-brands fa-instagram"></i> Follow @flylensemediapartner</a>
             </div>
         </div>
-    </div>
 </section>
 
     <div id="footer-placeholder"></div>
@@ -2878,60 +2591,6 @@
                 });
             }, { rootMargin: '200px' });
             document.querySelectorAll('video[data-src]').forEach(v => lazyObserver.observe(v));
-
-// ── VIDEO BAR NAVIGATION ──
-            function setupVideoBarNav(trackId, prevId, nextId) {
-                const track = document.getElementById(trackId);
-                const container = track ? track.closest('.video-bar-track-container') : null;
-                const prevBtn = document.getElementById(prevId);
-                const nextBtn = document.getElementById(nextId);
-                console.log('Setting up nav for:', trackId, prevId, nextId, track, prevBtn, nextBtn);
-                if (!track || !container || !prevBtn || !nextBtn) {
-                    console.warn('Missing elements for:', trackId, prevId, nextId);
-                    return;
-                }
-                
-                const scrollAmount = 320; // card width + gap
-                
-                prevBtn.addEventListener('click', () => {
-                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                });
-                
-                nextBtn.addEventListener('click', () => {
-                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                });
-                
-                // Update button visibility based on scroll position
-                const updateButtons = () => {
-                    const maxScroll = container.scrollWidth - container.clientWidth;
-                    const scrolledRight = container.scrollLeft > 10;
-                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
-                    
-                    // Left arrow: show when scrolled right
-                    prevBtn.style.opacity = container.scrollLeft > 10 ? '1' : '0';
-                    prevBtn.style.visibility = container.scrollLeft > 10 ? 'visible' : 'hidden';
-                    prevBtn.style.pointerEvents = container.scrollLeft > 10 ? 'auto' : 'none';
-                    
-                    // Right arrow: hide when at end
-                    nextBtn.style.opacity = !atEnd ? '1' : '0';
-                    nextBtn.style.visibility = !atEnd ? 'visible' : 'hidden';
-                    nextBtn.style.pointerEvents = !atEnd ? 'auto' : 'none';
-                };
-                
-                container.addEventListener('scroll', updateButtons);
-                updateButtons(); // Initial check
-            }
-            
-            // Wait for DOM to be ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => {
-                    setupVideoBarNav('portraitTrack', 'portraitPrev', 'portraitNext');
-                    setupVideoBarNav('landscapeTrack', 'landscapePrev', 'landscapeNext');
-                });
-            } else {
-                setupVideoBarNav('portraitTrack', 'portraitPrev', 'portraitNext');
-                setupVideoBarNav('landscapeTrack', 'landscapePrev', 'landscapeNext');
-            }
 
         })();
     </script>
