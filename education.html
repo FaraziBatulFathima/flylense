@@ -797,39 +797,113 @@
         .delay-7 { transition-delay: 0.35s; }
         .delay-8 { transition-delay: 0.4s; }
 
-        /* ── VIDEO SHOWCASE BAR (Horizontal Scroll) ── */
+         /* ── VIDEO SHOWCASE BAR ── */
         .video-showcase {
             background: var(--bg-deep);
         }
         .video-bar-wrapper {
             width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
+            position: relative;
             padding: 10px 0 20px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) var(--bg-deep);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .video-bar-wrapper::-webkit-scrollbar {
-            height: 6px;
+        .video-bar-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
-        .video-bar-wrapper::-webkit-scrollbar-track {
-            background: var(--bg-deep);
+        .video-bar-nav:hover {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
         }
-        .video-bar-wrapper::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 3px;
+        .video-bar-nav.prev {
+            left: 1rem;
         }
-        .video-bar-wrapper::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-light);
+        .video-bar-nav.next {
+            right: 1rem;
         }
+        @media (max-width: 768px) {
+            .video-bar-nav {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Shadow hover zones - arrows appear based on scroll position */
+        .video-bar-track-container::before,
+        .video-bar-track-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 15%;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .video-bar-track-container::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+        }
+        .video-bar-track-container::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
+        }
+        
+        /* Show left arrow when scrolled right, right arrow when not at end */
+        .video-bar-track-container.scrolled-right .video-bar-nav.prev,
+        .video-bar-track-container:hover .video-bar-nav.prev {
+            opacity: 1;
+            visibility: visible;
+        }
+        .video-bar-track-container:not(.at-end) .video-bar-nav.next,
+        .video-bar-track-container:hover .video-bar-nav.next {
+            opacity: 1;
+            visibility: visible;
+        }
+        .video-bar-nav:hover {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
+        }
+        .video-bar-nav.prev {
+            left: 1rem;
+        }
+        .video-bar-nav.next {
+            right: 1rem;
+        }
+        @media (max-width: 768px) {
+            .video-bar-nav {
+                font-size: 2rem;
+            }
+        }
+        
         .video-bar-track {
             display: flex;
             gap: 1.5rem;
             width: max-content;
             padding: 0 2rem 1rem;
             will-change: transform;
+        }
+        .video-bar-track-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .video-bar-track-container::-webkit-scrollbar {
+            display: none;
         }
         .video-bar-track .video-card {
             flex: 0 0 auto;
@@ -842,12 +916,12 @@
             cursor: pointer;
         }
         .video-bar-track .video-card.portrait {
-            width: 280px;
+            width: 290px;
             aspect-ratio: 9 / 16;
         }
         .video-bar-track .video-card.cinematic {
-            width: 830px;
-            aspect-ratio: 16 / 9;
+            width: 1030px;
+            aspect-ratio: 1920 / 1080;
         }
         .video-bar-track .video-card:hover {
             transform: translateY(-4px);
@@ -886,13 +960,13 @@
             opacity: 1;
             visibility: visible;
             transition: opacity var(--transition-fast);
-        }
+        } 
         .video-bar-track .video-card .video-play-btn.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-         .video-bar-track .video-card .video-play-btn i {
+        .video-bar-track .video-card .video-play-btn i {
             font-size: 3.5rem;
             color: whitesmoke;
             /*background: rgba(255, 255, 255, 0.15);*/
@@ -1373,32 +1447,160 @@
     </div>
 
     <!-- ===== REELS FOR SOCIAL MEDIA (Horizontal Scroll Bar) ===== -->
-    <section class="section video-showcase" id="reels">
-        <div class="section-inner">
-            <div class="section-header-bar reveal reveal-up">
-                <h3>Reels for Social Media <span>|</span> <a href="https://www.instagram.com/flylensemediapartner/" target="_blank">View All</a></h3>
-            </div>
-            <div class="video-bar-wrapper reveal reveal-up delay-1">
-                <div class="video-bar-track" id="reelsTrack">
-                    <!-- Dynamically generated by JavaScript -->
+    <section class="section video-showcase" id="portrait-videos">
+    <div class="section-inner">
+        <div class="section-header-bar reveal reveal-up">
+            <h3>Our Latest Reels <span>|</span> <a href="portfolio.html">Watch All</a></h3>
+        </div>
+        <div class="video-bar-wrapper reveal reveal-up delay-1">
+            <button class="video-bar-nav prev" id="portraitPrev" aria-label="Previous reel"><i class="bi bi-chevron-compact-left"></i></button>
+            <button class="video-bar-nav next" id="portraitNext" aria-label="Next reel"><i class="bi bi-chevron-compact-right"></i></button>
+            <div class="video-bar-track-container">
+                <div class="video-bar-track" id="portraitTrack">
+
+                    <!-- Card 1: Code.in Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Code.in_Video_04.mp4" data-poster="assets/thumbnails/Code.in_Video_04.png" data-title="Code.in Reel" data-duration="0:30" data-category="Academy">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Code.in_Video_04.png">
+                            <source src="assets/Videos/Education/Code.in_Video_04.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Code.in Reel</span>
+                        <span class="video-duration">0:30</span>
+                    </div>
+
+                    <!-- Card 2: Full Stack Academy Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Full_Stack_Reel.mp4" data-poster="assets/thumbnails/Full_Stack_Reel.png" data-title="Full Stack Academy Reel" data-duration="0:25" data-category="Academy">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Full_Stack_Reel.png">
+                            <source src="assets/Videos/Education/Full_Stack_Reel.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Full Stack Academy Reel</span>
+                        <span class="video-duration">0:25</span>
+                    </div>
+
+                    <!-- Card 3: Global School Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Global .mp4" data-poster="assets/thumbnails/Global.png" data-title="Global School Reel" data-duration="0:35" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Global.png">
+                            <source src="assets/Videos/Education/Global .mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Global School Reel</span>
+                        <span class="video-duration">0:35</span>
+                    </div>
+
+                    <!-- Card 4: VIP's Muay Thai Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's   International School, we believe.mp4" data-poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png" data-title="VIP's Muay Thai Reel" data-duration="0:28" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/MUAY THAI CHAMPIONSHIP AT VIP'S STRENGTH, SKILL & SPIRIT.png">
+                            <source src="assets/Videos/Education/MUAY THAI CHAMPIONSHIP AT VIP'SSTRENGTH, SKILL & SPIRITAt VIP's   International School, we believe.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">VIP's Muay Thai Reel</span>
+                        <span class="video-duration">0:28</span>
+                    </div>
+
+                    <!-- Card 5: Saritha Reel 06 -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Saritha Reel_06.mp4" data-poster="assets/thumbnails/Saritha Reel_06.png" data-title="Saritha Reel 06" data-duration="0:32" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Saritha Reel_06.png">
+                            <source src="assets/Videos/Education/Saritha Reel_06.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Saritha Reel 06</span>
+                        <span class="video-duration">0:32</span>
+                    </div>
+
+                    <!-- Card 6: Silver Crest Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Silver Crest Reel 01.mp4" data-poster="assets/thumbnails/Silver Crest Reel 01.png" data-title="Silver Crest Reel" data-duration="0:27" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Silver Crest Reel 01.png">
+                            <source src="assets/Videos/Education/Silver Crest Reel 01.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Silver Crest Reel</span>
+                        <span class="video-duration">0:27</span>
+                    </div>
+
+                    <!-- Card 7: Success Podcast Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Success_Podcast_Reel_03.mp4" data-poster="assets/thumbnails/Success_Podcast_Reel_03.png" data-title="Success Podcast Reel" data-duration="0:33" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Podcast_Reel_03.png">
+                            <source src="assets/Videos/Education/Success_Podcast_Reel_03.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Success Podcast Reel</span>
+                        <span class="video-duration">0:33</span>
+                    </div>
+
+                    <!-- Card 8: Unique Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Education/Unique Reel.mp4" data-poster="assets/thumbnails/Unique Reel.png" data-title="Unique Reel" data-duration="0:30" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Unique Reel.png">
+                            <source src="assets/Videos/Education/Unique Reel.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Unique Reel</span>
+                        <span class="video-duration">0:30</span>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ===== CINEMATIC FILMS SECTION (Horizontal Scroll Bar) ===== -->
-    <section class="section video-showcase" id="cinematic">
-        <div class="section-inner">
-            <div class="section-header-bar reveal reveal-up">
-                <h3>Cinematic Films <span>|</span> <a href="portfolio.html">Watch All</a></h3>
-            </div>
-            <div class="video-bar-wrapper reveal reveal-up delay-1">
-                <div class="video-bar-track" id="cinematicTrack">
-                    <!-- Dynamically generated by JavaScript -->
+   <section class="section video-showcase" id="landscape-videos">
+    <div class="section-inner">
+        <div class="section-header-bar reveal reveal-up">
+            <h3>Cinematic Films <span>|</span> <a href="portfolio.html">Watch All</a></h3>
+        </div>
+        <div class="video-bar-wrapper reveal reveal-up delay-1">
+            <button class="video-bar-nav prev" id="landscapePrev" aria-label="Previous film"><i class="bi bi-chevron-compact-left"></i></button>
+            <button class="video-bar-nav next" id="landscapeNext" aria-label="Next film"><i class="bi bi-chevron-compact-right"></i></button>
+            <div class="video-bar-track-container">
+                <div class="video-bar-track" id="landscapeTrack">
+
+                    <!-- Card 1: Oakridge Promo Film -->
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" data-poster="assets/thumbnails/Oakridge_Promo_Video_01.png" data-title="Oakridge Promo Film" data-duration="2:15" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Oakridge_Promo_Video_01.png">
+                            <source src="assets/Videos/Landscape/Oakridge_Promo_Video_01.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Oakridge Promo Film</span>
+                        <span class="video-duration">2:15</span>
+                    </div>
+
+                    <!-- Card 2: Springfield Trailer -->
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Springfield_Trailer_01.mp4" data-poster="assets/thumbnails/Springfield_Trailer_01.png" data-title="Springfield Trailer" data-duration="1:45" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Springfield_Trailer_01.png">
+                            <source src="assets/Videos/Landscape/Springfield_Trailer_01.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Springfield Trailer</span>
+                        <span class="video-duration">1:45</span>
+                    </div>
+
+                    <!-- Card 3: VIP's Cinematic Ad -->
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" data-poster="assets/thumbnails/Vip's_Trailer_Video_02.png" data-title="VIP's Cinematic Ad" data-duration="3:00" data-category="School">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Vip's_Trailer_Video_02.png">
+                            <source src="assets/Videos/Landscape/Vip's_Trailer_Video_02.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">VIP's Cinematic Ad</span>
+                        <span class="video-duration">3:00</span>
+                    </div>
+
+                    <!-- Card 4: Success Sports Carnival -->
+                    <div class="video-card cinematic" data-video="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" data-poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png" data-title="Success Sports Carnival" data-duration="2:30" data-category="Events">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Success_Sports_Carnival_Reel_01.png">
+                            <source src="assets/Videos/Landscape/Success_Sports_Carnival_Reel_01.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Success Sports Carnival</span>
+                        <span class="video-duration">2:30</span>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ===== SOCIAL MEDIA MANAGEMENT ===== -->
     <section class="section" id="social-management">
@@ -1625,6 +1827,59 @@
                         if (card) card.classList.remove('playing');
                     }
                 });
+            }
+            // ── VIDEO BAR NAVIGATION ──
+            function setupVideoBarNav(trackId, prevId, nextId) {
+                const track = document.getElementById(trackId);
+                const container = track ? track.closest('.video-bar-track-container') : null;
+                const prevBtn = document.getElementById(prevId);
+                const nextBtn = document.getElementById(nextId);
+                console.log('Setting up nav for:', trackId, prevId, nextId, track, prevBtn, nextBtn);
+                if (!track || !container || !prevBtn || !nextBtn) {
+                    console.warn('Missing elements for:', trackId, prevId, nextId);
+                    return;
+                }
+                
+                const scrollAmount = 1030; // card width + gap
+                
+                prevBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+                
+                // Update button visibility based on scroll position
+                const updateButtons = () => {
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    const scrolledRight = container.scrollLeft > 10;
+                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
+                    
+                    // Left arrow: show when scrolled right
+                    prevBtn.style.opacity = container.scrollLeft > 10 ? '1' : '0';
+                    prevBtn.style.visibility = container.scrollLeft > 10 ? 'visible' : 'hidden';
+                    prevBtn.style.pointerEvents = container.scrollLeft > 10 ? 'auto' : 'none';
+                    
+                    // Right arrow: hide when at end
+                    nextBtn.style.opacity = !atEnd ? '1' : '0';
+                    nextBtn.style.visibility = !atEnd ? 'visible' : 'hidden';
+                    nextBtn.style.pointerEvents = !atEnd ? 'auto' : 'none';
+                };
+                
+                container.addEventListener('scroll', updateButtons);
+                updateButtons(); // Initial check
+            }
+            
+            // Wait for DOM to be ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    setupVideoBarNav('portraitTrack', 'portraitPrev', 'portraitNext');
+                    setupVideoBarNav('landscapeTrack', 'landscapePrev', 'landscapeNext');
+                });
+            } else {
+                setupVideoBarNav('portraitTrack', 'portraitPrev', 'portraitNext');
+                setupVideoBarNav('landscapeTrack', 'landscapePrev', 'landscapeNext');
             }
 
             document.addEventListener('click', function(e) {

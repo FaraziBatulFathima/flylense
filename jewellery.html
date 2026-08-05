@@ -1026,33 +1026,94 @@
             transition-delay: 0.4s;
         }
 
-        /* ── VIDEO SHOWCASE BAR (Horizontal Scroll) ── */
+        /* ── VIDEO SHOWCASE BAR ── */
         .video-showcase {
             background: var(--bg-deep);
         }
         .video-bar-wrapper {
             width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
+            position: relative;
             padding: 10px 0 20px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) var(--bg-deep);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .video-bar-wrapper::-webkit-scrollbar {
-            height: 6px;
+        .video-bar-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
-        .video-bar-wrapper::-webkit-scrollbar-track {
-            background: var(--bg-deep);
+        .video-bar-nav:hover {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
         }
-        .video-bar-wrapper::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 3px;
+        .video-bar-nav.prev {
+            left: 1rem;
         }
-        .video-bar-wrapper::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-light);
+        .video-bar-nav.next {
+            right: 1rem;
         }
+        @media (max-width: 768px) {
+            .video-bar-nav {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Shadow hover zones - arrows appear based on scroll position */
+        .video-bar-track-container::before,
+        .video-bar-track-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 15%;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .video-bar-track-container::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+        }
+        .video-bar-track-container::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
+        }
+        
+        /* Show left arrow when scrolled right, right arrow when not at end */
+        .video-bar-track-container.scrolled-right .video-bar-nav.prev,
+        .video-bar-track-container:hover .video-bar-nav.prev {
+            opacity: 1;
+            visibility: visible;
+        }
+        .video-bar-track-container:not(.at-end) .video-bar-nav.next,
+        .video-bar-track-container:hover .video-bar-nav.next {
+            opacity: 1;
+            visibility: visible;
+        }
+        .video-bar-nav:hover {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
+        }
+        .video-bar-nav.prev {
+            left: 1rem;
+        }
+        .video-bar-nav.next {
+            right: 1rem;
+        }
+        @media (max-width: 768px) {
+            .video-bar-nav {
+                font-size: 2rem;
+            }
+        }
+        
         .video-bar-track {
             display: flex;
             gap: 1.5rem;
@@ -1060,34 +1121,59 @@
             padding: 0 2rem 1rem;
             will-change: transform;
         }
+        .video-bar-track-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .video-bar-track-container::-webkit-scrollbar {
+            display: none;
+        }
         .video-bar-track .video-card {
             flex: 0 0 auto;
             position: relative;
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            /*border-radius: var(--radius-lg);*/
+            border-radius: 0;
             overflow: hidden;
             transition: all var(--transition-smooth);
             cursor: pointer;
         }
-         .video-bar-track .video-card.portrait {
-            width: 280px;
+        .video-bar-track .video-card.portrait {
+            width: 290px;
             aspect-ratio: 9 / 16;
         }
         .video-bar-track .video-card.cinematic {
-            width: 830px;
-            aspect-ratio: 16 / 9;
+            width: 1030px;
+            aspect-ratio: 1920 / 1080;
         }
         .video-bar-track .video-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-accent);
-            border-color: var(--accent);
+            transform: translateY(-4px);
         }
         .video-bar-track .video-card video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            background: #000;
+            border-radius: 0;
+        }
+        .video-bar-track .video-card video:-webkit-full-screen,
+        .video-bar-track .video-card video:fullscreen {
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important;
+            background: #000 !important;
+        }
+        .video-bar-track .video-card video:-webkit-full-screen::backdrop,
+        .video-bar-track .video-card video::backdrop {
             background: #000;
         }
         .video-bar-track .video-card .video-play-btn {
@@ -1103,13 +1189,13 @@
             opacity: 1;
             visibility: visible;
             transition: opacity var(--transition-fast);
-        }
+        } 
         .video-bar-track .video-card .video-play-btn.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-         .video-bar-track .video-card .video-play-btn i {
+        .video-bar-track .video-card .video-play-btn i {
             font-size: 3.5rem;
             color: whitesmoke;
             /*background: rgba(255, 255, 255, 0.15);*/
@@ -1811,18 +1897,102 @@
     </div>
 
     <!-- ── REELS FOR SOCIAL MEDIA (Horizontal Scroll Bar) ── -->
-    <section class="section video-showcase" id="reels">
-        <div class="section-inner">
-            <div class="section-header-bar reveal reveal-up">
-                <h3>Reels for Social Media <span>|</span> <a href="https://www.instagram.com/flylensemediapartner/" target="_blank">View All</a></h3>
-            </div>
-            <div class="video-bar-wrapper reveal reveal-up delay-1">
-                <div class="video-bar-track" id="reelsTrack">
-                    <!-- Dynamically generated by JavaScript -->
+    <section class="section video-showcase" id="portrait-videos">
+    <div class="section-inner">
+        <div class="section-header-bar reveal reveal-up">
+            <h3>Our Latest Reels <span>|</span> <a href="portfolio.html">Watch All</a></h3>
+        </div>
+        <div class="video-bar-wrapper reveal reveal-up delay-1">
+            <button class="video-bar-nav prev" id="portraitPrev" aria-label="Previous reel"><i class="bi bi-chevron-compact-left"></i></button>
+            <button class="video-bar-nav next" id="portraitNext" aria-label="Next reel"><i class="bi bi-chevron-compact-right"></i></button>
+            <div class="video-bar-track-container">
+                <div class="video-bar-track" id="portraitTrack">
+
+                    <!-- Card 1: Iqbal Jewellers -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers" data-duration="0:30" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png">
+                            <source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Iqbal Jewellers</span>
+                        <span class="video-duration">0:30</span>
+                    </div>
+
+                    <!-- Card 2: Nisar Jewellery -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" data-poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png" data-title="Nisar Jewellery" data-duration="0:28" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Nisar_Jewellery_Reel_09.png">
+                            <source src="assets/Videos/Jwellery/Videos/Nisar_Jewellery_Reel_09.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Nisar Jewellery</span>
+                        <span class="video-duration">0:28</span>
+                    </div>
+
+                    <!-- Card 3: Maram Jewellery -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4" data-poster="assets/thumbnails/Maram_jewellery_01.png" data-title="Maram Jewellery" data-duration="0:32" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Maram_jewellery_01.png">
+                            <source src="assets/Videos/Jwellery/Videos/Maram_jewellery_01.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Maram Jewellery</span>
+                        <span class="video-duration">0:32</span>
+                    </div>
+
+                    <!-- Card 4: SNJ Reel 09 -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/SNJ_Reel_09.mp4" data-poster="assets/thumbnails/SNJ_Reel_09.png" data-title="SNJ Reel 09" data-duration="0:25" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/SNJ_Reel_09.png">
+                            <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_09.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">SNJ Reel 09</span>
+                        <span class="video-duration">0:25</span>
+                    </div>
+
+                    <!-- Card 5: SNJ Reel 04 -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/SNJ_Reel_04.mp4" data-poster="assets/thumbnails/SNJ_Reel_04.png" data-title="SNJ Reel 04" data-duration="0:27" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/SNJ_Reel_04.png">
+                            <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_04.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">SNJ Reel 04</span>
+                        <span class="video-duration">0:27</span>
+                    </div>
+
+                    <!-- Card 6: SNJ Reel 03 -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" data-poster="assets/thumbnails/SNJ_Reel_03.png" data-title="SNJ Reel 03" data-duration="0:30" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/SNJ_Reel_03.png">
+                            <source src="assets/Videos/Jwellery/Videos/SNJ_Reel_03.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">SNJ Reel 03</span>
+                        <span class="video-duration">0:30</span>
+                    </div>
+
+                    <!-- Card 7: S-Craft Feb Reel -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4" data-poster="assets/thumbnails/S-Craft_Feb_Reel_01.png" data-title="S-Craft Feb Reel" data-duration="0:28" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/S-Craft_Feb_Reel_01.png">
+                            <source src="assets/Videos/Jwellery/Videos/S-Craft_Feb_Reel_01.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">S-Craft Feb Reel</span>
+                        <span class="video-duration">0:28</span>
+                    </div>
+
+                    <!-- Card 8: Iqbal Jewellers Alt -->
+                    <div class="video-card portrait" data-video="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" data-poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png" data-title="Iqbal Jewellers Alt" data-duration="0:30" data-category="Jewellery">
+                        <video class="video-bg" playsinline preload="metadata" loop muted poster="assets/thumbnails/Iqbal_jewellers_Reel_03.png">
+                            <source src="assets/Videos/Jwellery/Videos/Iqbal_jewellers_Reel_03.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-play-btn"><i class="bi bi-play-circle"></i></div>
+                        <span class="video-label">Iqbal Jewellers Alt</span>
+                        <span class="video-duration">0:30</span>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Gallery Section -->
     <section class="section" id="gallery">
@@ -2076,6 +2246,59 @@
                         if (card) card.classList.remove('playing');
                     }
                 });
+            }
+            // ── VIDEO BAR NAVIGATION ──
+            function setupVideoBarNav(trackId, prevId, nextId) {
+                const track = document.getElementById(trackId);
+                const container = track ? track.closest('.video-bar-track-container') : null;
+                const prevBtn = document.getElementById(prevId);
+                const nextBtn = document.getElementById(nextId);
+                console.log('Setting up nav for:', trackId, prevId, nextId, track, prevBtn, nextBtn);
+                if (!track || !container || !prevBtn || !nextBtn) {
+                    console.warn('Missing elements for:', trackId, prevId, nextId);
+                    return;
+                }
+                
+                const scrollAmount = 1030; // card width + gap
+                
+                prevBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+                
+                // Update button visibility based on scroll position
+                const updateButtons = () => {
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    const scrolledRight = container.scrollLeft > 10;
+                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
+                    
+                    // Left arrow: show when scrolled right
+                    prevBtn.style.opacity = container.scrollLeft > 10 ? '1' : '0';
+                    prevBtn.style.visibility = container.scrollLeft > 10 ? 'visible' : 'hidden';
+                    prevBtn.style.pointerEvents = container.scrollLeft > 10 ? 'auto' : 'none';
+                    
+                    // Right arrow: hide when at end
+                    nextBtn.style.opacity = !atEnd ? '1' : '0';
+                    nextBtn.style.visibility = !atEnd ? 'visible' : 'hidden';
+                    nextBtn.style.pointerEvents = !atEnd ? 'auto' : 'none';
+                };
+                
+                container.addEventListener('scroll', updateButtons);
+                updateButtons(); // Initial check
+            }
+            
+            // Wait for DOM to be ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    setupVideoBarNav('portraitTrack', 'portraitPrev', 'portraitNext');
+                    setupVideoBarNav('landscapeTrack', 'landscapePrev', 'landscapeNext');
+                });
+            } else {
+                setupVideoBarNav('portraitTrack', 'portraitPrev', 'portraitNext');
+                setupVideoBarNav('landscapeTrack', 'landscapePrev', 'landscapeNext');
             }
 
             // Click on video card (toggles play/pause)
